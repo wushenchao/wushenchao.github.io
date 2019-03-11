@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="@autoreleasepool@autoreleasepool{} 是一个__AtAutorereleasePool的结构体 struct __AtAutoreleasePool {   __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}   ~__AtAutoreleasePool() {objc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21.深入AutoreleasePool">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/21.AutoreleasePool/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="@autoreleasepool@autoreleasepool{} 是一个__AtAutorereleasePool的结构体 struct __AtAutoreleasePool {   __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}   ~__AtAutoreleasePool() {objc">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g0jv3eeabij30rd04htaa.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1g0jv87h0mkj30ex0j0tab.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g0jvfd92jjj30ew0izq6k.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tKfTcly1g0jw04abxlj30rj0as0u0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcly1g0k07vxs7gj30ri0apq47.jpg">
+<meta property="og:updated_time" content="2019-02-28T05:47:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="21.深入AutoreleasePool">
+<meta name="twitter:description" content="@autoreleasepool@autoreleasepool{} 是一个__AtAutorereleasePool的结构体 struct __AtAutoreleasePool {   __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}   ~__AtAutoreleasePool() {objc">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tKfTcly1g0jv3eeabij30rd04htaa.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/21.AutoreleasePool/">
+
+
+
+
+
+  <title>21.深入AutoreleasePool | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/21.AutoreleasePool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">21.深入AutoreleasePool</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T11:12:23+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/01/17/21.AutoreleasePool/" class="leancloud_visitors" data-flag-title="21.深入AutoreleasePool">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="autoreleasepool"><a href="#autoreleasepool" class="headerlink" title="@autoreleasepool"></a>@autoreleasepool</h3><p>@autoreleasepool{} 是一个__AtAutorereleasePool的结构体</p>
+<pre><code>struct __AtAutoreleasePool {
+  __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}
+  ~__AtAutoreleasePool() {objc_autoreleasePoolPop(atautoreleasepoolobj);}
+  void * atautoreleasepoolobj;
+};
+</code></pre><p>这个结构体会在初始化时调用<strong>objc_autoreleasePoolPush()</strong>方法,会在析构(对象结束其生命周期)时调用<strong>objc_autoreleasePoolPop</strong>方法。</p>
+<a id="more"></a>
+<p>我们main函数在实际工作时其实是这样的:</p>
+<pre><code>int main(int argc, const char * argv[]) {
+    {
+        void * atautoreleasepoolobj = objc_autoreleasePoolPush();
+
+        // do whatever you want
+
+        objc_autoreleasePoolPop(atautoreleasepoolobj);
+    }
+    return 0;
+}
+</code></pre><h3 id="AutoreleasePool-是什么"><a href="#AutoreleasePool-是什么" class="headerlink" title="AutoreleasePool 是什么"></a>AutoreleasePool 是什么</h3><p>这一节开始分析方法<strong>objc_autoreleasePoolPush</strong>和 <strong>objc_autoreleasePoolPop</strong>实现:</p>
+<pre><code>void *objc_autoreleasePoolPush(void) {
+    return AutoreleasePoolPage::push();
+}
+
+void objc_autoreleasePoolPop(void *ctxt) {
+    AutoreleasePoolPage::pop(ctxt);
+}
+</code></pre><p>上面的方法是对AutoreleasePoolPage对应的静态方法push和pop的封装。</p>
+<h4 id="AutoreleasePoolPage-的结构"><a href="#AutoreleasePoolPage-的结构" class="headerlink" title="AutoreleasePoolPage 的结构"></a>AutoreleasePoolPage 的结构</h4><p><strong>AutoreleasePoolPage</strong>是一个c++中的类, 它在NSObject.mm中的定义是这样的:</p>
+<pre><code>class AutoreleasePoolPage {
+    magic_t const magic;
+    id *next;
+    pthread_t const thread;
+    AutoreleasePoolPage * const parent;
+    AutoreleasePoolPage *child;
+    uint32_t const depth;
+    uint32_t hiwat;
+};
+</code></pre><ul>
+<li>magic用于对当前AutoreleasePoolPage完整性的校验</li>
+<li>thread保存了当前页所在的线程</li>
+<li>*next指向最新添加的autorelease对象的下一个位置,初始化时指向begin()</li>
+<li>parent指向了父节点,第一个初始化的 AutoreleasePoolPage 的parent值为nil</li>
+<li>child指向子节点,最后一个节点的child值为nil</li>
+</ul>
+<p>每一个自动释放池都是由一系列的 AutoreleasePoolPage 组成的,并且每一个 AutoreleasePoolPage 的大小都是4096字节(16进制 0x1000)</p>
+<h5 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表:"></a>双向链表:</h5><p>自动释放池中的 AutoreleasePoolPage 是以<strong>双向链表</strong>的形式连接起来的:</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g0jv3eeabij30rd04htaa.jpg" alt></p>
+<p><strong>parent 和 child 就是用来构造双向链表的指针。</strong></p>
+<h5 id="自动释放池中的栈"><a href="#自动释放池中的栈" class="headerlink" title="自动释放池中的栈"></a>自动释放池中的栈</h5><p>如果我们的一个 AutoreleasePoolPage被初始化在内存中的<strong>0x100816000 ~ 0x100817000</strong> 中,它在内存中的结构如下:</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g0jv87h0mkj30ex0j0tab.jpg" alt></p>
+<p>其中0x100816000 ~ 0x100816028的 56bit用于存储 AutoreleasePoolPage的成员变量,剩下的 0x100816038 ~ 0x100817000 都是用来存储加入到自动释放池中的对象。</p>
+<p><strong>next</strong> 指向了下一个为空的内存地址,如果 <strong>next</strong> 指向的地址加入一个 <strong>object</strong>, 它就会如下如图所示<strong>移动到下一个为空的内存地址中:</strong></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcly1g0jvfd92jjj30ew0izq6k.jpg" alt></p>
+<pre><code>hiwat和depth在文章中并不会进行介绍,因为它们并不影响释放池的实现,也不在关键方法中的调用栈中。
+</code></pre><h5 id="POOL-SENTINEL-哨兵对象"><a href="#POOL-SENTINEL-哨兵对象" class="headerlink" title="POOL_SENTINEL(哨兵对象)"></a>POOL_SENTINEL(哨兵对象)</h5><p><strong>POOL_SENTINEL</strong> 只是 <strong>nil</strong> 的别名。</p>
+<p>在每个自动释放池初始化调用 <strong>objc_autoreleasePoolPush</strong> 的时候,都会把一个 <strong>POOL_SENTINEL</strong> push到自动释放池的栈顶,并且返回这个 <strong>POOL_SENTINEL</strong> 哨兵对象。</p>
+<pre><code>int main(int argc, const char * argv[]) {
+    {
+        void * atautoreleasepoolobj = objc_autoreleasePoolPush();
+
+        // do whatever you want
+
+        objc_autoreleasePoolPop(atautoreleasepoolobj);
+    }
+    return 0;
+}
+</code></pre><p>上面的 <strong>atautoreleasepoolobj</strong> 就是一个 <strong>POOL_SENTINEL</strong>。</p>
+<p>而当方法 <strong>objc_autoreleasePoolPop</strong> 调用时,就会向自动释放池中的对象发送 <strong>release</strong> 消息,直到第一个 <strong>POOL_SENTINEL</strong>:</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tKfTcly1g0jw04abxlj30rj0as0u0.jpg" alt></p>
+<h5 id="objc-autoreleasePoolPush方法"><a href="#objc-autoreleasePoolPush方法" class="headerlink" title="objc_autoreleasePoolPush方法"></a>objc_autoreleasePoolPush方法</h5><pre><code>void *objc_autoreleasePoolPush(void) {
+    return AutoreleasePoolPage::push();
+}
+</code></pre><p>它调用 <strong>AutoreleasePoolPage</strong> 的类方法 <strong>push</strong>: </p>
+<pre><code>static inline void *push() {
+       return autoreleaseFast(POOL_SENTINEL);
+}
+</code></pre><p>在这里会进入一个比较关键的方法 <strong>autoreleaseFast</strong>,并传入哨兵对象 <strong>POOL_SENTINEL</strong>:</p>
+<pre><code>static inline id *autoreleaseFast(id obj)
+{
+   AutoreleasePoolPage *page = hotPage();
+   if (page &amp;&amp; !page-&gt;full()) {
+       return page-&gt;add(obj);
+   } else if (page) {
+       return autoreleaseFullPage(obj, page);
+   } else {
+       return autoreleaseNoPage(obj);
+   }
+}
+</code></pre><p>上述方法分三种情况选择不同的代码执行:</p>
+<ul>
+<li><strong>有hotPage并且当前的page不满</strong> :调用 page-&gt;add(obj) 方法将对象添加至 AutoreleasePoolPage 的栈中</li>
+<li><strong>有 hotpage 并且当前的page已满</strong> :调用 autoreleaseFullPage 初始化一个新的页; 调用 page-&gt;add(obj) 方法将对象添加至 AutoreleasePoolPage 的栈中</li>
+<li><strong>无 hotPage</strong> : 调用 autoreleaseNoPage 创建一个 hotPage; 调用 page-&gt;add(obj)方法将对象添加至 AutoreleasePoolPage 的栈中</li>
+</ul>
+<p>最后都会调用 <strong>page-&gt;add(obj)</strong> 将对象添加到自动释放池中。</p>
+<p><strong>hotPage</strong> 可以理解为当前正在使用的 <strong>AutoreleasePoolPage</strong></p>
+<h5 id="page-gt-add-添加对象"><a href="#page-gt-add-添加对象" class="headerlink" title="page-&gt;add 添加对象"></a>page-&gt;add 添加对象</h5><p><strong>id *add(id objc)</strong> 将对象添加到自动释放池中:</p>
+<pre><code>id *add(id obj) {
+    id *ret = next;
+    *next = obj;
+    next++;
+    return ret;
+}
+</code></pre><p>这个方法其实就是一个压栈的操作,将对象加入到 <strong>AutoreleasePoolPage</strong> 然后移动到栈顶的指针。</p>
+<h5 id="autoreleaseFullPage-当前的hotPage已满"><a href="#autoreleaseFullPage-当前的hotPage已满" class="headerlink" title="autoreleaseFullPage(当前的hotPage已满)"></a>autoreleaseFullPage(当前的hotPage已满)</h5><p>autoreleaseFullPage会在当前的hotPage已满的时候调用:</p>
+<pre><code>static id *autoreleaseFullPage(id obj, AutoreleasePoolPage *page) {
+    do {
+        if (page-&gt;child) page = page-&gt;child;
+        else page = new AutoreleasePoolPage(page);
+    } while (page-&gt;full());
+
+    setHotPage(page);
+    return page-&gt;add(obj);
+}
+</code></pre><p>它会从传入的 page 开始遍历整个双向链表,直到:</p>
+<ol>
+<li>查找到一个未满的 autoreleaseFullPage</li>
+<li>使用构造器传入parent创建一个新的 AutoreleasePoolPage</li>
+</ol>
+<p>在查找到一个可以使用的 AutoreleasePoolPage 之后,会将该页面标记成 hotPage,然后调动上面分析过的 page-&gt;add方法添加对象。</p>
+<h5 id="autoreleaseNoPage-没有hotPage"><a href="#autoreleaseNoPage-没有hotPage" class="headerlink" title="autoreleaseNoPage(没有hotPage)"></a>autoreleaseNoPage(没有hotPage)</h5><p>如果当前内存中不存在 hotPage,就会调用 autoreleaseNoPage 方法初始化一个 AutoreleasePoolPage:</p>
+<pre><code>static id *autoreleaseNoPage(id obj) {
+    AutoreleasePoolPage *page = new AutoreleasePoolPage(nil);
+    setHotPage(page);
+
+    if (obj != POOL_SENTINEL) {
+        page-&gt;add(POOL_SENTINEL);
+    }
+
+    return page-&gt;add(obj);
+}
+</code></pre><p>既然当前内存中不存在 AutoreleasePoolPage, 就要 <strong>从头开始构建这个自动释放池的双向链表</strong>,也就是说,新的 AutoreleasePoolPage 是没有 parent指针的。</p>
+<p>初始化之后,将当前页标记为 hotPage,然后会先向这个page中添加一个 POOL_SENTINEL 对象,来确保在 pop 调用的时候,不会出现异常。</p>
+<p>最后,将 obj 添加到自动释放池中。</p>
+<h3 id="objc-autoreleasePoolPop-方法"><a href="#objc-autoreleasePoolPop-方法" class="headerlink" title="objc_autoreleasePoolPop 方法"></a>objc_autoreleasePoolPop 方法</h3><pre><code>void objc_autoreleasePoolPop(void *ctxt) {
+    AutoreleasePoolPage::pop(ctxt);
+}
+</code></pre><p>我们一般会在这个方法中传入一个哨兵对象POOL_SENTINEL(传入其他对象也是没有问题的),如下图一样释放对象:</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcly1g0k07vxs7gj30ri0apq47.jpg" alt></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>自动释放池是由 <strong>AutoreleasePoolPage</strong> 以双向链表的方式实现的</li>
+<li>当对象调用 <strong>autorelease</strong> 方法时,会将对象加入 <strong>AutoreleasePoolPage</strong> 的栈中</li>
+<li>调用 <strong>AutoreleasePoolPage::pop</strong> 方法会向栈中的对象发送 <strong>release</strong> 消息。</li>
+</ul>
+<p><strong>参考资料</strong></p>
+<p><a href="https://juejin.im/entry/5a4302535188257d7242b387#autoreleaseFast" target="_blank" rel="noopener">原理部分</a></p>
+<p><a href="https://juejin.im/post/5b052282f265da0b7156a2aa" target="_blank" rel="noopener">AutoreleasePool底层实现原理</a></p>
+<p><a href="https://juejin.im/post/59eabe2451882578ca2dc145" target="_blank" rel="noopener">在ARC环境中autoreleasepool(runloop)的研究</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/17/20.GCD/" rel="next" title="20.多线程编程-GCD">
+                <i class="fa fa-chevron-left"></i> 20.多线程编程-GCD
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#autoreleasepool"><span class="nav-number">1.</span> <span class="nav-text">@autoreleasepool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AutoreleasePool-是什么"><span class="nav-number">2.</span> <span class="nav-text">AutoreleasePool 是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AutoreleasePoolPage-的结构"><span class="nav-number">2.1.</span> <span class="nav-text">AutoreleasePoolPage 的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#双向链表"><span class="nav-number">2.1.1.</span> <span class="nav-text">双向链表:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自动释放池中的栈"><span class="nav-number">2.1.2.</span> <span class="nav-text">自动释放池中的栈</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#POOL-SENTINEL-哨兵对象"><span class="nav-number">2.1.3.</span> <span class="nav-text">POOL_SENTINEL(哨兵对象)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#objc-autoreleasePoolPush方法"><span class="nav-number">2.1.4.</span> <span class="nav-text">objc_autoreleasePoolPush方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#page-gt-add-添加对象"><span class="nav-number">2.1.5.</span> <span class="nav-text">page-&gt;add 添加对象</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#autoreleaseFullPage-当前的hotPage已满"><span class="nav-number">2.1.6.</span> <span class="nav-text">autoreleaseFullPage(当前的hotPage已满)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#autoreleaseNoPage-没有hotPage"><span class="nav-number">2.1.7.</span> <span class="nav-text">autoreleaseNoPage(没有hotPage)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#objc-autoreleasePoolPop-方法"><span class="nav-number">3.</span> <span class="nav-text">objc_autoreleasePoolPop 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

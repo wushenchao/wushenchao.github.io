@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -115,7 +115,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/page/2/">
 
 
 
@@ -259,7 +259,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/21.AutoreleasePool/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/11.关于iOS9.0~9.3 从App Store下载出现不规则奔溃问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -278,7 +278,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/17/21.AutoreleasePool/" itemprop="url">21.深入AutoreleasePool</a></h1>
+                <a class="post-title-link" href="/2017/07/15/11.关于iOS9.0~9.3 从App Store下载出现不规则奔溃问题/" itemprop="url">11.关于iOS9.0 ~ iOS9.3 从App Store下载出现不规则奔溃问题</a></h1>
         
 
         <div class="post-meta">
@@ -290,8 +290,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T11:12:23+08:00">
-                2019-01-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T16:34:14+08:00">
+                2017-07-15
               </time>
             
 
@@ -308,7 +308,7 @@
 
           
           
-             <span id="/2019/01/17/21.AutoreleasePool/" class="leancloud_visitors" data-flag-title="21.深入AutoreleasePool">
+             <span id="/2017/07/15/11.关于iOS9.0~9.3 从App Store下载出现不规则奔溃问题/" class="leancloud_visitors" data-flag-title="11.关于iOS9.0 ~ iOS9.3 从App Store下载出现不规则奔溃问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -340,16 +340,10 @@
 
       
         
-          <h3 id="autoreleasepool"><a href="#autoreleasepool" class="headerlink" title="@autoreleasepool"></a>@autoreleasepool</h3><p>@autoreleasepool{} 是一个__AtAutorereleasePool的结构体</p>
-<pre><code>struct __AtAutoreleasePool {
-  __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}
-  ~__AtAutoreleasePool() {objc_autoreleasePoolPop(atautoreleasepoolobj);}
-  void * atautoreleasepoolobj;
-};
-</code></pre><p>这个结构体会在初始化时调用<strong>objc_autoreleasePoolPush()</strong>方法,会在析构(对象结束其生命周期)时调用<strong>objc_autoreleasePoolPop</strong>方法。</p>
+          <p>这次上线遇到了一个大坑,版本发布上线后,同事的iOS9.1系统的6sp手机运行闪退,而这个手机真机直接跑、扫描二维码安装ipa包,都是没有问题的。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/01/17/21.AutoreleasePool/#more" rel="contents">
+            <a class="btn" href="/2017/07/15/11.关于iOS9.0~9.3 从App Store下载出现不规则奔溃问题/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -400,7 +394,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/20.GCD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/10.上传App Store 报错 ERROR ITMS-90087- " unsupported architectures 解决办法 ">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -419,7 +413,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/17/20.GCD/" itemprop="url">20.多线程编程-GCD</a></h1>
+                <a class="post-title-link" href="/2017/06/15/10.上传App Store 报错 ERROR ITMS-90087- " unsupported architectures 解决办法 " itemprop="url">10- 上传App Store 报错 ERROR ITMS-90087:"Unsupported Architectures 解决办法</a></h1>
         
 
         <div class="post-meta">
@@ -431,8 +425,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T16:02:23+08:00">
-                2018-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-15T14:45:43+08:00">
+                2017-06-15
               </time>
             
 
@@ -449,7 +443,7 @@
 
           
           
-             <span id="/2018/11/17/20.GCD/" class="leancloud_visitors" data-flag-title="20.多线程编程-GCD">
+             <span id="/2017/06/15/10.上传App Store 报错 ERROR ITMS-90087- " unsupported architectures 解决办法 " class="leancloud_visitors" data-flag-title="10- 上传App Store 报错 ERROR ITMS-90087:" 解决办法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -481,22 +475,729 @@
 
       
         
-          <p>在实际开项目开发中为了能够给用户更好的体验，有些延时操作我们都会放在子线程中进行。今天我们就来聊聊多线程在实际项目中的运用。</p>
-<h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><h4 id="进程-process"><a href="#进程-process" class="headerlink" title="进程(process)"></a>进程(process)</h4><ul>
-<li>进程是一个具有一定独立功能的程序关于某次数据集合的一次运行活动,它是操作系统分配资源的基本单元</li>
-<li>一个软件启动就是一个进程,每个进程之间是相互独立的,每个进程均运行在其专用且受保护的内存空间内。</li>
-<li>进程状态: 进程有三个状态,就绪、运行和阻塞。就绪状态其实就是获取了除cpu外的所有资源,只要处理器分配资源马上就可以运行。运行状态就是获取了处理器分配的资源,程序开始执行。阻塞状态:当程序条件不够时,需要等待条件满足时才能执行;比如等待I/O操作的时候,此刻的状态就叫阻塞</li>
+          <h3 id="说明"><a href="#说明" class="headerlink" title="说明:"></a>说明:</h3><p>有些第三方提供商为了方便开发者使用,经常把i386 x86_64 armv7 arm64 等几个平台合并到一起,但是上传App Store的时候需要将i386 x86_64两个平台删除后,才能正常审核。</p>
+<h3 id="一、几个重要概念"><a href="#一、几个重要概念" class="headerlink" title="一、几个重要概念"></a>一、几个重要概念</h3><ol>
+<li>ARM:ARM处理器,特点是体积小、低功耗、低成本、高性能,所以几乎所有手机处理器都基于ARM,在嵌入式系统中应用广泛。</li>
+<li>ARM处理器指令集: armv6 | armv7 | armv7s | arm64都是ARM处理器的指令集,这些指令集都是向下兼容的,例如armv7指令集兼容armv6,只是使用armv6的时候无法发挥出其性能,无法使用armv7的新特性,从而会导致程序执行效率没有那么高。<br>i386 | x86_64是Mac处理器的指令集,i386是针对intel通用微处理器32架构的(虚拟机: iPhone4s iPhone5)。x86_64是针对x86架构的64位处理器(虚拟机: iPhone5S iPhone6 iPhone6S iPhone7 iPhone8 iPhoneX)。</li>
+<li><p>目前iOS移动设备指令集</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/06/15/10.上传App Store 报错 ERROR ITMS-90087- " unsupported architectures 解决办法 #more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ol></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/25/09.iOS证书申请和使用详情/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/05/25/09.iOS证书申请和使用详情/" itemprop="url">09- iOS证书申请和使用详情</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-25T13:55:42+08:00">
+                2017-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/05/25/09.iOS证书申请和使用详情/" class="leancloud_visitors" data-flag-title="09- iOS证书申请和使用详情">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <pre><code>由于公司近期开始接入个推推送,自己也没有详细的总结过iOS证书相关,今天刚好有时间,也就当个记录吧
+</code></pre><h4 id="一-App-ID-bundle-idengtifier"><a href="#一-App-ID-bundle-idengtifier" class="headerlink" title="一. App ID(bundle idengtifier)"></a>一. App ID(bundle idengtifier)</h4><p>App ID一这是每个应用的独立标识,应该是和Xcode中的Bundle Identifier是一致(Explicit)的或匹配(Wildcard)的。<br>App ID字符串通常以反域名格式Company Identifier 例如 “com.apple.garageband”<br>App ID全名会被追加Application Identifier(一般为TeamID),分为两类:</p>
+<pre><code>* Explicit App ID：唯一的App ID，用于唯一标识一个应用程序。
+* Wildcard App ID：含有通配符的App ID，用于标识一组应用程序。
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/05/25/09.iOS证书申请和使用详情/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/15/08.gitignore/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/15/08.gitignore/" itemprop="url">08-.gitignore相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-15T13:25:42+08:00">
+                2017-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/04/15/08.gitignore/" class="leancloud_visitors" data-flag-title="08-.gitignore相关">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="1-作用"><a href="#1-作用" class="headerlink" title="1.作用:"></a>1.作用:</h4><p>利用.gitignore过滤文件，如编译过程中的中间文件，等等，这些文件不需要被追踪管理。<br><a href="https://github.com/github/gitignore" target="_blank" rel="noopener"><font size="3">内容参考gitHub</font>
+</a></p>
+<h4 id="2-gitignore无效，不能过滤某些文件"><a href="#2-gitignore无效，不能过滤某些文件" class="headerlink" title="2.gitignore无效，不能过滤某些文件"></a>2.gitignore无效，不能过滤某些文件</h4>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/15/08.gitignore/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/15/07-JavaScript && iOS原生交互/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/03/15/07-JavaScript && iOS原生交互/" itemprop="url">07-JavaScript && iOS原生交互</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-15T16:23:12+08:00">
+                2017-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/15/07-JavaScript && iOS原生交互/" class="leancloud_visitors" data-flag-title="07-JavaScript && iOS原生交互">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="JavaScript-amp-amp-iOS原生交互"><a href="#JavaScript-amp-amp-iOS原生交互" class="headerlink" title="JavaScript &amp;&amp; iOS原生交互"></a>JavaScript &amp;&amp; iOS原生交互</h3><p>JavaScript &amp;&amp; iOS原生交互第三方框架:<br><a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">WebViewJavascriptBridge</a></p>
+<h4 id="1-简单用法-OC执行JS"><a href="#1-简单用法-OC执行JS" class="headerlink" title="1. 简单用法(OC执行JS)"></a>1. 简单用法(OC执行JS)</h4><pre><code>UIWebView在webViewDidFinishLoad里使用 - (nullable NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script;
+// 获取当前页面的title
+NSString *title = [webview stringByEvaluatingJavaScriptFromString:@&quot;document.title&quot;];
+
+// 获取当前页面的url
+NSString *url = [webview stringByEvaluatingJavaScriptFromString:@&quot;document.location.href&quot;];
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/15/07-JavaScript && iOS原生交互/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/15/06-Objectview-C 中变量采用@property的各个关键字的含义/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/15/06-Objectview-C 中变量采用@property的各个关键字的含义/" itemprop="url">06-Objectview-C 中变量采用@property的各个关键字的含义</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-15T13:47:16+08:00">
+                2016-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/12/15/06-Objectview-C 中变量采用@property的各个关键字的含义/" class="leancloud_visitors" data-flag-title="06-Objectview-C 中变量采用@property的各个关键字的含义">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="Objectview-C-中变量采用-property的各个关键字的含义"><a href="#Objectview-C-中变量采用-property的各个关键字的含义" class="headerlink" title="Objectview-C 中变量采用@property的各个关键字的含义"></a>Objectview-C 中变量采用@property的各个关键字的含义</h3><h4 id="1-property的本质是什么"><a href="#1-property的本质是什么" class="headerlink" title="1.@property的本质是什么?"></a>1.@property的本质是什么?</h4><p>@property = ivar + getter + setter<br>“属性”(property) = 实例变量 + 存取方法<br>OC2.0开始,系统提供了自动生成设置变量值得方法或获取变量值得方法,让我们有更多的精力放在程序的业务逻辑上</p>
+<h4 id="2-ARC下-不显示指定任何属性性关键字时-默认的关键字有哪些"><a href="#2-ARC下-不显示指定任何属性性关键字时-默认的关键字有哪些" class="headerlink" title="2.ARC下,不显示指定任何属性性关键字时,默认的关键字有哪些?"></a>2.ARC下,不显示指定任何属性性关键字时,默认的关键字有哪些?</h4><pre><code>对于基本数据类型默认关键字是:atomic,readwrite,assign
+对于普通的OC对象:atomic,readwrite,strong
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/15/06-Objectview-C 中变量采用@property的各个关键字的含义/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/13/05-git教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/13/05-git教程/" itemprop="url">05-git教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-13T20:45:06+08:00">
+                2016-11-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/11/13/05-git教程/" class="leancloud_visitors" data-flag-title="05-git教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li><p>SVN: 集中式的版本控制系统. 本地只有文件,没有版本库,所有的代码只在服务器上有版本记录,如果要进行版本的回退,和一些tag操作,必须经过服务器</p>
+</li>
+<li><p>Git: 分布式版本控制系统,每个人电脑就有版本库.写完代码,先提交到本地的版本,让后提交到服务器上,最后每个电脑都有一个最新的代码</p>
+<pre><code>git也要配置服务器, 但是服务器的作用, 只是作为一个中间桥梁供开发人员去同步代码用的.
+git有机器强大的分支管理,把SVN等远远抛在了后面
+</code></pre></li>
 </ul>
+<h4 id="1-远程仓库"><a href="#1-远程仓库" class="headerlink" title="1.远程仓库"></a>1.远程仓库</h4><ul>
+<li><p>1.1 创建SSH Key. 在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件，如果已经有了，可直接跳到下一步。使用以下命令创建SSH Key：(替换成你的邮箱地址).</p>
+<pre><code>$ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;
+</code></pre></li>
+<li><p>1.2 在用户主目录中找到.ssh目录,里面有id_rsa(私钥)和id_rea.pub(公钥),打开id_rea.pub并记录下来.</p>
+</li>
+<li><p>1.3 登录GitHub,打开”Account settings”,”SSH Key”页面,添加Key,把id_rea.pub内容添加进去.</p>
+<pre><code>git需要在GitHup,OsChina,GitLabel中添加自己的公钥
+由于你的本地Git仓库和GitHub仓库之间的传输是通过SSH加密的,GitHub只要知道了你的公钥,就可以在每台电脑上往GitHub推送了.
+</code></pre>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/11/17/20.GCD/#more" rel="contents">
+            <a class="btn" href="/2016/11/13/05-git教程/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </div>
+    </li></ul></div>
     
     
     
@@ -540,7 +1241,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/19.python自动生成model和api脚本/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/23/04-代码审查清单/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -559,7 +1260,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/19.python自动生成model和api脚本/" itemprop="url">19.RequestToModel的使用</a></h1>
+                <a class="post-title-link" href="/2016/10/23/04-代码审查清单/" itemprop="url">04-Code Review</a></h1>
         
 
         <div class="post-meta">
@@ -571,8 +1272,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T15:12:15+08:00">
-                2018-08-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-23T19:35:16+08:00">
+                2016-10-23
               </time>
             
 
@@ -589,7 +1290,7 @@
 
           
           
-             <span id="/2018/08/17/19.python自动生成model和api脚本/" class="leancloud_visitors" data-flag-title="19.RequestToModel的使用">
+             <span id="/2016/10/23/04-代码审查清单/" class="leancloud_visitors" data-flag-title="04-Code Review">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -621,287 +1322,171 @@
 
       
         
-          <h3 id="19-RequestToModel的使用"><a href="#19-RequestToModel的使用" class="headerlink" title="19.RequestToModel的使用"></a>19.RequestToModel的使用</h3><p>第一步、进入RequestToModel路径<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/17/19.python自动生成model和api脚本/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/18.在Mac系统下配置PHP运行环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/18.在Mac系统下配置PHP运行环境/" itemprop="url">18.在Mac系统下配置PHP运行环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T14:12:14+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/04/26/18.在Mac系统下配置PHP运行环境/" class="leancloud_visitors" data-flag-title="18.在Mac系统下配置PHP运行环境">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>近期项目中需要将UIWebView替换成WKWebView,查询到前端口原js调用的方法不在起作用,需要调用新方法window.webkit.messageHandlers.<name>.postMessage(<messagebody>),所以本地新建Html测试下,需要设置Apache相关配置</messagebody></name></p>
-<p>Mac系统对于Php运行非常友好,我们只需要进行简单的配置便可以开始进行使用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/26/18.在Mac系统下配置PHP运行环境/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/17.iOS Block详解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/17.iOS Block详解/" itemprop="url">17.iOS Block详解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T14:12:14+08:00">
-                2018-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/04/23/17.iOS Block详解/" class="leancloud_visitors" data-flag-title="17.iOS Block详解">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>Block是C语言的扩充功能。可以用一句话来表示Block的扩充功能: 带有自动变量的匿名函数。</p>
-<ul>
-<li>Block本质是对象,使代码高聚合</li>
-<li>Block的使用分为声明、实现、执行</li>
-<li>Block可以定义在方法内部或外部</li>
+          <h2 id="Code-Review"><a href="#Code-Review" class="headerlink" title="Code Review"></a>Code Review</h2><h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><ul>
+<li>1.在项目早起就能发现代码中的bug</li>
+<li>2.项目统一代码风格,项目代码更容易维护</li>
+<li>3.避免开发人员犯一些很常见,很普通的错误(可预测性检查)</li>
 </ul>
-<h4 id="二、-Block的定义和使用"><a href="#二、-Block的定义和使用" class="headerlink" title="二、 Block的定义和使用"></a>二、 Block的定义和使用</h4>
+<h4 id="常规项"><a href="#常规项" class="headerlink" title="常规项"></a>常规项</h4><ul>
+<li>1.代码能够工作吗？它有没有实现预期的功能，逻辑是否正确等。</li>
+<li>2.代码符合你遵循的编程规范吗？通常包括大括号的位置，变量名和函数名，行的长度，缩进，格式和注释等风格是否保持一致。</li>
+<li>3.是否存在多余的或是重复的代码？</li>
+<li>4.代码是否尽可能的模块化了？</li>
+<li>5.是否有可以被替换的全局变量？</li>
+<li>6.是否有被注释掉的代码？所有的注释是否是准确的?</li>
+<li>7.健壮性：是否考虑线程安全；边界处理是否完整；数据的越界处理；被零除,有没有内存泄漏；逻辑是否健壮；循环引用（block中的self和weakSelf）
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/04/23/17.iOS Block详解/#more" rel="contents">
+            <a class="btn" href="/2016/10/23/04-代码审查清单/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/08/13/03-iOS单元测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/08/13/03-iOS单元测试/" itemprop="url">03-iOS单元测试</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-08-13T17:25:13+08:00">
+                2016-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/08/13/03-iOS单元测试/" class="leancloud_visitors" data-flag-title="03-iOS单元测试">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h2><p>我是从去年开始写单元测试的,平常也只是使用测试一下接口的测试,最近有时间网上查找下了资料总结一下,也是有个归纳吧</p>
+<h2 id="单元测试简介"><a href="#单元测试简介" class="headerlink" title="单元测试简介"></a>单元测试简介</h2><blockquote>
+<p>单元测试是指开发者编写代码,检测代码。合理的利用单元测试可以提高软件的质量</p>
+<p>代码检测通常需要预先设置边界条件,因为UI测试的时候,很多边界条件不容易满足。主要针对<font color="#0099ff" size="3" face="黑体">业务逻辑</font>进行测试,不适合做UI的测试。</p>
+<p>MVVM的设计模式,把几乎所有重要的业务逻辑全部封装在视图模型中,通过单元测试就很方便检测条件以及代码质量。</p>
+</blockquote>
+<h2 id="什么方法或者函数需要测试"><a href="#什么方法或者函数需要测试" class="headerlink" title="什么方法或者函数需要测试"></a>什么方法或者函数需要测试</h2><pre><code>1.私有方法不需要测试,面向对象有一个原则:开闭原则! 暴露在.h中的方法需要测试,
+2. 所有跟UI有关的都不需要测试,有UI的交互。MVVM 把小的业务逻辑封装出来,变成可以测试的代码,让程序更加健壮。
+3.一般而言,代码的覆盖度大概在50% ~ 70%
+</code></pre><h2 id="苹果自带的XCTest"><a href="#苹果自带的XCTest" class="headerlink" title="苹果自带的XCTest"></a>苹果自带的XCTest</h2><pre><code>/** 单元测试开始前调用 */
+- (void)setUp {
+[supersetUp];
+// Put setup code here. This method is called before the invocation of each test method in the class.
+}
+</code></pre>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/08/13/03-iOS单元测试/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -952,7 +1537,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/16.项目启动耗时测试/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/03/02-mac上安装oh-my-zsh以及应用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -971,7 +1556,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/16.项目启动耗时测试/" itemprop="url">16.项目启动耗时性能优化</a></h1>
+                <a class="post-title-link" href="/2016/07/03/02-mac上安装oh-my-zsh以及应用/" itemprop="url">02-Mac上安装oh-my-zsh以及iterm2的使用</a></h1>
         
 
         <div class="post-meta">
@@ -983,8 +1568,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-13T14:34:14+08:00">
-                2018-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-03T15:22:13+08:00">
+                2016-07-03
               </time>
             
 
@@ -1001,7 +1586,7 @@
 
           
           
-             <span id="/2018/02/13/16.项目启动耗时测试/" class="leancloud_visitors" data-flag-title="16.项目启动耗时性能优化">
+             <span id="/2016/07/03/02-mac上安装oh-my-zsh以及应用/" class="leancloud_visitors" data-flag-title="02-Mac上安装oh-my-zsh以及iterm2的使用">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1033,571 +1618,28 @@
 
       
         
-          <p>近期项目线下反应app启动时间较长,本着对用户体验的追求,我们希望在业务扩张的同时优化启动时间。</p>
-<h3 id="启动时间"><a href="#启动时间" class="headerlink" title="启动时间"></a>启动时间</h3><p>总时间 = T1(main函数之前的加载时间) + T2(main函数之后的加载时间)</p>
-<p>T1: 加载系统dylib和可执行文件的时间</p>
-<p>T2: 从mian函数到applicationWillFinishLaunching结束的时间,构建第一个界面,并完成渲染展示</p>
-<h4 id="main-函数调用之前的加载过程"><a href="#main-函数调用之前的加载过程" class="headerlink" title="main()函数调用之前的加载过程"></a>main()函数调用之前的加载过程</h4>
+          <h3 id="Mac上安装oh-my-zsh"><a href="#Mac上安装oh-my-zsh" class="headerlink" title="Mac上安装oh-my-zsh"></a>Mac上安装oh-my-zsh</h3><ul>
+<li><p>1 克隆项目本地(Mac默认已经安装git) </p>
+<pre><code>git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+</code></pre></li>
+<li><p>2 创建一个zsh的配置文件 </p>
+<pre><code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+</code></pre><p>  备注:~ 代表:你的/home/用户名的目录,假设你的用户名是user,那么~/就是/home/user/. .是代表此目录本身,但是一般可以不写,所以cd ~/. 和 cd ~ 和cd ~/效果是一样的.但是.后面有东西又是另外一个问题,点在文件名头部,代表一个隐藏文件. ~/.local是你的主目录下下一个.local的文件夹的路径,并且从.可以看出,这是一个隐藏文件,使用ls -a显示.</p>
+</li>
+<li><p>3 设置zsh为默认的shell</p>
+<pre><code>chsh -s /bin/zsh
+</code></pre></li>
+<li><p>4 重启终端生效</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/13/16.项目启动耗时测试/#more" rel="contents">
+            <a class="btn" href="/2016/07/03/02-mac上安装oh-my-zsh以及应用/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/15.rutime系列-消息传递/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/12/15.rutime系列-消息传递/" itemprop="url">15.Object-C Runtime基本介绍和消息传递</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-12T14:34:14+08:00">
-                2017-12-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/12/12/15.rutime系列-消息传递/" class="leancloud_visitors" data-flag-title="15.Object-C Runtime基本介绍和消息传递">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文内容</p>
-<ul>
-<li><a href="#缘由代码">缘由代码</a></li>
-<li><a href="#Runtime基本介绍">Runtime基本介绍</a></li>
-<li><a href="object_getClass(obj">object_getClass(obj)与[obj class]的区别</a>与[obj class]的区别)</li>
-<li><a href="#objc_class结构体及其成员变量定义">objc_class结构体及其成员变量定义</a></li>
-</ul>
-<h3 id="1-objc-msgSend的介绍"><a href="#1-objc-msgSend的介绍" class="headerlink" title="1. objc_msgSend的介绍"></a>1. objc_msgSend的介绍</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/12/15.rutime系列-消息传递/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/14.友盟 crash log 错误分析工具/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/02/14.友盟 crash log 错误分析工具/" itemprop="url">14.友盟 crash log 错误分析工具</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-02T09:34:14+08:00">
-                2017-10-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/10/02/14.友盟 crash log 错误分析工具/" class="leancloud_visitors" data-flag-title="14.友盟 crash log 错误分析工具">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>开发完成,闲置时间对已上线版本进行crash log错误分析,crash展示文件除了帧调用就是内存地址,的确不好看明白 <img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzq8sq7lj21f413in9b.jpg" alt></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/02/14.友盟 crash log 错误分析工具/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/13.字符串特辑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/20/13.字符串特辑/" itemprop="url">13.字符串特辑(转载)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T09:34:14+08:00">
-                2017-09-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/20/13.字符串特辑/" class="leancloud_visitors" data-flag-title="13.字符串特辑(转载)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。</p>
-<p>首先我们做下测试:</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/20/13.字符串特辑/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/12.Effective Objective-C 2.0读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/12.Effective Objective-C 2.0读书笔记/" itemprop="url">12.Effective Objective-C 2.0读书笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T15:34:14+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/17/12.Effective Objective-C 2.0读书笔记/" class="leancloud_visitors" data-flag-title="12.Effective Objective-C 2.0读书笔记">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>动态绑定</li>
-</ol>
-<p>// Messaging (Objective-C)</p>
-<p>Object *obj = [Object new];</p>
-<p>[obj performWith:parameterl and: parameterl2];</p>
-<p>关键区别在于: 使用消息结构的语言,其运行时所应执行的代码由运行环境来决定;而使用函数调用的语言,则有编辑器决定。如果范例代码中调用的函数是多态的,那么在运行时就要按照 <strong>虚方法表: </strong>来查出到底应该执行哪个函数实现。而采取消息结构的语言,不论是否多态,总是在运行时才回去查找所要执行的方法。实际上,编辑器甚至不关心接受消息的对象是何种类型。接受消息的对象问题也要在运行时处理,其过程叫做”动态绑定”。</p>
-
-          
-        
-      
-    </div>
+    </li></ul></div>
     
     
     
@@ -1632,7 +1674,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 

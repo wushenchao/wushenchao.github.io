@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。 首先我们做下测试:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13.字符串特辑(转载)">
+<meta property="og:url" content="http://yoursite.com/2017/09/20/13.字符串特辑/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。 首先我们做下测试:">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-25T03:20:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="13.字符串特辑(转载)">
+<meta name="twitter:description" content="OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。 首先我们做下测试:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/09/20/13.字符串特辑/">
+
+
+
+
+
+  <title>13.字符串特辑(转载) | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/13.字符串特辑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">13.字符串特辑(转载)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T09:34:14+08:00">
+                2017-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/20/13.字符串特辑/" class="leancloud_visitors" data-flag-title="13.字符串特辑(转载)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。</p>
+<p>首先我们做下测试:</p>
+<a id="more"></a>
+<p>定义宏方便打印:</p>
+<pre><code>#if __has_feature(objc_arc)
+#define Obj_RetainCount(obj) \
+CFGetRetainCount((__bridge CFTypeRef)(obj))
+#else
+#define Obj_RetainCount(obj) \
+DebugLog(@&quot;%lu&quot;,[obj retainCount]);
+#endif
+
+#define KNLog(_var) NSLog(@&quot;%@ : class = %@ p = %p retainCount = %d&quot;,@#_var,NSStringFromClass([_var class]),_var,Obj_RetainCount(_var));
+</code></pre><p>测试代码:</p>
+<pre><code>NSString *a = @&quot;str&quot;;
+NSString *b = [[NSString alloc]init];
+NSString *c = [[NSString alloc]initWithString:@&quot;str&quot;];
+NSString *d = [[NSString alloc]initWithFormat:@&quot;str&quot;];
+NSString *e = [NSString stringWithFormat:@&quot;str&quot;];
+NSString *f = [NSString stringWithFormat:@&quot;123456789&quot;];
+NSString *g = [NSString stringWithFormat:@&quot;1234567890&quot;];
+
+
+KNLog(a);
+KNLog(b);
+KNLog(c);
+KNLog(d);
+KNLog(e);
+KNLog(f);
+KNLog(g);
+</code></pre><p>打印结果:</p>
+<pre><code>a : class = __NSCFConstantString p = 0x104038110 retainCount = -1
+b : class = __NSCFConstantString p = 0x1af4d3c28 retainCount = -1
+c : class = __NSCFConstantString p = 0x104038110 retainCount = -1
+d : class = NSTaggedPointerString p = 0xa000000007274733 retainCount = -1
+e : class = NSTaggedPointerString p = 0xa000000007274733 retainCount = -1
+f : class = NSTaggedPointerString p = 0xa1ea1f72bb30ab19 retainCount = -1
+g : class = __NSCFString p = 0x1c40366e0 retainCount = 2
+</code></pre><p>可以看到,不同的方式创建的字符串额立新不同,引用计数也有所区别,并不是我们常规理解的对象初始化后引用计数为1.创建的字符串有3种类型</p>
+<ul>
+<li>__NSCFConstantString</li>
+<li>__NSCFString</li>
+<li>NSTaggedPointerString</li>
+</ul>
+<p>造成这种结果的原因是由于OC对字符串做的内存优化。</p>
+<h5 id="NSCFConstantString"><a href="#NSCFConstantString" class="headerlink" title="__NSCFConstantString"></a>__NSCFConstantString</h5><p>对变量类型名上就可以看出,这种类型的字符串是常亮字符串。该类型的字符串以字面量的方式创建,保存在字符串常亮区,是在编译时创建的。例如:</p>
+<pre><code>NSString *a = @&quot;good afternoon!&quot;;
+NSString *b = [[NSString alloc]initWithString:@&quot;good afternoon!&quot;];
+NSString *c = [[NSString alloc]initWithFormat:a];
+</code></pre><p>对于initWithString实例方法以及stringWithString类方法,编译器会给出redundant警告,原因是该方法创建字符串等同于直接复制字符串字面量。    </p>
+<ul>
+<li>当创建的字符串变量值在常亮区已经存在时,会指向那个字符串,这是编译器做的优化。</li>
+<li>由于是常量,因此其内存管理并不同于对象的内存管理,引用计数用用整形格式打出来始终为-1。</li>
+</ul>
+<h5 id="NSCFString"><a href="#NSCFString" class="headerlink" title="__NSCFString"></a>__NSCFString</h5><p>__NSCFString表示对象类型的字符串,在运行时创建,保存在堆区,初始引用计数为1,其内存管理方式就是对象的内存管理方式。该种类型字符串通过format方式创建,并且字符串内容仅由数字、字母和常规ASCII字符构成,且其长度不能太小,否则创建的是NSTaggedPointerString类型。</p>
+<pre><code>NSString *d = [[NSString alloc]initWithFormat:@&quot;我是对象&quot;];//__NSCFString
+NSString *e = [NSString stringWithFormat:@&quot;1234567890&quot;]; //__NSCFString
+</code></pre><h5 id="NSTaggedPointerString"><a href="#NSTaggedPointerString" class="headerlink" title="NSTaggedPointerString"></a>NSTaggedPointerString</h5><p>NSTaggedPointerString类型的字符串是对__NSCFString类型的一种优化,在运行时创建字符串时,会对字符串内容及长度作判断,若内容由ASCII字符构成且长度较小,这时候创建的字符串类型就是NSTaggedPointerString（标签指针字符串),字符串直接存储在指针的内容中。NSTaggedPointerString类型中字符串引用计数同样为-1,不适用对象的内存管理策略。</p>
+<pre><code>NSString *e = [NSString stringWithFormat:@&quot;123456789&quot;]; //NSTaggedPointerString 
+</code></pre><p>而上面以同样的方式创建的1234567890字符串却为 __NSCFString 类型。</p>
+<h4 id="探究NSDictionary-NSArray-NSValue-NSNumber是否也做了优化"><a href="#探究NSDictionary-NSArray-NSValue-NSNumber是否也做了优化" class="headerlink" title="探究NSDictionary NSArray NSValue NSNumber是否也做了优化"></a>探究NSDictionary NSArray NSValue NSNumber是否也做了优化</h4><p>#####NSDictionary测试代码如下：</p>
+<pre><code>NSDictionary *d1 = @{@&quot;aa&quot;:@&quot;11&quot;,@&quot;bb&quot;:@&quot;22&quot;};
+NSDictionary *d2 = [[NSDictionary alloc]init];
+NSDictionary *d3 = [[NSDictionary alloc]initWithObjectsAndKeys:@&quot;a&quot;,@&quot;1&quot;, nil];
+NSDictionary *d4 = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;b&quot;,@&quot;2&quot;, nil];
+
+KNLog(d1);
+KNLog(d2);
+KNLog(d3);
+KNLog(d4);
+</code></pre><p>打印结果:</p>
+<pre><code>d1 : class = __NSDictionaryI p = 0x7fddbad1e9d0 retainCount = 1
+d2 : class = __NSDictionary0 p = 0x7fddbae00dd0 retainCount = -1
+d3 : class = __NSDictionaryI p = 0x7fddbad044f0 retainCount = 1
+d4 : class = __NSDictionaryI p = 0x7fddbadbd8a0 retainCount = 2
+</code></pre><p>#####NSArray测试代码如下：</p>
+<pre><code>NSDictionary *d1 = @{@&quot;aa&quot;:@&quot;11&quot;,@&quot;bb&quot;:@&quot;22&quot;};
+NSDictionary *d2 = [[NSDictionary alloc]init];
+NSDictionary *d3 = [[NSDictionary alloc]initWithObjectsAndKeys:@&quot;a&quot;,@&quot;1&quot;, nil];
+NSDictionary *d4 = [NSDictionary dictionaryWithObjectsAndKeys:@&quot;b&quot;,@&quot;2&quot;, nil];
+
+KNLog(d1);
+KNLog(d2);
+KNLog(d3);
+KNLog(d4);
+</code></pre><p>打印结果:</p>
+<pre><code>d1 : class = __NSDictionaryI p = 0x7fddbad1e9d0 retainCount = 1
+d2 : class = __NSDictionary0 p = 0x7fddbae00dd0 retainCount = -1
+d3 : class = __NSDictionaryI p = 0x7fddbad044f0 retainCount = 1
+d4 : class = __NSDictionaryI p = 0x7fddbadbd8a0 retainCount = 2
+</code></pre><h5 id="NSArray测试代码如下："><a href="#NSArray测试代码如下：" class="headerlink" title="NSArray测试代码如下："></a>NSArray测试代码如下：</h5><pre><code>NSArray *a1 = @[@&quot;1&quot;,@&quot;2&quot;];
+NSArray *a2 = [[NSArray alloc]init];
+NSArray *a3 = [[NSArray alloc]initWithObjects:@&quot;1&quot;, nil];
+NSArray *a4 = [[NSArray alloc]initWithArray:@[@&quot;a&quot;,@&quot;b&quot;]];
+NSArray *a5 = [NSArray arrayWithObjects:@&quot;m&quot;,@&quot;n&quot;, nil];
+
+KNLog(a1);
+KNLog(a2);
+KNLog(a3);
+KNLog(a4);
+KNLog(a5);
+</code></pre><p>打印结果:</p>
+<pre><code>a1 : class = __NSArrayI p = 0x7fddbae16970 retainCount = 1
+a2 : class = __NSArray0 p = 0x7fddbae00ce0 retainCount = -1
+a3 : class = __NSArrayI p = 0x7fddbae23ea0 retainCount = 1
+a4 : class = __NSArrayI p = 0x7fddbae0ab30 retainCount = 1
+a5 : class = __NSArrayI p = 0x7fddbae0ab10 retainCount = 2
+</code></pre><h5 id="NSValue测试代码如下："><a href="#NSValue测试代码如下：" class="headerlink" title="NSValue测试代码如下："></a>NSValue测试代码如下：</h5><pre><code>NSValue *v1 = [NSValue valueWithCGPoint:CGPointMake(10, 10)];
+CGPoint point = CGPointMake(20, 20);
+NSValue *v2 = [[NSValue alloc]initWithBytes:&amp;point objCType:@encode(CGPoint)];
+KNLog(v1);
+KNLog(v2);
+</code></pre><p>打印结果:</p>
+<pre><code>v1 : class = NSConcreteValue p = 0x7fddbae153e0 retainCount = 2
+v2 : class = NSConcreteValue p = 0x7fddbae21fa0 retainCount = 1
+</code></pre><h5 id="NSNumber测试代码如下："><a href="#NSNumber测试代码如下：" class="headerlink" title="NSNumber测试代码如下："></a>NSNumber测试代码如下：</h5><pre><code>NSNumber *n1 = [NSNumber numberWithInt:123456789];
+NSNumber *n2 = [NSNumber numberWithInt:1234567890];
+int i = 10;
+NSNumber *n3 = [[NSNumber alloc]initWithBytes:&amp;i objCType:@encode(int)];
+KNLog(n1);
+KNLog(n2);
+KNLog(n3);
+</code></pre><p>打印结果:</p>
+<pre><code>n1 : class = __NSCFNumber p = 0xb000000075bcd152 retainCount = -1
+n2 : class = __NSCFNumber p = 0xb000000499602d22 retainCount = -1
+n3 : class = NSConcreteValue p = 0x7fddbadb4df0 retainCount = 1
+</code></pre><p>结论:</p>
+<ul>
+<li>对于NSDictionary、NSArray以及NSValue实例,除了空字典和空字符串,其余实例都遵循对象的内存管理策略。</li>
+<li>NSNumber类创建的对于普通数据类型的封装的实例,其内存管理同样做了优化,不遵循对象的内存管理策略。<br>另外可以看到,有些新创建的对象引用计数为1,有些为2.这是因为用类方法创建的实例,系统自动将其置入自动释放池。</li>
+</ul>
+<h5 id="mutable-variable"><a href="#mutable-variable" class="headerlink" title="mutable variable"></a>mutable variable</h5><p>测试代码如下:</p>
+<pre><code>//NSMutableString
+NSMutableString *ms1 = [[NSMutableString alloc]init];
+NSMutableString *ms2 = [[NSMutableString alloc]initWithString:@&quot;str&quot;];
+NSMutableString *ms3 = [[NSMutableString alloc]initWithFormat:@&quot;str&quot;];
+NSMutableString *ms4 = [NSMutableString stringWithFormat:@&quot;str&quot;];
+NSMutableString *ms5 = [NSMutableString stringWithFormat:@&quot;123456789&quot;];
+NSMutableString *ms6 = [NSMutableString stringWithFormat:@&quot;1234567890&quot;];
+
+XFLog(ms1);
+XFLog(ms2);
+XFLog(ms3);
+XFLog(ms4);
+XFLog(ms5);
+XFLog(ms6);
+
+//NSMutableDictionary
+NSMutableDictionary *md1 = [[NSMutableDictionary alloc]init];
+NSMutableDictionary *md2 = [[NSMutableDictionary alloc]initWithObjectsAndKeys:@&quot;a&quot;,@&quot;1&quot;, nil];
+NSMutableDictionary *md3 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@&quot;b&quot;,@&quot;2&quot;, nil];
+
+XFLog(md1);
+XFLog(md2);
+XFLog(md3);
+
+//NSMutableArray
+NSMutableArray *ma1 = [[NSMutableArray alloc]init];
+NSMutableArray *ma2 = [[NSMutableArray alloc]initWithObjects:@&quot;1&quot;, nil];
+NSMutableArray *ma3 = [[NSMutableArray alloc]initWithArray:@[@&quot;a&quot;,@&quot;b&quot;]];
+NSMutableArray *ma4 = [NSMutableArray arrayWithObjects:@&quot;m&quot;,@&quot;n&quot;, nil];
+
+XFLog(ma1);
+XFLog(ma2);
+XFLog(ma3);
+XFLog(ma4); 
+</code></pre><p>测试结果如下:</p>
+<pre><code>ms1 : class = __NSCFString p = 0x7fd31070e6b0 retainCount = 1
+ms2 : class = __NSCFString p = 0x7fd310716d40 retainCount = 1
+ms3 : class = __NSCFString p = 0x7fd310719910 retainCount = 1
+ms4 : class = __NSCFString p = 0x7fd31071b610 retainCount = 2
+ms5 : class = __NSCFString p = 0x7fd31071bc40 retainCount = 2
+ms6 : class = __NSCFString p = 0x7fd310715350 retainCount = 2
+md1 : class = __NSDictionaryM p = 0x7fd31071be00 retainCount = 1
+md2 : class = __NSDictionaryM p = 0x7fd31070c270 retainCount = 1
+md3 : class = __NSDictionaryM p = 0x7fd310717960 retainCount = 2
+ma1 : class = __NSArrayM p = 0x7fd31060d860 retainCount = 1
+ma2 : class = __NSArrayM p = 0x7fd310605730 retainCount = 1
+ma3 : class = __NSArrayM p = 0x7fd310607f80 retainCount = 1
+ma4 : class = __NSArrayM p = 0x7fd310606dc0 retainCount = 2
+</code></pre><p>结论:<br>    可变变量实例均以对象的形式保存在堆中。</p>
+<font color="#0099ff" size="face=" 黑体"">color=#0099ff size=12 face=”黑体”</font>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/12.Effective Objective-C 2.0读书笔记/" rel="next" title="12.Effective Objective-C 2.0读书笔记">
+                <i class="fa fa-chevron-left"></i> 12.Effective Objective-C 2.0读书笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/02/14.友盟 crash log 错误分析工具/" rel="prev" title="14.友盟 crash log 错误分析工具">
+                14.友盟 crash log 错误分析工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#NSCFConstantString"><span class="nav-number">1.</span> <span class="nav-text">__NSCFConstantString</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSCFString"><span class="nav-number">2.</span> <span class="nav-text">__NSCFString</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSTaggedPointerString"><span class="nav-number">3.</span> <span class="nav-text">NSTaggedPointerString</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#探究NSDictionary-NSArray-NSValue-NSNumber是否也做了优化"><span class="nav-number"></span> <span class="nav-text">探究NSDictionary NSArray NSValue NSNumber是否也做了优化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NSArray测试代码如下："><span class="nav-number">1.</span> <span class="nav-text">NSArray测试代码如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSValue测试代码如下："><span class="nav-number">2.</span> <span class="nav-text">NSValue测试代码如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSNumber测试代码如下："><span class="nav-number">3.</span> <span class="nav-text">NSNumber测试代码如下：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mutable-variable"><span class="nav-number">4.</span> <span class="nav-text">mutable variable</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Sj2lCA09ErubMSsa2v9oFU9Y-gzGzoHsz", "qJejurdHKM06N75OQedX4SDK");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

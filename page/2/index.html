@@ -914,6 +914,28 @@ git stash drop删除
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1203,6 +1225,28 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -1245,7 +1289,9 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
           
             <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
-<p><img src="../images/02/02-1.jpg" alt="avatar"><br><img src="../images/02/02-2.jpg" alt="avatar"><br><img src="../images/02/02-3.jpg" alt="avatar"></p>
+<p><img src="../images/02/02-1.jpg" alt="avatar"></p>
+<p><img src="../images/02/02-2.jpg" alt="avatar"></p>
+<p><img src="../images/02/02-3.jpg" alt="avatar"></p>
 <p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
 <p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
 <p><img src="../images/02/02-4.jpg" alt="avatar"></p>
@@ -1263,7 +1309,9 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
 <p><img src="../images/02/02-9.jpg" alt="avatar"></p>
 <h4 id="3-静态库支持的SDK版本"><a href="#3-静态库支持的SDK版本" class="headerlink" title="3.静态库支持的SDK版本"></a>3.静态库支持的SDK版本</h4><p>为了使自己的静态库尽可能多的支持IOS的系统版本，应该在”IOS Deployment Target”这个选项中选择自己所需的IOS版本。设置如下图，这个是我的静态库工程中的配置，红框框起来的是我修改过的选项。</p>
 <p><img src="../images/02/02-9.jpg" alt="avatar"></p>
-<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。<br><img src="../images/02/02-10.png" alt="avatar"><br><img src="../images/02/02-11.png" alt="avatar"></p>
+<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。</p>
+<p><img src="../images/02/02-10.png" alt="avatar"></p>
+<p><img src="../images/02/02-11.png" alt="avatar"></p>
 <p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
 
           
@@ -1436,12 +1484,14 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
     UIBarStyleBlackOpaque      = 1, // Deprecated. Use UIBarStyleBlack
     UIBarStyleBlackTranslucent = 2, // Deprecated. Use UIBarStyleBlack and set the translucent property to YES
 } __TVOS_PROHIBITED;    
-</code></pre><h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p><img src="../images/01/01-2.png" alt="avatar"><br><img src="../images/01/01-1.png" alt="avatar"></p>
+</code></pre><h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p><img src="../images/01/01-2.png" alt="avatar"></p>
+<p><img src="../images/01/01-1.png" alt="avatar"></p>
 <p>方法1.下面的属性为设置为NO （View controller-based status bar appearance）</p>
 <p><img src="../images/01/01-3.png" alt="avatar">    </p>
 <p>项目中添加如下设置</p>
 <pre><code>[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-</code></pre><p>方法2.下面的属性为设置为YES （View controller-based status bar appearance）<br><img src="../images/01/01-3.png" alt="avatar"></p>
+</code></pre><p>方法2.下面的属性为设置为YES （View controller-based status bar appearance）</p>
+<p><img src="../images/01/01-3.png" alt="avatar"></p>
 <p>项目中添加如下设置</p>
 <pre><code>- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

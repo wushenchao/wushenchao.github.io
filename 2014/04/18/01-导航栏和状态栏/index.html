@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://yoursite.com/2014/04/18/images/01/01-3.png">
 <meta property="og:image" content="http://yoursite.com/2014/04/18/images/01/01-3.png">
 <meta property="og:image" content="http://yoursite.com/2014/04/18/images/01/01-4.png">
-<meta property="og:updated_time" content="2019-03-12T10:39:16.866Z">
+<meta property="og:updated_time" content="2019-03-12T10:52:20.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="01-导航栏和状态栏">
 <meta name="twitter:description" content="状态栏typedef NS_ENUM(NSInteger, UIStatusBarStyle) {     UIStatusBarStyleDefault                                     = 0, // 白底黑子     UIStatusBarStyleLightContent     NS_ENUM_AVAILABLE_IOS(7_0) = 1, // 黑">
@@ -379,12 +379,14 @@
     UIBarStyleBlackOpaque      = 1, // Deprecated. Use UIBarStyleBlack
     UIBarStyleBlackTranslucent = 2, // Deprecated. Use UIBarStyleBlack and set the translucent property to YES
 } __TVOS_PROHIBITED;    
-</code></pre><h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p><img src="../images/01/01-2.png" alt="avatar"><br><img src="../images/01/01-1.png" alt="avatar"></p>
+</code></pre><h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p><img src="../images/01/01-2.png" alt="avatar"></p>
+<p><img src="../images/01/01-1.png" alt="avatar"></p>
 <p>方法1.下面的属性为设置为NO （View controller-based status bar appearance）</p>
 <p><img src="../images/01/01-3.png" alt="avatar">    </p>
 <p>项目中添加如下设置</p>
 <pre><code>[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-</code></pre><p>方法2.下面的属性为设置为YES （View controller-based status bar appearance）<br><img src="../images/01/01-3.png" alt="avatar"></p>
+</code></pre><p>方法2.下面的属性为设置为YES （View controller-based status bar appearance）</p>
+<p><img src="../images/01/01-3.png" alt="avatar"></p>
 <p>项目中添加如下设置</p>
 <pre><code>- (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;

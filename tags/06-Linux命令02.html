@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一.进程管理1.创建进程：有两种方式来创建进程，前台进程和后台进程。12前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp;amp; 如 $ls *.txt &amp;amp; ####2.查看正在运行的进程可以使用 ps  或者 ps －f 来查看正在运行的进程其他如:    选项 说明     -a 显">
+<meta property="og:type" content="website">
+<meta property="og:title" content="06-Linux命令2">
+<meta property="og:url" content="http://yoursite.com/tags/06-Linux命令02.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="一.进程管理1.创建进程：有两种方式来创建进程，前台进程和后台进程。12前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp;amp; 如 $ls *.txt &amp;amp; ####2.查看正在运行的进程可以使用 ps  或者 ps －f 来查看正在运行的进程其他如:    选项 说明     -a 显">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-12T09:59:31.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="06-Linux命令2">
+<meta name="twitter:description" content="一.进程管理1.创建进程：有两种方式来创建进程，前台进程和后台进程。12前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp;amp; 如 $ls *.txt &amp;amp; ####2.查看正在运行的进程可以使用 ps  或者 ps －f 来查看正在运行的进程其他如:    选项 说明     -a 显">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/tags/06-Linux命令02.html">
+
+
+
+
+
+  <title>06-Linux命令2 | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It is never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+    
+    
+    <div class="post-block page">
+      <header class="post-header">
+
+	<h1 class="post-title" itemprop="name headline">06-Linux命令2</h1>
+
+
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+        
+        
+          <h3 id="一-进程管理"><a href="#一-进程管理" class="headerlink" title="一.进程管理"></a>一.进程管理</h3><h4 id="1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><a href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。" class="headerlink" title="1.创建进程：有两种方式来创建进程，前台进程和后台进程。"></a>1.创建进程：有两种方式来创建进程，前台进程和后台进程。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt</span><br><span class="line">后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp; 如 $ls *.txt &amp;</span><br></pre></td></tr></table></figure>
+<p>####2.查看正在运行的进程<br>可以使用 ps  或者 ps －f 来查看正在运行的进程<br>其他如:</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>显示所有用户的所有进程。</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示无终端的进程。</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示更多信息，类似于 -f 选项。</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>显示所有进程。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UID</td>
+<td>进程所属用户的ID，即哪个用户创建了该进程。</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>进程ID。</td>
+</tr>
+<tr>
+<td>PPID</td>
+<td>父进程ID，创建该进程的进程称为父进程。</td>
+</tr>
+<tr>
+<td>C</td>
+<td>CPU使用率。</td>
+</tr>
+<tr>
+<td>STIME</td>
+<td>进程被创建的时间。</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>与进程有关的终端类型。</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>进程所使用的CPU时间。</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>创建该进程的命令。</td>
+</tr>
+</tbody>
+</table>
+<p>####3.终止进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">当进程运行在前台时，可以通过 kill 命令或 Ctrl+C 组合键来结束进程。</span><br><span class="line">如果进程忽略kill命令 可以使用 kill－9 pid</span><br><span class="line"></span><br><span class="line">孤儿进程：正常情况下，子进程在被终止时会通过sigchld信号通知父进程，父进程会做一些清理工作或重启一个新的进程。在一些特殊情况下，父进程在子进程终止前被终止，那么这些子进程被称为孤儿进程。</span><br><span class="line"></span><br><span class="line">僵尸进程：如果一个进程被终止了，但使用ps命令可以查看该进程，并且状态为z，那么这就是一个僵尸进程。</span><br><span class="line"></span><br><span class="line">常驻进程：常驻进程一般时系统级进程，以root权限在后台，可以处理其他进程的请求。</span><br><span class="line">常驻进程没有终端.</span><br><span class="line"></span><br><span class="line">top命令：它可以动态显示正在运行的进程，还可以按条件对进程进行排序。</span><br></pre></td></tr></table></figure></p>
+<h4 id="4-任务和进程"><a href="#4-任务和进程" class="headerlink" title="4.任务和进程"></a>4.任务和进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">任务：任务是抽象的，是一个一般性的术语，指由软件完成的一个活动。一个任务即可以是一个进程，也可以是多个进程。简而言之，它是指一系列共同达到莫一目的的操作。</span><br><span class="line"></span><br><span class="line">进程：常常被定义为程序的执行。可以把一个进程看成是一个独立的进程，在内存中有其完备的数据空间和代码空间。一个进程所拥有的数据和变量只属于它自己。</span><br><span class="line"></span><br><span class="line">jobs －l 命令可以查看当前任务包含的进程id</span><br></pre></td></tr></table></figure>
+<h4 id="5前台任务和后台任务的切换"><a href="#5前台任务和后台任务的切换" class="headerlink" title="5前台任务和后台任务的切换"></a>5前台任务和后台任务的切换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fg命令可以将后台任务调节到前台。语法：$fg %jobnumber</span><br><span class="line"></span><br><span class="line">bg命令可以将前台任务调节到后台。语法：$bg %jobnumber</span><br><span class="line"></span><br><span class="line">jobnumber 是通过 jobs 命令获取的后台任务的的序号，注意不是pid。如果只有一个任务，可以不指定 jobnumber。</span><br><span class="line"></span><br><span class="line">如果希望将当前任务转移到后台，可以先 Ctrl+z 暂停任务，再使用 bg 命令。任务转移到后台可以空出终端，继续输入其他命令。</span><br></pre></td></tr></table></figure>
+<h3 id="二-网络通信工具"><a href="#二-网络通信工具" class="headerlink" title="二.网络通信工具"></a>二.网络通信工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ping命令 向网络主机发送应答请求，根据响应判断远程主机是否可用。</span><br><span class="line">语法：$ping hostname or ip－address</span><br><span class="line"></span><br><span class="line">telnet工具</span><br><span class="line">Telnet 工具可以让我们连接并登录到远程计算机。</span><br><span class="line"></span><br><span class="line">finger工具</span><br><span class="line">finger 可以让我们查看本地主机或远程主机上的用户信息。有些系统为了安全会禁用 finger 命令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ftp工具</span><br><span class="line">ftp 是 File Transfer Protocol 的缩写，称为文件传输协议。通过 ftp 工具，能够将文件上传到远程服务器，也可以从远程服务器下载文件。</span><br><span class="line"></span><br><span class="line">ftp 工具有自己的命令（类似Linux命令），可以：</span><br><span class="line">1.连接并登录远程主机；</span><br><span class="line">2.查看目录，遍历目录下的文件；</span><br><span class="line">3.上传或下载文件，包括文本文件、二进制文件等。</span><br><span class="line"></span><br><span class="line">ftp的语法：ftp hostname or ip－address</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>ftp命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>put filename</td>
+<td>将本地文件上传到远程主机。</td>
+</tr>
+<tr>
+<td>get filenam</td>
+<td>将远程文件下载到本地。</td>
+</tr>
+<tr>
+<td>mput file list</td>
+<td>将多个本地文件上传到远程主机。</td>
+</tr>
+<tr>
+<td>mget file list</td>
+<td>将多个远程文件下载到本地。</td>
+</tr>
+<tr>
+<td>prompt off</td>
+<td>关闭提示。默认使用 mput 或 mget 命令会不断提示你确认文件的上传或下载。</td>
+</tr>
+<tr>
+<td>prompt on</td>
+<td>打开提示。</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>列出远程主机当前目录下的所有文件。</td>
+</tr>
+<tr>
+<td>cd dirname</td>
+<td>改变远程主机目录。</td>
+</tr>
+<tr>
+<td>lcd dirname</td>
+<td>改变本地目录。</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出登录。</td>
+</tr>
+</tbody>
+</table>
+<p>###三.VI编辑器</p>
+<p>####1.进入vi编辑器</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vi filename</td>
+<td>如果filename存在，则打开；否则会创建一个新文件再打开。</td>
+</tr>
+<tr>
+<td>vi -R filename</td>
+<td>以只读模式（只能查看不能编辑）打开现有文件。</td>
+</tr>
+<tr>
+<td>view filename</td>
+<td>以只读模式打开现有文件。</td>
+</tr>
+</tbody>
+</table>
+<p>####2.工作模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.普通模式</span><br><span class="line">由shell进入vi编辑器时，首先进入普通模式，在普通模式下，从键盘输入任何字符都被当作命令来解释。普通模式下没有任何提示符，输入命令后立即执行，不需要回车，而且输入字符在屏幕上不显示。</span><br><span class="line"></span><br><span class="line">普通模式下可以执行命令，保存文件，移动光标，粘贴复制。</span><br><span class="line"></span><br><span class="line">2.编辑模式</span><br><span class="line">编辑模式主要用于文本编辑，该模式下用户输入的任何字符都被当作文件的内容保存起来，并在屏幕上显示出来。</span><br><span class="line"></span><br><span class="line">3.命令模式</span><br><span class="line">命令模式下，用户可以对文件进行一些高级的处理，如执行一些字符串的查找，替换和显示符号等操作必须进入命令模式。</span><br><span class="line"></span><br><span class="line">工作模式切换：</span><br><span class="line">在普通模式下输入 i(插入)、c(修改)、o(另起一行) 命令时进入编辑模式；按 esc 键退回到普通模式。</span><br><span class="line">在普通模式下输入冒号(:)可以进入命令模式。输入完命令按回车，命令执行完后会自动退回普通模式。s</span><br></pre></td></tr></table></figure>
+<p>####3.退出vi编辑器</p>
+<table>
+<thead>
+<tr>
+<th>退出命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q</td>
+<td>如果文件未被修改，会直接退回到Shell；否则提示保存文件。</td>
+</tr>
+<tr>
+<td>q!</td>
+<td>强行退出，不保存修改内容。</td>
+</tr>
+<tr>
+<td>wq</td>
+<td>w 命令保存文件，q 命令退出 vi，合起来就是保存并退出。</td>
+</tr>
+<tr>
+<td>ZZ</td>
+<td>保存并退出，相当于 wq，但是更加方便。</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>注意:</em></strong>  zz使用shift＋zz方式 其他使用shift+: 命令 +回车</p>
+<p>####4.控制命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTRL+d</td>
+<td>向前滚动半屏</td>
+</tr>
+<tr>
+<td>CTRL+f</td>
+<td>向前滚动全屏</td>
+</tr>
+<tr>
+<td>CTRL+u</td>
+<td>向后滚动半屏</td>
+</tr>
+<tr>
+<td>CTRL+b</td>
+<td>向后滚动全屏</td>
+</tr>
+<tr>
+<td>CTRL+e</td>
+<td>向上滚动一行</td>
+</tr>
+<tr>
+<td>CTRL+y</td>
+<td>向下滚动一行</td>
+</tr>
+<tr>
+<td>CTRL+i</td>
+<td>刷新屏幕</td>
+</tr>
+</tbody>
+</table>
+<p>####5.编辑文件<br>切换到编辑模式下才能编辑文件，从普通模式切换到编辑模式的命令如下</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>在当前光标位置之前插入</td>
+</tr>
+<tr>
+<td>I</td>
+<td>在当前行的开头插入</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在当前光标位置之后插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在当前行的末尾插入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前位置下面创建一行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前位置上面创建一行</td>
+</tr>
+<tr>
+<td>fn + ⬆️</td>
+<td>光标移动到当前屏幕开始位置</td>
+</tr>
+<tr>
+<td>fn + ⬇️</td>
+<td>光标移动到当前屏幕末尾位置</td>
+</tr>
+<tr>
+<td>fn + ⬅️</td>
+<td>光标移动到当前行开头</td>
+</tr>
+<tr>
+<td>fn + ➡️</td>
+<td>光标移动到当前行末尾</td>
+</tr>
+</tbody>
+</table>
+<p>####6.删除字符或行</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>删除当前光标下的字符</td>
+</tr>
+<tr>
+<td>X</td>
+<td>删除光标前面的字符</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除从当前光标到单词结尾的字符</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>删除从当前光标到行首的字符</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除从当前光标到行尾的字符</td>
+</tr>
+<tr>
+<td>D</td>
+<td>删除从当前光标到行尾的字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除当前光标所在的行</td>
+</tr>
+</tbody>
+</table>
+<p>可以在命令前面添加一个数字前缀，表示重复操作的次数，例如，2x  表示连续两次删除光标下的字符，2dd 表示连续两次删除光标所在的行。</p>
+<p>####7.修改文本</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cc</td>
+<td>删除当前行，并进入编辑模式。</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>删除当前字（单词），并进入编辑模式。</td>
+</tr>
+<tr>
+<td>r</td>
+<td>替换当前光标下的字符。</td>
+</tr>
+<tr>
+<td>R</td>
+<td>从当前光标开始替换字符，按 Esc 键退出。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>用输入的字符替换当前字符，并进入编辑模式。</td>
+</tr>
+<tr>
+<td>S</td>
+<td>用输入的文本替换当前行，并进入编辑模式。</td>
+</tr>
+</tbody>
+</table>
+<p>####8.粘贴复制</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yy</td>
+<td>复制当前行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>复制n行</td>
+</tr>
+<tr>
+<td>yw</td>
+<td>复制一个字（单词）</td>
+</tr>
+<tr>
+<td>nyw</td>
+<td>复制n行</td>
+</tr>
+<tr>
+<td>p</td>
+<td>将复制的文本粘贴到光标后面</td>
+</tr>
+<tr>
+<td>P</td>
+<td>将复制的文本粘贴到光标前面</td>
+</tr>
+</tbody>
+</table>
+<p>文本替换</p>
+<p>切换到命令模式，再输入 s/ 命令即可对文本进行替换。语法为：<br>:s/search/replace/g<br>search 为检索的文本，replace 为要替换的文本，g 表示全局替换</p>
+<p>几点提示</p>
+<p>vi 编辑器的使用讲解完毕，但是请记住下面几点：<br>输入冒号(:)进入命令模式，按两次 Esc 键进入普通模式。<br>命令大小写的含义是不一样的。<br>必须在编辑模式下才能输入内容。</p>
+
+        
+      </div>
+      
+      
+      
+    </div>
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-进程管理"><span class="nav-number">1.</span> <span class="nav-text">一.进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建进程：有两种方式来创建进程，前台进程和后台进程。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-任务和进程"><span class="nav-number">1.2.</span> <span class="nav-text">4.任务和进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5前台任务和后台任务的切换"><span class="nav-number">1.3.</span> <span class="nav-text">5前台任务和后台任务的切换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-网络通信工具"><span class="nav-number">2.</span> <span class="nav-text">二.网络通信工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

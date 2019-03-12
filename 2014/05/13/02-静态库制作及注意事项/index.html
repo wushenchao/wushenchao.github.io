@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary  此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自己的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="02-静态库制作及注意事项">
+<meta property="og:url" content="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary  此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自己的">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-1.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-2.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-3.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-4.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-5.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-6.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-7.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-8.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-9.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-9.jpg">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-10.png">
+<meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-11.png">
+<meta property="og:updated_time" content="2019-03-12T07:02:54.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="02-静态库制作及注意事项">
+<meta name="twitter:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary  此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自己的">
+<meta name="twitter:image" content="http://yoursite.com/2014/05/13/images/02/02-1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/">
+
+
+
+
+
+  <title>02-静态库制作及注意事项 | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It is never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">02-静态库制作及注意事项</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-13T00:00:00+08:00">
+                2014-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/05/13/02-静态库制作及注意事项/" class="leancloud_visitors" data-flag-title="02-静态库制作及注意事项">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
+<p><img src="../images/02/02-1.jpg" alt="avatar"><br><img src="../images/02/02-2.jpg" alt="avatar"><br><img src="../images/02/02-3.jpg" alt="avatar"></p>
+<p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
+<p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
+<p><img src="../images/02/02-4.jpg" alt="avatar"></p>
+<pre><code>然后选择 静态库
+</code></pre><p><img src="../images/02/02-5.jpg" alt="avatar"></p>
+<pre><code>同时 Edit Sheme
+</code></pre><p><img src="../images/02/02-6.jpg" alt="avatar"></p>
+<pre><code>然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了
+</code></pre><p><img src="../images/02/02-7.jpg" alt="avatar"></p>
+<p>##注意事项</p>
+<p>在开发过程中，经常会碰到一些在不同工程中经常用到的部分，把这些部分抽取出来做成一个静态库往往是一个比较好的做法。xcode里就有制作静态库的模板，相关的制作步骤网上也有很多，但在实际的操作中，还是有不少细节方面需要注意。以下是我碰到的一些问题总结。</p>
+<h4 id="1-编译release版本的库"><a href="#1-编译release版本的库" class="headerlink" title="1.编译release版本的库"></a>1.编译release版本的库</h4><p>在“Manage Schemes”中，将“Build Configuration”的选项改为“Release”即可。如图：</p>
+<p><img src="../images/02/02-8.jpg" alt="avatar"></p>
+<h4 id="2-静态库中包含category"><a href="#2-静态库中包含category" class="headerlink" title="2.静态库中包含category"></a>2.静态库中包含category</h4><p>如果你在静态库工程中使用了category，那么你可能会碰到链接问题，解决的办法就是需要同时在生成静态库的工程和使用静态库的工程中使用“-all_load”编译选项，即在对应target的”Build Settings”中的“Other Linker Flags”选项添加“-all_load”。注意：使用静态库的工程中是一定要加该编译选项的！！至于生成静态库的工程中加不加没有试过，不过建议还是加上该编译选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="3-静态库支持的SDK版本"><a href="#3-静态库支持的SDK版本" class="headerlink" title="3.静态库支持的SDK版本"></a>3.静态库支持的SDK版本</h4><p>为了使自己的静态库尽可能多的支持IOS的系统版本，应该在”IOS Deployment Target”这个选项中选择自己所需的IOS版本。设置如下图，这个是我的静态库工程中的配置，红框框起来的是我修改过的选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。<br><img src="../images/02/02-10.png" alt="avatar"><br><img src="../images/02/02-11.png" alt="avatar"></p>
+<p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/04/18/01-导航栏和状态栏/" rel="next" title="01-导航栏和状态栏">
+                <i class="fa fa-chevron-left"></i> 01-导航栏和状态栏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/06/20/03-AppB中获取AppA的照片/" rel="prev" title="03-AppB中获取AppA的照片">
+                03-AppB中获取AppA的照片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一"><span class="nav-number">1.</span> <span class="nav-text">方法一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二"><span class="nav-number">2.</span> <span class="nav-text">方法二</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-编译release版本的库"><span class="nav-number">2.0.1.</span> <span class="nav-text">1.编译release版本的库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-静态库中包含category"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.静态库中包含category</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-静态库支持的SDK版本"><span class="nav-number">2.0.3.</span> <span class="nav-text">3.静态库支持的SDK版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-自动拷贝头文件"><span class="nav-number">2.0.4.</span> <span class="nav-text">4.自动拷贝头文件</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

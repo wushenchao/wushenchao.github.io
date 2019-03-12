@@ -79,16 +79,13 @@
 
 
 
-<meta name="description" content="活到老，学到老。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="不知是哪个号">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="活到老，学到老。">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不知是哪个号">
-<meta name="twitter:description" content="活到老，学到老。">
 
 
 
@@ -252,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/21.AutoreleasePool/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -271,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/17/21.AutoreleasePool/" itemprop="url">21.深入AutoreleasePool</a></h1>
+                <a class="post-title-link" href="/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/" itemprop="url">11.关于iOS9.0~9.3 App Store下载奔溃问题</a></h1>
         
 
         <div class="post-meta">
@@ -283,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-17T11:12:23+08:00">
-                2019-01-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-15T00:00:00+08:00">
+                2017-06-15
               </time>
             
 
@@ -301,7 +298,7 @@
 
           
           
-             <span id="/2019/01/17/21.AutoreleasePool/" class="leancloud_visitors" data-flag-title="21.深入AutoreleasePool">
+             <span id="/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="11.关于iOS9.0~9.3 App Store下载奔溃问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -333,20 +330,455 @@
 
       
         
-          <h3 id="autoreleasepool"><a href="#autoreleasepool" class="headerlink" title="@autoreleasepool"></a>@autoreleasepool</h3><p>@autoreleasepool{} 是一个__AtAutorereleasePool的结构体</p>
-<pre><code>struct __AtAutoreleasePool {
-  __AtAutoreleasePool() {atautoreleasepoolobj = objc_autoreleasePoolPush();}
-  ~__AtAutoreleasePool() {objc_autoreleasePoolPop(atautoreleasepoolobj);}
-  void * atautoreleasepoolobj;
+          
+            <p>参考链接：<a href="https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below" target="_blank" rel="noopener">https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below</a></p>
+<p>##问题出现前提:</p>
+<p>1.使用Xcode8打包</p>
+<p>2.运行系统iOS9.0～9.3</p>
+<p>3.图片添加在Assets资源下</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。</p>
+<p>去友盟错误列表反馈报以下错误提示:</p>
+<pre><code>Application received signal SIGTRAP
+</code></pre><p>最终定位到了P3资源文件的问题上了,图片资源文件里有16位图,显示模式为P3</p>
+<p>##原理: </p>
+<p>如果你的app需要支持广色域显示的话，那你必须得把target设置成iOS 9.3+，相反，如果你的app不需要支持广色域且你想兼容 iOS 9.3 之前的项目，你就得把资源文件所有的16位的或者显示模式为’P3’图片全都替换成8位模式的SRGB颜色的图片</p>
+<p>####1.查找16位模式的SRGB颜色的图片步骤:</p>
+<pre><code>1.打一个ipa包,将该文件后缀名.ipa为.zip
+
+2.解压该.zip文件,解压后的目录里面会有一个Payload文件夹
+
+3.打开终端切换到Payload文件下的.app路径
+
+    cd ~/路径/appname.app
+
+4.用find命名定位到Asset.car文件
+
+    find . -name &apos;Assets.car&apos;
+
+5.使用 assetutil 命令导出图片的信息存储到Assets.json文件中
+
+
+    sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json
+
+6.使用以下命令 打开上步生成的/tmp/Assets.json
+
+    open /tmp/Assets.json
+查找“DisplayGamut&quot;: “P3”,
+看到&quot;Encoding&quot; : &quot;ARGB-16&quot;,这个就是要被替换的图片
+
+{ 
+    &quot;SizeClass Vertical&quot; : &quot;universal&quot;,
+    &quot;Graphics&quot; : &quot;GLES2,0&quot;, &quot;Name&quot; : &quot;ianisme.com&quot;, 
+    &quot;Scale&quot; : 2, &quot;Idiom&quot; : &quot;universal&quot;, 
+    &quot;Memory&quot; : &quot;512MB&quot;, 
+    &quot;LayoutDirection&quot; : &quot;0 - Horizontal&quot;, 
+    &quot;DisplayGamut&quot; : &quot;P3&quot;,
+    &quot;Encoding&quot; : &quot;ARGB-16&quot;,
+    &quot;SizeClass Horizontal&quot; : &quot;universal&quot;,
+    &quot;Image Type&quot; : &quot;kCoreThemeOnePartScale&quot;, 
+    &quot;AssetType&quot; : &quot;Image&quot;, 
+    &quot;Subtype&quot; : 0, 
+    &quot;EdgeInsets&quot; : &quot;top:0 left:0 bottom:0 right:0&quot;
+},
+</code></pre><h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><p>#####1修改图片:</p>
+<pre><code>使用ColorSync实用工具将这个描述文件修改下
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg" alt><br>    指派它的描述文件为sRGB IEC61966-2.1，保存.</p>
+<p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg" alt></p>
+<pre><code>至此我们的问题完美解决。
+</code></pre><p>#####2改变图片位置</p>
+<p>将问题图片从Assets移除，直接添加到工程中使用</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/01/10-iOS10推送/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/01/10-iOS10推送/" itemprop="url">10-iOS10推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-01T00:00:00+08:00">
+                2016-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/07/01/10-iOS10推送/" class="leancloud_visitors" data-flag-title="10-iOS10推送">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最新苹果刚刚发布系统10版本，其中有项重大的改变就是通知</p>
+<p>iOS 9 以前的通知</p>
+<pre><code>1.在调用方法时，有些方法让人很难区分，容易写错方法，这让开发者有时候很苦恼。
+2.应用在运行时和非运行时捕获通知的路径还不一致。
+3.应用在前台时，是无法直接显示远程通知，还需要进一步处理。
+4.已经发出的通知是不能更新的，内容发出时是不能改变的，并且只有简单文本展示方式，扩展性根本不是很好。
+</code></pre><p>iOS 10 开始的通知</p>
+<pre><code>1.所有相关通知被统一到了UserNotifications.framework框架中。
+2.增加了撤销、更新、中途还可以修改通知的内容。
+3.通知不在是简单的文本了，可以加入视频、图片，自定义通知的展示等等。
+4.iOS 10相对之前的通知来说更加好用易于管理，并且进行了大规模优化，对于开发者来说是一件好事。
+5.iOS 10开始对于权限问题进行了优化，申请权限就比较简单了(本地与远程通知集成在一个方法中)。    
+</code></pre><p>我们项目中使用的是第三方个推，最近刚好赶上项目上线，而且个推也刚刚发布一个新版本，因此在发布版本之前我们决定对通知模块的做更新。</p>
+<p>一切准备就绪后，在新系统（iOS10）上测试顺利完成（公司缺少测试机），然后打包上线。过审核后的那天晚上发布了该版本包，第二天早上收到线下大量的反馈，iOS10以下系统打开就闪退，然后开始找原因：</p>
+<p>####1.首先看的是友盟bug统计：<br>    里面没有日志记录，分析因为项目还没启动就闪退日志无法收集</p>
+<p>####2查看xcode日志收集<br>    由于时间较短该版本并无日志上传</p>
+<p>####3.分析代码改动：</p>
+<pre><code>1.通知升级
+2.系统适配
+3.小功能添加
+</code></pre><p>排除2、3模块问题很大的原因在这次通知升级上，仔细比对代码和引入的新framework最终发现问题在引入的framework中</p>
+<p>在引入新包时需要将status设置成optional状态</p>
+<p><img src="../images/10/10-1.png" alt="avatar"></p>
+<p>###总结：在新版本改动的过程中除了细心、细心再细心的改动，还需要仔细、仔细再仔细的测试。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/09-OC&&JS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/15/09-OC&&JS/" itemprop="url">09-OC&&JS交互</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-15T00:00:00+08:00">
+                2016-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/03/15/09-OC&&JS/" class="leancloud_visitors" data-flag-title="09-OC&&JS交互">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###OC &amp;&amp; JS交互第三方框架:<br><a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">WebViewJavascriptBridge</a></p>
+<h3 id="JavaScriptCore的使用（iOS7后引用）"><a href="#JavaScriptCore的使用（iOS7后引用）" class="headerlink" title="JavaScriptCore的使用（iOS7后引用）"></a>JavaScriptCore的使用（iOS7后引用）</h3><p>JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码</p>
+<p>JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等</p>
+<p>JSManagedValue：管理数据和方法的类</p>
+<p>JSVirtualMachine：处理线程相关，使用较少</p>
+<p>JSExport：这是一个协议，如果采用协议的方法交互，自己定义的协议必须遵守此协议</p>
+<p>注:</p>
+<blockquote>
+<p>JSContext 和 JSValue : </p>
+</blockquote>
+<blockquote>
+<p>JSVirtualMachine 为JavaScript的运行提供了底层资源,JSContext为JS其提供着运行环境,通过evaluateScript方法就可以执行一段JavaScript脚本,并且如果其中有方法,变量等信息都会被存储在其中以便在需要的时候使用。而JSContext的创建都是基于JSVirtualMachine(initwithVirtualMachine:),如果使用init进行初始化,那么在其内部会自动创建一个新的JSVirtualMachine对象然后调用前边的初始化方法。</p>
+</blockquote>
+<blockquote>
+<p>JSValue是JSContext执行后的返回结果,封装了JS与OC中的对应的类型,可以方便的在两种类型之间转换,可以说是JS和OC之间互换的桥梁</p>
+</blockquote>
+<pre><code>Objective-C type  |   JavaScript type
+</code></pre><p>   ——————–+———————<br>           nil         |     undefined<br>          NSNull       |        null<br>         NSString      |       string<br>         NSNumber      |   number, boolean<br>       NSDictionary    |   Object object<br>         NSArray       |    Array object<br>          NSDate       |     Date object<br>         NSBlock (1)   |   Function object (1)<br>            id (2)     |   Wrapper object (2)<br>          Class (3)    | Constructor object (3)</p>
+<blockquote>
+<p>JSVirtualMachine : “A JSVirtualMachine instance represents a self-contained environment for JavaScript execution.”，这段话是官方文档中对JSVirtualMachine的定义，我们使用JSVirtualMachine的目的主要有两个：支持JS并发执行，管理用于衔接JS 与 OC 代码的对象的内存。</p>
+</blockquote>
+<h3 id="OC-amp-amp-JS交互"><a href="#OC-amp-amp-JS交互" class="headerlink" title="OC &amp;&amp; JS交互"></a>OC &amp;&amp; JS交互</h3><p>默认在该代理方法中执行</p>
+<p><strong>- (void)webViewDidFinishLoad:(UIWebView *)webView</strong></p>
+<pre><code>static NSString *const WWJavaScripeContext = @&quot;documentView.webView.mainFrame.javaScriptContext&quot;;
+static NSString *const WWWebDocumentTitle = @&quot;document.title&quot;;
+</code></pre><h2 id="1-OC调用JS"><a href="#1-OC调用JS" class="headerlink" title="1. OC调用JS"></a>1. OC调用JS</h2><h4 id="使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script"><a href="#使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script" class="headerlink" title="使用- (NSString )stringByEvaluatingJavaScriptFromString:(NSString )script;"></a>使用<strong>- (NSString <em>)stringByEvaluatingJavaScriptFromString:(NSString </em>)script;</strong></h4><pre><code>// 获取当前页面的title
+NSString *title = [webview stringByEvaluatingJavaScriptFromString: WWWebDocumentTitle];
+
+// 获取当前页面的url
+NSString *url = [webview stringByEvaluatingJavaScriptFromString:@&quot;document.location.href&quot;];
+</code></pre><h4 id="使用JSContext"><a href="#使用JSContext" class="headerlink" title="使用JSContext"></a>使用JSContext</h4><pre><code>JSContext *context = [webView valueForKeyPath:WWJavaScripeContext];
+JSValue *value = [context evaluateScript:WWWebDocumentTitle];
+NSLog(@&quot;%@&quot;,value.toString);
+</code></pre><h2 id="2-JS调用OC"><a href="#2-JS调用OC" class="headerlink" title="2. JS调用OC"></a>2. JS调用OC</h2><h4 id="JS直接调用OC"><a href="#JS直接调用OC" class="headerlink" title="JS直接调用OC"></a>JS直接调用OC</h4><pre><code>JSContext *context = [webView valueForKeyPath:WWJavaScripeContext];
+
+context[@&quot;testNo&quot;] = ^{
+    NSLog(@&quot;JS-OC testNo&quot;);
 };
-</code></pre><p>这个结构体会在初始化时调用<strong>objc_autoreleasePoolPush()</strong>方法,会在析构(对象结束其生命周期)时调用<strong>objc_autoreleasePoolPop</strong>方法。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/17/21.AutoreleasePool/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+context[@&quot;testTwo&quot;] = ^{
+    NSArray *arr = [JSContext currentArguments];
+    NSLog(@&quot;JS-OC testTwo&quot;);
+    NSLog(@&quot;%@&quot;,arr);
+};
+</code></pre><p>在Block内都不要直接使用其外部定义的JSContext对象或者JSValue，应该将其当做参数传入到Block中，或者通过JSContext的类方法+ (JSContext *)currentContext;来获得。否则会造成循环引用使得内存无法被正确释放。</p>
+<h4 id="JS通过对象调用OC"><a href="#JS通过对象调用OC" class="headerlink" title="JS通过对象调用OC"></a>JS通过对象调用OC</h4><p>TestJSObject 对象的定义:</p>
+<p>.h 文件</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+#import &lt;JavaScriptCore/JavaScriptCore.h&gt;
+
+@protocol TestJSObjectProtocol &lt;JSExport&gt;
+//此处我们测试几种参数的情况
+- (void)testNoParameter;
+- (void)testOneParameter:(NSString *)value;
+- (void)testTwoParameter:(NSString *)value
+          OhterParameter:(NSString *)other;
+ JSExportAs(testMoreParameter,
+    - (void)testMoreParameter:(NSString *)one two:(NSString *)two three:(NSString *)three
+ );
+
+@end
+
+typedef void (^DDOCJSNoParameterBlock)();
+
+@interface TestJSObject : NSObject&lt;TestJSObjectProtocol&gt;
+
+@property (nonatomic, copy) DDOCJSNoParameterBlock noParameterBlock;
+
+@end
+</code></pre><p>.m 文件    </p>
+<pre><code>#import &quot;TestJSObject.h&quot;
+
+@implementation TestJSObject
+
+- (void)testNoParameter {
+    NSLog(@&quot;this is ios testNoParameter&quot;);
+    if (self.noParameterBlock) {
+        self.noParameterBlock();
+    }
+}
+
+- (void)testOneParameter:(NSString *)value {
+    NSLog(@&quot;this is testOneParameter = %@&quot;,value);
+}
+
+- (void)testTwoParameter:(NSString *)value
+          OhterParameter:(NSString *)other {
+    NSLog(@&quot;this is testTwoParameter = %@  other = %@&quot;,value,other);
+}
+
+- (void)testMoreParameter:(NSString *)one two:(NSString *)two three:(NSString *)three {
+    NSLog(@&quot;this is OneParameter=%@ OneParameter=%@ OneParameter=%@&quot;,one,two,three);
+}
+
+@end
+</code></pre><p>通过对象调用方法</p>
+<pre><code>TestJSObject *object = [TestJSObject new];
+context[@&quot;native&quot;] = object;
+
+object.noParameterBlock = ^(){
+    NSLog(@&quot;webview testNoParameter&quot;);
+};
+</code></pre><p>####OC代码见下图:</p>
+<p><img src="../images/09/09-1.png" alt="avatar">        </p>
+<p>####JS代码见下图</p>
+<p><img src="../images/09/09-2.png" alt="avatar"><br><img src="../images/09/09-3.png" alt="avatar">        </p>
+
+          
         
       
     </div>
@@ -393,7 +825,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/17/20.GCD/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/08-iOS7以后UITextView的那些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -412,7 +844,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/17/20.GCD/" itemprop="url">20.多线程编程-GCD</a></h1>
+                <a class="post-title-link" href="/2015/10/13/08-iOS7以后UITextView的那些坑/" itemprop="url">08-iOS7以后UITextView的那些坑</a></h1>
         
 
         <div class="post-meta">
@@ -424,8 +856,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-17T16:02:23+08:00">
-                2018-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-13T00:00:00+08:00">
+                2015-10-13
               </time>
             
 
@@ -442,7 +874,7 @@
 
           
           
-             <span id="/2018/11/17/20.GCD/" class="leancloud_visitors" data-flag-title="20.多线程编程-GCD">
+             <span id="/2015/10/13/08-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="08-iOS7以后UITextView的那些坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -474,19 +906,27 @@
 
       
         
-          <p>在实际开项目开发中为了能够给用户更好的体验，有些延时操作我们都会放在子线程中进行。今天我们就来聊聊多线程在实际项目中的运用。</p>
-<h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><h4 id="进程-process"><a href="#进程-process" class="headerlink" title="进程(process)"></a>进程(process)</h4><ul>
-<li>进程是一个具有一定独立功能的程序关于某次数据集合的一次运行活动,它是操作系统分配资源的基本单元</li>
-<li>一个软件启动就是一个进程,每个进程之间是相互独立的,每个进程均运行在其专用且受保护的内存空间内。</li>
-<li>进程状态: 进程有三个状态,就绪、运行和阻塞。就绪状态其实就是获取了除cpu外的所有资源,只要处理器分配资源马上就可以运行。运行状态就是获取了处理器分配的资源,程序开始执行。阻塞状态:当程序条件不够时,需要等待条件满足时才能执行;比如等待I/O操作的时候,此刻的状态就叫阻塞</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/17/20.GCD/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>###坑1：<br>iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方</p>
+<pre><code>解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。
+
+if (IOS7_And_Later) {  
+      self.automaticallyAdjustsScrollViewInsets = NO;  
+}  
+</code></pre><p>###坑2:</p>
+<p>iOS7及以上的版本上，UITextView输入中文时，在输入多行后，光标有时会上下跳动，输入文字的时候内容有时会往上跳，光标都显示不出来。这个bug坑死好多人啊，特别是做聊天输入框的时候，不得已找一些非正常的方法解决。从网上找的各种解决方案都不行。</p>
+<p>解决方案：</p>
+<pre><code>- (void)textViewDidChangeSelection:(UITextView *)textView {  
+    if (floor(NSFoundationVersionNumber) &gt; NSFoundationVersionNumber_iOS_6_1) {  
+        CGRect r = [textView caretRectForPosition:textView.selectedTextRange.end];  
+        CGFloat caretY =  MAX(r.origin.y - textView.frame.size.height + r.size.height + 8, 0);  
+        if (textView.contentOffset.y &lt; caretY &amp;&amp; r.origin.y != INFINITY) {  
+            textView.contentOffset = CGPointMake(0, caretY);  
+        }  
+    }  
+}  
+</code></pre>
+          
         
       
     </div>
@@ -533,7 +973,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/19.python自动生成model和api脚本/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/13/07-忽略performSelector警告/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -552,7 +992,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/19.python自动生成model和api脚本/" itemprop="url">19.RequestToModel的使用</a></h1>
+                <a class="post-title-link" href="/2015/05/13/07-忽略performSelector警告/" itemprop="url">07-忽略performSelector的警告</a></h1>
         
 
         <div class="post-meta">
@@ -564,8 +1004,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T15:12:15+08:00">
-                2018-08-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-05-13T00:00:00+08:00">
+                2015-05-13
               </time>
             
 
@@ -582,7 +1022,7 @@
 
           
           
-             <span id="/2018/08/17/19.python自动生成model和api脚本/" class="leancloud_visitors" data-flag-title="19.RequestToModel的使用">
+             <span id="/2015/05/13/07-忽略performSelector警告/" class="leancloud_visitors" data-flag-title="07-忽略performSelector的警告">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -614,150 +1054,25 @@
 
       
         
-          <h3 id="19-RequestToModel的使用"><a href="#19-RequestToModel的使用" class="headerlink" title="19.RequestToModel的使用"></a>19.RequestToModel的使用</h3><p>第一步、进入RequestToModel路径<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/08/17/19.python自动生成model和api脚本/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/26/18.在Mac系统下配置PHP运行环境/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/26/18.在Mac系统下配置PHP运行环境/" itemprop="url">18.在Mac系统下配置PHP运行环境</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-26T14:12:14+08:00">
-                2018-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
           
-
+            <pre><code>#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+    _Pragma(&quot;clang diagnostic push&quot;) \
+    _Pragma(&quot;clang diagnostic ignored \&quot;-Warc-performSelector-leaks\&quot;&quot;) \
+    Stuff; \
+    _Pragma(&quot;clang diagnostic pop&quot;) \
+} while (0)
+</code></pre><p>如果没有返回结果，可以直接按如下方式调用：</p>
+<pre><code>SuppressPerformSelectorLeakWarning(
+    [_target performSelector:_action withObject:self]
+);
+</code></pre><p>如果要返回结果，可以按如下方式调用:</p>
+<pre><code>id result;
+SuppressPerformSelectorLeakWarning(
+    result = [_target performSelector:_action withObject:self]
+);
+</code></pre>
           
-            
-          
-
-          
-          
-             <span id="/2018/04/26/18.在Mac系统下配置PHP运行环境/" class="leancloud_visitors" data-flag-title="18.在Mac系统下配置PHP运行环境">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>近期项目中需要将UIWebView替换成WKWebView,查询到前端口原js调用的方法不在起作用,需要调用新方法window.webkit.messageHandlers.<name>.postMessage(<messagebody>),所以本地新建Html测试下,需要设置Apache相关配置</messagebody></name></p>
-<p>Mac系统对于Php运行非常友好,我们只需要进行简单的配置便可以开始进行使用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/26/18.在Mac系统下配置PHP运行环境/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -804,7 +1119,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/17.iOS Block详解/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/11/06-iOS时间转换/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -823,7 +1138,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/23/17.iOS Block详解/" itemprop="url">17.iOS Block详解</a></h1>
+                <a class="post-title-link" href="/2015/04/11/06-iOS时间转换/" itemprop="url">06-iOS时间转换</a></h1>
         
 
         <div class="post-meta">
@@ -835,8 +1150,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T14:12:14+08:00">
-                2018-04-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-11T00:00:00+08:00">
+                2015-04-11
               </time>
             
 
@@ -853,7 +1168,7 @@
 
           
           
-             <span id="/2018/04/23/17.iOS Block详解/" class="leancloud_visitors" data-flag-title="17.iOS Block详解">
+             <span id="/2015/04/11/06-iOS时间转换/" class="leancloud_visitors" data-flag-title="06-iOS时间转换">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -885,20 +1200,92 @@
 
       
         
-          <h4 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h4><p>Block是C语言的扩充功能。可以用一句话来表示Block的扩充功能: 带有自动变量的匿名函数。</p>
-<ul>
-<li>Block本质是对象,使代码高聚合</li>
-<li>Block的使用分为声明、实现、执行</li>
-<li>Block可以定义在方法内部或外部</li>
-</ul>
-<h4 id="二、-Block的定义和使用"><a href="#二、-Block的定义和使用" class="headerlink" title="二、 Block的定义和使用"></a>二、 Block的定义和使用</h4>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/23/17.iOS Block详解/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p><a href="https://blog.csdn.net/Chao_Mu/article/details/44996573" target="_blank" rel="noopener">https://blog.csdn.net/Chao_Mu/article/details/44996573</a></p>
+<p>字符说明</p>
+<p>(:)</p>
+<p>时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。</p>
+<p>(/)</p>
+<p>日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期值时分隔日、月和年。格式化输出中用作日期分隔符的实际字符由您的应用程序的当前区域性确定。</p>
+<p>(%)</p>
+<p>用于表明不论尾随什么字母，随后字符都应该以单字母格式读取。也用于表明单字母格式应以用户定义格式读取。有关更多详细信息，请参见下面的内容。</p>
+<p>gg</p>
+<p>显示时代/纪元字符串（例如 A.D.）</p>
+<p>y</p>
+<p>将年份 (0-9) 显示为不带前导零的数字。如果这是用户定义的数字格式中的唯一字符，请使用 %y。</p>
+<p>yy</p>
+<p>以带前导零的两位数字格式显示年份（如果适用）。</p>
+<p>yyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>yyyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>M</p>
+<p>将月份显示为不带前导零的数字（如一月表示为 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %M。</p>
+<p>MM</p>
+<p>将月份显示为带前导零的数字（例如 01）。</p>
+<p>MMM</p>
+<p>将月份显示为英文缩写形式（例如 Jan）。</p>
+<p>MMMM</p>
+<p>将月份显示为完整英文月份名（例如 January）。</p>
+<p>d</p>
+<p>将日显示为不带前导零的数字（如 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %d。</p>
+<p>dd</p>
+<p>将日显示为带前导零的数字（如 01）。</p>
+<p>EEE</p>
+<p>将日显示为英文缩写形式（例如 Sun）。</p>
+<p>EEEE</p>
+<p>将日显示为英文全名（例如 Sunday）。</p>
+<p>h</p>
+<p>使用 12 小时制将小时显示为不带前导零的数字（例如 1:15:15 PM）。如果这是用户定义的数字格式中的唯一字符，请使用 %h。</p>
+<p>hh</p>
+<p>使用 12 小时制将小时显示为带前导零的数字（例如 01:15:15 PM）。</p>
+<p>H</p>
+<p>使用 24 小时制将小时显示为不带前导零的数字（例如 1:15:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %H。</p>
+<p>HH</p>
+<p>使用 24 小时制将小时显示为带前导零的数字（例如 01:15:15）。</p>
+<p>m</p>
+<p>将分钟显示为不带前导零的数字（例如 12:1:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %m。</p>
+<p>mm</p>
+<p>将分钟显示为带前导零的数字（例如 12:01:15）。</p>
+<p>s</p>
+<p>将秒显示为不带前导零的数字（例如 12:15:5）。如果这是用户定义的数字格式中的唯一字符，请使用 %s。</p>
+<p>ss</p>
+<p>将秒显示为带前导零的数字（例如 12:15:05）。</p>
+<p>f</p>
+<p>显示秒的小数部分。例如，ff 将精确显示到百分之一秒，而 ffff 将精确显示到万分之一秒。用户定义格式中最多可使用七个 f 符号。如果这是用户定义的数字格式中的唯一字符，请使用 %f。</p>
+<p>t</p>
+<p>使用 12 小时制，并对中午之前的任一小时显示大写的 A，对中午到 11:59 P.M 之间的任一小时显示大写的 P。如果这是用户定义的数字格式中的唯一字符，请使用 %t。</p>
+<p>tt</p>
+<p>对于使用 12 小时制的区域设置，对中午之前任一小时显示大写的 AM，对中午到 11:59 P.M 之间的任一小时显示大写的 PM。</p>
+<p>对于使用 24 小时制的区域设置，不显示任何字符。</p>
+<p>z</p>
+<p>显示不带前导零的时区偏移量（如 -8）。如果这是用户定义的数字格式中的唯一字符，请使用 %z。</p>
+<p>zz</p>
+<p>显示带前导零的时区偏移量（例如 -08）</p>
+<p>zzz</p>
+<p>显示完整的时区偏移量（例如 -08:00）</p>
+<p>例如：<br>Tue Apr 07 03:17:04 PDT 2015<br>@”EEE MMM dd KK:mm:ss zz yyyy”</p>
+<p>2015-03-21 11:12:14<br>@”yy-MM-dd HH:mm:ss”</p>
+<p>NSDate与NSString互相转换：</p>
+<p>(1)</p>
+<pre><code> - (NSString *)dateToString:(NSDate *＊)date dateFormatter:(NSString *)dateFormatter
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:dateFormatter];
+    NSString *dateStr = [formatter stringFromDate:date];
+    return dateStr;
+}
+</code></pre><p>(2)</p>
+<pre><code>- (NSDate *)stringForDate:(NSString *＊)dateString dateFormatter:(NSString *)dateFormatter
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:28800]];
+    [formatter setDateFormat:dateFormatter];
+    NSDate *date = [formatter dateFromString:dateString];
+    return date;
+}
+</code></pre>
+          
         
       
     </div>
@@ -945,7 +1332,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/16.项目启动耗时测试/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/10/23/05-XML解析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -964,7 +1351,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/16.项目启动耗时测试/" itemprop="url">16.项目启动耗时性能优化</a></h1>
+                <a class="post-title-link" href="/2014/10/23/05-XML解析/" itemprop="url">05-xml解析</a></h1>
         
 
         <div class="post-meta">
@@ -976,8 +1363,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-13T14:34:14+08:00">
-                2018-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-10-23T00:00:00+08:00">
+                2014-10-23
               </time>
             
 
@@ -994,7 +1381,7 @@
 
           
           
-             <span id="/2018/02/13/16.项目启动耗时测试/" class="leancloud_visitors" data-flag-title="16.项目启动耗时性能优化">
+             <span id="/2014/10/23/05-XML解析/" class="leancloud_visitors" data-flag-title="05-xml解析">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1026,18 +1413,65 @@
 
       
         
-          <p>近期项目线下反应app启动时间较长,本着对用户体验的追求,我们希望在业务扩张的同时优化启动时间。</p>
-<h3 id="启动时间"><a href="#启动时间" class="headerlink" title="启动时间"></a>启动时间</h3><p>总时间 = T1(main函数之前的加载时间) + T2(main函数之后的加载时间)</p>
-<p>T1: 加载系统dylib和可执行文件的时间</p>
-<p>T2: 从mian函数到applicationWillFinishLaunching结束的时间,构建第一个界面,并完成渲染展示</p>
-<h4 id="main-函数调用之前的加载过程"><a href="#main-函数调用之前的加载过程" class="headerlink" title="main()函数调用之前的加载过程"></a>main()函数调用之前的加载过程</h4>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/13/16.项目启动耗时测试/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章：</p>
+<p><a href="http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project" target="_blank" rel="noopener">http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project</a></p>
+<p>这里主要介绍一下由Google提供的一种在IOS平台上进行XML解析的开源库GDataXML，可以到</p>
+<p><a href="http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/" target="_blank" rel="noopener">http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/</a></p>
+<p>下载源码，下载下来后进入文件夹找到XMLSupport文件夹，将里面的GDataXMLNode.h和GDataXMLNode.m文件拖拽到项目中新建的文件夹即可（我这里是建的GDataXML文件夹），注意要选中复制文件到项目中而不是只是引用，如图：</p>
+<p><img src="../images/05/05-1.png" alt="avatar"></p>
+<p>然后就是对工程进行一些配置，点击工程根目录然后点击左边的Target，进入Build Phases，然后点击第三个Link binary with libraries，点击加号搜索libxml2并将这个库添加到工程，如图：</p>
+<p><img src="../images/05/05-2.png" alt="avatar"></p>
+<p>接下来再进入Build Settings，在搜索框中搜索Head Search Path，然后双击并点击+按钮添加/usr/include/libxml2,如图：</p>
+<p><img src="../images/05/05-3.png" alt="avatar"></p>
+<p>接下来再搜索框中搜索Other linker flags，同样的方式添加-lxml2，如图：</p>
+<p><img src="../images/05/05-4.png" alt="avatar"></p>
+<p>到这里，添加和配置的工作就完成了（是有点麻烦），接下来就看如何使用了：<br>首先在工程中新建一个xml文件，作为我们要解析的对象，新建方法是在工程中新建一个Empty的文件，命名为users.xml，然后添加内容：</p>
+<pre><code>1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+2. &lt;Users]] &gt;   
+3.     &lt;User id=&quot;001&quot;]]]] &gt;   
+4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   
+5.         &lt;age]] &gt; 24&lt;/age]] &gt;   
+6.     &lt;/User]] &gt;   
+7.     &lt;User id=&quot;002&quot;]]]] &gt;   
+8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   
+9.         &lt;age]] &gt; 23&lt;/age]] &gt;   
+10.     &lt;/User]] &gt;   
+11. &lt;/Users]] &gt;   
+</code></pre><p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>
+<pre><code>7. - (void)xmlParse {       
+8.     //获取工程目录的xml文件  
+9.     NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;users&quot; ofType:@&quot;xml&quot;];  
+10.     NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];  
+11.       
+12.     //使用NSData对象初始化  
+13.     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData  options:0error:nil];  
+14.       
+15.     //获取根节点（Users）  
+16.     GDataXMLElement *rootElement = [doc rootElement];  
+17.       
+18.     //获取根节点下的节点（User）  
+19.     NSArray *users = [rootElement elementsForName:@&quot;User&quot;];  
+20.       
+21.     for (GDataXMLElement *user in users) {  
+22.         //User节点的id属性  
+23.         NSString *userId = [[user attributeForName:@&quot;id&quot;] stringValue];  
+24.         NSLog(@&quot;User id is:%@&quot;,userId);  
+25.           
+26.         //获取name节点的值  
+27.         GDataXMLElement *nameElement = [[user elementsForName:@&quot;name&quot;] objectAtIndex:0];  
+28.         NSString *name = [nameElement stringValue];  
+29.         NSLog(@&quot;User name is:%@&quot;,name);  
+30.           
+31.         //获取age节点的值  
+32.         GDataXMLElement *ageElement = [[user elementsForName:@&quot;age&quot;] objectAtIndex:0];  
+33.         NSString *age = [ageElement stringValue];  
+34.         NSLog(@&quot;User age is:%@&quot;,age);  
+35.     }
+36.  }      
+37.           
+</code></pre>
+          
         
       
     </div>
@@ -1084,7 +1518,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/12/15.rutime系列-消息传递/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/21/04-编译问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1103,7 +1537,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/12/15.rutime系列-消息传递/" itemprop="url">15.Object-C Runtime基本介绍和消息传递</a></h1>
+                <a class="post-title-link" href="/2014/08/21/04-编译问题/" itemprop="url">04-编译问题</a></h1>
         
 
         <div class="post-meta">
@@ -1115,8 +1549,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-12T14:34:14+08:00">
-                2017-12-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">
+                2014-08-21
               </time>
             
 
@@ -1133,7 +1567,7 @@
 
           
           
-             <span id="/2017/12/12/15.rutime系列-消息传递/" class="leancloud_visitors" data-flag-title="15.Object-C Runtime基本介绍和消息传递">
+             <span id="/2014/08/21/04-编译问题/" class="leancloud_visitors" data-flag-title="04-编译问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1165,21 +1599,14 @@
 
       
         
-          <p>本文内容</p>
-<ul>
-<li><a href="#缘由代码">缘由代码</a></li>
-<li><a href="#Runtime基本介绍">Runtime基本介绍</a></li>
-<li><a href="object_getClass(obj">object_getClass(obj)与[obj class]的区别</a>与[obj class]的区别)</li>
-<li><a href="#objc_class结构体及其成员变量定义">objc_class结构体及其成员变量定义</a></li>
-</ul>
-<h3 id="1-objc-msgSend的介绍"><a href="#1-objc-msgSend的介绍" class="headerlink" title="1. objc_msgSend的介绍"></a>1. objc_msgSend的介绍</h3>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/12/12/15.rutime系列-消息传递/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h3 id="编译正常，但无法运行到真机和模拟器上"><a href="#编译正常，但无法运行到真机和模拟器上" class="headerlink" title="编译正常，但无法运行到真机和模拟器上"></a>编译正常，但无法运行到真机和模拟器上</h3><p>Choose a destination with a supported architecture</p>
+<p><img src="../images/04/04-1.png" alt="avatar"></p>
+<p>这样的错误解决办法</p>
+<h4 id="1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图："><a href="#1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图：" class="headerlink" title="1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图："></a>1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图：</h4><p><img src="../images/04/04-2.png" alt="avatar"></p>
+<h4 id="2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"><a href="#2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。" class="headerlink" title="2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"></a>2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。</h4><h4 id="3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm"><a href="#3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm" class="headerlink" title="3 compilier for c/c++/objective-c也要看是不是选的apple llvm"></a>3 compilier for c/c++/objective-c也要看是不是选的apple llvm</h4><p><img src="../images/04/04-3.png" alt="avatar"></p>
+<h4 id="4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"><a href="#4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了" class="headerlink" title="4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"></a>4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了</h4>
+          
         
       
     </div>
@@ -1226,7 +1653,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/02/14.友盟 crash log 错误分析工具/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/20/03-AppB中获取AppA的照片/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1245,7 +1672,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/02/14.友盟 crash log 错误分析工具/" itemprop="url">14.友盟 crash log 错误分析工具</a></h1>
+                <a class="post-title-link" href="/2014/06/20/03-AppB中获取AppA的照片/" itemprop="url">03-AppB中获取AppA的照片</a></h1>
         
 
         <div class="post-meta">
@@ -1257,8 +1684,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-02T09:34:14+08:00">
-                2017-10-02
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-20T00:00:00+08:00">
+                2014-06-20
               </time>
             
 
@@ -1275,7 +1702,7 @@
 
           
           
-             <span id="/2017/10/02/14.友盟 crash log 错误分析工具/" class="leancloud_visitors" data-flag-title="14.友盟 crash log 错误分析工具">
+             <span id="/2014/06/20/03-AppB中获取AppA的照片/" class="leancloud_visitors" data-flag-title="03-AppB中获取AppA的照片">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1307,14 +1734,33 @@
 
       
         
-          <p>开发完成,闲置时间对已上线版本进行crash log错误分析,crash展示文件除了帧调用就是内存地址,的确不好看明白 <img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzq8sq7lj21f413in9b.jpg" alt></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/02/14.友盟 crash log 错误分析工具/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h3 id="URLType配置"><a href="#URLType配置" class="headerlink" title="URLType配置"></a>URLType配置</h3><p>分别配置 两个应用的 URLType</p>
+<p>AppA定义URLType为AppA0000000000</p>
+<p>AppB定义URLType为AppB0000000000</p>
+<h3 id="AppB在需要获取AppA中的图片使用如下方法"><a href="#AppB在需要获取AppA中的图片使用如下方法" class="headerlink" title="AppB在需要获取AppA中的图片使用如下方法"></a>AppB在需要获取AppA中的图片使用如下方法</h3><pre><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;AppA0000000000://demo.prefix?imageName=aaa&quot;]];
+</code></pre><h3 id="AppA中"><a href="#AppA中" class="headerlink" title="AppA中"></a>AppA中</h3><p>拦截方法获取处理图片并返回给AppB</p>
+<pre><code>- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url 
+sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
+{
+    if ([[url host] isEqualToString:@&quot;demo.prefix&quot;]) {
+        NSArray *params = [[url query] componentsSeparatedByString:@&quot;&amp;&quot;];
+        for (NSString *param in params) {
+            NSArray *keyValue = [param componentsSeparatedByString:@&quot;=&quot;];
+            NSString *value = [keyValue lastObject];
+            UIImage *image = [UIImage imageNamed:value];
+            NSData *data = UIImagePNGRepresentation(image);
+            NSString *base64String = [data base64EncodedStringWithOptions:0];
+            NSURL url = [NSURL URLWithString:[NSString 
+stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
+            // 将base64后的字串带给AppB
+                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
+    }
+    return YES;
+}
+</code></pre><h3 id="AppB中同上述AppA的方法进行拦截获取图片"><a href="#AppB中同上述AppA的方法进行拦截获取图片" class="headerlink" title="AppB中同上述AppA的方法进行拦截获取图片"></a>AppB中同上述AppA的方法进行拦截获取图片</h3>
+          
         
       
     </div>
@@ -1361,7 +1807,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/20/13.字符串特辑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1380,7 +1826,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/20/13.字符串特辑/" itemprop="url">13.字符串特辑(转载)</a></h1>
+                <a class="post-title-link" href="/2014/05/13/02-静态库制作及注意事项/" itemprop="url">02-静态库制作及注意事项</a></h1>
         
 
         <div class="post-meta">
@@ -1392,8 +1838,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-20T09:34:14+08:00">
-                2017-09-20
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-13T00:00:00+08:00">
+                2014-05-13
               </time>
             
 
@@ -1410,143 +1856,7 @@
 
           
           
-             <span id="/2017/09/20/13.字符串特辑/" class="leancloud_visitors" data-flag-title="13.字符串特辑(转载)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>OC中的NSString不伦是在编译时还是在运行时都做了很多的优化,和普通的对象不同,它是一个比较复杂的存在。</p>
-<p>首先我们做下测试:</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/20/13.字符串特辑/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/12.Effective Objective-C 2.0读书笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/17/12.Effective Objective-C 2.0读书笔记/" itemprop="url">12.Effective Objective-C 2.0读书笔记</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T15:34:14+08:00">
-                2017-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/17/12.Effective Objective-C 2.0读书笔记/" class="leancloud_visitors" data-flag-title="12.Effective Objective-C 2.0读书笔记">
+             <span id="/2014/05/13/02-静态库制作及注意事项/" class="leancloud_visitors" data-flag-title="02-静态库制作及注意事项">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1579,13 +1889,28 @@
       
         
           
-            <ol>
-<li>动态绑定</li>
-</ol>
-<p>// Messaging (Objective-C)</p>
-<p>Object *obj = [Object new];</p>
-<p>[obj performWith:parameterl and: parameterl2];</p>
-<p>关键区别在于: 使用消息结构的语言,其运行时所应执行的代码由运行环境来决定;而使用函数调用的语言,则有编辑器决定。如果范例代码中调用的函数是多态的,那么在运行时就要按照 <strong>虚方法表: </strong>来查出到底应该执行哪个函数实现。而采取消息结构的语言,不论是否多态,总是在运行时才回去查找所要执行的方法。实际上,编辑器甚至不关心接受消息的对象是何种类型。接受消息的对象问题也要在运行时处理,其过程叫做”动态绑定”。</p>
+            <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
+<p><img src="../images/02/02-1.jpg" alt="avatar"><br><img src="../images/02/02-2.jpg" alt="avatar"><br><img src="../images/02/02-3.jpg" alt="avatar"></p>
+<p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
+<p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
+<p><img src="../images/02/02-4.jpg" alt="avatar"></p>
+<pre><code>然后选择 静态库
+</code></pre><p><img src="../images/02/02-5.jpg" alt="avatar"></p>
+<pre><code>同时 Edit Sheme
+</code></pre><p><img src="../images/02/02-6.jpg" alt="avatar"></p>
+<pre><code>然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了
+</code></pre><p><img src="../images/02/02-7.jpg" alt="avatar"></p>
+<p>##注意事项</p>
+<p>在开发过程中，经常会碰到一些在不同工程中经常用到的部分，把这些部分抽取出来做成一个静态库往往是一个比较好的做法。xcode里就有制作静态库的模板，相关的制作步骤网上也有很多，但在实际的操作中，还是有不少细节方面需要注意。以下是我碰到的一些问题总结。</p>
+<h4 id="1-编译release版本的库"><a href="#1-编译release版本的库" class="headerlink" title="1.编译release版本的库"></a>1.编译release版本的库</h4><p>在“Manage Schemes”中，将“Build Configuration”的选项改为“Release”即可。如图：</p>
+<p><img src="../images/02/02-8.jpg" alt="avatar"></p>
+<h4 id="2-静态库中包含category"><a href="#2-静态库中包含category" class="headerlink" title="2.静态库中包含category"></a>2.静态库中包含category</h4><p>如果你在静态库工程中使用了category，那么你可能会碰到链接问题，解决的办法就是需要同时在生成静态库的工程和使用静态库的工程中使用“-all_load”编译选项，即在对应target的”Build Settings”中的“Other Linker Flags”选项添加“-all_load”。注意：使用静态库的工程中是一定要加该编译选项的！！至于生成静态库的工程中加不加没有试过，不过建议还是加上该编译选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="3-静态库支持的SDK版本"><a href="#3-静态库支持的SDK版本" class="headerlink" title="3.静态库支持的SDK版本"></a>3.静态库支持的SDK版本</h4><p>为了使自己的静态库尽可能多的支持IOS的系统版本，应该在”IOS Deployment Target”这个选项中选择自己所需的IOS版本。设置如下图，这个是我的静态库工程中的配置，红框框起来的是我修改过的选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。<br><img src="../images/02/02-10.png" alt="avatar"><br><img src="../images/02/02-11.png" alt="avatar"></p>
+<p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
 
           
         
@@ -1625,7 +1950,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1661,7 +1986,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name"></p>
-              <p class="site-description motion-element" itemprop="description">活到老，学到老。</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1671,7 +1996,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

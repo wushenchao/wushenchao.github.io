@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。  if (IOS7_And_Later) {         self.automaticallyAdjustsScroll">
+<meta name="description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below ##问题出现前提: 1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描">
 <meta property="og:type" content="article">
-<meta property="og:title" content="08-iOS7以后UITextView的那些坑">
-<meta property="og:url" content="http://yoursite.com/2015/10/13/08-iOS7以后UITextView的那些坑/index.html">
+<meta property="og:title" content="14.关于iOS9.0~9.3 App Store下载奔溃问题">
+<meta property="og:url" content="http://yoursite.com/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。  if (IOS7_And_Later) {         self.automaticallyAdjustsScroll">
+<meta property="og:description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below ##问题出现前提: 1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T07:13:23.546Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg">
+<meta property="og:updated_time" content="2019-03-12T10:21:53.258Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="08-iOS7以后UITextView的那些坑">
-<meta name="twitter:description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。  if (IOS7_And_Later) {         self.automaticallyAdjustsScroll">
+<meta name="twitter:title" content="14.关于iOS9.0~9.3 App Store下载奔溃问题">
+<meta name="twitter:description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below ##问题出现前提: 1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/10/13/08-iOS7以后UITextView的那些坑/">
+  <link rel="canonical" href="http://yoursite.com/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/">
 
 
 
 
 
-  <title>08-iOS7以后UITextView的那些坑 | 不知是哪个号</title>
+  <title>14.关于iOS9.0~9.3 App Store下载奔溃问题 | 不知是哪个号</title>
   
 
 
@@ -252,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/08-iOS7以后UITextView的那些坑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -269,7 +273,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">08-iOS7以后UITextView的那些坑</h1>
+          <h1 class="post-title" itemprop="name headline">14.关于iOS9.0~9.3 App Store下载奔溃问题</h1>
         
 
         <div class="post-meta">
@@ -281,8 +285,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-10-13T00:00:00+08:00">
-                2015-10-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-15T00:00:00+08:00">
+                2017-06-15
               </time>
             
 
@@ -299,7 +303,7 @@
 
           
           
-             <span id="/2015/10/13/08-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="08-iOS7以后UITextView的那些坑">
+             <span id="/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="14.关于iOS9.0~9.3 App Store下载奔溃问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -330,25 +334,64 @@
       
 
       
-        <p>###坑1：<br>iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方</p>
-<pre><code>解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。
+        <p>参考链接：<a href="https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below" target="_blank" rel="noopener">https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below</a></p>
+<p>##问题出现前提:</p>
+<p>1.使用Xcode8打包</p>
+<p>2.运行系统iOS9.0～9.3</p>
+<p>3.图片添加在Assets资源下</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。</p>
+<p>去友盟错误列表反馈报以下错误提示:</p>
+<pre><code>Application received signal SIGTRAP
+</code></pre><p>最终定位到了P3资源文件的问题上了,图片资源文件里有16位图,显示模式为P3</p>
+<p>##原理: </p>
+<p>如果你的app需要支持广色域显示的话，那你必须得把target设置成iOS 9.3+，相反，如果你的app不需要支持广色域且你想兼容 iOS 9.3 之前的项目，你就得把资源文件所有的16位的或者显示模式为’P3’图片全都替换成8位模式的SRGB颜色的图片</p>
+<p>####1.查找16位模式的SRGB颜色的图片步骤:</p>
+<pre><code>1.打一个ipa包,将该文件后缀名.ipa为.zip
 
-if (IOS7_And_Later) {  
-      self.automaticallyAdjustsScrollViewInsets = NO;  
-}  
-</code></pre><p>###坑2:</p>
-<p>iOS7及以上的版本上，UITextView输入中文时，在输入多行后，光标有时会上下跳动，输入文字的时候内容有时会往上跳，光标都显示不出来。这个bug坑死好多人啊，特别是做聊天输入框的时候，不得已找一些非正常的方法解决。从网上找的各种解决方案都不行。</p>
-<p>解决方案：</p>
-<pre><code>- (void)textViewDidChangeSelection:(UITextView *)textView {  
-    if (floor(NSFoundationVersionNumber) &gt; NSFoundationVersionNumber_iOS_6_1) {  
-        CGRect r = [textView caretRectForPosition:textView.selectedTextRange.end];  
-        CGFloat caretY =  MAX(r.origin.y - textView.frame.size.height + r.size.height + 8, 0);  
-        if (textView.contentOffset.y &lt; caretY &amp;&amp; r.origin.y != INFINITY) {  
-            textView.contentOffset = CGPointMake(0, caretY);  
-        }  
-    }  
-}  
-</code></pre>
+2.解压该.zip文件,解压后的目录里面会有一个Payload文件夹
+
+3.打开终端切换到Payload文件下的.app路径
+
+    cd ~/路径/appname.app
+
+4.用find命名定位到Asset.car文件
+
+    find . -name &apos;Assets.car&apos;
+
+5.使用 assetutil 命令导出图片的信息存储到Assets.json文件中
+
+
+    sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json
+
+6.使用以下命令 打开上步生成的/tmp/Assets.json
+
+    open /tmp/Assets.json
+查找“DisplayGamut&quot;: “P3”,
+看到&quot;Encoding&quot; : &quot;ARGB-16&quot;,这个就是要被替换的图片
+
+{ 
+    &quot;SizeClass Vertical&quot; : &quot;universal&quot;,
+    &quot;Graphics&quot; : &quot;GLES2,0&quot;, &quot;Name&quot; : &quot;ianisme.com&quot;, 
+    &quot;Scale&quot; : 2, &quot;Idiom&quot; : &quot;universal&quot;, 
+    &quot;Memory&quot; : &quot;512MB&quot;, 
+    &quot;LayoutDirection&quot; : &quot;0 - Horizontal&quot;, 
+    &quot;DisplayGamut&quot; : &quot;P3&quot;,
+    &quot;Encoding&quot; : &quot;ARGB-16&quot;,
+    &quot;SizeClass Horizontal&quot; : &quot;universal&quot;,
+    &quot;Image Type&quot; : &quot;kCoreThemeOnePartScale&quot;, 
+    &quot;AssetType&quot; : &quot;Image&quot;, 
+    &quot;Subtype&quot; : 0, 
+    &quot;EdgeInsets&quot; : &quot;top:0 left:0 bottom:0 right:0&quot;
+},
+</code></pre><h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><p>#####1修改图片:</p>
+<pre><code>使用ColorSync实用工具将这个描述文件修改下
+</code></pre><p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg" alt><br>    指派它的描述文件为sRGB IEC61966-2.1，保存.</p>
+<p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg" alt></p>
+<p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg" alt></p>
+<pre><code>至此我们的问题完美解决。
+</code></pre><p>#####2改变图片位置</p>
+<p>将问题图片从Assets移除，直接添加到工程中使用</p>
+
       
     </div>
     
@@ -372,8 +415,8 @@ if (IOS7_And_Later) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/13/07-忽略performSelector警告/" rel="next" title="07-忽略performSelector的警告">
-                <i class="fa fa-chevron-left"></i> 07-忽略performSelector的警告
+              <a href="/2017/03/27/13-MySql安装及命令的副本/" rel="next" title="13-HomeBrew 安装MySql">
+                <i class="fa fa-chevron-left"></i> 13-HomeBrew 安装MySql
               </a>
             
           </div>
@@ -382,8 +425,8 @@ if (IOS7_And_Later) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/15/09-OC&&JS/" rel="prev" title="09-OC&&JS交互">
-                09-OC&&JS交互 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/20/15-node学习/" rel="prev" title="15-node 学习">
+                15-node 学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -436,8 +479,17 @@ if (IOS7_And_Later) {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -452,7 +504,7 @@ if (IOS7_And_Later) {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -460,6 +512,15 @@ if (IOS7_And_Later) {
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>
@@ -479,6 +540,22 @@ if (IOS7_And_Later) {
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题"><span class="nav-number">1.0.1.</span> <span class="nav-text">解决问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

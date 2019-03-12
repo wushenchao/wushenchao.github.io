@@ -80,15 +80,15 @@
 
 
 <meta name="description" content="安装过程中出现的errorError: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2) wang: 执行的顺序不能错否则会出现上述错误 1. 打开终端执行命令 $ brew install mysql  2. 执行命令 $ mysql.server start 此时提示          Starti">
-<meta property="og:type" content="website">
-<meta property="og:title" content="03-HomeBrew 安装MySql">
-<meta property="og:url" content="http://yoursite.com/tags/03-MySql安装及命令的副本.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13-HomeBrew 安装MySql">
+<meta property="og:url" content="http://yoursite.com/2017/03/27/13-MySql安装及命令的副本/index.html">
 <meta property="og:site_name" content="不知是哪个号">
 <meta property="og:description" content="安装过程中出现的errorError: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2) wang: 执行的顺序不能错否则会出现上述错误 1. 打开终端执行命令 $ brew install mysql  2. 执行命令 $ mysql.server start 此时提示          Starti">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T09:57:43.991Z">
+<meta property="og:updated_time" content="2019-03-12T10:21:43.987Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="03-HomeBrew 安装MySql">
+<meta name="twitter:title" content="13-HomeBrew 安装MySql">
 <meta name="twitter:description" content="安装过程中出现的errorError: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2) wang: 执行的顺序不能错否则会出现上述错误 1. 打开终端执行命令 $ brew install mysql  2. 执行命令 $ mysql.server start 此时提示          Starti">
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/03-MySql安装及命令的副本.html">
+  <link rel="canonical" href="http://yoursite.com/2017/03/27/13-MySql安装及命令的副本/">
 
 
 
 
 
-  <title>03-HomeBrew 安装MySql | 不知是哪个号</title>
+  <title>13-HomeBrew 安装MySql | 不知是哪个号</title>
   
 
 
@@ -240,24 +240,97 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/13-MySql安装及命令的副本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">03-HomeBrew 安装MySql</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <h2 id="安装过程中出现的error"><a href="#安装过程中出现的error" class="headerlink" title="安装过程中出现的error"></a>安装过程中出现的error</h2><p><em>Error: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)</em></p>
+          <h1 class="post-title" itemprop="name headline">13-HomeBrew 安装MySql</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T00:00:00+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/27/13-MySql安装及命令的副本/" class="leancloud_visitors" data-flag-title="13-HomeBrew 安装MySql">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安装过程中出现的error"><a href="#安装过程中出现的error" class="headerlink" title="安装过程中出现的error"></a>安装过程中出现的error</h2><p><em>Error: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)</em></p>
 <h3 id="wang-执行的顺序不能错"><a href="#wang-执行的顺序不能错" class="headerlink" title="wang: 执行的顺序不能错"></a>wang: 执行的顺序不能错</h3><p>否则会出现上述错误</p>
 <pre><code>1. 打开终端执行命令 $ brew install mysql
 
@@ -359,15 +432,61 @@ show variables; // 列出MySQL系统环境变量
 <p>在书写id 为递增的sql 语句中 我们通常使用 ‘’ 来填写id 字段的值</p>
 <p>但是 在mysql 5中 根据php.ini的设置的不同 有可能出现 1366 - Incorrect integer value: ‘’ for column ‘ID’ at row 1  的错误 ，这时 ，用NULL 代替 ‘’就行了</p>
 
-        
-      </div>
-      
-      
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/19/12-cocoaPods 配置和升级/" rel="next" title="12-cocoaPods配置和升级">
+                <i class="fa fa-chevron-left"></i> 12-cocoaPods配置和升级
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/" rel="prev" title="14.关于iOS9.0~9.3 App Store下载奔溃问题">
+                14.关于iOS9.0~9.3 App Store下载奔溃问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -425,7 +544,7 @@ show variables; // 列出MySQL系统环境变量
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -433,6 +552,15 @@ show variables; // 列出MySQL系统环境变量
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

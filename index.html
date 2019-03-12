@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/17-Linux命令02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -268,7 +268,865 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/" itemprop="url">11.关于iOS9.0~9.3 App Store下载奔溃问题</a></h1>
+                <a class="post-title-link" href="/2017/09/25/17-Linux命令02/" itemprop="url">17-Linux命令2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-25T00:00:00+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/25/17-Linux命令02/" class="leancloud_visitors" data-flag-title="17-Linux命令2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="一-进程管理"><a href="#一-进程管理" class="headerlink" title="一.进程管理"></a>一.进程管理</h3><h4 id="1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><a href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。" class="headerlink" title="1.创建进程：有两种方式来创建进程，前台进程和后台进程。"></a>1.创建进程：有两种方式来创建进程，前台进程和后台进程。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt</span><br><span class="line">后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp; 如 $ls *.txt &amp;</span><br></pre></td></tr></table></figure>
+<p>####2.查看正在运行的进程<br>可以使用 ps  或者 ps －f 来查看正在运行的进程<br>其他如:</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>显示所有用户的所有进程。</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>显示无终端的进程。</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>显示更多信息，类似于 -f 选项。</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>显示所有进程。</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>列</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UID</td>
+<td>进程所属用户的ID，即哪个用户创建了该进程。</td>
+</tr>
+<tr>
+<td>PID</td>
+<td>进程ID。</td>
+</tr>
+<tr>
+<td>PPID</td>
+<td>父进程ID，创建该进程的进程称为父进程。</td>
+</tr>
+<tr>
+<td>C</td>
+<td>CPU使用率。</td>
+</tr>
+<tr>
+<td>STIME</td>
+<td>进程被创建的时间。</td>
+</tr>
+<tr>
+<td>TTY</td>
+<td>与进程有关的终端类型。</td>
+</tr>
+<tr>
+<td>TIME</td>
+<td>进程所使用的CPU时间。</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>创建该进程的命令。</td>
+</tr>
+</tbody>
+</table>
+<p>####3.终止进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">当进程运行在前台时，可以通过 kill 命令或 Ctrl+C 组合键来结束进程。</span><br><span class="line">如果进程忽略kill命令 可以使用 kill－9 pid</span><br><span class="line"></span><br><span class="line">孤儿进程：正常情况下，子进程在被终止时会通过sigchld信号通知父进程，父进程会做一些清理工作或重启一个新的进程。在一些特殊情况下，父进程在子进程终止前被终止，那么这些子进程被称为孤儿进程。</span><br><span class="line"></span><br><span class="line">僵尸进程：如果一个进程被终止了，但使用ps命令可以查看该进程，并且状态为z，那么这就是一个僵尸进程。</span><br><span class="line"></span><br><span class="line">常驻进程：常驻进程一般时系统级进程，以root权限在后台，可以处理其他进程的请求。</span><br><span class="line">常驻进程没有终端.</span><br><span class="line"></span><br><span class="line">top命令：它可以动态显示正在运行的进程，还可以按条件对进程进行排序。</span><br></pre></td></tr></table></figure></p>
+<h4 id="4-任务和进程"><a href="#4-任务和进程" class="headerlink" title="4.任务和进程"></a>4.任务和进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">任务：任务是抽象的，是一个一般性的术语，指由软件完成的一个活动。一个任务即可以是一个进程，也可以是多个进程。简而言之，它是指一系列共同达到莫一目的的操作。</span><br><span class="line"></span><br><span class="line">进程：常常被定义为程序的执行。可以把一个进程看成是一个独立的进程，在内存中有其完备的数据空间和代码空间。一个进程所拥有的数据和变量只属于它自己。</span><br><span class="line"></span><br><span class="line">jobs －l 命令可以查看当前任务包含的进程id</span><br></pre></td></tr></table></figure>
+<h4 id="5前台任务和后台任务的切换"><a href="#5前台任务和后台任务的切换" class="headerlink" title="5前台任务和后台任务的切换"></a>5前台任务和后台任务的切换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fg命令可以将后台任务调节到前台。语法：$fg %jobnumber</span><br><span class="line"></span><br><span class="line">bg命令可以将前台任务调节到后台。语法：$bg %jobnumber</span><br><span class="line"></span><br><span class="line">jobnumber 是通过 jobs 命令获取的后台任务的的序号，注意不是pid。如果只有一个任务，可以不指定 jobnumber。</span><br><span class="line"></span><br><span class="line">如果希望将当前任务转移到后台，可以先 Ctrl+z 暂停任务，再使用 bg 命令。任务转移到后台可以空出终端，继续输入其他命令。</span><br></pre></td></tr></table></figure>
+<h3 id="二-网络通信工具"><a href="#二-网络通信工具" class="headerlink" title="二.网络通信工具"></a>二.网络通信工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ping命令 向网络主机发送应答请求，根据响应判断远程主机是否可用。</span><br><span class="line">语法：$ping hostname or ip－address</span><br><span class="line"></span><br><span class="line">telnet工具</span><br><span class="line">Telnet 工具可以让我们连接并登录到远程计算机。</span><br><span class="line"></span><br><span class="line">finger工具</span><br><span class="line">finger 可以让我们查看本地主机或远程主机上的用户信息。有些系统为了安全会禁用 finger 命令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ftp工具</span><br><span class="line">ftp 是 File Transfer Protocol 的缩写，称为文件传输协议。通过 ftp 工具，能够将文件上传到远程服务器，也可以从远程服务器下载文件。</span><br><span class="line"></span><br><span class="line">ftp 工具有自己的命令（类似Linux命令），可以：</span><br><span class="line">1.连接并登录远程主机；</span><br><span class="line">2.查看目录，遍历目录下的文件；</span><br><span class="line">3.上传或下载文件，包括文本文件、二进制文件等。</span><br><span class="line"></span><br><span class="line">ftp的语法：ftp hostname or ip－address</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>ftp命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>put filename</td>
+<td>将本地文件上传到远程主机。</td>
+</tr>
+<tr>
+<td>get filenam</td>
+<td>将远程文件下载到本地。</td>
+</tr>
+<tr>
+<td>mput file list</td>
+<td>将多个本地文件上传到远程主机。</td>
+</tr>
+<tr>
+<td>mget file list</td>
+<td>将多个远程文件下载到本地。</td>
+</tr>
+<tr>
+<td>prompt off</td>
+<td>关闭提示。默认使用 mput 或 mget 命令会不断提示你确认文件的上传或下载。</td>
+</tr>
+<tr>
+<td>prompt on</td>
+<td>打开提示。</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>列出远程主机当前目录下的所有文件。</td>
+</tr>
+<tr>
+<td>cd dirname</td>
+<td>改变远程主机目录。</td>
+</tr>
+<tr>
+<td>lcd dirname</td>
+<td>改变本地目录。</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>退出登录。</td>
+</tr>
+</tbody>
+</table>
+<p>###三.VI编辑器</p>
+<p>####1.进入vi编辑器</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vi filename</td>
+<td>如果filename存在，则打开；否则会创建一个新文件再打开。</td>
+</tr>
+<tr>
+<td>vi -R filename</td>
+<td>以只读模式（只能查看不能编辑）打开现有文件。</td>
+</tr>
+<tr>
+<td>view filename</td>
+<td>以只读模式打开现有文件。</td>
+</tr>
+</tbody>
+</table>
+<p>####2.工作模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.普通模式</span><br><span class="line">由shell进入vi编辑器时，首先进入普通模式，在普通模式下，从键盘输入任何字符都被当作命令来解释。普通模式下没有任何提示符，输入命令后立即执行，不需要回车，而且输入字符在屏幕上不显示。</span><br><span class="line"></span><br><span class="line">普通模式下可以执行命令，保存文件，移动光标，粘贴复制。</span><br><span class="line"></span><br><span class="line">2.编辑模式</span><br><span class="line">编辑模式主要用于文本编辑，该模式下用户输入的任何字符都被当作文件的内容保存起来，并在屏幕上显示出来。</span><br><span class="line"></span><br><span class="line">3.命令模式</span><br><span class="line">命令模式下，用户可以对文件进行一些高级的处理，如执行一些字符串的查找，替换和显示符号等操作必须进入命令模式。</span><br><span class="line"></span><br><span class="line">工作模式切换：</span><br><span class="line">在普通模式下输入 i(插入)、c(修改)、o(另起一行) 命令时进入编辑模式；按 esc 键退回到普通模式。</span><br><span class="line">在普通模式下输入冒号(:)可以进入命令模式。输入完命令按回车，命令执行完后会自动退回普通模式。s</span><br></pre></td></tr></table></figure>
+<p>####3.退出vi编辑器</p>
+<table>
+<thead>
+<tr>
+<th>退出命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>q</td>
+<td>如果文件未被修改，会直接退回到Shell；否则提示保存文件。</td>
+</tr>
+<tr>
+<td>q!</td>
+<td>强行退出，不保存修改内容。</td>
+</tr>
+<tr>
+<td>wq</td>
+<td>w 命令保存文件，q 命令退出 vi，合起来就是保存并退出。</td>
+</tr>
+<tr>
+<td>ZZ</td>
+<td>保存并退出，相当于 wq，但是更加方便。</td>
+</tr>
+</tbody>
+</table>
+<p><strong><em>注意:</em></strong>  zz使用shift＋zz方式 其他使用shift+: 命令 +回车</p>
+<p>####4.控制命令</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTRL+d</td>
+<td>向前滚动半屏</td>
+</tr>
+<tr>
+<td>CTRL+f</td>
+<td>向前滚动全屏</td>
+</tr>
+<tr>
+<td>CTRL+u</td>
+<td>向后滚动半屏</td>
+</tr>
+<tr>
+<td>CTRL+b</td>
+<td>向后滚动全屏</td>
+</tr>
+<tr>
+<td>CTRL+e</td>
+<td>向上滚动一行</td>
+</tr>
+<tr>
+<td>CTRL+y</td>
+<td>向下滚动一行</td>
+</tr>
+<tr>
+<td>CTRL+i</td>
+<td>刷新屏幕</td>
+</tr>
+</tbody>
+</table>
+<p>####5.编辑文件<br>切换到编辑模式下才能编辑文件，从普通模式切换到编辑模式的命令如下</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>i</td>
+<td>在当前光标位置之前插入</td>
+</tr>
+<tr>
+<td>I</td>
+<td>在当前行的开头插入</td>
+</tr>
+<tr>
+<td>a</td>
+<td>在当前光标位置之后插入</td>
+</tr>
+<tr>
+<td>A</td>
+<td>在当前行的末尾插入</td>
+</tr>
+<tr>
+<td>o</td>
+<td>在当前位置下面创建一行</td>
+</tr>
+<tr>
+<td>O</td>
+<td>在当前位置上面创建一行</td>
+</tr>
+<tr>
+<td>fn + ⬆️</td>
+<td>光标移动到当前屏幕开始位置</td>
+</tr>
+<tr>
+<td>fn + ⬇️</td>
+<td>光标移动到当前屏幕末尾位置</td>
+</tr>
+<tr>
+<td>fn + ⬅️</td>
+<td>光标移动到当前行开头</td>
+</tr>
+<tr>
+<td>fn + ➡️</td>
+<td>光标移动到当前行末尾</td>
+</tr>
+</tbody>
+</table>
+<p>####6.删除字符或行</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>删除当前光标下的字符</td>
+</tr>
+<tr>
+<td>X</td>
+<td>删除光标前面的字符</td>
+</tr>
+<tr>
+<td>dw</td>
+<td>删除从当前光标到单词结尾的字符</td>
+</tr>
+<tr>
+<td>d^</td>
+<td>删除从当前光标到行首的字符</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>删除从当前光标到行尾的字符</td>
+</tr>
+<tr>
+<td>D</td>
+<td>删除从当前光标到行尾的字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>删除当前光标所在的行</td>
+</tr>
+</tbody>
+</table>
+<p>可以在命令前面添加一个数字前缀，表示重复操作的次数，例如，2x  表示连续两次删除光标下的字符，2dd 表示连续两次删除光标所在的行。</p>
+<p>####7.修改文本</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cc</td>
+<td>删除当前行，并进入编辑模式。</td>
+</tr>
+<tr>
+<td>cw</td>
+<td>删除当前字（单词），并进入编辑模式。</td>
+</tr>
+<tr>
+<td>r</td>
+<td>替换当前光标下的字符。</td>
+</tr>
+<tr>
+<td>R</td>
+<td>从当前光标开始替换字符，按 Esc 键退出。</td>
+</tr>
+<tr>
+<td>s</td>
+<td>用输入的字符替换当前字符，并进入编辑模式。</td>
+</tr>
+<tr>
+<td>S</td>
+<td>用输入的文本替换当前行，并进入编辑模式。</td>
+</tr>
+</tbody>
+</table>
+<p>####8.粘贴复制</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yy</td>
+<td>复制当前行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>复制n行</td>
+</tr>
+<tr>
+<td>yw</td>
+<td>复制一个字（单词）</td>
+</tr>
+<tr>
+<td>nyw</td>
+<td>复制n行</td>
+</tr>
+<tr>
+<td>p</td>
+<td>将复制的文本粘贴到光标后面</td>
+</tr>
+<tr>
+<td>P</td>
+<td>将复制的文本粘贴到光标前面</td>
+</tr>
+</tbody>
+</table>
+<p>文本替换</p>
+<p>切换到命令模式，再输入 s/ 命令即可对文本进行替换。语法为：<br>:s/search/replace/g<br>search 为检索的文本，replace 为要替换的文本，g 表示全局替换</p>
+<p>几点提示</p>
+<p>vi 编辑器的使用讲解完毕，但是请记住下面几点：<br>输入冒号(:)进入命令模式，按两次 Esc 键进入普通模式。<br>命令大小写的含义是不一样的。<br>必须在编辑模式下才能输入内容。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/22/16-Linux命令01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/22/16-Linux命令01/" itemprop="url">16-Linux 命令1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-22T00:00:00+08:00">
+                2017-09-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/09/22/16-Linux命令01/" class="leancloud_visitors" data-flag-title="16-Linux 命令1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###一 ：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">查看文件：ls </span><br><span class="line">查看文件的更多信息：ls －l </span><br><span class="line">查看文件隐藏文件：ls －a</span><br><span class="line"></span><br><span class="line">创建文件：vi fileName   </span><br><span class="line">i键开始编辑，esc退出编辑，组合键shift＋zz完全退出。</span><br><span class="line">或者是shift＋：再使用wq完全退出。</span><br><span class="line"></span><br><span class="line">编辑文件：vi fileName</span><br><span class="line">i键开始编辑，想要移动光标，必须先用esc退出编辑模式。</span><br><span class="line">l：右移  h：左移 k：上移 j：下移</span><br><span class="line"></span><br><span class="line">查看文件内容：cat fileName</span><br><span class="line">cat -b fileName 显示行号</span><br><span class="line"></span><br><span class="line">统计单词数目：wc fileName</span><br><span class="line">每一列的含义如下：</span><br><span class="line">第一列：文件的总行数</span><br><span class="line">第二列：单词数目</span><br><span class="line">第三列：文件的字节数，即文件的大小</span><br><span class="line">第四列：文件名</span><br><span class="line"></span><br><span class="line">复制文件：cp source_file destination_file</span><br><span class="line"></span><br><span class="line">重命名文件：mv old_file new_file</span><br><span class="line"></span><br><span class="line">删除文件：rm fileName</span><br></pre></td></tr></table></figure></p>
+<p>###二 :Linux目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line">1. cd 用来切换工作目录 </span><br><span class="line">cd ~ 进入用户主目录；</span><br><span class="line">cd - 返回进入此目录之前所在的目录；</span><br><span class="line">cd .. 返回上级目录（若当前目录为“/“，则执行完后还在“/&quot;；&quot;..&quot;为上级目录的意思）； </span><br><span class="line">cd ../.. 返回上两级目录； </span><br><span class="line">cd !$ 把上个命令的参数作为cd参数使用。</span><br><span class="line"></span><br><span class="line">2. cp 用来将一个或多个源文件或者目录复制到指定的目的文件或目录</span><br><span class="line">-a：此参数的效果和同时指定&quot;-dpR&quot;参数相同； </span><br><span class="line">-d：当复制符号连接时，把目标文件或目录也建立为符号连接，并指向与源文件或目录连接的原始文件或目录； </span><br><span class="line">-f：强行复制文件或目录，不论目标文件或目录是否已存在； </span><br><span class="line">-i：覆盖既有文件之前先询问用户； </span><br><span class="line">-l：对源文件建立硬连接，而非复制文件； </span><br><span class="line">-p：保留源文件或目录的属性； </span><br><span class="line">-R/r：递归处理，将指定目录下的所有文件与子目录一并处理； </span><br><span class="line">-s：对源文件建立符号连接，而非复制文件； </span><br><span class="line">-u：使用这项参数后只会在源文件的更改时间较目标文件更新时或是名称相互对应的目标文件并不存在时，才复制文件； </span><br><span class="line">-S：在备份文件时，用指定的后缀“SUFFIX”代替文件的默认后缀； </span><br><span class="line">-b：覆盖已存在的文件目标前将目标文件备份； </span><br><span class="line">-v：详细显示命令执行的操作。</span><br><span class="line"></span><br><span class="line">3. mv 用来对文件或目录重新命名，或者将文件从一个目录移到另一个目录中</span><br><span class="line">--backup=&lt;备份模式&gt;：若需覆盖文件，则覆盖前先行备份； </span><br><span class="line">-b：当文件存在时，覆盖前，为其创建一个备份； </span><br><span class="line">-f：若目标文件或目录与现有的文件或目录重复，则直接覆盖现有的文件或目录； </span><br><span class="line">-i：交互式操作，覆盖前先行询问用户，如果源文件与目标文件或目标目录中的文件同名，则询问用户是否覆盖目标文件。用户输入”y”，表示将覆盖目标文件；输入”n”，表示取消对源文件的移动。这样可以避免误将文件覆盖。 </span><br><span class="line">--strip-trailing-slashes：删除源文件中的斜杠“/”； </span><br><span class="line">-S&lt;后缀&gt;：为备份文件指定后缀，而不使用默认的后缀； </span><br><span class="line">--target-directory=&lt;目录&gt;：指定源文件要移动到目标目录； </span><br><span class="line">-u：当源文件比目标文件新或者目标文件不存在时，才执行移动操作。</span><br><span class="line"></span><br><span class="line">4. ls 用来显示目标列表</span><br><span class="line">-a：显示所有档案及目录（ls内定将档案名或目录名称为“.”的视为影藏，不会列出）； </span><br><span class="line">-A：显示除影藏文件“.”和“..”以外的所有文件列表； </span><br><span class="line">-C：多列显示输出结果。这是默认选项； </span><br><span class="line">-l：与“-C”选项功能相反，所有输出信息用单列格式输出，不输出为多列； </span><br><span class="line">-F：在每个输出项后追加文件的类型标识符，具体含义：“星”表示具有可执行权限的普通文件，“/”表示目录，“@”表示符号链接，“|”表示命令管道FIFO，“=”表示sockets套接字。当文件为普通文件时，不输出任何标识符； </span><br><span class="line">-b：将文件中的不可输出的字符以反斜线“”加字符编码的方式输出； </span><br><span class="line">-c：与“-lt”选项连用时，按照文件状态时间排序输出目录内容，排序的依据是文件的索引节点中的ctime字段。与“-l”选项连用时，则排序的一句是文件的状态改变时间； </span><br><span class="line">-d：仅显示目录名，而不显示目录下的内容列表。显示符号链接文件本身，而不显示其所指向的目录列表； </span><br><span class="line">-f：此参数的效果和同时指定“aU”参数相同，并关闭“lst”参数的效果； </span><br><span class="line">-i：显示文件索引节点号（inode）。一个索引节点代表一个文件； </span><br><span class="line">--file-type：与“-F”选项的功能相同，但是不显示“*”； </span><br><span class="line">-k：以KB（千字节）为单位显示文件大小； </span><br><span class="line">-l：以长格式显示目录下的内容列表。输出的信息从左到右依次包括文件名，文件类型、权限模式、硬连接数、所有者、组、文件大小和文件的最后修改时间等； </span><br><span class="line">-m：用“,”号区隔每个文件和目录的名称； </span><br><span class="line">-n：以用户识别码和群组识别码替代其名称；</span><br><span class="line">-r：以文件名反序排列并输出目录内容列表； </span><br><span class="line">-s：显示文件和目录的大小，以区块为单位； </span><br><span class="line">-t：用文件和目录的更改时间排序； </span><br><span class="line">-L：如果遇到性质为符号链接的文件或目录，直接列出该链接所指向的原始文件或目录； </span><br><span class="line">-R：递归处理，将指定目录下的所有文件及子目录一并处理； </span><br><span class="line">--full-time：列出完整的日期与时间； </span><br><span class="line">--color[=WHEN]：使用不同的颜色高亮显示不同类型的</span><br><span class="line"></span><br><span class="line">5. pwd 以绝对路径的方式显示用户当前工作目录</span><br><span class="line"></span><br><span class="line">6. rm 可以删除一个目录中的一个或多个文件或目录，也可以将某个目录及其下属的所有文件及其子目录均删除掉，因为一旦删除了一个文件，就无法再恢复它。</span><br><span class="line">-d：直接把欲删除的目录的硬连接数据删除成0，删除该目录； </span><br><span class="line">-f：强制删除文件或目录； </span><br><span class="line">-i：删除已有文件或目录之前先询问用户； </span><br><span class="line">-r或-R：递归处理，将指定目录下的所有文件与子目录一并处理； </span><br><span class="line">--preserve-root：不对根目录进行递归操作； </span><br><span class="line">-v：显示指令的详细执行过程。</span><br><span class="line"></span><br><span class="line">7. mkdir 用来创建目录</span><br><span class="line">-Z：设置安全上下文，当使用SELinux时有效； </span><br><span class="line">-m&lt;目标属性&gt;或--mode&lt;目标属性&gt;建立目录的同时设置目录的权限； </span><br><span class="line">-p或--parents 若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录； </span><br><span class="line">--version 显示版本信息</span><br><span class="line"></span><br><span class="line">8. rmdir 用来删除空目录</span><br><span class="line">-p或--parents：删除指定目录后，若该目录的上层目录已变成空目录，则将其一并删除； </span><br><span class="line">--ignore-fail-on-non-empty：此选项使rmdir命令忽略由于删除非空目录时导致的错误信息； </span><br><span class="line">-v或-verboes：显示命令的详细执行过程； </span><br><span class="line">--help：显示命令的帮助信息； </span><br><span class="line">--version：显示命令的版本信息。</span><br><span class="line"></span><br><span class="line">9. dirs 显示当前目录栈中的所有记录</span><br><span class="line">-c：删除目录栈中的所有记录 </span><br><span class="line">-l：以完整格式显示 </span><br><span class="line">-p：一个目录一行的方式显示 </span><br><span class="line">-v：每行一个目录来显示目录栈的内容，每个目录前加上的编号 </span><br><span class="line">+N：显示从左到右的第n个目录，数字从0开始 </span><br><span class="line">-N：显示从右到左的第n个日录，数字从0开始</span><br><span class="line"></span><br><span class="line">10. cat 连接文件并打印到标准输出设备上</span><br><span class="line">-n或-number：有1开始对所有输出的行数编号； </span><br><span class="line">-b或--number-nonblank：和-n相似，只不过对于空白行不编号； </span><br><span class="line">-s或--squeeze-blank：当遇到有连续两行以上的空白行，就代换为一行的空白行； </span><br><span class="line">-A：显示不可打印字符，行尾显示“$”； </span><br><span class="line">-e：等价于&quot;-vE&quot;选项； -t：等价于&quot;-vT&quot;选项；</span><br><span class="line"></span><br><span class="line">实例</span><br><span class="line">cat m1 （在屏幕上显示文件ml的内容） </span><br><span class="line">cat m1 m2 （同时显示文件ml和m2的内容） </span><br><span class="line">cat m1 m2 &gt; file （将文件ml和m2合并后放入文件file中）</span><br><span class="line"></span><br><span class="line">11. touch  一是用于把已存在文件的时间标签更新为系统当前的时间（默认方式），它们的数据将原封不动地保留下来；二是用来创建新的空文件</span><br><span class="line"></span><br><span class="line">-a：或--time=atime或--time=access或--time=use 只更改存取时间； </span><br><span class="line">-c：或--no-create 不建立任何文件； </span><br><span class="line">-d：&lt;时间日期&gt; 使用指定的日期时间，而非现在的时间； </span><br><span class="line">-f：此参数将忽略不予处理，仅负责解决BSD版本touch指令的兼容性问题； </span><br><span class="line">-m：或--time=mtime或--time=modify 只更该变动时间； </span><br><span class="line">-r：&lt;参考文件或目录&gt; 把指定文件或目录的日期时间，统统设成和参考文件或目录的日期时间相同； </span><br><span class="line">-t：&lt;日期时间&gt; 使用指定的日期时间，而非现在的时间； </span><br><span class="line">--help：在线帮助； </span><br><span class="line">--version：显示版本信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">绝对路径和相对路径：</span><br><span class="line">一个路径以/开头的路径为绝对路径，它表示当前文件与根目录的关系</span><br><span class="line">一个路径不以/开头的为相对路径，它表示文件与当前目录的关系。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">创建目录：mkdir dirname</span><br><span class="line">mkdir -p /tmp/amrood/test 一级一级创建所需要的目录，即使上级目录不存在。</span><br><span class="line"></span><br><span class="line">删除目录：rmdir dirname （删除时要确保目录为空，不包含其他文件和目录）</span><br><span class="line">		rm -rf dirname (删除文件夹,里面可以包含文件)</span><br><span class="line">点号：. 一个点表示当前目录，二个点表示上级目录</span><br></pre></td></tr></table></figure>
+<p>###三 ：文件权限和访问模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">每个文件都有三种权限：</span><br><span class="line">1.所有者权限：文件所有者能够进行的操作。</span><br><span class="line">2.组权限：文件所属用户能够进行的操作。</span><br><span class="line">3.外部权限：其他用户可以进行的操作。</span><br><span class="line"></span><br><span class="line">改变文件的权限：chmod  xxx fileName</span><br><span class="line"></span><br><span class="line">数字	说明	权限</span><br><span class="line">0	没有任何权限	---</span><br><span class="line">1	执行权限	--x</span><br><span class="line">2	写入权限	-w-</span><br><span class="line">3	执行权限和写入权限：1 (执行) + 2 (写入) = 3	-wx</span><br><span class="line">4	读取权限	r--</span><br><span class="line">5	读取和执行权限：4 (读取) + 1 (执行) = 5	r-x</span><br><span class="line">6	读取和写入权限：4 (读取) + 2 (写入) = 6	rw-</span><br><span class="line">7	所有权限: 4 (读取) + 2 (写入) + 1 (执行) = 7	rwx</span><br><span class="line"></span><br><span class="line">更改所有者和用户组：</span><br><span class="line">chown：命令 change owner 的缩写，改变文件的所有者。</span><br><span class="line">chgrp：命令 change group 的缩写，改变文件所在的群组。</span><br></pre></td></tr></table></figure>
+<h3 id="四-：文件传输"><a href="#四-：文件传输" class="headerlink" title="四 ：文件传输"></a>四 ：文件传输</h3><p>####1. ftp 命令用来设置文件系统相关功能</p>
+<pre><code>-d：详细显示指令执行过程，便于排错或分析程序执行的情况； 
+-i：关闭互动模式，不询问任何问题； 
+-g：关闭本地主机文件名称支持特殊字符的扩充特性； 
+-n：不使用自动登录； 
+-v：显示指令执行过程。
+</code></pre><p>####2. scp</p>
+<pre><code>-1：使用ssh协议版本1； 
+-2：使用ssh协议版本2； 
+-4：使用ipv4； 
+-6：使用ipv6； 
+-B：以批处理模式运行； 
+-C：使用压缩； 
+-F：指定ssh配置文件； 
+-l：指定宽带限制； 
+-o：指定使用的ssh选项； 
+-P：指定远程主机的端口号； 
+-p：保留文件的最后修改时间，最后访问时间和权限模式； 
+-q：不显示复制进度； 
+-r：以递归方式复制。
+</code></pre><p>eg：</p>
+<pre><code>scp[参数]&lt;源地址(用户名@ip地址或主机名)&gt;：&lt;文件路径&gt; &lt;目标地址(用户名@ip地址或主机名)&gt;：&lt;文件路径&gt;
+
+(1) 上传文件到服务器
+scp 本地文件目录 root@www.xxxx.xx:/目标路径
+
+(2) copy文件到本地
+scp root@www.xxx.xx:/root/test/one.txt /Users/wushenchao/desktop
+
+(3) -r -v
+scp -r root@www.xxx.xx:/root/test/one.txt /Users/wushenchao/desktop (拷贝文件夹-r)
+scp -r -v root@www.xxx.xx:/root/test/one.txt /Users/wushenchao/desktop (拷贝文件夹-r,显示详情 －v)
+</code></pre><p>####3.ncftp</p>
+<pre><code>命令是增强的的ftp工具，比传统的FTP指令更加强大。FTP让用户得以下载存放于服务器主机的文件，也能将文件上传到远端主机放置。ncftp是文字模式FTP程序的佼佼者，它具备多样特色，包括显示传输速率，下载进度，自动续传，标住书签，可通过防火墙和代理服务器等
+</code></pre><p>5.rcp</p>
+<h3 id="五-：文件的压缩与解压"><a href="#五-：文件的压缩与解压" class="headerlink" title="五 ：文件的压缩与解压"></a>五 ：文件的压缩与解压</h3><p>####1. zip 用来解压缩文件，或者对文件进行打包操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">A：调整可执行的自动解压缩文件； </span><br><span class="line">-b&lt;工作目录&gt;：指定暂时存放文件的目录； </span><br><span class="line">-c：替每个被压缩的文件加上注释； </span><br><span class="line">-d：从压缩文件内删除指定的文件； </span><br><span class="line">-D：压缩文件内不建立目录名称； </span><br><span class="line">-f：此参数的效果和指定“-u”参数类似，但不仅更新既有文件，如果某些文件原本不存在于压缩文件内，使用本参数会一并将其加入压缩文件中； </span><br><span class="line">-F：尝试修复已损坏的压缩文件； </span><br><span class="line">-g：将文件压缩后附加在已有的压缩文件之后，而非另行建立新的压缩文件； </span><br><span class="line">-h：在线帮助； </span><br><span class="line">-i&lt;范本样式&gt;：只压缩符合条件的文件； </span><br><span class="line">-j：只保存文件名称及其内容，而不存放任何目录名称； </span><br><span class="line">-J：删除压缩文件前面不必要的数据； </span><br><span class="line">-k：使用MS-DOS兼容格式的文件名称； </span><br><span class="line">-l：压缩文件时，把LF字符置换成LF+CR字符； </span><br><span class="line">-ll：压缩文件时，把LF+cp字符置换成LF字符； </span><br><span class="line">-L：显示版权信息； </span><br><span class="line">-m：将文件压缩并加入压缩文件后，删除原始文件，即把文件移到压缩文件中； </span><br><span class="line">-n&lt;字尾字符串&gt;：不压缩具有特定字尾字符串的文件； </span><br><span class="line">-o：以压缩文件内拥有最新更改时间的文件为准，将压缩文件的更改时间设成和该文件相同； </span><br><span class="line">-q：不显示指令执行过程； </span><br><span class="line">-r：递归处理，将指定目录下的所有文件和子目录一并处理； </span><br><span class="line">-S：包含系统和隐藏文件； </span><br><span class="line">-t&lt;日期时间&gt;：把压缩文件的日期设成指定的日期； </span><br><span class="line">-T：检查备份文件内的每个文件是否正确无误； </span><br><span class="line">-u：更换较新的文件到压缩文件内； </span><br><span class="line">-v：显示指令执行过程或显示版本信息； </span><br><span class="line">-V：保存VMS操作系统的文件属性； </span><br><span class="line">-w：在文件名称里假如版本编号，本参数仅在VMS操作系统下有效； </span><br><span class="line">-x&lt;范本样式&gt;：压缩时排除符合条件的文件； </span><br><span class="line">-X：不保存额外的文件属性； </span><br><span class="line">-y：直接保存符号连接，而非该链接所指向的文件，本参数仅在UNIX之类的系统下有效； </span><br><span class="line">-z：替压缩文件加上注释； </span><br><span class="line">-$：保存第一个被压缩文件所在磁盘的卷册名称； </span><br><span class="line">-&lt;压缩效率&gt;：压缩效率是一个介于1~9的数值。</span><br></pre></td></tr></table></figure>
+<p>####2. gzip 压缩文件。gzip是个使用广泛的压缩程序，文件经它压缩过后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">-a或——ascii：使用ASCII文字模式； </span><br><span class="line">-d或--decompress或----uncompress：解开压缩文件； </span><br><span class="line">-f或——force：强行压缩文件。不理会文件名称或硬连接是否存在以及该文件是否为符号连接； </span><br><span class="line">-h或——help：在线帮助； </span><br><span class="line">-l或——list：列出压缩文件的相关信息； </span><br><span class="line">-L或——license：显示版本与版权信息； </span><br><span class="line">-n或--no-name：压缩文件时，不保存原来的文件名称及时间戳记； </span><br><span class="line">-N或——name：压缩文件时，保存原来的文件名称及时间戳记； </span><br><span class="line">-q或——quiet：不显示警告信息； </span><br><span class="line">-r或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理； </span><br><span class="line">-S或&lt;压缩字尾字符串&gt;或----suffix&lt;压缩字尾字符串&gt;：更改压缩字尾字符串； </span><br><span class="line">-t或——test：测试压缩文件是否正确无误； </span><br><span class="line">-v或——verbose：显示指令执行过程； </span><br><span class="line">-V或——version：显示版本信息； </span><br><span class="line">-&lt;压缩效率&gt;：压缩效率是一个介于1~9的数值，预设值为“6”，指定愈大的数值，压缩效率就会愈高；</span><br><span class="line">--best：此参数的效果和指定“-9”参数相同； </span><br><span class="line">--fast：此参数的效果和指定“-1”参数相同。</span><br></pre></td></tr></table></figure>
+<p>####3. unzip 用于解压缩由zip命令压缩的“.zip”压缩包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-c：将解压缩的结果显示到屏幕上，并对字符做适当的转换； </span><br><span class="line">-f：更新现有的文件； </span><br><span class="line">-l：显示压缩文件内所包含的文件； </span><br><span class="line">-p：与-c参数类似，会将解压缩的结果显示到屏幕上，但不会执行任何的转换； </span><br><span class="line">-t：检查压缩文件是否正确； </span><br><span class="line">-u：与-f参数类似，但是除了更新现有的文件外，也会将压缩文件中的其他文件解压缩到目录中； </span><br><span class="line">-v：执行时显示详细的信息； </span><br><span class="line">-z：仅显示压缩文件的备注文字； </span><br><span class="line">-a：对文本文件进行必要的字符转换； </span><br><span class="line">-b：不要对文本文件进行字符转换； </span><br><span class="line">-C：压缩文件中的文件名称区分大小写； </span><br><span class="line">-j：不处理压缩文件中原有的目录路径； </span><br><span class="line">-L：将压缩文件中的全部文件名改为小写； </span><br><span class="line">-M：将输出结果送到more程序处理； </span><br><span class="line">-n：解压缩时不要覆盖原有的文件； </span><br><span class="line">-o：不必先询问用户，unzip执行后覆盖原有的文件； </span><br><span class="line">-P&lt;密码&gt;：使用zip的密码选项； </span><br><span class="line">-q：执行时不显示任何信息； </span><br><span class="line">-s：将文件名中的空白字符转换为底线字符； </span><br><span class="line">-V：保留VMS的文件版本信息； </span><br><span class="line">-X：解压缩时同时回存文件原来的UID/GID； </span><br><span class="line">-d&lt;目录&gt;：指定文件解压缩后所要存储的目录； </span><br><span class="line">-x&lt;文件&gt;：指定不要处理.zip压缩文件中的哪些文件； </span><br><span class="line">-Z：unzip-Z等于执行zipinfo指令。</span><br></pre></td></tr></table></figure>
+<p>####4. gunzip命令 用来解压缩文件。gunzip是个使用广泛的解压缩程序，它用于解开被gzip压缩过的文件，这些压缩文件预设最后的扩展名为.gz。事实上gunzip就是gzip的硬连接，因此不论是压缩或解压缩，都可通过gzip指令单独完成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">-a或——ascii：使用ASCII文字模式； </span><br><span class="line">-c或--stdout或--to-stdout：把解压后的文件输出到标准输出设备； </span><br><span class="line">-f或-force：强行解开压缩文件，不理会文件名称或硬连接是否存在以及该文件是否为符号连接； </span><br><span class="line">-h或——help：在线帮助； </span><br><span class="line">-l或——list：列出压缩文件的相关信息； </span><br><span class="line">-L或——license：显示版本与版权信息； </span><br><span class="line">-n或--no-name：解压缩时，若压缩文件内含有原来的文件名称及时间戳记，则将其忽略不予处理； </span><br><span class="line">-N或——name：解压缩时，若压缩文件内含有原来的文件名称及时间戳记，则将其回存到解开的文件上； </span><br><span class="line">-q或——quiet：不显示警告信息； </span><br><span class="line">-r或——recursive：递归处理，将指定目录下的所有文件及子目录一并处理； </span><br><span class="line">-S或&lt;压缩字尾字符串&gt;或----suffix&lt;压缩字尾字符串&gt;：更改压缩字尾字符串； </span><br><span class="line">-t或——test：测试压缩文件是否正确无误； </span><br><span class="line">-v或——verbose：显示指令执行过程； </span><br><span class="line">-V或——version：显示版本信息；</span><br></pre></td></tr></table></figure>
+<p>####5. zcat 命令 用于不真正解压缩文件，就能显示压缩包中文件的内容的场合。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-S：指定gzip格式的压缩包的后缀。当后缀不是标准压缩包后缀时使用此选项； </span><br><span class="line">-c：将文件内容写到标注输出； </span><br><span class="line">-d：执行解压缩操作； </span><br><span class="line">-l：显示压缩包中文件的列表； </span><br><span class="line">-L：显示软件许可信息； </span><br><span class="line">-q：禁用警告信息； </span><br><span class="line">-r：在目录上执行递归操作； </span><br><span class="line">-t：测试压缩文件的完整性； </span><br><span class="line">-V：显示指令的版本信息； </span><br><span class="line">-l：更快的压缩速度； </span><br><span class="line">-9：更高的压缩比</span><br></pre></td></tr></table></figure>
+<p>####6. zipsplit 用于将较大的“zip”压缩包分割成各个较小的“zip”压缩包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-n：指定分割后每个zip文件的大小； </span><br><span class="line">-t：报告将要产生的较小的zip文件的大小； </span><br><span class="line">-b：指定分割后的zip文件的存放位置。</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/20/15-node学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/20/15-node学习/" itemprop="url">15-node 学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-20T00:00:00+08:00">
+                2017-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/20/15-node学习/" class="leancloud_visitors" data-flag-title="15-node 学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###1. node 基础<br>（1）node定义：JS是脚本语言，脚本语言都需要一个解析器才能运行。对于写在HTML页面里的JS，浏览器充当了解析器的角色。而对于需要独立运行的JS，NodeJS就是一个解析器。</p>
+<p>每一种解析器都是一个运行环境，不但允许JS定义各种数据结构，进行各种计算，还允许JS使用运行环境提供的内置对象和方法做一些事情。例如运行在浏览器中的JS的用途是操作DOM，浏览器就提供了document之类的内置对象。而运行在NodeJS中的JS的用途是操作磁盘文件或搭建HTTP服务器，NodeJS就相应提供了fs、http等内置对象<br><br><br><br><br>（2）模块<br>编写稍大一点的程序时一般都会将代码模块化。在NodeJS中，一般将代码合理拆分到不同的JS文件中，每一个文件就是一个模块，而文件路径就是模块名。</p>
+<p>在编写每个模块时，都有require、exports、module三个预先定义好的变量可供使用</p>
+<p>（i）require函数用于在当前模块中加载和使用别的模块，传入一个模块名，返回一个模块导出对象。模块名可使用相对路径（以./开头），或者是绝对路径（以/或C:之类的盘符开头）。另外，模块名中的.js扩展名可以省略。</p>
+<p>（ii）exports对象是当前模块的导出对象，用于导出模块公有方法和属性。别的模块通过require函数使用当前模块时得到的就是当前模块的exports对象。</p>
+<p>（iii）通过module对象可以访问到当前模块的一些相关信息，但最多的用途是替换当前模块的导出对象。例如模块导出对象默认是一个普通对象，如果想改成一个函数的话，<br><br><br><br><br>（3）模块初始化<br><br>一个模块中的JS代码仅在模块第一次被使用时执行一次，并在执行过程中初始化模块的导出对象。之后，缓存起来的导出对象被重复利用。</p>
+<p>###2 node 安装<br>（1）nvm 管理node版本<br>安装方法：</p>
+<pre><code>1. git clone https://github.com/creationix/nvm.git
+
+2. 配置终端启动自动执行 source ~/git/nvm/nvm.sh （在 ~/.bashrc, ~/.bash_profile, ~/.profile, 或者 ~/.zshrc 中添加上述命令）重新启动终端。
+
+3.安装任意版本 nvm install xxx
+
+4.使用任意版本 nvm use xxx
+
+5.查看所有node版本     nvm ls
+
+6.安装最新稳定版本 nvm install stable
+
+7.使用最新稳定版本  nvm use stable
+
+8.安装最新版本  nvm install unstable
+
+9.使用最新版本 nvm run unstable --version
+
+10.使用系统版本 nvm use system
+
+11.设置默认版本 nvm alias default vxxx
+
+12.删除指定版本 nvm uninstall v6.6.0
+</code></pre><p>(2) 快速生成 package.json<br>    命令 npm init</p>
+<p>(3) 安装依赖<br>    npm install –save PACKAGE_NAME<br>    npm install –savr-dev PACKAGE_NAME<br>    npm install –save PACKAGE_NAMR -g (全局安装exp：mocha)</p>
+<p>(4) koa 运行命令为 node –harmony xxx.js</p>
+<p>(5) error: describe is not defined 需要安装 mocha 运行命令 mocha app</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/" itemprop="url">14.关于iOS9.0~9.3 App Store下载奔溃问题</a></h1>
         
 
         <div class="post-meta">
@@ -298,7 +1156,7 @@
 
           
           
-             <span id="/2017/06/15/11.iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="11.关于iOS9.0~9.3 App Store下载奔溃问题">
+             <span id="/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="14.关于iOS9.0~9.3 App Store下载奔溃问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -436,7 +1294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/01/10-iOS10推送/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/13-MySql安装及命令的副本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -455,7 +1313,394 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/01/10-iOS10推送/" itemprop="url">10-iOS10推送</a></h1>
+                <a class="post-title-link" href="/2017/03/27/13-MySql安装及命令的副本/" itemprop="url">13-HomeBrew 安装MySql</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-27T00:00:00+08:00">
+                2017-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/27/13-MySql安装及命令的副本/" class="leancloud_visitors" data-flag-title="13-HomeBrew 安装MySql">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装过程中出现的error"><a href="#安装过程中出现的error" class="headerlink" title="安装过程中出现的error"></a>安装过程中出现的error</h2><p><em>Error: Can’t connect to local MySQL server through socket ‘/tmp/mysql.sock’ (2)</em></p>
+<h3 id="wang-执行的顺序不能错"><a href="#wang-执行的顺序不能错" class="headerlink" title="wang: 执行的顺序不能错"></a>wang: 执行的顺序不能错</h3><p>否则会出现上述错误</p>
+<pre><code>1. 打开终端执行命令 $ brew install mysql
+
+2. 执行命令 $ mysql.server start 此时提示 
+        Starting MySQL
+                 SUCCESS! 
+
+3. 执行命令 $ mysql_secure_installation 按要求进行设置 y y y y
+
+4. 连接 mysql 命令： mysql -uroot -p (连接到本地数据库)
+</code></pre><h3 id="MySql-常用命令-（命令末位加上-）"><a href="#MySql-常用命令-（命令末位加上-）" class="headerlink" title="MySql 常用命令  （命令末位加上 ; ）"></a>MySql 常用命令  （命令末位加上 ; ）</h3><p>乱码修改MYSQL的配置文件：my.ini里面修改default-character-set=gbk</p>
+<h2 id="1-连接数据库"><a href="#1-连接数据库" class="headerlink" title="1.连接数据库"></a>1.连接数据库</h2><pre><code>1.连接到本地数据库：    mysql -uroot -p
+2.连接到远程主机： mysql -h ip -u root -p 123
+</code></pre><h5 id="2-退出命令"><a href="#2-退出命令" class="headerlink" title="2.退出命令"></a>2.退出命令</h5><pre><code>\q 或者执行 exit ，quit 之后回车
+</code></pre><h5 id="3-修改用户密码"><a href="#3-修改用户密码" class="headerlink" title="3.修改用户密码"></a>3.修改用户密码</h5><pre><code>mysqladmin -u root -p 旧密码 password 新密码
+</code></pre><h5 id="4-新增用户"><a href="#4-新增用户" class="headerlink" title="4.新增用户"></a>4.新增用户</h5><pre><code>grant on 命令用于增加新用户并控制权限
+grant on 命令格式: 
+    grant select on 数据库.* to 用户名@登录主机 identified by &quot;密码&quot;;
+
+1)增加一个用户test1，密码abc，让他可以在任何主机上登录，并对所有数据库查询、插入、修改、删除的权限。
+grant select,insert,update,delete on *.* to [email=test1@”%]test1@”%[/email]” Identified by “abc”;
+
+2)增加一个用户test2密码为abc，让他只可以在localhost上登录，并可以对数据库mydb进行查询、插入、修改、删除的操作
+grant select,insert,update,delete on mydb.* to [email=test2@localhost]test2@localhost[/email] identified by “abc”;
+</code></pre><h5 id="4-创建数据库-并分配用户"><a href="#4-创建数据库-并分配用户" class="headerlink" title="4.创建数据库 并分配用户"></a>4.创建数据库 并分配用户</h5><pre><code>create database &lt;数据库名&gt;;
+分配用户：grant select,insert,update,delete,create,drop,alter on test.* to test@locallhost identified by &apos;1234abcd&apos;;
+</code></pre><h5 id="5-显示数据库"><a href="#5-显示数据库" class="headerlink" title="5.显示数据库"></a>5.显示数据库</h5><pre><code>show databases;
+</code></pre><h5 id="6-删除数据库"><a href="#6-删除数据库" class="headerlink" title="6.删除数据库"></a>6.删除数据库</h5><pre><code>drop database &lt;数据库名&gt;;
+</code></pre><h5 id="7-使用数据库"><a href="#7-使用数据库" class="headerlink" title="7.使用数据库"></a>7.使用数据库</h5><pre><code>use &lt;数据库名&gt;;
+显示当前数据库中的表 show tables;
+</code></pre><h5 id="8-当前连接的数据库"><a href="#8-当前连接的数据库" class="headerlink" title="8.当前连接的数据库"></a>8.当前连接的数据库</h5><pre><code>select database();
+
+select version();             // 显示版本
+select now();                  // 显示时间
+select dayofmonth(current_date); 
+select month(current_date);
+select year(current_date);
+</code></pre><h5 id="9-创建数据表"><a href="#9-创建数据表" class="headerlink" title="9.创建数据表"></a>9.创建数据表</h5><pre><code>create table &lt;表名&gt; (&lt;字段名1&gt; &lt;类型1&gt; [,..&lt;字段名n&gt; &lt;类型n&gt;]);
+
+ep:
+ mysql&gt; create table MyClass(
+      &gt; id int(4) not null primary key auto_increment,
+      &gt; name char(20) not null,
+      &gt; sex int(4) not null default &apos;0&apos;,
+      &gt; degree double(16,2));
+</code></pre><h5 id="10-获取表结构"><a href="#10-获取表结构" class="headerlink" title="10.获取表结构"></a>10.获取表结构</h5><pre><code>desc 表名;
+或者： show columns from 表名;
+</code></pre><h5 id="11-删除数据表"><a href="#11-删除数据表" class="headerlink" title="11.删除数据表"></a>11.删除数据表</h5><pre><code>drop table &lt;表名&gt;;
+</code></pre><h5 id="12-数据的增删改查"><a href="#12-数据的增删改查" class="headerlink" title="12.数据的增删改查"></a>12.数据的增删改查</h5><pre><code>1. 增
+insert into 表名 [(&lt;字段名1&gt;[,..&lt;字段名n&gt;])] values(值1)[,(值n)]；
+
+2. 删
+delete from where 表达式
+
+3. 改
+update 表名 set 字段＝新值 ... where 条件
+
+4. 查
+查所有行: select &lt;字段1，字段2&gt; from &lt;表名&gt; where &lt;表达式&gt;;
+eg:
+select *from &lt;表名&gt;
+
+查询前几行：
+select *from &lt;表名&gt; order by id limit 0,2;
+</code></pre><h5 id="13-数据库增加字段和修改字段属性"><a href="#13-数据库增加字段和修改字段属性" class="headerlink" title="13.数据库增加字段和修改字段属性"></a>13.数据库增加字段和修改字段属性</h5><pre><code>1）增减字段
+alter table 表名 add 列名 类型 其他    
+
+例如，在表MyClass中添加了一个字段passtest，类型为int(4)，默认值为0：
+   mysql&gt; alter table MyClass add passtest int(4) default &apos;0&apos;;
+
+2）修改字段属性
+alter table 表名 change 字段名称
+alter table 表名称 change 原列名 新列名 字段类型 [是否允许非空];
+alter table 表名称 modify 列名 字段类型 [是否允许非空]; //实际应用可行!!
+
+3）指定列为主键
+alter table 表名 add primary key(列名)
+
+4）删除外键
+</code></pre><h5 id="14-修改表名"><a href="#14-修改表名" class="headerlink" title="14.修改表名"></a>14.修改表名</h5><pre><code>rename table 原表名 to 新表名
+</code></pre><h5 id="15-数据库备份"><a href="#15-数据库备份" class="headerlink" title="15.数据库备份"></a>15.数据库备份</h5><pre><code>mysqldump命令用来备份数据库;
+
+1) 导出整个数据库(导出文件默认是存在mysql\bin目录下)
+mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名
+mysqldump -u user_name -p123456 database_name &gt; outfile_name.sql
+
+2) 导出一个表
+mysqldump -u 用户名 -p 数据库名 表名&gt; 导出的文件名
+mysqldump -u user_name -p database_name table_name &gt; outfile_name.sql
+
+3) 导出一个数据库结构
+mysqldump -u user_name -p -d –add-drop-table database_name &gt; outfile_name.sql
+-d 没有数据 –add-drop-table 在每个create语句之前增加一个drop table    
+</code></pre><h5 id="16-查看表带字段的详细信息"><a href="#16-查看表带字段的详细信息" class="headerlink" title="16. 查看表带字段的详细信息"></a>16. 查看表带字段的详细信息</h5><pre><code>show full columns from 表名称 [from 数据库名]; //列出字段及详情；
+show full fields from 表名称 [from 数据库名]; //列出字段完整属性
+show index from 表名称 [from 数据库名]; //列出表索引
+show variables; // 列出MySQL系统环境变量
+</code></pre><h2 id="其他error"><a href="#其他error" class="headerlink" title="其他error"></a>其他error</h2><p>1366 - Incorrect integer value: ‘’ for column ‘ID’ at row 1 </p>
+<p>在书写id 为递增的sql 语句中 我们通常使用 ‘’ 来填写id 字段的值</p>
+<p>但是 在mysql 5中 根据php.ini的设置的不同 有可能出现 1366 - Incorrect integer value: ‘’ for column ‘ID’ at row 1  的错误 ，这时 ，用NULL 代替 ‘’就行了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/19/12-cocoaPods 配置和升级/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/19/12-cocoaPods 配置和升级/" itemprop="url">12-cocoaPods配置和升级</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-19T00:00:00+08:00">
+                2016-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/10/19/12-cocoaPods 配置和升级/" class="leancloud_visitors" data-flag-title="12-cocoaPods配置和升级">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###1.cocoaPods升级命令：</p>
+<pre><code>$ sudo gem update --system // 先更新gem，国内需要切换源
+$ gem sources --remove https://rubygems.org/
+$ gem sources -a https://ruby.taobao.org/
+$ gem sources -l
+\*\*\* CURRENT SOURCES \*\*\*
+https://ruby.taobao.org/
+$ sudo gem install cocoapods // 安装cocoapods
+$ pod setup
+sudo gem uninstall cocoapods
+</code></pre><p><em>10.11 系统使用下面命令</em></p>
+<pre><code>sudo gem install -n /usr/local/bin cocoapods
+</code></pre><p>###2.cocoaPods配置</p>
+<p>首先，你得有一个pod的账号 在终端中输入pod 可以查看关于pod 的命令帮助，输入pod trunk me 可以查看自己的账号信息，如果没有的话先注册一个。输入pod trunk register然后根据提示注册一个即可，在有账号之后：</p>
+<pre><code>1.cd 到工程目录下，以工程名创建一个.podspec文件 例如:
+2.cd Demo ---&gt; pod spec create Demo
+3.然后vi Demo.podspec 进入文件中进行配置（参考已有的）
+4.git add -&gt; git commit -m “zz” -&gt; git push同步到远程端
+5.再创建LICENSE文件
+6然后需要创建工程的tag 
+     git tag &apos;0.0.1&apos;
+     git add *
+     git commit -m &apos;add tag&apos;
+     git push origin 0.0.1
+7.pod spec lint 来检测一下是否有错误或警告(在改变了tag 之后需要将.podspec文件中的s.version和s.source 的tag 改成同样的值)
+8.输入pod trunk push 发布
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/01/11-iOS10推送/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/07/01/11-iOS10推送/" itemprop="url">11-iOS10推送</a></h1>
         
 
         <div class="post-meta">
@@ -485,7 +1730,7 @@
 
           
           
-             <span id="/2016/07/01/10-iOS10推送/" class="leancloud_visitors" data-flag-title="10-iOS10推送">
+             <span id="/2016/07/01/11-iOS10推送/" class="leancloud_visitors" data-flag-title="11-iOS10推送">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -590,7 +1835,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/09-OC&&JS/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/10-OC&&JS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -609,7 +1854,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/15/09-OC&&JS/" itemprop="url">09-OC&&JS交互</a></h1>
+                <a class="post-title-link" href="/2016/03/15/10-OC&&JS/" itemprop="url">10-OC&&JS交互</a></h1>
         
 
         <div class="post-meta">
@@ -639,7 +1884,7 @@
 
           
           
-             <span id="/2016/03/15/09-OC&&JS/" class="leancloud_visitors" data-flag-title="09-OC&&JS交互">
+             <span id="/2016/03/15/10-OC&&JS/" class="leancloud_visitors" data-flag-title="10-OC&&JS交互">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -825,7 +2070,7 @@ object.noParameterBlock = ^(){
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/08-iOS7以后UITextView的那些坑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/09-iOS7以后UITextView的那些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -844,7 +2089,7 @@ object.noParameterBlock = ^(){
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/10/13/08-iOS7以后UITextView的那些坑/" itemprop="url">08-iOS7以后UITextView的那些坑</a></h1>
+                <a class="post-title-link" href="/2015/10/13/09-iOS7以后UITextView的那些坑/" itemprop="url">09-iOS7以后UITextView的那些坑</a></h1>
         
 
         <div class="post-meta">
@@ -874,7 +2119,7 @@ object.noParameterBlock = ^(){
 
           
           
-             <span id="/2015/10/13/08-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="08-iOS7以后UITextView的那些坑">
+             <span id="/2015/10/13/09-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="09-iOS7以后UITextView的那些坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -973,7 +2218,7 @@ if (IOS7_And_Later) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/13/07-忽略performSelector警告/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/13/08-忽略performSelector警告/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -992,7 +2237,7 @@ if (IOS7_And_Later) {
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/05/13/07-忽略performSelector警告/" itemprop="url">07-忽略performSelector的警告</a></h1>
+                <a class="post-title-link" href="/2015/05/13/08-忽略performSelector警告/" itemprop="url">08-忽略performSelector的警告</a></h1>
         
 
         <div class="post-meta">
@@ -1022,7 +2267,7 @@ if (IOS7_And_Later) {
 
           
           
-             <span id="/2015/05/13/07-忽略performSelector警告/" class="leancloud_visitors" data-flag-title="07-忽略performSelector的警告">
+             <span id="/2015/05/13/08-忽略performSelector警告/" class="leancloud_visitors" data-flag-title="08-忽略performSelector的警告">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1072,846 +2317,6 @@ SuppressPerformSelectorLeakWarning(
     result = [_target performSelector:_action withObject:self]
 );
 </code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/11/06-iOS时间转换/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/04/11/06-iOS时间转换/" itemprop="url">06-iOS时间转换</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-11T00:00:00+08:00">
-                2015-04-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2015/04/11/06-iOS时间转换/" class="leancloud_visitors" data-flag-title="06-iOS时间转换">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://blog.csdn.net/Chao_Mu/article/details/44996573" target="_blank" rel="noopener">https://blog.csdn.net/Chao_Mu/article/details/44996573</a></p>
-<p>字符说明</p>
-<p>(:)</p>
-<p>时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。</p>
-<p>(/)</p>
-<p>日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期值时分隔日、月和年。格式化输出中用作日期分隔符的实际字符由您的应用程序的当前区域性确定。</p>
-<p>(%)</p>
-<p>用于表明不论尾随什么字母，随后字符都应该以单字母格式读取。也用于表明单字母格式应以用户定义格式读取。有关更多详细信息，请参见下面的内容。</p>
-<p>gg</p>
-<p>显示时代/纪元字符串（例如 A.D.）</p>
-<p>y</p>
-<p>将年份 (0-9) 显示为不带前导零的数字。如果这是用户定义的数字格式中的唯一字符，请使用 %y。</p>
-<p>yy</p>
-<p>以带前导零的两位数字格式显示年份（如果适用）。</p>
-<p>yyy</p>
-<p>以四位数字格式显示年份。</p>
-<p>yyyy</p>
-<p>以四位数字格式显示年份。</p>
-<p>M</p>
-<p>将月份显示为不带前导零的数字（如一月表示为 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %M。</p>
-<p>MM</p>
-<p>将月份显示为带前导零的数字（例如 01）。</p>
-<p>MMM</p>
-<p>将月份显示为英文缩写形式（例如 Jan）。</p>
-<p>MMMM</p>
-<p>将月份显示为完整英文月份名（例如 January）。</p>
-<p>d</p>
-<p>将日显示为不带前导零的数字（如 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %d。</p>
-<p>dd</p>
-<p>将日显示为带前导零的数字（如 01）。</p>
-<p>EEE</p>
-<p>将日显示为英文缩写形式（例如 Sun）。</p>
-<p>EEEE</p>
-<p>将日显示为英文全名（例如 Sunday）。</p>
-<p>h</p>
-<p>使用 12 小时制将小时显示为不带前导零的数字（例如 1:15:15 PM）。如果这是用户定义的数字格式中的唯一字符，请使用 %h。</p>
-<p>hh</p>
-<p>使用 12 小时制将小时显示为带前导零的数字（例如 01:15:15 PM）。</p>
-<p>H</p>
-<p>使用 24 小时制将小时显示为不带前导零的数字（例如 1:15:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %H。</p>
-<p>HH</p>
-<p>使用 24 小时制将小时显示为带前导零的数字（例如 01:15:15）。</p>
-<p>m</p>
-<p>将分钟显示为不带前导零的数字（例如 12:1:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %m。</p>
-<p>mm</p>
-<p>将分钟显示为带前导零的数字（例如 12:01:15）。</p>
-<p>s</p>
-<p>将秒显示为不带前导零的数字（例如 12:15:5）。如果这是用户定义的数字格式中的唯一字符，请使用 %s。</p>
-<p>ss</p>
-<p>将秒显示为带前导零的数字（例如 12:15:05）。</p>
-<p>f</p>
-<p>显示秒的小数部分。例如，ff 将精确显示到百分之一秒，而 ffff 将精确显示到万分之一秒。用户定义格式中最多可使用七个 f 符号。如果这是用户定义的数字格式中的唯一字符，请使用 %f。</p>
-<p>t</p>
-<p>使用 12 小时制，并对中午之前的任一小时显示大写的 A，对中午到 11:59 P.M 之间的任一小时显示大写的 P。如果这是用户定义的数字格式中的唯一字符，请使用 %t。</p>
-<p>tt</p>
-<p>对于使用 12 小时制的区域设置，对中午之前任一小时显示大写的 AM，对中午到 11:59 P.M 之间的任一小时显示大写的 PM。</p>
-<p>对于使用 24 小时制的区域设置，不显示任何字符。</p>
-<p>z</p>
-<p>显示不带前导零的时区偏移量（如 -8）。如果这是用户定义的数字格式中的唯一字符，请使用 %z。</p>
-<p>zz</p>
-<p>显示带前导零的时区偏移量（例如 -08）</p>
-<p>zzz</p>
-<p>显示完整的时区偏移量（例如 -08:00）</p>
-<p>例如：<br>Tue Apr 07 03:17:04 PDT 2015<br>@”EEE MMM dd KK:mm:ss zz yyyy”</p>
-<p>2015-03-21 11:12:14<br>@”yy-MM-dd HH:mm:ss”</p>
-<p>NSDate与NSString互相转换：</p>
-<p>(1)</p>
-<pre><code> - (NSString *)dateToString:(NSDate *＊)date dateFormatter:(NSString *)dateFormatter
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:dateFormatter];
-    NSString *dateStr = [formatter stringFromDate:date];
-    return dateStr;
-}
-</code></pre><p>(2)</p>
-<pre><code>- (NSDate *)stringForDate:(NSString *＊)dateString dateFormatter:(NSString *)dateFormatter
-{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:28800]];
-    [formatter setDateFormat:dateFormatter];
-    NSDate *date = [formatter dateFromString:dateString];
-    return date;
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/10/23/05-XML解析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/10/23/05-XML解析/" itemprop="url">05-xml解析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-10-23T00:00:00+08:00">
-                2014-10-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2014/10/23/05-XML解析/" class="leancloud_visitors" data-flag-title="05-xml解析">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章：</p>
-<p><a href="http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project" target="_blank" rel="noopener">http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project</a></p>
-<p>这里主要介绍一下由Google提供的一种在IOS平台上进行XML解析的开源库GDataXML，可以到</p>
-<p><a href="http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/" target="_blank" rel="noopener">http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/</a></p>
-<p>下载源码，下载下来后进入文件夹找到XMLSupport文件夹，将里面的GDataXMLNode.h和GDataXMLNode.m文件拖拽到项目中新建的文件夹即可（我这里是建的GDataXML文件夹），注意要选中复制文件到项目中而不是只是引用，如图：</p>
-<p><img src="../images/05/05-1.png" alt="avatar"></p>
-<p>然后就是对工程进行一些配置，点击工程根目录然后点击左边的Target，进入Build Phases，然后点击第三个Link binary with libraries，点击加号搜索libxml2并将这个库添加到工程，如图：</p>
-<p><img src="../images/05/05-2.png" alt="avatar"></p>
-<p>接下来再进入Build Settings，在搜索框中搜索Head Search Path，然后双击并点击+按钮添加/usr/include/libxml2,如图：</p>
-<p><img src="../images/05/05-3.png" alt="avatar"></p>
-<p>接下来再搜索框中搜索Other linker flags，同样的方式添加-lxml2，如图：</p>
-<p><img src="../images/05/05-4.png" alt="avatar"></p>
-<p>到这里，添加和配置的工作就完成了（是有点麻烦），接下来就看如何使用了：<br>首先在工程中新建一个xml文件，作为我们要解析的对象，新建方法是在工程中新建一个Empty的文件，命名为users.xml，然后添加内容：</p>
-<pre><code>1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
-2. &lt;Users]] &gt;   
-3.     &lt;User id=&quot;001&quot;]]]] &gt;   
-4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   
-5.         &lt;age]] &gt; 24&lt;/age]] &gt;   
-6.     &lt;/User]] &gt;   
-7.     &lt;User id=&quot;002&quot;]]]] &gt;   
-8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   
-9.         &lt;age]] &gt; 23&lt;/age]] &gt;   
-10.     &lt;/User]] &gt;   
-11. &lt;/Users]] &gt;   
-</code></pre><p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>
-<pre><code>7. - (void)xmlParse {       
-8.     //获取工程目录的xml文件  
-9.     NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;users&quot; ofType:@&quot;xml&quot;];  
-10.     NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];  
-11.       
-12.     //使用NSData对象初始化  
-13.     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData  options:0error:nil];  
-14.       
-15.     //获取根节点（Users）  
-16.     GDataXMLElement *rootElement = [doc rootElement];  
-17.       
-18.     //获取根节点下的节点（User）  
-19.     NSArray *users = [rootElement elementsForName:@&quot;User&quot;];  
-20.       
-21.     for (GDataXMLElement *user in users) {  
-22.         //User节点的id属性  
-23.         NSString *userId = [[user attributeForName:@&quot;id&quot;] stringValue];  
-24.         NSLog(@&quot;User id is:%@&quot;,userId);  
-25.           
-26.         //获取name节点的值  
-27.         GDataXMLElement *nameElement = [[user elementsForName:@&quot;name&quot;] objectAtIndex:0];  
-28.         NSString *name = [nameElement stringValue];  
-29.         NSLog(@&quot;User name is:%@&quot;,name);  
-30.           
-31.         //获取age节点的值  
-32.         GDataXMLElement *ageElement = [[user elementsForName:@&quot;age&quot;] objectAtIndex:0];  
-33.         NSString *age = [ageElement stringValue];  
-34.         NSLog(@&quot;User age is:%@&quot;,age);  
-35.     }
-36.  }      
-37.           
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/21/04-编译问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/08/21/04-编译问题/" itemprop="url">04-编译问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">
-                2014-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2014/08/21/04-编译问题/" class="leancloud_visitors" data-flag-title="04-编译问题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="编译正常，但无法运行到真机和模拟器上"><a href="#编译正常，但无法运行到真机和模拟器上" class="headerlink" title="编译正常，但无法运行到真机和模拟器上"></a>编译正常，但无法运行到真机和模拟器上</h3><p>Choose a destination with a supported architecture</p>
-<p><img src="../images/04/04-1.png" alt="avatar"></p>
-<p>这样的错误解决办法</p>
-<h4 id="1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图："><a href="#1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图：" class="headerlink" title="1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图："></a>1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图：</h4><p><img src="../images/04/04-2.png" alt="avatar"></p>
-<h4 id="2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"><a href="#2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。" class="headerlink" title="2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"></a>2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。</h4><h4 id="3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm"><a href="#3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm" class="headerlink" title="3 compilier for c/c++/objective-c也要看是不是选的apple llvm"></a>3 compilier for c/c++/objective-c也要看是不是选的apple llvm</h4><p><img src="../images/04/04-3.png" alt="avatar"></p>
-<h4 id="4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"><a href="#4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了" class="headerlink" title="4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"></a>4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了</h4>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/20/03-AppB中获取AppA的照片/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/06/20/03-AppB中获取AppA的照片/" itemprop="url">03-AppB中获取AppA的照片</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-20T00:00:00+08:00">
-                2014-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2014/06/20/03-AppB中获取AppA的照片/" class="leancloud_visitors" data-flag-title="03-AppB中获取AppA的照片">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="URLType配置"><a href="#URLType配置" class="headerlink" title="URLType配置"></a>URLType配置</h3><p>分别配置 两个应用的 URLType</p>
-<p>AppA定义URLType为AppA0000000000</p>
-<p>AppB定义URLType为AppB0000000000</p>
-<h3 id="AppB在需要获取AppA中的图片使用如下方法"><a href="#AppB在需要获取AppA中的图片使用如下方法" class="headerlink" title="AppB在需要获取AppA中的图片使用如下方法"></a>AppB在需要获取AppA中的图片使用如下方法</h3><pre><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;AppA0000000000://demo.prefix?imageName=aaa&quot;]];
-</code></pre><h3 id="AppA中"><a href="#AppA中" class="headerlink" title="AppA中"></a>AppA中</h3><p>拦截方法获取处理图片并返回给AppB</p>
-<pre><code>- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url 
-sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
-{
-    if ([[url host] isEqualToString:@&quot;demo.prefix&quot;]) {
-        NSArray *params = [[url query] componentsSeparatedByString:@&quot;&amp;&quot;];
-        for (NSString *param in params) {
-            NSArray *keyValue = [param componentsSeparatedByString:@&quot;=&quot;];
-            NSString *value = [keyValue lastObject];
-            UIImage *image = [UIImage imageNamed:value];
-            NSData *data = UIImagePNGRepresentation(image);
-            NSString *base64String = [data base64EncodedStringWithOptions:0];
-            NSURL url = [NSURL URLWithString:[NSString 
-stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
-            // 将base64后的字串带给AppB
-                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-        }
-    }
-    return YES;
-}
-</code></pre><h3 id="AppB中同上述AppA的方法进行拦截获取图片"><a href="#AppB中同上述AppA的方法进行拦截获取图片" class="headerlink" title="AppB中同上述AppA的方法进行拦截获取图片"></a>AppB中同上述AppA的方法进行拦截获取图片</h3>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2014/05/13/02-静态库制作及注意事项/" itemprop="url">02-静态库制作及注意事项</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-13T00:00:00+08:00">
-                2014-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2014/05/13/02-静态库制作及注意事项/" class="leancloud_visitors" data-flag-title="02-静态库制作及注意事项">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
-<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
-<p><img src="../images/02/02-1.jpg" alt="avatar"><br><img src="../images/02/02-2.jpg" alt="avatar"><br><img src="../images/02/02-3.jpg" alt="avatar"></p>
-<p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
-<p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
-<p><img src="../images/02/02-4.jpg" alt="avatar"></p>
-<pre><code>然后选择 静态库
-</code></pre><p><img src="../images/02/02-5.jpg" alt="avatar"></p>
-<pre><code>同时 Edit Sheme
-</code></pre><p><img src="../images/02/02-6.jpg" alt="avatar"></p>
-<pre><code>然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了
-</code></pre><p><img src="../images/02/02-7.jpg" alt="avatar"></p>
-<p>##注意事项</p>
-<p>在开发过程中，经常会碰到一些在不同工程中经常用到的部分，把这些部分抽取出来做成一个静态库往往是一个比较好的做法。xcode里就有制作静态库的模板，相关的制作步骤网上也有很多，但在实际的操作中，还是有不少细节方面需要注意。以下是我碰到的一些问题总结。</p>
-<h4 id="1-编译release版本的库"><a href="#1-编译release版本的库" class="headerlink" title="1.编译release版本的库"></a>1.编译release版本的库</h4><p>在“Manage Schemes”中，将“Build Configuration”的选项改为“Release”即可。如图：</p>
-<p><img src="../images/02/02-8.jpg" alt="avatar"></p>
-<h4 id="2-静态库中包含category"><a href="#2-静态库中包含category" class="headerlink" title="2.静态库中包含category"></a>2.静态库中包含category</h4><p>如果你在静态库工程中使用了category，那么你可能会碰到链接问题，解决的办法就是需要同时在生成静态库的工程和使用静态库的工程中使用“-all_load”编译选项，即在对应target的”Build Settings”中的“Other Linker Flags”选项添加“-all_load”。注意：使用静态库的工程中是一定要加该编译选项的！！至于生成静态库的工程中加不加没有试过，不过建议还是加上该编译选项。</p>
-<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
-<h4 id="3-静态库支持的SDK版本"><a href="#3-静态库支持的SDK版本" class="headerlink" title="3.静态库支持的SDK版本"></a>3.静态库支持的SDK版本</h4><p>为了使自己的静态库尽可能多的支持IOS的系统版本，应该在”IOS Deployment Target”这个选项中选择自己所需的IOS版本。设置如下图，这个是我的静态库工程中的配置，红框框起来的是我修改过的选项。</p>
-<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
-<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。<br><img src="../images/02/02-10.png" alt="avatar"><br><img src="../images/02/02-11.png" alt="avatar"></p>
-<p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
-
           
         
       
@@ -1996,7 +2401,7 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2004,6 +2409,15 @@ stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Git,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="###1.cocoaPods升级命令： $ sudo gem update --system // 先更新gem，国内需要切换源 $ gem sources --remove https://rubygems.org/ $ gem sources -a https://ruby.taobao.org/ $ gem sources -l \*\*\* CURRENT SOURCES \*\*\* h">
-<meta property="og:type" content="website">
-<meta property="og:title" content="02-cocoaPods配置和升级">
-<meta property="og:url" content="http://yoursite.com/tags/02-cocoaPods 配置和升级.html">
+<meta name="description" content="https://blog.csdn.net/Chao_Mu/article/details/43120275 ###git常用命令 git add  &amp;lt;name&amp;gt;  添加一个文件（到暂存区stage）  git commit   提交一个文件（到分支master）  git status  查看哪些文件被修改、或者是哪些文件被添加 提交文件修改等操作 先使用 git add  在使用g">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="06-git常用命令">
+<meta property="og:url" content="http://yoursite.com/2015/01/25/06-git常用命令/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="###1.cocoaPods升级命令： $ sudo gem update --system // 先更新gem，国内需要切换源 $ gem sources --remove https://rubygems.org/ $ gem sources -a https://ruby.taobao.org/ $ gem sources -l \*\*\* CURRENT SOURCES \*\*\* h">
+<meta property="og:description" content="https://blog.csdn.net/Chao_Mu/article/details/43120275 ###git常用命令 git add  &amp;lt;name&amp;gt;  添加一个文件（到暂存区stage）  git commit   提交一个文件（到分支master）  git status  查看哪些文件被修改、或者是哪些文件被添加 提交文件修改等操作 先使用 git add  在使用g">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T07:18:24.233Z">
+<meta property="og:updated_time" content="2019-03-12T10:22:56.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="02-cocoaPods配置和升级">
-<meta name="twitter:description" content="###1.cocoaPods升级命令： $ sudo gem update --system // 先更新gem，国内需要切换源 $ gem sources --remove https://rubygems.org/ $ gem sources -a https://ruby.taobao.org/ $ gem sources -l \*\*\* CURRENT SOURCES \*\*\* h">
+<meta name="twitter:title" content="06-git常用命令">
+<meta name="twitter:description" content="https://blog.csdn.net/Chao_Mu/article/details/43120275 ###git常用命令 git add  &amp;lt;name&amp;gt;  添加一个文件（到暂存区stage）  git commit   提交一个文件（到分支master）  git status  查看哪些文件被修改、或者是哪些文件被添加 提交文件修改等操作 先使用 git add  在使用g">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/02-cocoaPods 配置和升级.html">
+  <link rel="canonical" href="http://yoursite.com/2015/01/25/06-git常用命令/">
 
 
 
 
 
-  <title>02-cocoaPods配置和升级 | 不知是哪个号</title>
+  <title>06-git常用命令 | 不知是哪个号</title>
   
 
 
@@ -240,59 +241,230 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/25/06-git常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">02-cocoaPods配置和升级</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <p>###1.cocoaPods升级命令：</p>
-<pre><code>$ sudo gem update --system // 先更新gem，国内需要切换源
-$ gem sources --remove https://rubygems.org/
-$ gem sources -a https://ruby.taobao.org/
-$ gem sources -l
-\*\*\* CURRENT SOURCES \*\*\*
-https://ruby.taobao.org/
-$ sudo gem install cocoapods // 安装cocoapods
-$ pod setup
-sudo gem uninstall cocoapods
-</code></pre><p><em>10.11 系统使用下面命令</em></p>
-<pre><code>sudo gem install -n /usr/local/bin cocoapods
-</code></pre><p>###2.cocoaPods配置</p>
-<p>首先，你得有一个pod的账号 在终端中输入pod 可以查看关于pod 的命令帮助，输入pod trunk me 可以查看自己的账号信息，如果没有的话先注册一个。输入pod trunk register然后根据提示注册一个即可，在有账号之后：</p>
-<pre><code>1.cd 到工程目录下，以工程名创建一个.podspec文件 例如:
-2.cd Demo ---&gt; pod spec create Demo
-3.然后vi Demo.podspec 进入文件中进行配置（参考已有的）
-4.git add -&gt; git commit -m “zz” -&gt; git push同步到远程端
-5.再创建LICENSE文件
-6然后需要创建工程的tag 
-     git tag &apos;0.0.1&apos;
-     git add *
-     git commit -m &apos;add tag&apos;
-     git push origin 0.0.1
-7.pod spec lint 来检测一下是否有错误或警告(在改变了tag 之后需要将.podspec文件中的s.version和s.source 的tag 改成同样的值)
-8.输入pod trunk push 发布
+          <h1 class="post-title" itemprop="name headline">06-git常用命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-25T00:00:00+08:00">
+                2015-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/01/25/06-git常用命令/" class="leancloud_visitors" data-flag-title="06-git常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://blog.csdn.net/Chao_Mu/article/details/43120275" target="_blank" rel="noopener">https://blog.csdn.net/Chao_Mu/article/details/43120275</a></p>
+<p>###git常用命令</p>
+<pre><code>git add  &lt;name&gt;  添加一个文件（到暂存区stage）
+
+git commit   提交一个文件（到分支master）
+
+git status  查看哪些文件被修改、或者是哪些文件被添加
+</code></pre><p>提交文件修改等操作 先使用 git add  在使用git status查看当前仓库的状态，最后使用 git commit</p>
+<pre><code>git diff  查看具体修改的内容(需要在没有add的情况下)
+
+git log  查看历史(git log --pretty=oneline )
+
+git reset —hard HEAD^ 返回上一版本（多个使用 HEAD~100）
+
+git reflog 查看命令历史
+
+git reset --hard A929053 (回到指定的版本)
+
+git rm —－ &lt;name&gt; 删除文件
+</code></pre><p>###关联一个远程分支</p>
+<pre><code>git branch &lt;name&gt; origin/&lt;name&gt;
+</code></pre><p>###关联一个远程库的命令</p>
+<pre><code>git remote add origin git@server-name:path/repo-name.git
+
+
+关联成功后使用命令 git push -u origin master (第一次) 
+
+以后可使用 git push origin master
+</code></pre><p>###撤销操作</p>
+<p>没使用 git add 在暂存区</p>
+<pre><code>git checkout -- readme.txt (撤销这个文件的修改注意－－不能省略)
+</code></pre><p>使用git add 后 在分支</p>
+<pre><code>git reset head  readme.txt （撤销操作） 
+</code></pre><p>###其他</p>
+<pre><code>查看本地分支：git branch
+
+查看所有分支：git branch -a
+
+创建分支：git branch &lt;name&gt;
+
+切换分支：git checkout &lt;name&gt;
+
+创建+切换分支：git checkout -b &lt;name&gt;
+
+合并某分支到当前分支：git merge &lt;name&gt;
+
+删除分支：git branch -d &lt;name&gt;
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D &lt;name&gt;强行删除
+
+下拉更新：git pull
+
+上传demo：git push origin &lt;name&gt;
+
+撤销操作 ：git checkout -- &lt;name&gt;  （没有使用git add）
+
+撤销操作 ：git reset head &lt;name&gt;  (使用了 git add)
+
+关联一个远程分支 ：git branch &lt;name&gt; origin/&lt;name&gt;
+
+删除文件 ：git rm -- &lt;name&gt;
+
+显示某个版本的修改详情： git show &lt;版本号&gt;
+
+用git log --graph命令可以看到分支合并图。
+
+合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+</code></pre><p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
+<p>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
+<pre><code>git stash apply 恢复 
+git stash drop删除
+</code></pre><p>忽略文件简单操作：</p>
+<pre><code>先进入 vi .gitignore 中 把需要忽略的 文件放入进去 i 开始编辑 esc 退出编辑 ：wq 退出
 </code></pre>
-        
-      </div>
-      
-      
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/10/23/05-XML解析/" rel="next" title="05-xml解析">
+                <i class="fa fa-chevron-left"></i> 05-xml解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/11/07-iOS时间转换/" rel="prev" title="07-iOS时间转换">
+                07-iOS时间转换 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -341,7 +513,7 @@ sudo gem uninstall cocoapods
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -349,6 +521,15 @@ sudo gem uninstall cocoapods
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

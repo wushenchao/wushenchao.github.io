@@ -249,6 +249,1048 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/11/07-iOS时间转换/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/04/11/07-iOS时间转换/" itemprop="url">07-iOS时间转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-04-11T00:00:00+08:00">
+                2015-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/04/11/07-iOS时间转换/" class="leancloud_visitors" data-flag-title="07-iOS时间转换">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://blog.csdn.net/Chao_Mu/article/details/44996573" target="_blank" rel="noopener">https://blog.csdn.net/Chao_Mu/article/details/44996573</a></p>
+<p>字符说明</p>
+<p>(:)</p>
+<p>时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。</p>
+<p>(/)</p>
+<p>日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期值时分隔日、月和年。格式化输出中用作日期分隔符的实际字符由您的应用程序的当前区域性确定。</p>
+<p>(%)</p>
+<p>用于表明不论尾随什么字母，随后字符都应该以单字母格式读取。也用于表明单字母格式应以用户定义格式读取。有关更多详细信息，请参见下面的内容。</p>
+<p>gg</p>
+<p>显示时代/纪元字符串（例如 A.D.）</p>
+<p>y</p>
+<p>将年份 (0-9) 显示为不带前导零的数字。如果这是用户定义的数字格式中的唯一字符，请使用 %y。</p>
+<p>yy</p>
+<p>以带前导零的两位数字格式显示年份（如果适用）。</p>
+<p>yyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>yyyy</p>
+<p>以四位数字格式显示年份。</p>
+<p>M</p>
+<p>将月份显示为不带前导零的数字（如一月表示为 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %M。</p>
+<p>MM</p>
+<p>将月份显示为带前导零的数字（例如 01）。</p>
+<p>MMM</p>
+<p>将月份显示为英文缩写形式（例如 Jan）。</p>
+<p>MMMM</p>
+<p>将月份显示为完整英文月份名（例如 January）。</p>
+<p>d</p>
+<p>将日显示为不带前导零的数字（如 1）。如果这是用户定义的数字格式中的唯一字符，请使用 %d。</p>
+<p>dd</p>
+<p>将日显示为带前导零的数字（如 01）。</p>
+<p>EEE</p>
+<p>将日显示为英文缩写形式（例如 Sun）。</p>
+<p>EEEE</p>
+<p>将日显示为英文全名（例如 Sunday）。</p>
+<p>h</p>
+<p>使用 12 小时制将小时显示为不带前导零的数字（例如 1:15:15 PM）。如果这是用户定义的数字格式中的唯一字符，请使用 %h。</p>
+<p>hh</p>
+<p>使用 12 小时制将小时显示为带前导零的数字（例如 01:15:15 PM）。</p>
+<p>H</p>
+<p>使用 24 小时制将小时显示为不带前导零的数字（例如 1:15:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %H。</p>
+<p>HH</p>
+<p>使用 24 小时制将小时显示为带前导零的数字（例如 01:15:15）。</p>
+<p>m</p>
+<p>将分钟显示为不带前导零的数字（例如 12:1:15）。如果这是用户定义的数字格式中的唯一字符，请使用 %m。</p>
+<p>mm</p>
+<p>将分钟显示为带前导零的数字（例如 12:01:15）。</p>
+<p>s</p>
+<p>将秒显示为不带前导零的数字（例如 12:15:5）。如果这是用户定义的数字格式中的唯一字符，请使用 %s。</p>
+<p>ss</p>
+<p>将秒显示为带前导零的数字（例如 12:15:05）。</p>
+<p>f</p>
+<p>显示秒的小数部分。例如，ff 将精确显示到百分之一秒，而 ffff 将精确显示到万分之一秒。用户定义格式中最多可使用七个 f 符号。如果这是用户定义的数字格式中的唯一字符，请使用 %f。</p>
+<p>t</p>
+<p>使用 12 小时制，并对中午之前的任一小时显示大写的 A，对中午到 11:59 P.M 之间的任一小时显示大写的 P。如果这是用户定义的数字格式中的唯一字符，请使用 %t。</p>
+<p>tt</p>
+<p>对于使用 12 小时制的区域设置，对中午之前任一小时显示大写的 AM，对中午到 11:59 P.M 之间的任一小时显示大写的 PM。</p>
+<p>对于使用 24 小时制的区域设置，不显示任何字符。</p>
+<p>z</p>
+<p>显示不带前导零的时区偏移量（如 -8）。如果这是用户定义的数字格式中的唯一字符，请使用 %z。</p>
+<p>zz</p>
+<p>显示带前导零的时区偏移量（例如 -08）</p>
+<p>zzz</p>
+<p>显示完整的时区偏移量（例如 -08:00）</p>
+<p>例如：<br>Tue Apr 07 03:17:04 PDT 2015<br>@”EEE MMM dd KK:mm:ss zz yyyy”</p>
+<p>2015-03-21 11:12:14<br>@”yy-MM-dd HH:mm:ss”</p>
+<p>NSDate与NSString互相转换：</p>
+<p>(1)</p>
+<pre><code> - (NSString *)dateToString:(NSDate *＊)date dateFormatter:(NSString *)dateFormatter
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:dateFormatter];
+    NSString *dateStr = [formatter stringFromDate:date];
+    return dateStr;
+}
+</code></pre><p>(2)</p>
+<pre><code>- (NSDate *)stringForDate:(NSString *＊)dateString dateFormatter:(NSString *)dateFormatter
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:28800]];
+    [formatter setDateFormat:dateFormatter];
+    NSDate *date = [formatter dateFromString:dateString];
+    return date;
+}
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/01/25/06-git常用命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/01/25/06-git常用命令/" itemprop="url">06-git常用命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-25T00:00:00+08:00">
+                2015-01-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2015/01/25/06-git常用命令/" class="leancloud_visitors" data-flag-title="06-git常用命令">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://blog.csdn.net/Chao_Mu/article/details/43120275" target="_blank" rel="noopener">https://blog.csdn.net/Chao_Mu/article/details/43120275</a></p>
+<p>###git常用命令</p>
+<pre><code>git add  &lt;name&gt;  添加一个文件（到暂存区stage）
+
+git commit   提交一个文件（到分支master）
+
+git status  查看哪些文件被修改、或者是哪些文件被添加
+</code></pre><p>提交文件修改等操作 先使用 git add  在使用git status查看当前仓库的状态，最后使用 git commit</p>
+<pre><code>git diff  查看具体修改的内容(需要在没有add的情况下)
+
+git log  查看历史(git log --pretty=oneline )
+
+git reset —hard HEAD^ 返回上一版本（多个使用 HEAD~100）
+
+git reflog 查看命令历史
+
+git reset --hard A929053 (回到指定的版本)
+
+git rm —－ &lt;name&gt; 删除文件
+</code></pre><p>###关联一个远程分支</p>
+<pre><code>git branch &lt;name&gt; origin/&lt;name&gt;
+</code></pre><p>###关联一个远程库的命令</p>
+<pre><code>git remote add origin git@server-name:path/repo-name.git
+
+
+关联成功后使用命令 git push -u origin master (第一次) 
+
+以后可使用 git push origin master
+</code></pre><p>###撤销操作</p>
+<p>没使用 git add 在暂存区</p>
+<pre><code>git checkout -- readme.txt (撤销这个文件的修改注意－－不能省略)
+</code></pre><p>使用git add 后 在分支</p>
+<pre><code>git reset head  readme.txt （撤销操作） 
+</code></pre><p>###其他</p>
+<pre><code>查看本地分支：git branch
+
+查看所有分支：git branch -a
+
+创建分支：git branch &lt;name&gt;
+
+切换分支：git checkout &lt;name&gt;
+
+创建+切换分支：git checkout -b &lt;name&gt;
+
+合并某分支到当前分支：git merge &lt;name&gt;
+
+删除分支：git branch -d &lt;name&gt;
+如果要丢弃一个没有被合并过的分支，可以通过git branch -D &lt;name&gt;强行删除
+
+下拉更新：git pull
+
+上传demo：git push origin &lt;name&gt;
+
+撤销操作 ：git checkout -- &lt;name&gt;  （没有使用git add）
+
+撤销操作 ：git reset head &lt;name&gt;  (使用了 git add)
+
+关联一个远程分支 ：git branch &lt;name&gt; origin/&lt;name&gt;
+
+删除文件 ：git rm -- &lt;name&gt;
+
+显示某个版本的修改详情： git show &lt;版本号&gt;
+
+用git log --graph命令可以看到分支合并图。
+
+合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+</code></pre><p>修复bug时，我们会通过创建新的bug分支进行修复，然后合并，最后删除；</p>
+<p>当手头工作没有完成时，先把工作现场git stash一下，然后去修复bug，修复后，再git stash pop，回到工作现场。</p>
+<pre><code>git stash apply 恢复 
+git stash drop删除
+</code></pre><p>忽略文件简单操作：</p>
+<pre><code>先进入 vi .gitignore 中 把需要忽略的 文件放入进去 i 开始编辑 esc 退出编辑 ：wq 退出
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/10/23/05-XML解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/10/23/05-XML解析/" itemprop="url">05-xml解析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-10-23T00:00:00+08:00">
+                2014-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/10/23/05-XML解析/" class="leancloud_visitors" data-flag-title="05-xml解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章：</p>
+<p><a href="http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project" target="_blank" rel="noopener">http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project</a></p>
+<p>这里主要介绍一下由Google提供的一种在IOS平台上进行XML解析的开源库GDataXML，可以到</p>
+<p><a href="http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/" target="_blank" rel="noopener">http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/</a></p>
+<p>下载源码，下载下来后进入文件夹找到XMLSupport文件夹，将里面的GDataXMLNode.h和GDataXMLNode.m文件拖拽到项目中新建的文件夹即可（我这里是建的GDataXML文件夹），注意要选中复制文件到项目中而不是只是引用，如图：</p>
+<p><img src="../images/05/05-1.png" alt="avatar"></p>
+<p>然后就是对工程进行一些配置，点击工程根目录然后点击左边的Target，进入Build Phases，然后点击第三个Link binary with libraries，点击加号搜索libxml2并将这个库添加到工程，如图：</p>
+<p><img src="../images/05/05-2.png" alt="avatar"></p>
+<p>接下来再进入Build Settings，在搜索框中搜索Head Search Path，然后双击并点击+按钮添加/usr/include/libxml2,如图：</p>
+<p><img src="../images/05/05-3.png" alt="avatar"></p>
+<p>接下来再搜索框中搜索Other linker flags，同样的方式添加-lxml2，如图：</p>
+<p><img src="../images/05/05-4.png" alt="avatar"></p>
+<p>到这里，添加和配置的工作就完成了（是有点麻烦），接下来就看如何使用了：<br>首先在工程中新建一个xml文件，作为我们要解析的对象，新建方法是在工程中新建一个Empty的文件，命名为users.xml，然后添加内容：</p>
+<pre><code>1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
+2. &lt;Users]] &gt;   
+3.     &lt;User id=&quot;001&quot;]]]] &gt;   
+4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   
+5.         &lt;age]] &gt; 24&lt;/age]] &gt;   
+6.     &lt;/User]] &gt;   
+7.     &lt;User id=&quot;002&quot;]]]] &gt;   
+8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   
+9.         &lt;age]] &gt; 23&lt;/age]] &gt;   
+10.     &lt;/User]] &gt;   
+11. &lt;/Users]] &gt;   
+</code></pre><p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>
+<pre><code>7. - (void)xmlParse {       
+8.     //获取工程目录的xml文件  
+9.     NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;users&quot; ofType:@&quot;xml&quot;];  
+10.     NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];  
+11.       
+12.     //使用NSData对象初始化  
+13.     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData  options:0error:nil];  
+14.       
+15.     //获取根节点（Users）  
+16.     GDataXMLElement *rootElement = [doc rootElement];  
+17.       
+18.     //获取根节点下的节点（User）  
+19.     NSArray *users = [rootElement elementsForName:@&quot;User&quot;];  
+20.       
+21.     for (GDataXMLElement *user in users) {  
+22.         //User节点的id属性  
+23.         NSString *userId = [[user attributeForName:@&quot;id&quot;] stringValue];  
+24.         NSLog(@&quot;User id is:%@&quot;,userId);  
+25.           
+26.         //获取name节点的值  
+27.         GDataXMLElement *nameElement = [[user elementsForName:@&quot;name&quot;] objectAtIndex:0];  
+28.         NSString *name = [nameElement stringValue];  
+29.         NSLog(@&quot;User name is:%@&quot;,name);  
+30.           
+31.         //获取age节点的值  
+32.         GDataXMLElement *ageElement = [[user elementsForName:@&quot;age&quot;] objectAtIndex:0];  
+33.         NSString *age = [ageElement stringValue];  
+34.         NSLog(@&quot;User age is:%@&quot;,age);  
+35.     }
+36.  }      
+37.           
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/08/21/04-编译问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/08/21/04-编译问题/" itemprop="url">04-编译问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-21T00:00:00+08:00">
+                2014-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/08/21/04-编译问题/" class="leancloud_visitors" data-flag-title="04-编译问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="编译正常，但无法运行到真机和模拟器上"><a href="#编译正常，但无法运行到真机和模拟器上" class="headerlink" title="编译正常，但无法运行到真机和模拟器上"></a>编译正常，但无法运行到真机和模拟器上</h3><p>Choose a destination with a supported architecture</p>
+<p><img src="../images/04/04-1.png" alt="avatar"></p>
+<p>这样的错误解决办法</p>
+<h4 id="1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图："><a href="#1-可能你的-valid-architectures支持armv7，或者-armv7s，修改一下，如下图：" class="headerlink" title="1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图："></a>1 可能你的 valid architectures支持armv7，或者 armv7s，修改一下，如下图：</h4><p><img src="../images/04/04-2.png" alt="avatar"></p>
+<h4 id="2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"><a href="#2-检查product-name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。" class="headerlink" title="2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。"></a>2 检查product name是否和工程名一致（这里可以其实可以不一致），重点检查是否有空格或其它非法字符。</h4><h4 id="3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm"><a href="#3-compilier-for-c-c-objective-c也要看是不是选的apple-llvm" class="headerlink" title="3 compilier for c/c++/objective-c也要看是不是选的apple llvm"></a>3 compilier for c/c++/objective-c也要看是不是选的apple llvm</h4><p><img src="../images/04/04-3.png" alt="avatar"></p>
+<h4 id="4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"><a href="#4-最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了" class="headerlink" title="4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了"></a>4 最后实在不行，关闭xcode，重启设备，删除应用重新加载，应该就好了</h4>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/06/20/03-AppB中获取AppA的照片/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/06/20/03-AppB中获取AppA的照片/" itemprop="url">03-AppB中获取AppA的照片</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-20T00:00:00+08:00">
+                2014-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/06/20/03-AppB中获取AppA的照片/" class="leancloud_visitors" data-flag-title="03-AppB中获取AppA的照片">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="URLType配置"><a href="#URLType配置" class="headerlink" title="URLType配置"></a>URLType配置</h3><p>分别配置 两个应用的 URLType</p>
+<p>AppA定义URLType为AppA0000000000</p>
+<p>AppB定义URLType为AppB0000000000</p>
+<h3 id="AppB在需要获取AppA中的图片使用如下方法"><a href="#AppB在需要获取AppA中的图片使用如下方法" class="headerlink" title="AppB在需要获取AppA中的图片使用如下方法"></a>AppB在需要获取AppA中的图片使用如下方法</h3><pre><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@&quot;AppA0000000000://demo.prefix?imageName=aaa&quot;]];
+</code></pre><h3 id="AppA中"><a href="#AppA中" class="headerlink" title="AppA中"></a>AppA中</h3><p>拦截方法获取处理图片并返回给AppB</p>
+<pre><code>- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url 
+sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
+{
+    if ([[url host] isEqualToString:@&quot;demo.prefix&quot;]) {
+        NSArray *params = [[url query] componentsSeparatedByString:@&quot;&amp;&quot;];
+        for (NSString *param in params) {
+            NSArray *keyValue = [param componentsSeparatedByString:@&quot;=&quot;];
+            NSString *value = [keyValue lastObject];
+            UIImage *image = [UIImage imageNamed:value];
+            NSData *data = UIImagePNGRepresentation(image);
+            NSString *base64String = [data base64EncodedStringWithOptions:0];
+            NSURL url = [NSURL URLWithString:[NSString 
+stringWithFormat:@&quot;AppB0000000000://%@&quot;, base64String]];
+            // 将base64后的字串带给AppB
+                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        }
+    }
+    return YES;
+}
+</code></pre><h3 id="AppB中同上述AppA的方法进行拦截获取图片"><a href="#AppB中同上述AppA的方法进行拦截获取图片" class="headerlink" title="AppB中同上述AppA的方法进行拦截获取图片"></a>AppB中同上述AppA的方法进行拦截获取图片</h3>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/05/13/02-静态库制作及注意事项/" itemprop="url">02-静态库制作及注意事项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-13T00:00:00+08:00">
+                2014-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2014/05/13/02-静态库制作及注意事项/" class="leancloud_visitors" data-flag-title="02-静态库制作及注意事项">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
+<h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
+<p><img src="../images/02/02-1.jpg" alt="avatar"><br><img src="../images/02/02-2.jpg" alt="avatar"><br><img src="../images/02/02-3.jpg" alt="avatar"></p>
+<p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
+<p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
+<p><img src="../images/02/02-4.jpg" alt="avatar"></p>
+<pre><code>然后选择 静态库
+</code></pre><p><img src="../images/02/02-5.jpg" alt="avatar"></p>
+<pre><code>同时 Edit Sheme
+</code></pre><p><img src="../images/02/02-6.jpg" alt="avatar"></p>
+<pre><code>然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了
+</code></pre><p><img src="../images/02/02-7.jpg" alt="avatar"></p>
+<p>##注意事项</p>
+<p>在开发过程中，经常会碰到一些在不同工程中经常用到的部分，把这些部分抽取出来做成一个静态库往往是一个比较好的做法。xcode里就有制作静态库的模板，相关的制作步骤网上也有很多，但在实际的操作中，还是有不少细节方面需要注意。以下是我碰到的一些问题总结。</p>
+<h4 id="1-编译release版本的库"><a href="#1-编译release版本的库" class="headerlink" title="1.编译release版本的库"></a>1.编译release版本的库</h4><p>在“Manage Schemes”中，将“Build Configuration”的选项改为“Release”即可。如图：</p>
+<p><img src="../images/02/02-8.jpg" alt="avatar"></p>
+<h4 id="2-静态库中包含category"><a href="#2-静态库中包含category" class="headerlink" title="2.静态库中包含category"></a>2.静态库中包含category</h4><p>如果你在静态库工程中使用了category，那么你可能会碰到链接问题，解决的办法就是需要同时在生成静态库的工程和使用静态库的工程中使用“-all_load”编译选项，即在对应target的”Build Settings”中的“Other Linker Flags”选项添加“-all_load”。注意：使用静态库的工程中是一定要加该编译选项的！！至于生成静态库的工程中加不加没有试过，不过建议还是加上该编译选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="3-静态库支持的SDK版本"><a href="#3-静态库支持的SDK版本" class="headerlink" title="3.静态库支持的SDK版本"></a>3.静态库支持的SDK版本</h4><p>为了使自己的静态库尽可能多的支持IOS的系统版本，应该在”IOS Deployment Target”这个选项中选择自己所需的IOS版本。设置如下图，这个是我的静态库工程中的配置，红框框起来的是我修改过的选项。</p>
+<p><img src="../images/02/02-9.jpg" alt="avatar"></p>
+<h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。<br><img src="../images/02/02-10.png" alt="avatar"><br><img src="../images/02/02-11.png" alt="avatar"></p>
+<p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/04/18/01-导航栏和状态栏/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -473,7 +1515,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -481,6 +1523,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
             
 
           </nav>

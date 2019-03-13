@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjus">
+<meta name="description" content="坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjustsS">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="09-iOS7以后UITextView的那些坑">
 <meta property="og:url" content="http://yoursite.com/2015/10/13/09-iOS7以后UITextView的那些坑/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjus">
+<meta property="og:description" content="坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjustsS">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-13T01:22:38.220Z">
+<meta property="og:updated_time" content="2019-03-13T07:56:12.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="09-iOS7以后UITextView的那些坑">
-<meta name="twitter:description" content="###坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjus">
+<meta name="twitter:description" content="坑1：iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方 123456解决方案: iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。if (IOS7_And_Later) &amp;#123;        self.automaticallyAdjustsS">
 
 
 
@@ -353,10 +353,9 @@
       
 
       
-        <p>###坑1：<br>iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方</p>
+        <h3 id="坑1："><a href="#坑1：" class="headerlink" title="坑1："></a>坑1：</h3><p>iOS7及以上的版本上，UITextView出现这样的问题：弹出键盘时，没输入任何文字，但是光标位置不是在最上方</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">解决方案: </span><br><span class="line">iOS7以后新增了一个属性automaticallyAdjustsScrollViewInsets，将其置为NO即可。别忘了加版本判断。</span><br><span class="line"></span><br><span class="line">if (IOS7_And_Later) &#123;  </span><br><span class="line">      self.automaticallyAdjustsScrollViewInsets = NO;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>###坑2:</p>
-<p>iOS7及以上的版本上，UITextView输入中文时，在输入多行后，光标有时会上下跳动，输入文字的时候内容有时会往上跳，光标都显示不出来。这个bug坑死好多人啊，特别是做聊天输入框的时候，不得已找一些非正常的方法解决。从网上找的各种解决方案都不行。</p>
+<h3 id="坑2"><a href="#坑2" class="headerlink" title="坑2:"></a>坑2:</h3><p>iOS7及以上的版本上，UITextView输入中文时，在输入多行后，光标有时会上下跳动，输入文字的时候内容有时会往上跳，光标都显示不出来。这个bug坑死好多人啊，特别是做聊天输入框的时候，不得已找一些非正常的方法解决。从网上找的各种解决方案都不行。</p>
 <p>解决方案：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)textViewDidChangeSelection:(UITextView *)textView &#123;  </span><br><span class="line">    if (floor(NSFoundationVersionNumber) &gt; NSFoundationVersionNumber_iOS_6_1) &#123;  </span><br><span class="line">        CGRect r = [textView caretRectForPosition:textView.selectedTextRange.end];  </span><br><span class="line">        CGFloat caretY =  MAX(r.origin.y - textView.frame.size.height + r.size.height + 8, 0);  </span><br><span class="line">        if (textView.contentOffset.y &lt; caretY &amp;&amp; r.origin.y != INFINITY) &#123;  </span><br><span class="line">            textView.contentOffset = CGPointMake(0, caretY);  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -452,8 +451,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -513,6 +521,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#坑1："><span class="nav-number">1.</span> <span class="nav-text">坑1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坑2"><span class="nav-number">2.</span> <span class="nav-text">坑2:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

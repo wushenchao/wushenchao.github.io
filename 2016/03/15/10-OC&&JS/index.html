@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="###OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据">
+<meta name="description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="10-OC&amp;&amp;JS交互">
 <meta property="og:url" content="http://yoursite.com/2016/03/15/10-OC&&JS/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="###OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据">
+<meta property="og:description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2016/03/15/images/09/09-1.png">
-<meta property="og:image" content="http://yoursite.com/2016/03/15/images/09/09-2.png">
-<meta property="og:image" content="http://yoursite.com/2016/03/15/images/09/09-3.png">
-<meta property="og:updated_time" content="2019-03-13T01:23:19.257Z">
+<meta property="og:image" content="http://yoursite.com/images/09/09-1.png">
+<meta property="og:image" content="http://yoursite.com/images/09/09-2.png">
+<meta property="og:image" content="http://yoursite.com/images/09/09-3.png">
+<meta property="og:updated_time" content="2019-03-13T07:58:33.232Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="10-OC&amp;&amp;JS交互">
-<meta name="twitter:description" content="###OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据">
-<meta name="twitter:image" content="http://yoursite.com/2016/03/15/images/09/09-1.png">
+<meta name="twitter:description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
+<meta name="twitter:image" content="http://yoursite.com/images/09/09-1.png">
 
 
 
@@ -357,7 +357,7 @@
       
 
       
-        <p>###OC &amp;&amp; JS交互第三方框架:<br><a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">WebViewJavascriptBridge</a></p>
+        <h3 id="OC-amp-amp-JS交互第三方框架"><a href="#OC-amp-amp-JS交互第三方框架" class="headerlink" title="OC &amp;&amp; JS交互第三方框架:"></a>OC &amp;&amp; JS交互第三方框架:</h3><p><a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">WebViewJavascriptBridge</a></p>
 <h3 id="JavaScriptCore的使用（iOS7后引用）"><a href="#JavaScriptCore的使用（iOS7后引用）" class="headerlink" title="JavaScriptCore的使用（iOS7后引用）"></a>JavaScriptCore的使用（iOS7后引用）</h3><p>JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码</p>
 <p>JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等</p>
 <p>JSManagedValue：管理数据和方法的类</p>
@@ -374,8 +374,56 @@
 <blockquote>
 <p>JSValue是JSContext执行后的返回结果,封装了JS与OC中的对应的类型,可以方便的在两种类型之间转换,可以说是JS和OC之间互换的桥梁</p>
 </blockquote>
-<pre><code>Objective-C type  |   JavaScript type
-</code></pre><p>   ——————–+———————<br>           nil         |     undefined<br>          NSNull       |        null<br>         NSString      |       string<br>         NSNumber      |   number, boolean<br>       NSDictionary    |   Object object<br>         NSArray       |    Array object<br>          NSDate       |     Date object<br>         NSBlock (1)   |   Function object (1)<br>            id (2)     |   Wrapper object (2)<br>          Class (3)    | Constructor object (3)</p>
+<table>
+<thead>
+<tr>
+<th>Objective-C type</th>
+<th>JavaScript type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nil</td>
+<td>undefined</td>
+</tr>
+<tr>
+<td>NSNull</td>
+<td>null</td>
+</tr>
+<tr>
+<td>NSString</td>
+<td>string</td>
+</tr>
+<tr>
+<td>NSNumber</td>
+<td>number, boolean</td>
+</tr>
+<tr>
+<td>NSDictionary</td>
+<td>Object object</td>
+</tr>
+<tr>
+<td>NSArray</td>
+<td>Array object</td>
+</tr>
+<tr>
+<td>NSDate</td>
+<td>Date object</td>
+</tr>
+<tr>
+<td>NSBlock (1)</td>
+<td>Function object (1)</td>
+</tr>
+<tr>
+<td>id (2)</td>
+<td>Wrapper object (2)</td>
+</tr>
+<tr>
+<td>Class (3)</td>
+<td>Constructor object (3)</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>JSVirtualMachine : “A JSVirtualMachine instance represents a self-contained environment for JavaScript execution.”，这段话是官方文档中对JSVirtualMachine的定义，我们使用JSVirtualMachine的目的主要有两个：支持JS并发执行，管理用于衔接JS 与 OC 代码的对象的内存。</p>
 </blockquote>
@@ -459,10 +507,8 @@ context[@&quot;native&quot;] = object;
 object.noParameterBlock = ^(){
     NSLog(@&quot;webview testNoParameter&quot;);
 };
-</code></pre><p>####OC代码见下图:</p>
-<p><img src="../images/09/09-1.png" alt="avatar">        </p>
-<p>####JS代码见下图</p>
-<p><img src="../images/09/09-2.png" alt="avatar"><br><img src="../images/09/09-3.png" alt="avatar">        </p>
+</code></pre><h4 id="OC代码见下图"><a href="#OC代码见下图" class="headerlink" title="OC代码见下图:"></a>OC代码见下图:</h4><p><img src="../../../../images/09/09-1.png" alt="avatar">        </p>
+<h4 id="JS代码见下图"><a href="#JS代码见下图" class="headerlink" title="JS代码见下图"></a>JS代码见下图</h4><p><img src="../../../../images/09/09-2.png" alt="avatar"><br><img src="../../../../images/09/09-3.png" alt="avatar">        </p>
 
       
     </div>
@@ -637,7 +683,7 @@ object.noParameterBlock = ^(){
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScriptCore的使用（iOS7后引用）"><span class="nav-number">1.</span> <span class="nav-text">JavaScriptCore的使用（iOS7后引用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC-amp-amp-JS交互"><span class="nav-number">2.</span> <span class="nav-text">OC &amp;&amp; JS交互</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OC调用JS"><span class="nav-number"></span> <span class="nav-text">1. OC调用JS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script"><span class="nav-number">0.1.</span> <span class="nav-text">使用- (NSString )stringByEvaluatingJavaScriptFromString:(NSString )script;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JSContext"><span class="nav-number">0.2.</span> <span class="nav-text">使用JSContext</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JS调用OC"><span class="nav-number"></span> <span class="nav-text">2. JS调用OC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS直接调用OC"><span class="nav-number">0.1.</span> <span class="nav-text">JS直接调用OC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS通过对象调用OC"><span class="nav-number">0.2.</span> <span class="nav-text">JS通过对象调用OC</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OC-amp-amp-JS交互第三方框架"><span class="nav-number">1.</span> <span class="nav-text">OC &amp;&amp; JS交互第三方框架:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScriptCore的使用（iOS7后引用）"><span class="nav-number">2.</span> <span class="nav-text">JavaScriptCore的使用（iOS7后引用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC-amp-amp-JS交互"><span class="nav-number">3.</span> <span class="nav-text">OC &amp;&amp; JS交互</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OC调用JS"><span class="nav-number"></span> <span class="nav-text">1. OC调用JS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script"><span class="nav-number">0.1.</span> <span class="nav-text">使用- (NSString )stringByEvaluatingJavaScriptFromString:(NSString )script;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JSContext"><span class="nav-number">0.2.</span> <span class="nav-text">使用JSContext</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JS调用OC"><span class="nav-number"></span> <span class="nav-text">2. JS调用OC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS直接调用OC"><span class="nav-number">0.1.</span> <span class="nav-text">JS直接调用OC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS通过对象调用OC"><span class="nav-number">0.2.</span> <span class="nav-text">JS通过对象调用OC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OC代码见下图"><span class="nav-number">0.3.</span> <span class="nav-text">OC代码见下图:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS代码见下图"><span class="nav-number">0.4.</span> <span class="nav-text">JS代码见下图</span></a></li></ol></li></div>
             
 
           </div>

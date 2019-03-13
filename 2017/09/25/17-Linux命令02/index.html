@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="不知是哪个号">
 <meta property="og:description" content="一.进程管理1.创建进程：有两种方式来创建进程，前台进程和后台进程。12前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp;amp; 如 $ls *.txt &amp;amp;">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-13T01:29:57.320Z">
+<meta property="og:updated_time" content="2019-03-13T08:04:55.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="17-Linux命令2">
 <meta name="twitter:description" content="一.进程管理1.创建进程：有两种方式来创建进程，前台进程和后台进程。12前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp;amp; 如 $ls *.txt &amp;amp;">
@@ -355,7 +355,7 @@
       
         <h3 id="一-进程管理"><a href="#一-进程管理" class="headerlink" title="一.进程管理"></a>一.进程管理</h3><h4 id="1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><a href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。" class="headerlink" title="1.创建进程：有两种方式来创建进程，前台进程和后台进程。"></a>1.创建进程：有两种方式来创建进程，前台进程和后台进程。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt</span><br><span class="line">后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp; 如 $ls *.txt &amp;</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>####2.查看正在运行的进程<br>可以使用 ps  或者 ps －f 来查看正在运行的进程<br>其他如:</p>
+<h4 id="2-查看正在运行的进程"><a href="#2-查看正在运行的进程" class="headerlink" title="2.查看正在运行的进程"></a>2.查看正在运行的进程</h4><p>可以使用 ps  或者 ps －f 来查看正在运行的进程<br>其他如:</p>
 <table>
 <thead>
 <tr>
@@ -424,7 +424,7 @@
 </tr>
 </tbody>
 </table>
-<p>####3.终止进程<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">当进程运行在前台时，可以通过 kill 命令或 Ctrl+C 组合键来结束进程。</span><br><span class="line">如果进程忽略kill命令 可以使用 kill－9 pid</span><br><span class="line"></span><br><span class="line">孤儿进程：正常情况下，子进程在被终止时会通过sigchld信号通知父进程，父进程会做一些清理工作或重启一个新的进程。在一些特殊情况下，父进程在子进程终止前被终止，那么这些子进程被称为孤儿进程。</span><br><span class="line"></span><br><span class="line">僵尸进程：如果一个进程被终止了，但使用ps命令可以查看该进程，并且状态为z，那么这就是一个僵尸进程。</span><br><span class="line"></span><br><span class="line">常驻进程：常驻进程一般时系统级进程，以root权限在后台，可以处理其他进程的请求。</span><br><span class="line">常驻进程没有终端.</span><br><span class="line"></span><br><span class="line">top命令：它可以动态显示正在运行的进程，还可以按条件对进程进行排序。</span><br></pre></td></tr></table></figure></p>
+<h4 id="3-终止进程"><a href="#3-终止进程" class="headerlink" title="3.终止进程"></a>3.终止进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">当进程运行在前台时，可以通过 kill 命令或 Ctrl+C 组合键来结束进程。</span><br><span class="line">如果进程忽略kill命令 可以使用 kill－9 pid</span><br><span class="line"></span><br><span class="line">孤儿进程：正常情况下，子进程在被终止时会通过sigchld信号通知父进程，父进程会做一些清理工作或重启一个新的进程。在一些特殊情况下，父进程在子进程终止前被终止，那么这些子进程被称为孤儿进程。</span><br><span class="line"></span><br><span class="line">僵尸进程：如果一个进程被终止了，但使用ps命令可以查看该进程，并且状态为z，那么这就是一个僵尸进程。</span><br><span class="line"></span><br><span class="line">常驻进程：常驻进程一般时系统级进程，以root权限在后台，可以处理其他进程的请求。</span><br><span class="line">常驻进程没有终端.</span><br><span class="line"></span><br><span class="line">top命令：它可以动态显示正在运行的进程，还可以按条件对进程进行排序。</span><br></pre></td></tr></table></figure>
 <h4 id="4-任务和进程"><a href="#4-任务和进程" class="headerlink" title="4.任务和进程"></a>4.任务和进程</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">任务：任务是抽象的，是一个一般性的术语，指由软件完成的一个活动。一个任务即可以是一个进程，也可以是多个进程。简而言之，它是指一系列共同达到莫一目的的操作。</span><br><span class="line"></span><br><span class="line">进程：常常被定义为程序的执行。可以把一个进程看成是一个独立的进程，在内存中有其完备的数据空间和代码空间。一个进程所拥有的数据和变量只属于它自己。</span><br><span class="line"></span><br><span class="line">jobs －l 命令可以查看当前任务包含的进程id</span><br></pre></td></tr></table></figure>
 <h4 id="5前台任务和后台任务的切换"><a href="#5前台任务和后台任务的切换" class="headerlink" title="5前台任务和后台任务的切换"></a>5前台任务和后台任务的切换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fg命令可以将后台任务调节到前台。语法：$fg %jobnumber</span><br><span class="line"></span><br><span class="line">bg命令可以将前台任务调节到后台。语法：$bg %jobnumber</span><br><span class="line"></span><br><span class="line">jobnumber 是通过 jobs 命令获取的后台任务的的序号，注意不是pid。如果只有一个任务，可以不指定 jobnumber。</span><br><span class="line"></span><br><span class="line">如果希望将当前任务转移到后台，可以先 Ctrl+z 暂停任务，再使用 bg 命令。任务转移到后台可以空出终端，继续输入其他命令。</span><br></pre></td></tr></table></figure>
 <h3 id="二-网络通信工具"><a href="#二-网络通信工具" class="headerlink" title="二.网络通信工具"></a>二.网络通信工具</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">ping命令 向网络主机发送应答请求，根据响应判断远程主机是否可用。</span><br><span class="line">语法：$ping hostname or ip－address</span><br><span class="line"></span><br><span class="line">telnet工具</span><br><span class="line">Telnet 工具可以让我们连接并登录到远程计算机。</span><br><span class="line"></span><br><span class="line">finger工具</span><br><span class="line">finger 可以让我们查看本地主机或远程主机上的用户信息。有些系统为了安全会禁用 finger 命令。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ftp工具</span><br><span class="line">ftp 是 File Transfer Protocol 的缩写，称为文件传输协议。通过 ftp 工具，能够将文件上传到远程服务器，也可以从远程服务器下载文件。</span><br><span class="line"></span><br><span class="line">ftp 工具有自己的命令（类似Linux命令），可以：</span><br><span class="line">1.连接并登录远程主机；</span><br><span class="line">2.查看目录，遍历目录下的文件；</span><br><span class="line">3.上传或下载文件，包括文本文件、二进制文件等。</span><br><span class="line"></span><br><span class="line">ftp的语法：ftp hostname or ip－address</span><br></pre></td></tr></table></figure>
@@ -478,9 +478,7 @@
 </tr>
 </tbody>
 </table>
-<p>###三.VI编辑器</p>
-<p>####1.进入vi编辑器</p>
-<table>
+<h3 id="三-VI编辑器"><a href="#三-VI编辑器" class="headerlink" title="三.VI编辑器"></a>三.VI编辑器</h3><h4 id="1-进入vi编辑器"><a href="#1-进入vi编辑器" class="headerlink" title="1.进入vi编辑器"></a>1.进入vi编辑器</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -502,10 +500,8 @@
 </tr>
 </tbody>
 </table>
-<p>####2.工作模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.普通模式</span><br><span class="line">由shell进入vi编辑器时，首先进入普通模式，在普通模式下，从键盘输入任何字符都被当作命令来解释。普通模式下没有任何提示符，输入命令后立即执行，不需要回车，而且输入字符在屏幕上不显示。</span><br><span class="line"></span><br><span class="line">普通模式下可以执行命令，保存文件，移动光标，粘贴复制。</span><br><span class="line"></span><br><span class="line">2.编辑模式</span><br><span class="line">编辑模式主要用于文本编辑，该模式下用户输入的任何字符都被当作文件的内容保存起来，并在屏幕上显示出来。</span><br><span class="line"></span><br><span class="line">3.命令模式</span><br><span class="line">命令模式下，用户可以对文件进行一些高级的处理，如执行一些字符串的查找，替换和显示符号等操作必须进入命令模式。</span><br><span class="line"></span><br><span class="line">工作模式切换：</span><br><span class="line">在普通模式下输入 i(插入)、c(修改)、o(另起一行) 命令时进入编辑模式；按 esc 键退回到普通模式。</span><br><span class="line">在普通模式下输入冒号(:)可以进入命令模式。输入完命令按回车，命令执行完后会自动退回普通模式。s</span><br></pre></td></tr></table></figure>
-<p>####3.退出vi编辑器</p>
-<table>
+<h4 id="2-工作模式"><a href="#2-工作模式" class="headerlink" title="2.工作模式"></a>2.工作模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1.普通模式</span><br><span class="line">由shell进入vi编辑器时，首先进入普通模式，在普通模式下，从键盘输入任何字符都被当作命令来解释。普通模式下没有任何提示符，输入命令后立即执行，不需要回车，而且输入字符在屏幕上不显示。</span><br><span class="line"></span><br><span class="line">普通模式下可以执行命令，保存文件，移动光标，粘贴复制。</span><br><span class="line"></span><br><span class="line">2.编辑模式</span><br><span class="line">编辑模式主要用于文本编辑，该模式下用户输入的任何字符都被当作文件的内容保存起来，并在屏幕上显示出来。</span><br><span class="line"></span><br><span class="line">3.命令模式</span><br><span class="line">命令模式下，用户可以对文件进行一些高级的处理，如执行一些字符串的查找，替换和显示符号等操作必须进入命令模式。</span><br><span class="line"></span><br><span class="line">工作模式切换：</span><br><span class="line">在普通模式下输入 i(插入)、c(修改)、o(另起一行) 命令时进入编辑模式；按 esc 键退回到普通模式。</span><br><span class="line">在普通模式下输入冒号(:)可以进入命令模式。输入完命令按回车，命令执行完后会自动退回普通模式。s</span><br></pre></td></tr></table></figure>
+<h4 id="3-退出vi编辑器"><a href="#3-退出vi编辑器" class="headerlink" title="3.退出vi编辑器"></a>3.退出vi编辑器</h4><table>
 <thead>
 <tr>
 <th>退出命令</th>
@@ -532,8 +528,7 @@
 </tbody>
 </table>
 <p><strong><em>注意:</em></strong>  zz使用shift＋zz方式 其他使用shift+: 命令 +回车</p>
-<p>####4.控制命令</p>
-<table>
+<h4 id="4-控制命令"><a href="#4-控制命令" class="headerlink" title="4.控制命令"></a>4.控制命令</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -571,7 +566,7 @@
 </tr>
 </tbody>
 </table>
-<p>####5.编辑文件<br>切换到编辑模式下才能编辑文件，从普通模式切换到编辑模式的命令如下</p>
+<h4 id="5-编辑文件"><a href="#5-编辑文件" class="headerlink" title="5.编辑文件"></a>5.编辑文件</h4><p>切换到编辑模式下才能编辑文件，从普通模式切换到编辑模式的命令如下</p>
 <table>
 <thead>
 <tr>
@@ -622,8 +617,7 @@
 </tr>
 </tbody>
 </table>
-<p>####6.删除字符或行</p>
-<table>
+<h4 id="6-删除字符或行"><a href="#6-删除字符或行" class="headerlink" title="6.删除字符或行"></a>6.删除字符或行</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -662,8 +656,7 @@
 </tbody>
 </table>
 <p>可以在命令前面添加一个数字前缀，表示重复操作的次数，例如，2x  表示连续两次删除光标下的字符，2dd 表示连续两次删除光标所在的行。</p>
-<p>####7.修改文本</p>
-<table>
+<h4 id="7-修改文本"><a href="#7-修改文本" class="headerlink" title="7.修改文本"></a>7.修改文本</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -697,8 +690,7 @@
 </tr>
 </tbody>
 </table>
-<p>####8.粘贴复制</p>
-<table>
+<h4 id="8-粘贴复制"><a href="#8-粘贴复制" class="headerlink" title="8.粘贴复制"></a>8.粘贴复制</h4><table>
 <thead>
 <tr>
 <th>命令</th>
@@ -733,9 +725,10 @@
 </tbody>
 </table>
 <p>文本替换</p>
-<p>切换到命令模式，再输入 s/ 命令即可对文本进行替换。语法为：<br>:s/search/replace/g<br>search 为检索的文本，replace 为要替换的文本，g 表示全局替换</p>
-<p>几点提示</p>
-<p>vi 编辑器的使用讲解完毕，但是请记住下面几点：<br>输入冒号(:)进入命令模式，按两次 Esc 键进入普通模式。<br>命令大小写的含义是不一样的。<br>必须在编辑模式下才能输入内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">切换到命令模式，再输入 s/ 命令即可对文本进行替换。语法为：</span><br><span class="line">:s/search/replace/g</span><br><span class="line">search 为检索的文本，replace 为要替换的文本，g 表示全局替换</span><br></pre></td></tr></table></figure>
+<p><strong><em>几点提示</em></strong></p>
+<p>vi 编辑器的使用讲解完毕，但是请记住下面几点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.输入冒号(:)进入命令模式，按两次 Esc 键进入普通模式。</span><br><span class="line"></span><br><span class="line">2.命令大小写的含义是不一样的。</span><br><span class="line"></span><br><span class="line">3.必须在编辑模式下才能输入内容。</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -906,7 +899,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-进程管理"><span class="nav-number">1.</span> <span class="nav-text">一.进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建进程：有两种方式来创建进程，前台进程和后台进程。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-任务和进程"><span class="nav-number">1.2.</span> <span class="nav-text">4.任务和进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5前台任务和后台任务的切换"><span class="nav-number">1.3.</span> <span class="nav-text">5前台任务和后台任务的切换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-网络通信工具"><span class="nav-number">2.</span> <span class="nav-text">二.网络通信工具</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一-进程管理"><span class="nav-number">1.</span> <span class="nav-text">一.进程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建进程：有两种方式来创建进程，前台进程和后台进程。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查看正在运行的进程"><span class="nav-number">1.2.</span> <span class="nav-text">2.查看正在运行的进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-终止进程"><span class="nav-number">1.3.</span> <span class="nav-text">3.终止进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-任务和进程"><span class="nav-number">1.4.</span> <span class="nav-text">4.任务和进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5前台任务和后台任务的切换"><span class="nav-number">1.5.</span> <span class="nav-text">5前台任务和后台任务的切换</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-网络通信工具"><span class="nav-number">2.</span> <span class="nav-text">二.网络通信工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三-VI编辑器"><span class="nav-number">3.</span> <span class="nav-text">三.VI编辑器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进入vi编辑器"><span class="nav-number">3.1.</span> <span class="nav-text">1.进入vi编辑器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-工作模式"><span class="nav-number">3.2.</span> <span class="nav-text">2.工作模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-退出vi编辑器"><span class="nav-number">3.3.</span> <span class="nav-text">3.退出vi编辑器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-控制命令"><span class="nav-number">3.4.</span> <span class="nav-text">4.控制命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-编辑文件"><span class="nav-number">3.5.</span> <span class="nav-text">5.编辑文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-删除字符或行"><span class="nav-number">3.6.</span> <span class="nav-text">6.删除字符或行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-修改文本"><span class="nav-number">3.7.</span> <span class="nav-text">7.修改文本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-粘贴复制"><span class="nav-number">3.8.</span> <span class="nav-text">8.粘贴复制</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -87,15 +87,15 @@
 <meta property="og:site_name" content="不知是哪个号">
 <meta property="og:description" content="在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章： http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project 这里主要">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-1.png">
-<meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-2.png">
-<meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-3.png">
-<meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-4.png">
-<meta property="og:updated_time" content="2019-03-13T01:18:18.639Z">
+<meta property="og:image" content="http://yoursite.com/images/05/05-1.png">
+<meta property="og:image" content="http://yoursite.com/images/05/05-2.png">
+<meta property="og:image" content="http://yoursite.com/images/05/05-3.png">
+<meta property="og:image" content="http://yoursite.com/images/05/05-4.png">
+<meta property="og:updated_time" content="2019-03-13T07:55:15.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="05-xml解析">
 <meta name="twitter:description" content="在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章： http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project 这里主要">
-<meta name="twitter:image" content="http://yoursite.com/2014/10/23/images/05/05-1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/05/05-1.png">
 
 
 
@@ -364,13 +364,13 @@
 <p><a href="http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/" target="_blank" rel="noopener">http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/</a></p>
 <p>下载源码，下载下来后进入文件夹找到XMLSupport文件夹，将里面的GDataXMLNode.h和GDataXMLNode.m文件拖拽到项目中新建的文件夹即可（我这里是建的GDataXML文件夹），注意要选中复制文件到项目中而不是只是引用，如图：</p>
 <a id="more"></a>
-<p><img src="../images/05/05-1.png" alt="avatar"></p>
+<p><img src="../../../../images/05/05-1.png" alt="avatar"></p>
 <p>然后就是对工程进行一些配置，点击工程根目录然后点击左边的Target，进入Build Phases，然后点击第三个Link binary with libraries，点击加号搜索libxml2并将这个库添加到工程，如图：</p>
-<p><img src="../images/05/05-2.png" alt="avatar"></p>
+<p><img src="../../../../images/05/05-2.png" alt="avatar"></p>
 <p>接下来再进入Build Settings，在搜索框中搜索Head Search Path，然后双击并点击+按钮添加/usr/include/libxml2,如图：</p>
-<p><img src="../images/05/05-3.png" alt="avatar"></p>
+<p><img src="../../../../images/05/05-3.png" alt="avatar"></p>
 <p>接下来再搜索框中搜索Other linker flags，同样的方式添加-lxml2，如图：</p>
-<p><img src="../images/05/05-4.png" alt="avatar"></p>
+<p><img src="../../../../images/05/05-4.png" alt="avatar"></p>
 <p>到这里，添加和配置的工作就完成了（是有点麻烦），接下来就看如何使用了：<br>首先在工程中新建一个xml文件，作为我们要解析的对象，新建方法是在工程中新建一个Empty的文件，命名为users.xml，然后添加内容：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  </span><br><span class="line">2. &lt;Users]] &gt;   </span><br><span class="line">3.     &lt;User id=&quot;001&quot;]]]] &gt;   </span><br><span class="line">4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   </span><br><span class="line">5.         &lt;age]] &gt; 24&lt;/age]] &gt;   </span><br><span class="line">6.     &lt;/User]] &gt;   </span><br><span class="line">7.     &lt;User id=&quot;002&quot;]]]] &gt;   </span><br><span class="line">8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   </span><br><span class="line">9.         &lt;age]] &gt; 23&lt;/age]] &gt;   </span><br><span class="line">10.     &lt;/User]] &gt;   </span><br><span class="line">11. &lt;/Users]] &gt;</span><br></pre></td></tr></table></figure>
 <p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>

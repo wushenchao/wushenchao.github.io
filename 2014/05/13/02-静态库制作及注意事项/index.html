@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary    此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自">
+<meta name="description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="02-静态库制作及注意事项">
 <meta property="og:url" content="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary    此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自">
+<meta property="og:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-1.jpg">
 <meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-2.jpg">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-9.jpg">
 <meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-10.png">
 <meta property="og:image" content="http://yoursite.com/2014/05/13/images/02/02-11.png">
-<meta property="og:updated_time" content="2019-03-12T10:53:16.859Z">
+<meta property="og:updated_time" content="2019-03-13T01:08:22.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="02-静态库制作及注意事项">
-<meta name="twitter:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary    此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。 然后就是开始打包自">
+<meta name="twitter:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta name="twitter:image" content="http://yoursite.com/2014/05/13/images/02/02-1.jpg">
 
 
@@ -368,18 +368,19 @@
       
         <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
+<a id="more"></a>
 <p><img src="../images/02/02-1.jpg" alt="avatar"></p>
 <p><img src="../images/02/02-2.jpg" alt="avatar"></p>
 <p><img src="../images/02/02-3.jpg" alt="avatar"></p>
 <p>此处可以看到，新建的Target 里面同时具有 mylibrary.h mylibrary.m 这个没有用，可以直接删除。</p>
 <p>然后就是开始打包自己的静态库了，把你需要打成静态库.h  .m 文件复制一份，放好，然后把你工程里的那一份.h .m 删除，然后把你刚才复制的那一份拖进工程，选择Targets 里面的工程名和静态库名称。即两个对号都打上。然后添加上。下图是创建新的.h .m的操作，等同于直接add操作。</p>
 <p><img src="../images/02/02-4.jpg" alt="avatar"></p>
-<pre><code>然后选择 静态库
-</code></pre><p><img src="../images/02/02-5.jpg" alt="avatar"></p>
-<pre><code>同时 Edit Sheme
-</code></pre><p><img src="../images/02/02-6.jpg" alt="avatar"></p>
-<pre><code>然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了
-</code></pre><p><img src="../images/02/02-7.jpg" alt="avatar"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后选择 静态库</span><br></pre></td></tr></table></figure>
+<p><img src="../images/02/02-5.jpg" alt="avatar"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同时 Edit Sheme</span><br></pre></td></tr></table></figure>
+<p><img src="../images/02/02-6.jpg" alt="avatar"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后  Run 就可以看到 原来的红色的显示，变成了正常的，此时表明一个静态库已经打出来了</span><br></pre></td></tr></table></figure>
+<p><img src="../images/02/02-7.jpg" alt="avatar"></p>
 <p>##注意事项</p>
 <p>在开发过程中，经常会碰到一些在不同工程中经常用到的部分，把这些部分抽取出来做成一个静态库往往是一个比较好的做法。xcode里就有制作静态库的模板，相关的制作步骤网上也有很多，但在实际的操作中，还是有不少细节方面需要注意。以下是我碰到的一些问题总结。</p>
 <h4 id="1-编译release版本的库"><a href="#1-编译release版本的库" class="headerlink" title="1.编译release版本的库"></a>1.编译release版本的库</h4><p>在“Manage Schemes”中，将“Build Configuration”的选项改为“Release”即可。如图：</p>
@@ -522,7 +523,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -533,7 +534,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

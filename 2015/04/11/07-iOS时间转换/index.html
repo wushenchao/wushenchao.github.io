@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -80,13 +80,14 @@
 
 
 <meta name="description" content="https://blog.csdn.net/Chao_Mu/article/details/44996573 字符说明 (:) 时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。 (/) 日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="07-iOS时间转换">
 <meta property="og:url" content="http://yoursite.com/2015/04/11/07-iOS时间转换/index.html">
 <meta property="og:site_name" content="不知是哪个号">
 <meta property="og:description" content="https://blog.csdn.net/Chao_Mu/article/details/44996573 字符说明 (:) 时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。 (/) 日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-12T10:19:13.035Z">
+<meta property="og:updated_time" content="2019-03-13T01:21:15.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="07-iOS时间转换">
 <meta name="twitter:description" content="https://blog.csdn.net/Chao_Mu/article/details/44996573 字符说明 (:) 时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。 (/) 日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期">
@@ -292,6 +293,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -336,6 +359,7 @@
 <p>时间分隔符。在某些区域设置中，可以使用其他字符表示时间分隔符。时间分隔符在格式化时间值时分隔小时、分钟和秒。格式化输出中用作时间分隔符的实际字符由您的应用程序的当前区域性值确定。</p>
 <p>(/)</p>
 <p>日期分隔符。在某些区域设置中，可以使用其他字符表示日期分隔符。日期分隔符在格式化日期值时分隔日、月和年。格式化输出中用作日期分隔符的实际字符由您的应用程序的当前区域性确定。</p>
+<a id="more"></a>
 <p>(%)</p>
 <p>用于表明不论尾随什么字母，随后字符都应该以单字母格式读取。也用于表明单字母格式应以用户定义格式读取。有关更多详细信息，请参见下面的内容。</p>
 <p>gg</p>
@@ -393,8 +417,8 @@
 <p>显示带前导零的时区偏移量（例如 -08）</p>
 <p>zzz</p>
 <p>显示完整的时区偏移量（例如 -08:00）</p>
-<p>例如：<br>Tue Apr 07 03:17:04 PDT 2015<br>@”EEE MMM dd KK:mm:ss zz yyyy”</p>
-<p>2015-03-21 11:12:14<br>@”yy-MM-dd HH:mm:ss”</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Tue Apr 07 03:17:04 PDT 2015</span><br><span class="line">@&quot;EEE MMM dd KK:mm:ss zz yyyy&quot;</span><br><span class="line"></span><br><span class="line">2015-03-21 11:12:14</span><br><span class="line">@&quot;yy-MM-dd HH:mm:ss&quot;</span><br></pre></td></tr></table></figure>
 <p>NSDate与NSString互相转换：</p>
 <p>(1)</p>
 <pre><code> - (NSString *)dateToString:(NSDate *＊)date dateFormatter:(NSString *)dateFormatter
@@ -427,6 +451,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
@@ -528,7 +558,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -539,7 +569,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

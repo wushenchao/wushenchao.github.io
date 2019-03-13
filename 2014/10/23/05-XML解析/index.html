@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章： http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project 这里主要">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="05-xml解析">
 <meta property="og:url" content="http://yoursite.com/2014/10/23/05-XML解析/index.html">
@@ -90,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-2.png">
 <meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-3.png">
 <meta property="og:image" content="http://yoursite.com/2014/10/23/images/05/05-4.png">
-<meta property="og:updated_time" content="2019-03-12T07:03:34.165Z">
+<meta property="og:updated_time" content="2019-03-13T01:18:18.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="05-xml解析">
 <meta name="twitter:description" content="在IOS平台上进行XML文档的解析有很多种方法，在SDK里面有自带的解析方法，但是大多情况下都倾向于用第三方的库，原因是解析效率更高、使用上更方便，关于IOS平台各种解析XML库的优缺点分析，可以看下这篇文章： http://www.raywenderlich.com/553/how-to-chose-the-best-xml-parser-for-your-iphone-project 这里主要">
@@ -297,6 +298,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -340,6 +363,7 @@
 <p>这里主要介绍一下由Google提供的一种在IOS平台上进行XML解析的开源库GDataXML，可以到</p>
 <p><a href="http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/" target="_blank" rel="noopener">http://code.google.com/p/gdata-objectivec-client/source/browse/trunk/Source/XMLSupport/</a></p>
 <p>下载源码，下载下来后进入文件夹找到XMLSupport文件夹，将里面的GDataXMLNode.h和GDataXMLNode.m文件拖拽到项目中新建的文件夹即可（我这里是建的GDataXML文件夹），注意要选中复制文件到项目中而不是只是引用，如图：</p>
+<a id="more"></a>
 <p><img src="../images/05/05-1.png" alt="avatar"></p>
 <p>然后就是对工程进行一些配置，点击工程根目录然后点击左边的Target，进入Build Phases，然后点击第三个Link binary with libraries，点击加号搜索libxml2并将这个库添加到工程，如图：</p>
 <p><img src="../images/05/05-2.png" alt="avatar"></p>
@@ -348,50 +372,9 @@
 <p>接下来再搜索框中搜索Other linker flags，同样的方式添加-lxml2，如图：</p>
 <p><img src="../images/05/05-4.png" alt="avatar"></p>
 <p>到这里，添加和配置的工作就完成了（是有点麻烦），接下来就看如何使用了：<br>首先在工程中新建一个xml文件，作为我们要解析的对象，新建方法是在工程中新建一个Empty的文件，命名为users.xml，然后添加内容：</p>
-<pre><code>1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  
-2. &lt;Users]] &gt;   
-3.     &lt;User id=&quot;001&quot;]]]] &gt;   
-4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   
-5.         &lt;age]] &gt; 24&lt;/age]] &gt;   
-6.     &lt;/User]] &gt;   
-7.     &lt;User id=&quot;002&quot;]]]] &gt;   
-8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   
-9.         &lt;age]] &gt; 23&lt;/age]] &gt;   
-10.     &lt;/User]] &gt;   
-11. &lt;/Users]] &gt;   
-</code></pre><p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>
-<pre><code>7. - (void)xmlParse {       
-8.     //获取工程目录的xml文件  
-9.     NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;users&quot; ofType:@&quot;xml&quot;];  
-10.     NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];  
-11.       
-12.     //使用NSData对象初始化  
-13.     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData  options:0error:nil];  
-14.       
-15.     //获取根节点（Users）  
-16.     GDataXMLElement *rootElement = [doc rootElement];  
-17.       
-18.     //获取根节点下的节点（User）  
-19.     NSArray *users = [rootElement elementsForName:@&quot;User&quot;];  
-20.       
-21.     for (GDataXMLElement *user in users) {  
-22.         //User节点的id属性  
-23.         NSString *userId = [[user attributeForName:@&quot;id&quot;] stringValue];  
-24.         NSLog(@&quot;User id is:%@&quot;,userId);  
-25.           
-26.         //获取name节点的值  
-27.         GDataXMLElement *nameElement = [[user elementsForName:@&quot;name&quot;] objectAtIndex:0];  
-28.         NSString *name = [nameElement stringValue];  
-29.         NSLog(@&quot;User name is:%@&quot;,name);  
-30.           
-31.         //获取age节点的值  
-32.         GDataXMLElement *ageElement = [[user elementsForName:@&quot;age&quot;] objectAtIndex:0];  
-33.         NSString *age = [ageElement stringValue];  
-34.         NSLog(@&quot;User age is:%@&quot;,age);  
-35.     }
-36.  }      
-37.           
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;  </span><br><span class="line">2. &lt;Users]] &gt;   </span><br><span class="line">3.     &lt;User id=&quot;001&quot;]]]] &gt;   </span><br><span class="line">4.         &lt;name]] &gt; Ryan&lt;/name]] &gt;   </span><br><span class="line">5.         &lt;age]] &gt; 24&lt;/age]] &gt;   </span><br><span class="line">6.     &lt;/User]] &gt;   </span><br><span class="line">7.     &lt;User id=&quot;002&quot;]]]] &gt;   </span><br><span class="line">8.         &lt;name]] &gt; Tang&lt;/name]] &gt;   </span><br><span class="line">9.         &lt;age]] &gt; 23&lt;/age]] &gt;   </span><br><span class="line">10.     &lt;/User]] &gt;   </span><br><span class="line">11. &lt;/Users]] &gt;</span><br></pre></td></tr></table></figure>
+<p>接下来就可以开始解析了，在需要解析的文件中引入头文件：#import”GDataXMLNode.h”<br>我是新建的一个Empty工程，所以直接在AppDelegate.m中使用，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">7. - (void)xmlParse &#123;       </span><br><span class="line">8.     //获取工程目录的xml文件  </span><br><span class="line">9.     NSString *filePath = [[NSBundle mainBundle] pathForResource:@&quot;users&quot; ofType:@&quot;xml&quot;];  </span><br><span class="line">10.     NSData *xmlData = [[NSData alloc] initWithContentsOfFile:filePath];  </span><br><span class="line">11.       </span><br><span class="line">12.     //使用NSData对象初始化  </span><br><span class="line">13.     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithData:xmlData  options:0error:nil];  </span><br><span class="line">14.       </span><br><span class="line">15.     //获取根节点（Users）  </span><br><span class="line">16.     GDataXMLElement *rootElement = [doc rootElement];  </span><br><span class="line">17.       </span><br><span class="line">18.     //获取根节点下的节点（User）  </span><br><span class="line">19.     NSArray *users = [rootElement elementsForName:@&quot;User&quot;];  </span><br><span class="line">20.       </span><br><span class="line">21.     for (GDataXMLElement *user in users) &#123;  </span><br><span class="line">22.         //User节点的id属性  </span><br><span class="line">23.         NSString *userId = [[user attributeForName:@&quot;id&quot;] stringValue];  </span><br><span class="line">24.         NSLog(@&quot;User id is:%@&quot;,userId);  </span><br><span class="line">25.           </span><br><span class="line">26.         //获取name节点的值  </span><br><span class="line">27.         GDataXMLElement *nameElement = [[user elementsForName:@&quot;name&quot;] objectAtIndex:0];  </span><br><span class="line">28.         NSString *name = [nameElement stringValue];  </span><br><span class="line">29.         NSLog(@&quot;User name is:%@&quot;,name);  </span><br><span class="line">30.           </span><br><span class="line">31.         //获取age节点的值  </span><br><span class="line">32.         GDataXMLElement *ageElement = [[user elementsForName:@&quot;age&quot;] objectAtIndex:0];  </span><br><span class="line">33.         NSString *age = [ageElement stringValue];  </span><br><span class="line">34.         NSLog(@&quot;User age is:%@&quot;,age);  </span><br><span class="line">35. 	&#125;</span><br><span class="line">36.  &#125;      </span><br><span class="line">37.</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -405,6 +388,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
@@ -506,7 +495,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -517,7 +506,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

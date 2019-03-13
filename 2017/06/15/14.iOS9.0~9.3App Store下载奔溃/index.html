@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below ##问题出现前提: 1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="14.关于iOS9.0~9.3 App Store下载奔溃问题">
 <meta property="og:url" content="http://yoursite.com/2017/06/15/14.iOS9.0~9.3App Store下载奔溃/index.html">
@@ -89,7 +90,7 @@
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg">
-<meta property="og:updated_time" content="2019-03-12T10:21:53.258Z">
+<meta property="og:updated_time" content="2019-03-13T01:27:59.863Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="14.关于iOS9.0~9.3 App Store下载奔溃问题">
 <meta name="twitter:description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below ##问题出现前提: 1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描">
@@ -296,6 +297,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -343,53 +366,19 @@
 <p>去友盟错误列表反馈报以下错误提示:</p>
 <pre><code>Application received signal SIGTRAP
 </code></pre><p>最终定位到了P3资源文件的问题上了,图片资源文件里有16位图,显示模式为P3</p>
+<a id="more"></a>
 <p>##原理: </p>
 <p>如果你的app需要支持广色域显示的话，那你必须得把target设置成iOS 9.3+，相反，如果你的app不需要支持广色域且你想兼容 iOS 9.3 之前的项目，你就得把资源文件所有的16位的或者显示模式为’P3’图片全都替换成8位模式的SRGB颜色的图片</p>
 <p>####1.查找16位模式的SRGB颜色的图片步骤:</p>
-<pre><code>1.打一个ipa包,将该文件后缀名.ipa为.zip
-
-2.解压该.zip文件,解压后的目录里面会有一个Payload文件夹
-
-3.打开终端切换到Payload文件下的.app路径
-
-    cd ~/路径/appname.app
-
-4.用find命名定位到Asset.car文件
-
-    find . -name &apos;Assets.car&apos;
-
-5.使用 assetutil 命令导出图片的信息存储到Assets.json文件中
-
-
-    sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json
-
-6.使用以下命令 打开上步生成的/tmp/Assets.json
-
-    open /tmp/Assets.json
-查找“DisplayGamut&quot;: “P3”,
-看到&quot;Encoding&quot; : &quot;ARGB-16&quot;,这个就是要被替换的图片
-
-{ 
-    &quot;SizeClass Vertical&quot; : &quot;universal&quot;,
-    &quot;Graphics&quot; : &quot;GLES2,0&quot;, &quot;Name&quot; : &quot;ianisme.com&quot;, 
-    &quot;Scale&quot; : 2, &quot;Idiom&quot; : &quot;universal&quot;, 
-    &quot;Memory&quot; : &quot;512MB&quot;, 
-    &quot;LayoutDirection&quot; : &quot;0 - Horizontal&quot;, 
-    &quot;DisplayGamut&quot; : &quot;P3&quot;,
-    &quot;Encoding&quot; : &quot;ARGB-16&quot;,
-    &quot;SizeClass Horizontal&quot; : &quot;universal&quot;,
-    &quot;Image Type&quot; : &quot;kCoreThemeOnePartScale&quot;, 
-    &quot;AssetType&quot; : &quot;Image&quot;, 
-    &quot;Subtype&quot; : 0, 
-    &quot;EdgeInsets&quot; : &quot;top:0 left:0 bottom:0 right:0&quot;
-},
-</code></pre><h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><p>#####1修改图片:</p>
-<pre><code>使用ColorSync实用工具将这个描述文件修改下
-</code></pre><p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg" alt><br>    指派它的描述文件为sRGB IEC61966-2.1，保存.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">1.打一个ipa包,将该文件后缀名.ipa为.zip</span><br><span class="line">	</span><br><span class="line">2.解压该.zip文件,解压后的目录里面会有一个Payload文件夹</span><br><span class="line">	</span><br><span class="line">3.打开终端切换到Payload文件下的.app路径</span><br><span class="line">	</span><br><span class="line">	cd ~/路径/appname.app</span><br><span class="line">	</span><br><span class="line">4.用find命名定位到Asset.car文件</span><br><span class="line">	</span><br><span class="line">	find . -name &apos;Assets.car&apos;</span><br><span class="line">	</span><br><span class="line">5.使用 assetutil 命令导出图片的信息存储到Assets.json文件中</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	sudo xcrun --sdk iphoneos assetutil --info ./Assets.car &gt; /tmp/Assets.json</span><br><span class="line">	</span><br><span class="line">6.使用以下命令 打开上步生成的/tmp/Assets.json</span><br><span class="line">	</span><br><span class="line">	open /tmp/Assets.json</span><br><span class="line">查找“DisplayGamut&quot;: “P3”,</span><br><span class="line">看到&quot;Encoding&quot; : &quot;ARGB-16&quot;,这个就是要被替换的图片</span><br><span class="line">	</span><br><span class="line">&#123; </span><br><span class="line">	&quot;SizeClass Vertical&quot; : &quot;universal&quot;,</span><br><span class="line">	&quot;Graphics&quot; : &quot;GLES2,0&quot;, &quot;Name&quot; : &quot;ianisme.com&quot;, </span><br><span class="line">	&quot;Scale&quot; : 2, &quot;Idiom&quot; : &quot;universal&quot;, </span><br><span class="line">	&quot;Memory&quot; : &quot;512MB&quot;, </span><br><span class="line">	&quot;LayoutDirection&quot; : &quot;0 - Horizontal&quot;, </span><br><span class="line">	&quot;DisplayGamut&quot; : &quot;P3&quot;,</span><br><span class="line">	&quot;Encoding&quot; : &quot;ARGB-16&quot;,</span><br><span class="line">	&quot;SizeClass Horizontal&quot; : &quot;universal&quot;,</span><br><span class="line">	&quot;Image Type&quot; : &quot;kCoreThemeOnePartScale&quot;, </span><br><span class="line">	&quot;AssetType&quot; : &quot;Image&quot;, </span><br><span class="line">	&quot;Subtype&quot; : 0, </span><br><span class="line">	&quot;EdgeInsets&quot; : &quot;top:0 left:0 bottom:0 right:0&quot;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><p>#####1修改图片:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用ColorSync实用工具将这个描述文件修改下</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg" alt></p>
+<p>指派它的描述文件为sRGB IEC61966-2.1，保存.</p>
 <p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg" alt></p>
 <p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg" alt></p>
-<pre><code>至此我们的问题完美解决。
-</code></pre><p>#####2改变图片位置</p>
+<p>至此我们的问题完美解决。</p>
+<p>#####2改变图片位置</p>
 <p>将问题图片从Assets移除，直接添加到工程中使用</p>
 
       
@@ -405,6 +394,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
@@ -515,7 +510,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -526,7 +521,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/25/18-Linux命令02/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/19-python排序算法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -268,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/25/18-Linux命令02/" itemprop="url">Linux命令2</a></h1>
+                <a class="post-title-link" href="/2017/07/20/19-python排序算法/" itemprop="url">Python 排序算法</a></h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-25T00:00:00+08:00">
-                2017-09-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T00:00:00+08:00">
+                2017-07-20
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
                   </a>
                 </span>
 
@@ -320,7 +320,7 @@
 
           
           
-             <span id="/2017/09/25/18-Linux命令02/" class="leancloud_visitors" data-flag-title="Linux命令2">
+             <span id="/2017/07/20/19-python排序算法/" class="leancloud_visitors" data-flag-title="Python 排序算法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -352,14 +352,94 @@
 
       
         
-          <h3 id="一-进程管理"><a href="#一-进程管理" class="headerlink" title="一.进程管理"></a>一.进程管理</h3><h4 id="1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><a href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。" class="headerlink" title="1.创建进程：有两种方式来创建进程，前台进程和后台进程。"></a>1.创建进程：有两种方式来创建进程，前台进程和后台进程。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt</span><br><span class="line">后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp; 如 $ls *.txt &amp;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/25/18-Linux命令02/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <p>平均速度最快的排序算法是？</p>
+<table>
+<thead>
+<tr>
+<th>排序方法</th>
+<th>平均情况</th>
+<th>最好情况</th>
+<th>最坏情况</th>
+<th>辅助空间</th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冒泡排序</td>
+<td>O(n^2)</td>
+<td>O(n)</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>插入排序</td>
+<td>O(n^2)</td>
+<td>O(n)</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>O(n*log(n))~O(n^2)</td>
+<td>O(n^1.3)</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>O(n*log(n))</td>
+<td>O(n*log(n))</td>
+<td>O(n*log(n))</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>O(n*log(n))</td>
+<td>O(n*log(n))</td>
+<td>O(n*log(n))</td>
+<td>O(n)</td>
+<td>稳定</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>O(n*log(n))</td>
+<td>O(n*log(n))</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>不稳定</td>
+</tr>
+</tbody>
+</table>
+<p>冒泡排序经过优化以后，最好时间复杂度可以达到O(n)。设置一个标志位，如果有一趟比较中没有发生任何交换，可提前结束，因此在正序情况下，时间复杂度为O(n)。</p>
+<p>选择排序在最坏和最好情况下，都必须在剩余的序列中选择最小（大）的数，与已排好序的序列后一个位置元素做交换，依次最好和最坏时间复杂度均为O(n^2)。</p>
+<p>插入排序是在把已排好序的序列的后一个元素插入到前面已排好序(需要选择合适的位置)的序列中，在正序情况下时间复杂度为O(n)。</p>
+<p>堆是完全二叉树，因此树的深度一定是log(n)+1，最好和最坏时间复杂度均为O(n*log(n))。</p>
+<p>归并排序是将大数组分为两个小数组，依次递归，相当于二叉树，深度为log(n)+1，因此最好和最坏时间复杂度都是O(n*log(n))。</p>
+<p>快速排序在正序或逆序情况下，每次划分只得到比上一次划分少一个记录的子序列，用递归树画出来，是一棵斜树，此时需要n-1次递归，且第i次划分要经过n-i次关键字比较才能找到第i个记录，因此时间复杂度是\sum_{i=1}^{n-1}(n-i)=n(n-1)/2，即O(n^2)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def radix_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    基数排序</span><br><span class="line">    基数排序（radix sort）属于“分配式排序”（distribution sort），又称“桶子法”（bucket sort）或bin sort，顾名思义，它是透过键值的部份资讯，</span><br><span class="line">    将要排序的元素分配至某些“桶”中，藉以达到排序的作用，基数排序法是属于稳定性的排序，其时间复杂度为O (nlog(r)m)，</span><br><span class="line">    其中r为所采取的基数，而m为堆数，在某些时候，基数排序法的效率高于其它的稳定性排序法。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    radix = 10</span><br><span class="line">    # log() 方法返回x的自然对数，x &gt; 0</span><br><span class="line">    # ceil(x) 函数返回一个大于或等于 x 的的最小整数。</span><br><span class="line">    k = math.ceil(math.log(max(lists), radix))</span><br><span class="line">    bucket = [[] for i in range(radix)]</span><br><span class="line">    for i in range(1, k+1):</span><br><span class="line">        for j in lists:</span><br><span class="line">            bucket[int(j/(radix**(i-1)) % (radix**i))].append(j)</span><br><span class="line">        del lists[:]</span><br><span class="line">        for z in bucket:</span><br><span class="line">            lists += z</span><br><span class="line">            del z[:]</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">def merge_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    归并排序（利用递归）</span><br><span class="line">    归并排序是建立在归并操作上的一种有效的排序算法,该算法是采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；</span><br><span class="line">    即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并。</span><br><span class="line">    归并过程为：比较a[i]和a[j]的大小，若a[i]≤a[j]，则将第一个有序表中的元素a[i]复制到r[k]中，并令i和k分别加上1；否则将第二个有序表中的元素a[j]复制到r[k]中，</span><br><span class="line">    并令j和k分别加上1，如此循环下去，直到其中一个有序表取完，然后再将另一个有序表中剩余的元素复制到r中从下标k到下标t的单元。归并排序的算法我们通常用递归实现，</span><br><span class="line">    先把待排序区间[s,t]以中点二分，接着把左边子区间排序，再把右边子区间排序，最后把左区间和右区间用一次归并操作合并成有序的区间[s,t]。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def merge(left, right):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        合并过程</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        i, j = 0, 0</span><br><span class="line">        result = []</span><br><span class="line">        while i &lt; len(left) and j &lt; len(right):</span><br><span class="line">            if left[i] &lt;= right[j]:</span><br><span class="line">                result.append(left[i])</span><br><span class="line">                i += 1</span><br><span class="line">            else:</span><br><span class="line">                result.append(right[j])</span><br><span class="line">                j += 1</span><br><span class="line">        result.extend(left[i:])</span><br><span class="line">        result.extend(right[j:])</span><br><span class="line">        return result</span><br><span class="line"></span><br><span class="line">    if len(lists) &lt;= 1:</span><br><span class="line">        return lists</span><br><span class="line">    midx = int(len(lists) / 2)</span><br><span class="line">    left = merge_sort(lists[:midx])</span><br><span class="line">    right = merge_sort(lists[midx:])</span><br><span class="line">    return merge(left, right)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def heap_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    堆排序(较难理解)</span><br><span class="line">    堆排序(Heapsort)是指利用堆积树（堆）这种数据结构所设计的一种排序算法，它是选择排序的一种。可以利用数组的特点快速定位指定索引的元素。</span><br><span class="line">    堆分为大根堆和小根堆，是完全二叉树。大根堆的要求是每个节点的值都不大于其父节点的值，即A[PARENT[i]] &gt;= A[i]。</span><br><span class="line">    在数组的非降序排序中，需要使用的就是大根堆，因为根据大根堆的要求可知，最大的值一定在堆顶。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    def adjust_heap(lists, i, size):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        调整堆</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        lc = 2 * i + 1</span><br><span class="line">        rc = 2 * i + 2</span><br><span class="line">        maxd = i</span><br><span class="line">        if i &lt; int(size/2):</span><br><span class="line">            if lc &lt; size and lists[lc] &gt; lists[maxd]:</span><br><span class="line">                maxd = lc</span><br><span class="line">            if rc &lt; size and lists[rc] &gt; lists[maxd]:</span><br><span class="line">                maxd = rc</span><br><span class="line">            if maxd != i:</span><br><span class="line">                lists[maxd], lists[i] = lists[i], lists[maxd]</span><br><span class="line">                adjust_heap(lists, maxd, size)</span><br><span class="line"></span><br><span class="line">    def build_heap(lists, size):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        创建堆</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        count = int(size/2)</span><br><span class="line">        for i in range(count)[::-1]:</span><br><span class="line">            adjust_heap(lists, i, size)</span><br><span class="line"></span><br><span class="line">    count = len(lists)</span><br><span class="line">    build_heap(lists, count)</span><br><span class="line">    for i in range(count)[::-1]:</span><br><span class="line">        lists[0], lists[i] = lists[i], lists[0]</span><br><span class="line">        adjust_heap(lists, 0, i)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def select_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    直接选择排序</span><br><span class="line">    基本思想：第1趟，在待排序记录r1 ~ r[n]中选出最小的记录，将它与r1交换；第2趟，在待排序记录r2 ~ r[n]中选出最小的记录，将它与r2交换；</span><br><span class="line">    以此类推，第i趟在待排序记录r[i] ~ r[n]中选出最小的记录，将它与r[i]交换，使有序序列不断增长直到全部排序完毕。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    count = len(lists)</span><br><span class="line">    for i in range(count):</span><br><span class="line">        min_index = i</span><br><span class="line">        for j in range(i + 1, count):</span><br><span class="line">            if lists[min_index] &gt; lists[j]:</span><br><span class="line">                min_index = j</span><br><span class="line">        lists[min_index], lists[i] = lists[i], lists[min_index]</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">def shell_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    希尔排序</span><br><span class="line">    希尔排序(Shell Sort)是插入排序的一种。也称缩小增量排序，是直接插入排序算法的一种更高效的改进版本。希尔排序是非稳定排序算法。</span><br><span class="line">    该方法因DL．Shell于1959年提出而得名。 希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，</span><br><span class="line">    每组包含的关键词越来越多，当增量减至1时，整个文件恰被分成一组，算法便终止。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    count = len(lists)</span><br><span class="line">    step = 2</span><br><span class="line">    group = int(count / step)</span><br><span class="line">    while group &gt; 0:</span><br><span class="line">        for i in range(group):</span><br><span class="line">            j = i + group</span><br><span class="line">            while j &lt; count:</span><br><span class="line">                k = j - group</span><br><span class="line">                key = lists[j]</span><br><span class="line">                while k &gt;= 0:</span><br><span class="line">                    if lists[k] &gt; key:</span><br><span class="line">                        lists[k + group] = lists[k]</span><br><span class="line">                        lists[k] = key</span><br><span class="line">                    k -= group</span><br><span class="line">                j += group</span><br><span class="line">        group = int(group / step)</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def quick_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    快速排序(利用递归，效率较低，较难理解)</span><br><span class="line">    通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，</span><br><span class="line">    然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if len(lists) &lt;= 1:</span><br><span class="line">        return lists</span><br><span class="line">    return quick_sort([lt for lt in lists[1:] if lt &lt; lists[0]]) + lists[0:1] + quick_sort([rt for rt in lists[1:] if rt &gt;= lists[0]])</span><br><span class="line">    # left = []</span><br><span class="line">    # right = []</span><br><span class="line">    # base = lists[0]</span><br><span class="line">    # for x in lists[1:]:</span><br><span class="line">    #     if x &lt; base:</span><br><span class="line">    #         left.append(x)</span><br><span class="line">    #     else:</span><br><span class="line">    #         right.append(x)</span><br><span class="line">    # return quick_sort(left) + [base] + quick_sort(right)</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def insert_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    插入排序</span><br><span class="line">    插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序，时间复杂度为O(n^2)。</span><br><span class="line">    是稳定的排序方法。插入算法把要排序的数组分成两部分：第一部分包含了这个数组的所有元素，但将最后一个元素除外（让数组多一个空间才有插入的位置），</span><br><span class="line">    而第二部分就只包含这一个元素（即待插入元素）。在第一部分排序完成后，再将这个最后元素插入到已排好序的第一部分中</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    count = len(lists)</span><br><span class="line">    for j in range(1, count):</span><br><span class="line">        value = lists[j]</span><br><span class="line">        i = j - 1</span><br><span class="line">        while i &gt;= 0 and lists[i] &gt; value:</span><br><span class="line">            lists[i+1] = lists[i]</span><br><span class="line">            i -= 1</span><br><span class="line">        lists[i + 1] = value</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def bubble_sort(lists):</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    冒泡排序</span><br><span class="line">    它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。</span><br><span class="line">    走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    count = len(lists)</span><br><span class="line">    for i in range(count):</span><br><span class="line">        for j in range(i+1, count):</span><br><span class="line">            if lists[i] &gt; lists[j]:</span><br><span class="line">                lists[i], lists[j] = lists[j], lists[i]</span><br><span class="line">    return lists</span><br></pre></td></tr></table></figure>
+
+          
         
       
     </div>
@@ -406,7 +486,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/22/17-Linux命令01/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/18-iOS9.0~9.3App Store下载奔溃/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -425,322 +505,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/22/17-Linux命令01/" itemprop="url">Linux 命令1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-09-22T00:00:00+08:00">
-                2017-09-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/09/22/17-Linux命令01/" class="leancloud_visitors" data-flag-title="Linux 命令1">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="一-：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。"><a href="#一-：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。" class="headerlink" title="一 ：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。"></a>一 ：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">查看文件：ls </span><br><span class="line">查看文件的更多信息：ls －l </span><br><span class="line">查看文件隐藏文件：ls －a</span><br><span class="line"></span><br><span class="line">创建文件：vi fileName   </span><br><span class="line">i键开始编辑，esc退出编辑，组合键shift＋zz完全退出。</span><br><span class="line">或者是shift＋：再使用wq完全退出。</span><br><span class="line"></span><br><span class="line">编辑文件：vi fileName</span><br><span class="line">i键开始编辑，想要移动光标，必须先用esc退出编辑模式。</span><br><span class="line">l：右移  h：左移 k：上移 j：下移</span><br><span class="line"></span><br><span class="line">查看文件内容：cat fileName</span><br><span class="line">cat -b fileName 显示行号</span><br><span class="line"></span><br><span class="line">统计单词数目：wc fileName</span><br><span class="line">每一列的含义如下：</span><br><span class="line">第一列：文件的总行数</span><br><span class="line">第二列：单词数目</span><br><span class="line">第三列：文件的字节数，即文件的大小</span><br><span class="line">第四列：文件名</span><br><span class="line"></span><br><span class="line">复制文件：cp source_file destination_file</span><br><span class="line"></span><br><span class="line">重命名文件：mv old_file new_file</span><br><span class="line"></span><br><span class="line">删除文件：rm fileName</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/22/17-Linux命令01/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/20/16-node学习/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/20/16-node学习/" itemprop="url">node 学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-20T00:00:00+08:00">
-                2017-08-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Node/" itemprop="url" rel="index">
-                    <span itemprop="name">Node</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2017/08/20/16-node学习/" class="leancloud_visitors" data-flag-title="node 学习">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="1-node-基础"><a href="#1-node-基础" class="headerlink" title="1. node 基础"></a>1. node 基础</h3><p>（1）node定义：JS是脚本语言，脚本语言都需要一个解析器才能运行。对于写在HTML页面里的JS，浏览器充当了解析器的角色。而对于需要独立运行的JS，NodeJS就是一个解析器。</p>
-<p>每一种解析器都是一个运行环境，不但允许JS定义各种数据结构，进行各种计算，还允许JS使用运行环境提供的内置对象和方法做一些事情。例如运行在浏览器中的JS的用途是操作DOM，浏览器就提供了document之类的内置对象。而运行在NodeJS中的JS的用途是操作磁盘文件或搭建HTTP服务器，NodeJS就相应提供了fs、http等内置对象</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/20/16-node学习/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/15/15-iOS9.0~9.3App Store下载奔溃/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/06/15/15-iOS9.0~9.3App Store下载奔溃/" itemprop="url">关于iOS9.0~9.3 App Store下载奔溃问题</a></h1>
+                <a class="post-title-link" href="/2017/06/15/18-iOS9.0~9.3App Store下载奔溃/" itemprop="url">关于iOS9.0~9.3 App Store下载奔溃问题</a></h1>
         
 
         <div class="post-meta">
@@ -792,7 +557,7 @@
 
           
           
-             <span id="/2017/06/15/15-iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="关于iOS9.0~9.3 App Store下载奔溃问题">
+             <span id="/2017/06/15/18-iOS9.0~9.3App Store下载奔溃/" class="leancloud_visitors" data-flag-title="关于iOS9.0~9.3 App Store下载奔溃问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -834,7 +599,7 @@
 </code></pre><p>最终定位到了P3资源文件的问题上了,图片资源文件里有16位图,显示模式为P3</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/15/15-iOS9.0~9.3App Store下载奔溃/#more" rel="contents">
+            <a class="btn" href="/2017/06/15/18-iOS9.0~9.3App Store下载奔溃/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -885,7 +650,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/14-MySql安装及命令的副本/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/27/17-MySql安装及命令的副本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -904,7 +669,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/03/27/14-MySql安装及命令的副本/" itemprop="url">HomeBrew 安装MySql</a></h1>
+                <a class="post-title-link" href="/2017/03/27/17-MySql安装及命令的副本/" itemprop="url">HomeBrew 安装MySql</a></h1>
         
 
         <div class="post-meta">
@@ -956,7 +721,7 @@
 
           
           
-             <span id="/2017/03/27/14-MySql安装及命令的副本/" class="leancloud_visitors" data-flag-title="HomeBrew 安装MySql">
+             <span id="/2017/03/27/17-MySql安装及命令的副本/" class="leancloud_visitors" data-flag-title="HomeBrew 安装MySql">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -993,7 +758,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1. 打开终端执行命令 $ brew install mysql</span><br><span class="line">	</span><br><span class="line">2. 执行命令 $ mysql.server start 此时提示 </span><br><span class="line">		Starting MySQL</span><br><span class="line"> 				SUCCESS! </span><br><span class="line">	</span><br><span class="line">3. 执行命令 $ mysql_secure_installation 按要求进行设置 y y y y</span><br><span class="line">	</span><br><span class="line">4. 连接 mysql 命令： mysql -uroot -p (连接到本地数据库)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/03/27/14-MySql安装及命令的副本/#more" rel="contents">
+            <a class="btn" href="/2017/03/27/17-MySql安装及命令的副本/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1044,7 +809,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/20/13-iOS拆包 /">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/20/16-iOS拆包 /">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1063,7 +828,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/12/20/13-iOS拆包 /" itemprop="url">iOS正确拆包</a></h1>
+                <a class="post-title-link" href="/2016/12/20/16-iOS拆包 /" itemprop="url">iOS正确拆包</a></h1>
         
 
         <div class="post-meta">
@@ -1115,7 +880,7 @@
 
           
           
-             <span id="/2016/12/20/13-iOS拆包 /" class="leancloud_visitors" data-flag-title="iOS正确拆包">
+             <span id="/2016/12/20/16-iOS拆包 /" class="leancloud_visitors" data-flag-title="iOS正确拆包">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1152,7 +917,7 @@
 <p>设备指令集</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/12/20/13-iOS拆包 /#more" rel="contents">
+            <a class="btn" href="/2016/12/20/16-iOS拆包 /#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1203,7 +968,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/19/12-cocoaPods 配置和升级/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/19/15-cocoaPods 配置和升级/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1222,7 +987,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/10/19/12-cocoaPods 配置和升级/" itemprop="url">cocoaPods配置和升级</a></h1>
+                <a class="post-title-link" href="/2016/10/19/15-cocoaPods 配置和升级/" itemprop="url">cocoaPods配置和升级</a></h1>
         
 
         <div class="post-meta">
@@ -1274,7 +1039,7 @@
 
           
           
-             <span id="/2016/10/19/12-cocoaPods 配置和升级/" class="leancloud_visitors" data-flag-title="cocoaPods配置和升级">
+             <span id="/2016/10/19/15-cocoaPods 配置和升级/" class="leancloud_visitors" data-flag-title="cocoaPods配置和升级">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1311,7 +1076,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gem install -n /usr/local/bin cocoapods</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/10/19/12-cocoaPods 配置和升级/#more" rel="contents">
+            <a class="btn" href="/2016/10/19/15-cocoaPods 配置和升级/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1362,7 +1127,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/01/11-iOS10推送/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/01/14-iOS10推送/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1381,7 +1146,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/07/01/11-iOS10推送/" itemprop="url">iOS10推送</a></h1>
+                <a class="post-title-link" href="/2016/07/01/14-iOS10推送/" itemprop="url">iOS10推送</a></h1>
         
 
         <div class="post-meta">
@@ -1433,7 +1198,7 @@
 
           
           
-             <span id="/2016/07/01/11-iOS10推送/" class="leancloud_visitors" data-flag-title="iOS10推送">
+             <span id="/2016/07/01/14-iOS10推送/" class="leancloud_visitors" data-flag-title="iOS10推送">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1470,7 +1235,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.在调用方法时，有些方法让人很难区分，容易写错方法，这让开发者有时候很苦恼。</span><br><span class="line">2.应用在运行时和非运行时捕获通知的路径还不一致。</span><br><span class="line">3.应用在前台时，是无法直接显示远程通知，还需要进一步处理。</span><br><span class="line">4.已经发出的通知是不能更新的，内容发出时是不能改变的，并且只有简单文本展示方式，扩展性根本不是很好。</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/07/01/11-iOS10推送/#more" rel="contents">
+            <a class="btn" href="/2016/07/01/14-iOS10推送/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1521,7 +1286,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/10-OC&&JS/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/25/13-Linux命令02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1540,7 +1305,321 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/15/10-OC&&JS/" itemprop="url">OC&&JS交互</a></h1>
+                <a class="post-title-link" href="/2016/05/25/13-Linux命令02/" itemprop="url">Linux命令2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-25T00:00:00+08:00">
+                2016-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/05/25/13-Linux命令02/" class="leancloud_visitors" data-flag-title="Linux命令2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="一-进程管理"><a href="#一-进程管理" class="headerlink" title="一.进程管理"></a>一.进程管理</h3><h4 id="1-创建进程：有两种方式来创建进程，前台进程和后台进程。"><a href="#1-创建进程：有两种方式来创建进程，前台进程和后台进程。" class="headerlink" title="1.创建进程：有两种方式来创建进程，前台进程和后台进程。"></a>1.创建进程：有两种方式来创建进程，前台进程和后台进程。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">前台进程：默认情况下用户创建的都是前台进程例如：$ls *.txt</span><br><span class="line">后台进程：后台进程不必等待程序运行结束时就可以输入其他命令。最简单的方式就是在末尾加&amp; 如 $ls *.txt &amp;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/25/13-Linux命令02/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/22/12-Linux命令01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/05/22/12-Linux命令01/" itemprop="url">Linux 命令1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-05-22T00:00:00+08:00">
+                2016-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/05/22/12-Linux命令01/" class="leancloud_visitors" data-flag-title="Linux 命令1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="一-：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。"><a href="#一-：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。" class="headerlink" title="一 ：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。"></a>一 ：文件的基本操作，创建，删除，复制，重命名及为文件创建链接。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">查看文件：ls </span><br><span class="line">查看文件的更多信息：ls －l </span><br><span class="line">查看文件隐藏文件：ls －a</span><br><span class="line"></span><br><span class="line">创建文件：vi fileName   </span><br><span class="line">i键开始编辑，esc退出编辑，组合键shift＋zz完全退出。</span><br><span class="line">或者是shift＋：再使用wq完全退出。</span><br><span class="line"></span><br><span class="line">编辑文件：vi fileName</span><br><span class="line">i键开始编辑，想要移动光标，必须先用esc退出编辑模式。</span><br><span class="line">l：右移  h：左移 k：上移 j：下移</span><br><span class="line"></span><br><span class="line">查看文件内容：cat fileName</span><br><span class="line">cat -b fileName 显示行号</span><br><span class="line"></span><br><span class="line">统计单词数目：wc fileName</span><br><span class="line">每一列的含义如下：</span><br><span class="line">第一列：文件的总行数</span><br><span class="line">第二列：单词数目</span><br><span class="line">第三列：文件的字节数，即文件的大小</span><br><span class="line">第四列：文件名</span><br><span class="line"></span><br><span class="line">复制文件：cp source_file destination_file</span><br><span class="line"></span><br><span class="line">重命名文件：mv old_file new_file</span><br><span class="line"></span><br><span class="line">删除文件：rm fileName</span><br><span class="line"></span><br><span class="line">显示或者隐藏文件</span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -bool false</span><br><span class="line">defaults write com.apple.finder AppleShowAllFiles -bool true</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/05/22/12-Linux命令01/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/11-OC&&JS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/03/15/11-OC&&JS/" itemprop="url">OC&&JS交互</a></h1>
         
 
         <div class="post-meta">
@@ -1592,7 +1671,7 @@
 
           
           
-             <span id="/2016/03/15/10-OC&&JS/" class="leancloud_visitors" data-flag-title="OC&&JS交互">
+             <span id="/2016/03/15/11-OC&&JS/" class="leancloud_visitors" data-flag-title="OC&&JS交互">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1632,7 +1711,7 @@
 <p>JSExport：这是一个协议，如果采用协议的方法交互，自己定义的协议必须遵守此协议</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/03/15/10-OC&&JS/#more" rel="contents">
+            <a class="btn" href="/2016/03/15/11-OC&&JS/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1683,7 +1762,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/09-iOS7以后UITextView的那些坑/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/13/10-iOS7以后UITextView的那些坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1702,7 +1781,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/10/13/09-iOS7以后UITextView的那些坑/" itemprop="url">iOS7以后UITextView的那些坑</a></h1>
+                <a class="post-title-link" href="/2015/10/13/10-iOS7以后UITextView的那些坑/" itemprop="url">iOS7以后UITextView的那些坑</a></h1>
         
 
         <div class="post-meta">
@@ -1754,7 +1833,7 @@
 
           
           
-             <span id="/2015/10/13/09-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="iOS7以后UITextView的那些坑">
+             <span id="/2015/10/13/10-iOS7以后UITextView的那些坑/" class="leancloud_visitors" data-flag-title="iOS7以后UITextView的那些坑">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1876,7 +1955,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1887,7 +1966,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1898,7 +1977,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

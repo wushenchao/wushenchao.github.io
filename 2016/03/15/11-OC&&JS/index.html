@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OC&amp;&amp;JS交互">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/11-OC&&JS/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/09/09-1.png">
+<meta property="og:image" content="http://yoursite.com/images/09/09-2.png">
+<meta property="og:image" content="http://yoursite.com/images/09/09-3.png">
+<meta property="og:updated_time" content="2019-03-14T07:44:50.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OC&amp;&amp;JS交互">
+<meta name="twitter:description" content="OC &amp;amp;&amp;amp; JS交互第三方框架:WebViewJavascriptBridge JavaScriptCore的使用（iOS7后引用）JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码 JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等 JSManagedValue：管理数据和方法">
+<meta name="twitter:image" content="http://yoursite.com/images/09/09-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/03/15/11-OC&&JS/">
+
+
+
+
+
+  <title>OC&&JS交互 | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It is never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/15/11-OC&&JS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OC&&JS交互</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-15T00:00:00+08:00">
+                2016-03-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/03/15/11-OC&&JS/" class="leancloud_visitors" data-flag-title="OC&&JS交互">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="OC-amp-amp-JS交互第三方框架"><a href="#OC-amp-amp-JS交互第三方框架" class="headerlink" title="OC &amp;&amp; JS交互第三方框架:"></a>OC &amp;&amp; JS交互第三方框架:</h3><p><a href="https://github.com/marcuswestin/WebViewJavascriptBridge" target="_blank" rel="noopener">WebViewJavascriptBridge</a></p>
+<h3 id="JavaScriptCore的使用（iOS7后引用）"><a href="#JavaScriptCore的使用（iOS7后引用）" class="headerlink" title="JavaScriptCore的使用（iOS7后引用）"></a>JavaScriptCore的使用（iOS7后引用）</h3><p>JSContext：给JS提供运行的上下文环境,通过-evaluateScript:方法就可以执行JS代码</p>
+<p>JSValue：JS和OC数据和方法的桥梁,封装了JS与OC中的对应的类型，以及调用JS的API等</p>
+<p>JSManagedValue：管理数据和方法的类</p>
+<p>JSVirtualMachine：处理线程相关，使用较少</p>
+<p>JSExport：这是一个协议，如果采用协议的方法交互，自己定义的协议必须遵守此协议</p>
+<a id="more"></a>
+<p>注:</p>
+<blockquote>
+<p>JSContext 和 JSValue : </p>
+</blockquote>
+<blockquote>
+<p>JSVirtualMachine 为JavaScript的运行提供了底层资源,JSContext为JS其提供着运行环境,通过evaluateScript方法就可以执行一段JavaScript脚本,并且如果其中有方法,变量等信息都会被存储在其中以便在需要的时候使用。而JSContext的创建都是基于JSVirtualMachine(initwithVirtualMachine:),如果使用init进行初始化,那么在其内部会自动创建一个新的JSVirtualMachine对象然后调用前边的初始化方法。</p>
+</blockquote>
+<blockquote>
+<p>JSValue是JSContext执行后的返回结果,封装了JS与OC中的对应的类型,可以方便的在两种类型之间转换,可以说是JS和OC之间互换的桥梁</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Objective-C type</th>
+<th>JavaScript type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nil</td>
+<td>undefined</td>
+</tr>
+<tr>
+<td>NSNull</td>
+<td>null</td>
+</tr>
+<tr>
+<td>NSString</td>
+<td>string</td>
+</tr>
+<tr>
+<td>NSNumber</td>
+<td>number, boolean</td>
+</tr>
+<tr>
+<td>NSDictionary</td>
+<td>Object object</td>
+</tr>
+<tr>
+<td>NSArray</td>
+<td>Array object</td>
+</tr>
+<tr>
+<td>NSDate</td>
+<td>Date object</td>
+</tr>
+<tr>
+<td>NSBlock (1)</td>
+<td>Function object (1)</td>
+</tr>
+<tr>
+<td>id (2)</td>
+<td>Wrapper object (2)</td>
+</tr>
+<tr>
+<td>Class (3)</td>
+<td>Constructor object (3)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>JSVirtualMachine : “A JSVirtualMachine instance represents a self-contained environment for JavaScript execution.”，这段话是官方文档中对JSVirtualMachine的定义，我们使用JSVirtualMachine的目的主要有两个：支持JS并发执行，管理用于衔接JS 与 OC 代码的对象的内存。</p>
+</blockquote>
+<h3 id="OC-amp-amp-JS交互"><a href="#OC-amp-amp-JS交互" class="headerlink" title="OC &amp;&amp; JS交互"></a>OC &amp;&amp; JS交互</h3><p>默认在该代理方法中执行</p>
+<p><strong>- (void)webViewDidFinishLoad:(UIWebView *)webView</strong></p>
+<pre><code>static NSString *const WWJavaScripeContext = @&quot;documentView.webView.mainFrame.javaScriptContext&quot;;
+static NSString *const WWWebDocumentTitle = @&quot;document.title&quot;;
+</code></pre><h2 id="1-OC调用JS"><a href="#1-OC调用JS" class="headerlink" title="1. OC调用JS"></a>1. OC调用JS</h2><h4 id="使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script"><a href="#使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script" class="headerlink" title="使用- (NSString )stringByEvaluatingJavaScriptFromString:(NSString )script;"></a>使用<strong>- (NSString <em>)stringByEvaluatingJavaScriptFromString:(NSString </em>)script;</strong></h4><pre><code>// 获取当前页面的title
+NSString *title = [webview stringByEvaluatingJavaScriptFromString: WWWebDocumentTitle];
+
+// 获取当前页面的url
+NSString *url = [webview stringByEvaluatingJavaScriptFromString:@&quot;document.location.href&quot;];
+</code></pre><h4 id="使用JSContext"><a href="#使用JSContext" class="headerlink" title="使用JSContext"></a>使用JSContext</h4><pre><code>JSContext *context = [webView valueForKeyPath:WWJavaScripeContext];
+JSValue *value = [context evaluateScript:WWWebDocumentTitle];
+NSLog(@&quot;%@&quot;,value.toString);
+</code></pre><h2 id="2-JS调用OC"><a href="#2-JS调用OC" class="headerlink" title="2. JS调用OC"></a>2. JS调用OC</h2><h4 id="JS直接调用OC"><a href="#JS直接调用OC" class="headerlink" title="JS直接调用OC"></a>JS直接调用OC</h4><pre><code>JSContext *context = [webView valueForKeyPath:WWJavaScripeContext];
+
+context[@&quot;testNo&quot;] = ^{
+    NSLog(@&quot;JS-OC testNo&quot;);
+};
+context[@&quot;testTwo&quot;] = ^{
+    NSArray *arr = [JSContext currentArguments];
+    NSLog(@&quot;JS-OC testTwo&quot;);
+    NSLog(@&quot;%@&quot;,arr);
+};
+</code></pre><p>在Block内都不要直接使用其外部定义的JSContext对象或者JSValue，应该将其当做参数传入到Block中，或者通过JSContext的类方法+ (JSContext *)currentContext;来获得。否则会造成循环引用使得内存无法被正确释放。</p>
+<h4 id="JS通过对象调用OC"><a href="#JS通过对象调用OC" class="headerlink" title="JS通过对象调用OC"></a>JS通过对象调用OC</h4><p>TestJSObject 对象的定义:</p>
+<p>.h 文件</p>
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+#import &lt;JavaScriptCore/JavaScriptCore.h&gt;
+
+@protocol TestJSObjectProtocol &lt;JSExport&gt;
+//此处我们测试几种参数的情况
+- (void)testNoParameter;
+- (void)testOneParameter:(NSString *)value;
+- (void)testTwoParameter:(NSString *)value
+          OhterParameter:(NSString *)other;
+ JSExportAs(testMoreParameter,
+    - (void)testMoreParameter:(NSString *)one two:(NSString *)two three:(NSString *)three
+ );
+
+@end
+
+typedef void (^DDOCJSNoParameterBlock)();
+
+@interface TestJSObject : NSObject&lt;TestJSObjectProtocol&gt;
+
+@property (nonatomic, copy) DDOCJSNoParameterBlock noParameterBlock;
+
+@end
+</code></pre><p>.m 文件    </p>
+<pre><code>#import &quot;TestJSObject.h&quot;
+
+@implementation TestJSObject
+
+- (void)testNoParameter {
+    NSLog(@&quot;this is ios testNoParameter&quot;);
+    if (self.noParameterBlock) {
+        self.noParameterBlock();
+    }
+}
+
+- (void)testOneParameter:(NSString *)value {
+    NSLog(@&quot;this is testOneParameter = %@&quot;,value);
+}
+
+- (void)testTwoParameter:(NSString *)value
+          OhterParameter:(NSString *)other {
+    NSLog(@&quot;this is testTwoParameter = %@  other = %@&quot;,value,other);
+}
+
+- (void)testMoreParameter:(NSString *)one two:(NSString *)two three:(NSString *)three {
+    NSLog(@&quot;this is OneParameter=%@ OneParameter=%@ OneParameter=%@&quot;,one,two,three);
+}
+
+@end
+</code></pre><p>通过对象调用方法</p>
+<pre><code>TestJSObject *object = [TestJSObject new];
+context[@&quot;native&quot;] = object;
+
+object.noParameterBlock = ^(){
+    NSLog(@&quot;webview testNoParameter&quot;);
+};
+</code></pre><h4 id="OC代码见下图"><a href="#OC代码见下图" class="headerlink" title="OC代码见下图:"></a>OC代码见下图:</h4><p><img src="../../../../images/09/09-1.png" alt="avatar">        </p>
+<h4 id="JS代码见下图"><a href="#JS代码见下图" class="headerlink" title="JS代码见下图"></a>JS代码见下图</h4><p><img src="../../../../images/09/09-2.png" alt="avatar"><br><img src="../../../../images/09/09-3.png" alt="avatar">        </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/13/10-iOS7以后UITextView的那些坑/" rel="next" title="iOS7以后UITextView的那些坑">
+                <i class="fa fa-chevron-left"></i> iOS7以后UITextView的那些坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/22/12-Linux命令01/" rel="prev" title="Linux 命令1">
+                Linux 命令1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#OC-amp-amp-JS交互第三方框架"><span class="nav-number">1.</span> <span class="nav-text">OC &amp;&amp; JS交互第三方框架:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScriptCore的使用（iOS7后引用）"><span class="nav-number">2.</span> <span class="nav-text">JavaScriptCore的使用（iOS7后引用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OC-amp-amp-JS交互"><span class="nav-number">3.</span> <span class="nav-text">OC &amp;&amp; JS交互</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#1-OC调用JS"><span class="nav-number"></span> <span class="nav-text">1. OC调用JS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-NSString-stringByEvaluatingJavaScriptFromString-NSString-script"><span class="nav-number">0.1.</span> <span class="nav-text">使用- (NSString )stringByEvaluatingJavaScriptFromString:(NSString )script;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用JSContext"><span class="nav-number">0.2.</span> <span class="nav-text">使用JSContext</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-JS调用OC"><span class="nav-number"></span> <span class="nav-text">2. JS调用OC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JS直接调用OC"><span class="nav-number">0.1.</span> <span class="nav-text">JS直接调用OC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS通过对象调用OC"><span class="nav-number">0.2.</span> <span class="nav-text">JS通过对象调用OC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OC代码见下图"><span class="nav-number">0.3.</span> <span class="nav-text">OC代码见下图:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JS代码见下图"><span class="nav-number">0.4.</span> <span class="nav-text">JS代码见下图</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

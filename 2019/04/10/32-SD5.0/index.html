@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SD 5.0SD 的整体分类如下所示:    分类 说明     Manager 管理控制类   Downloader 核心下载   Cache 缓存处理   Decoder 编码解码   Prefetcher 图片预下载   Transformer 图片转换   ImageView 动态图片   Utils 通用方法类   Categories 类目   WebCache Categories">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SD5.0">
+<meta property="og:url" content="http://yoursite.com/2019/04/10/32-SD5.0/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="SD 5.0SD 的整体分类如下所示:    分类 说明     Manager 管理控制类   Downloader 核心下载   Cache 缓存处理   Decoder 编码解码   Prefetcher 图片预下载   Transformer 图片转换   ImageView 动态图片   Utils 通用方法类   Categories 类目   WebCache Categories">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/30/30-1.png">
+<meta property="og:image" content="http://yoursite.com/images/30/30-2-3.png">
+<meta property="og:image" content="http://yoursite.com/images/30/30-3.png">
+<meta property="og:image" content="http://yoursite.com/images/30/30-4.png">
+<meta property="og:image" content="http://yoursite.com/images/30/30-5.png">
+<meta property="og:image" content="http://yoursite.com/images/30/30-6.png">
+<meta property="og:updated_time" content="2019-05-05T09:31:05.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SD5.0">
+<meta name="twitter:description" content="SD 5.0SD 的整体分类如下所示:    分类 说明     Manager 管理控制类   Downloader 核心下载   Cache 缓存处理   Decoder 编码解码   Prefetcher 图片预下载   Transformer 图片转换   ImageView 动态图片   Utils 通用方法类   Categories 类目   WebCache Categories">
+<meta name="twitter:image" content="http://yoursite.com/images/30/30-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/10/32-SD5.0/">
+
+
+
+
+
+  <title>SD5.0 | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It is never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/32-SD5.0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SD5.0</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-10T00:00:00+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/10/32-SD5.0/" class="leancloud_visitors" data-flag-title="SD5.0">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.1k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  7 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="SD-5-0"><a href="#SD-5-0" class="headerlink" title="SD 5.0"></a>SD 5.0</h1><h2 id="SD-的整体分类如下所示"><a href="#SD-的整体分类如下所示" class="headerlink" title="SD 的整体分类如下所示:"></a>SD 的整体分类如下所示:</h2><p><img src="../../../../images/30/30-1.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Manager</td>
+<td>管理控制类</td>
+</tr>
+<tr>
+<td>Downloader</td>
+<td>核心下载</td>
+</tr>
+<tr>
+<td>Cache</td>
+<td>缓存处理</td>
+</tr>
+<tr>
+<td>Decoder</td>
+<td>编码解码</td>
+</tr>
+<tr>
+<td>Prefetcher</td>
+<td>图片预下载</td>
+</tr>
+<tr>
+<td>Transformer</td>
+<td>图片转换</td>
+</tr>
+<tr>
+<td>ImageView</td>
+<td>动态图片</td>
+</tr>
+<tr>
+<td>Utils</td>
+<td>通用方法类</td>
+</tr>
+<tr>
+<td>Categories</td>
+<td>类目</td>
+</tr>
+<tr>
+<td>WebCache Categories</td>
+<td>UIKiti 相关类目</td>
+</tr>
+<tr>
+<td>Private</td>
+<td>私有方法</td>
+</tr>
+<tr>
+<td>Mapkit</td>
+<td>地图相关类目</td>
+</tr>
+</tbody>
+</table>
+<p>各层级主要调用流程和对应的主要方法如下图所示:</p>
+<p><img src="../../../../images/30/30-2-3.png" alt></p>
+<h2 id="缓存模块"><a href="#缓存模块" class="headerlink" title="缓存模块"></a>缓存模块</h2><p>SD的缓存，主要有以下文件组成</p>
+<p><img src="../../../../images/30/30-3.png" alt></p>
+<p>有两大类型缓存：内存缓存(SDMemoryCache)和磁盘缓存(SDDiskCache)。</p>
+<h3 id="1-SDMemoryCache"><a href="#1-SDMemoryCache" class="headerlink" title="1. SDMemoryCache"></a>1. SDMemoryCache</h3><p>SDMemoryCache 继承于 NSCache，且实现了<strong><em>SDMemoryCache协议</em></strong></p>
+<p>SDMemoryCache 协议需要实现的协议方法如下:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithConfig:</td>
+<td>初始化配置基本信息</td>
+</tr>
+<tr>
+<td>objectForKey:</td>
+<td>通过key查询数据</td>
+</tr>
+<tr>
+<td>setObject:forkey:</td>
+<td>存储数据</td>
+</tr>
+<tr>
+<td>removeObjectForKey:</td>
+<td>通过key移除指定数据</td>
+</tr>
+<tr>
+<td>removeAllObjects</td>
+<td>移除所有数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-SDDiskCache"><a href="#2-SDDiskCache" class="headerlink" title="2. SDDiskCache"></a>2. SDDiskCache</h3><p>SDDiskCache 继承于 NSObject，且实现了 <strong><em>SDDiskCache 协议</em></strong></p>
+<p>SDDiskCache 协议具体实现的协议方法如下:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithConfig:</td>
+<td>初始化配置基本信息</td>
+</tr>
+<tr>
+<td>containsDataForKey:</td>
+<td>是否包含该key的数据</td>
+</tr>
+<tr>
+<td>dataForKey:</td>
+<td>通过key查询数据</td>
+</tr>
+<tr>
+<td>setData:forkey:</td>
+<td>设置缓存数据</td>
+</tr>
+<tr>
+<td>removeDataForKey:</td>
+<td>移除指定数据</td>
+</tr>
+<tr>
+<td>removeAllData</td>
+<td>移除所有数据</td>
+</tr>
+<tr>
+<td>removeExpiredData</td>
+<td>移除过期数据</td>
+</tr>
+<tr>
+<td>cachePathForKey:</td>
+<td>通过key查询缓存路径</td>
+</tr>
+<tr>
+<td>totalCount</td>
+<td>缓存数据总数</td>
+</tr>
+<tr>
+<td>totalSize</td>
+<td>缓存数据总大小</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-SDImageCacheConfig"><a href="#3-SDImageCacheConfig" class="headerlink" title="3. SDImageCacheConfig"></a>3. SDImageCacheConfig</h3><p>缓存信息配置文件，下面是该文件中部分参数字段说明:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shouldDisableiCloud</td>
+<td>是否禁用iCloud（默认YES）</td>
+</tr>
+<tr>
+<td>shouldCacheImagesInMemory</td>
+<td>是否使用内存缓存（默认YES）</td>
+</tr>
+<tr>
+<td>shouldUseWeakMemoryCache</td>
+<td>图像的弱内存缓存控制（默认YES）</td>
+</tr>
+<tr>
+<td>shouldRemoveExpiredDataWhenEnterBackground</td>
+<td>应用程序进入后台时删除过期的磁盘数据（默认YES）</td>
+</tr>
+<tr>
+<td>diskCacheReadingOptions</td>
+<td>磁盘数据读配置，枚举类型默认0</td>
+</tr>
+<tr>
+<td>diskCacheWritingOptions</td>
+<td>磁盘数据写配置，枚举类型默认0</td>
+</tr>
+<tr>
+<td>maxDiskAge</td>
+<td>磁盘缓存时间(单位s)，默认1week</td>
+</tr>
+<tr>
+<td>maxDiskSize</td>
+<td>磁盘缓存大小，默认0无限制</td>
+</tr>
+<tr>
+<td>maxMemoryCost</td>
+<td>内存缓存大小，默认0无限制</td>
+</tr>
+<tr>
+<td>maxMemoryCount</td>
+<td>内存缓存图片数量，默认0无限制</td>
+</tr>
+<tr>
+<td>diskCacheExpireType</td>
+<td>磁盘缓存过期类型，枚举类型（AccessDate和ModificationDate）默认ModificationDate</td>
+</tr>
+<tr>
+<td>memoryCacheClass</td>
+<td>自定义内存缓存类。该类实例必须实现“SDMemoryCache”协议。</td>
+</tr>
+<tr>
+<td>diskCacheClass</td>
+<td>自定义磁盘缓存类。该类实例必须实现“SDDiskCache”协议。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-SDImageCacheDefine"><a href="#4-SDImageCacheDefine" class="headerlink" title="4. SDImageCacheDefine"></a>4. SDImageCacheDefine</h3><p>该文件主要包含:</p>
+<ol>
+<li><p>缓存的枚举类型和相关的block定义</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, SDImageCacheType) &#123;</span><br><span class="line">    SDImageCacheTypeNone, // 不使用缓存</span><br><span class="line">    SDImageCacheTypeDisk, // 磁盘缓存</span><br><span class="line">    SDImageCacheTypeMemory, // 内存缓存</span><br><span class="line">    SDImageCacheTypeAll // 磁盘和内存缓存</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>缓存图片查询过程中的解码方法 SDImageCacheDecodeImageData</p>
+</li>
+<li><p><strong><em>定义了SDImageCache协议</em></strong> 和该协议必须实现的方法</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>方法说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>queryImageForKey:options:context:completion:</td>
+<td>通过key查询图片，通过返回ope，取消异步查询</td>
+</tr>
+<tr>
+<td>storeImage:imageData:forKey:cacheType: completion:</td>
+<td>以key为键存储图片</td>
+</tr>
+<tr>
+<td>removeImageForKey:cacheType:completion:</td>
+<td>移除指定key的图片</td>
+</tr>
+<tr>
+<td>containsImageForKey:cacheType:completion:</td>
+<td>是否包含key的键值图片</td>
+</tr>
+<tr>
+<td>clearWithCacheType: completion:</td>
+<td>清除图片缓存</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-SDImageCache"><a href="#5-SDImageCache" class="headerlink" title="5. SDImageCache"></a>5. SDImageCache</h3><p>缓存的核心类，管理内存缓存和磁盘缓存，</p>
+<p><strong><em>实现了 SDImageCacheDefine 中的 SDImageCache 协议。</em></strong></p>
+<p>并提供以下方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>方法说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithNamespace:</td>
+<td>初始化缓存方法</td>
+</tr>
+<tr>
+<td>cachePathForKey:</td>
+<td>通过key获取磁盘缓存的路径</td>
+</tr>
+<tr>
+<td>storeImage:forkey:completion:</td>
+<td>异步方法，图片/图片数据存储到磁盘、内存</td>
+</tr>
+<tr>
+<td>storeImageToMemory:forkey:</td>
+<td>同步方法，图片存储到内存</td>
+</tr>
+<tr>
+<td>storeImageDataToDisk:forkey:</td>
+<td>同步方法，图片数据存储到磁盘</td>
+</tr>
+<tr>
+<td>diskImageExistsWithKey:completion</td>
+<td>异步方法，图片在磁盘中是否存在</td>
+</tr>
+<tr>
+<td>diskImageDataExistsWithKey:</td>
+<td>同步方法，图片数据在磁盘中是否存在</td>
+</tr>
+<tr>
+<td>diskImageDataForKey:</td>
+<td>同步方法，使用串行队列查询图片数据</td>
+</tr>
+<tr>
+<td>queryCacheOperationForKey:done:</td>
+<td>异步查询方法，返回一个ope对象用于控制查询操作</td>
+</tr>
+<tr>
+<td>imageFromMemoryCacheForKey:</td>
+<td>同步方法，通过key从内存中查询缓存图片</td>
+</tr>
+<tr>
+<td>imageFromDiskCacheForKey:</td>
+<td>同步方法，通过key从磁盘中查询缓存图片</td>
+</tr>
+<tr>
+<td>imageFromCacheForKey:</td>
+<td>同步方法，通过key先从内存中查询缓存图片，如果没找到在从磁盘中查</td>
+</tr>
+<tr>
+<td>removeImageForKey:withCompletion</td>
+<td>异步方法，通过可以删除缓存</td>
+</tr>
+<tr>
+<td>clearMemory</td>
+<td>同步方法，清除内存缓存</td>
+</tr>
+<tr>
+<td>clearDiskOnCompletion:</td>
+<td>异步方法，清除磁盘缓存</td>
+</tr>
+<tr>
+<td>deleteOldFilesWithCompletionBlock:</td>
+<td>异步方法，清除过期磁盘缓存图片</td>
+</tr>
+<tr>
+<td>totalDiskSize</td>
+<td>获取磁盘缓存大小</td>
+</tr>
+<tr>
+<td>totalDiskCount</td>
+<td>获取磁盘缓存数量</td>
+</tr>
+<tr>
+<td>calculateSizeWithCompletionBlock:</td>
+<td>异步方法获取磁盘缓存数量和大小</td>
+</tr>
+</tbody>
+</table>
+<h3 id="6-SDImageCachesManager"><a href="#6-SDImageCachesManager" class="headerlink" title="6. SDImageCachesManager"></a>6. SDImageCachesManager</h3><p>管理缓存队列操作的优先级、串行、并行设置</p>
+<p>该类 <strong><em>实现 SDImageCacheDefine 中的 SDImageCache 协议。</em></strong></p>
+<p>通过以下枚举类型控制执行策略</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSUInteger, SDImageCachesManagerOperationPolicy) &#123;</span><br><span class="line">	SDImageCachesManagerOperationPolicySerial,//串行执行</span><br><span class="line">   SDImageCachesManagerOperationPolicyConcurrent,//并行执行</span><br><span class="line">   SDImageCachesManagerOperationPolicyHighestOnly,//只执行优先级最高的缓存</span><br><span class="line">   SDImageCachesManagerOperationPolicyLowestOnly //只执行优先级最低的缓存</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>可以分别单独设置协议中的查询、存储、删除、是否包含和清除。</p>
+<h2 id="下载模块"><a href="#下载模块" class="headerlink" title="下载模块"></a>下载模块</h2><p>SD的下载模块由以下文件组成</p>
+<p><img src="../../../../images/30/30-4.png" alt></p>
+<h3 id="1-SDImageLoader"><a href="#1-SDImageLoader" class="headerlink" title="1. SDImageLoader"></a>1. SDImageLoader</h3><p><strong><em>定义了SDImageLoader协议</em></strong> 和该协议需要实现的两个方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>canLoadWithURL:</td>
+<td>判断该图片是否可以继续下载</td>
+</tr>
+<tr>
+<td>loadImageWithURL:options:context:progress:completed:</td>
+<td>获取图片数据</td>
+</tr>
+</tbody>
+</table>
+<p>定义了图片解码方法:</p>
+<p>SDImageLoaderDecodeImageData</p>
+<p>SDImageLoaderDecodeProgressiveImageData</p>
+<h3 id="2-SDImageLoadersManager"><a href="#2-SDImageLoadersManager" class="headerlink" title="2. SDImageLoadersManager"></a>2. SDImageLoadersManager</h3><p>图片加载管理类 <strong><em>实现了SDImageLoader协议</em></strong> 并且定义了添加和移除loaders管理方法</p>
+<h3 id="3-SDWebImageDownloaderConfig"><a href="#3-SDWebImageDownloaderConfig" class="headerlink" title="3. SDWebImageDownloaderConfig"></a>3. SDWebImageDownloaderConfig</h3><p>图片下载选项配置类</p>
+<ol>
+<li>图片下载执行顺序，枚举类型</li>
+</ol>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">typedef NS_ENUM(NSInteger, SDWebImageDownloaderExecutionOrder) &#123;</span><br><span class="line">  		SDWebImageDownloaderFIFOExecutionOrder,//先进先出</span><br><span class="line">  		SDWebImageDownloaderLIFOExecutionOrder//后进先出</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</code></pre><ol start="2">
+<li>基本配置项</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maxConcurrentDownloads</td>
+<td>最大并发数量，默认6</td>
+</tr>
+<tr>
+<td>downloadTimeout</td>
+<td>下载超时时间，默认15s</td>
+</tr>
+<tr>
+<td>minimumProgressInterval</td>
+<td>下载进度回调最小间隔，默认0</td>
+</tr>
+<tr>
+<td>sessionConfiguration</td>
+<td>默认defaultSessionConfiguration</td>
+</tr>
+<tr>
+<td>operationClass</td>
+<td>默认SDWebImageDownloaderOperation</td>
+</tr>
+<tr>
+<td>executionOrder</td>
+<td>默认FIFOExecutionOrder 先进先出</td>
+</tr>
+<tr>
+<td>urlCredential</td>
+<td>设置url的证书默认为空</td>
+</tr>
+<tr>
+<td>username</td>
+<td>设置请求的用户名默认为空</td>
+</tr>
+<tr>
+<td>password</td>
+<td>设置请求的密码默认为空</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-SDWebImageDownloaderRequestModifier"><a href="#4-SDWebImageDownloaderRequestModifier" class="headerlink" title="4. SDWebImageDownloaderRequestModifier"></a>4. SDWebImageDownloaderRequestModifier</h3><p>该类首先定义了<strong>SDWebImageDownloaderRequestModifier协议</strong> 和该协议需要实现的方法</p>
+<p>modifiedRequestWithRequest: 使用该协议可以便捷的修改请求器。</p>
+<h3 id="5-SDWebImageDownloader"><a href="#5-SDWebImageDownloader" class="headerlink" title="5. SDWebImageDownloader"></a>5. SDWebImageDownloader</h3><p>一: 该类首先定义了与每个下载相关联的下载令牌 SDWebImageDownloadToken，该类需要实现 <strong>SDWebImageOperation 协议</strong> 方法，并且提供了取消下载的方法 cancel 和部分下载相关的只读属性：下载地址、下载请求和下载响应。</p>
+<p>二: 下载的核心部分</p>
+<p>定义了以下相关公有方法:</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithConfig:</td>
+<td>初始化并配置下载器（SDWebImageDownloaderConfig）</td>
+</tr>
+<tr>
+<td>setValue:forHTTPHeaderField</td>
+<td>设置下载请求头</td>
+</tr>
+<tr>
+<td>valueForHTTPHeaderField:</td>
+<td>获取下载请求头</td>
+</tr>
+<tr>
+<td>downloadImageWithURL:options:progress:completed</td>
+<td>创建一个下载实列，返回一个下载令牌（SDWebImageDownloadToken）</td>
+</tr>
+<tr>
+<td>cancelAllDownloads</td>
+<td>取消所有下载</td>
+</tr>
+<tr>
+<td>invalidateSessionAndCancel</td>
+<td>可选择的取消挂起的操作</td>
+</tr>
+</tbody>
+</table>
+<p>三: 该类需要实现了 <strong>SDImageLoader 协议</strong></p>
+<p>四: 内部主要私用方法</p>
+<p>|callCacheProcessForOperation:| 调用多线程查询缓存图片|<br>|callDownloadProcessForOperation:| 调用多线程下载图片|<br>|callStoreCacheProcessForOperation:| 调用多线程存储图片|</p>
+<h3 id="6-SDWebImageDownloaderOperation"><a href="#6-SDWebImageDownloaderOperation" class="headerlink" title="6. SDWebImageDownloaderOperation"></a>6. SDWebImageDownloaderOperation</h3><p>该类继承 NSOperation 类，并定义和需要实现 <strong>SDWebImageDownloaderOperation 协议</strong></p>
+<p>SDWebImageDownloaderOperation协议有如下方法和属性:</p>
+<p>一: 必须实现的方法/属性:</p>
+<table>
+<thead>
+<tr>
+<th>方法/属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithRequest:inSession:options</td>
+<td>初始化下载对象</td>
+</tr>
+<tr>
+<td>initWithRequest:inSession:options:options</td>
+<td>初始化下载对象</td>
+</tr>
+<tr>
+<td>addHandlersForProgress:completed</td>
+<td>下载进度和完成处理程序，返回token用于取消该回调</td>
+</tr>
+<tr>
+<td>cancel:</td>
+<td>通过token取消下载</td>
+</tr>
+<tr>
+<td>request(属性)</td>
+<td>下载请求体</td>
+</tr>
+<tr>
+<td>response(属性)</td>
+<td>下载响应体</td>
+</tr>
+</tbody>
+</table>
+<p>一: 可选择实现的属性:</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataTask</td>
+<td>NSURLSessionTask</td>
+</tr>
+<tr>
+<td>credential</td>
+<td>NSURLCredential</td>
+</tr>
+<tr>
+<td>minimumProgressInterval</td>
+<td>下载过程中进度回调的百分比最小间隔设置，默认是0立即回调</td>
+</tr>
+</tbody>
+</table>
+<h2 id="下载管理"><a href="#下载管理" class="headerlink" title="下载管理"></a>下载管理</h2><p>SD下载和缓存管理模块由以下文件组成</p>
+<p><img src="../../../../images/30/30-5.png" alt></p>
+<h3 id="SDWebImageManager"><a href="#SDWebImageManager" class="headerlink" title="SDWebImageManager"></a>SDWebImageManager</h3><p>该类默认初始化缓存管理 SDImageCache 和 下载器 SDWebImageDownloader，我们也可以修改成自定义下载类和缓存类，只要该类实现指定的协议方法。</p>
+<p>SDWebImageManager 提供了以下方法和属性</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delegate</td>
+<td>代理</td>
+</tr>
+<tr>
+<td>imageCache</td>
+<td>查询图片缓存</td>
+</tr>
+<tr>
+<td>imageLoader</td>
+<td>加载图片</td>
+</tr>
+<tr>
+<td>transformer</td>
+<td>图像转换器，用于图像加载完成后的图像转换，并将转换后的图像存储到换存</td>
+</tr>
+<tr>
+<td>cacheKeyFilter</td>
+<td>缓存过滤器用于将url转换为缓存建</td>
+</tr>
+<tr>
+<td>cacheSerializer</td>
+<td>默认把源下载的数据存储的磁盘缓存</td>
+</tr>
+<tr>
+<td>running</td>
+<td>线程是否在执行</td>
+</tr>
+<tr>
+<td>defaultImageCache</td>
+<td>默认的图片缓存</td>
+</tr>
+<tr>
+<td>defaultImageLoader</td>
+<td>默认的图片加载</td>
+</tr>
+<tr>
+<td>sharedManager</td>
+<td>单例</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>initWithCache:loader</td>
+<td>初始化默认的缓存管理器和图片加载器</td>
+</tr>
+<tr>
+<td>loadImageWithURL:options:progress:completed</td>
+<td>图片加载</td>
+</tr>
+<tr>
+<td>loadImageWithURL:options:context:progress:completed</td>
+<td>图片加载</td>
+</tr>
+<tr>
+<td>cancelAll</td>
+<td>取消所有下载队列</td>
+</tr>
+<tr>
+<td>cacheKeyForURL</td>
+<td>通过url获取缓存的key</td>
+</tr>
+</tbody>
+</table>
+<p>loadImageWithURL: 核心图片加载方法内容主要实现逻辑如下所示:</p>
+<p><img src="../../../../images/30/30-6.png" alt></p>
+<p>代码部分请参考sd源码。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/20/31-centos7部署flask项目/" rel="next" title="centos7服务部署flask项目">
+                <i class="fa fa-chevron-left"></i> centos7服务部署flask项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SD-5-0"><span class="nav-number">1.</span> <span class="nav-text">SD 5.0</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SD-的整体分类如下所示"><span class="nav-number">1.1.</span> <span class="nav-text">SD 的整体分类如下所示:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓存模块"><span class="nav-number">1.2.</span> <span class="nav-text">缓存模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SDMemoryCache"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. SDMemoryCache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SDDiskCache"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. SDDiskCache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SDImageCacheConfig"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. SDImageCacheConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SDImageCacheDefine"><span class="nav-number">1.2.4.</span> <span class="nav-text">4. SDImageCacheDefine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-SDImageCache"><span class="nav-number">1.2.5.</span> <span class="nav-text">5. SDImageCache</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-SDImageCachesManager"><span class="nav-number">1.2.6.</span> <span class="nav-text">6. SDImageCachesManager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载模块"><span class="nav-number">1.3.</span> <span class="nav-text">下载模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-SDImageLoader"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. SDImageLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SDImageLoadersManager"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. SDImageLoadersManager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SDWebImageDownloaderConfig"><span class="nav-number">1.3.3.</span> <span class="nav-text">3. SDWebImageDownloaderConfig</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-SDWebImageDownloaderRequestModifier"><span class="nav-number">1.3.4.</span> <span class="nav-text">4. SDWebImageDownloaderRequestModifier</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-SDWebImageDownloader"><span class="nav-number">1.3.5.</span> <span class="nav-text">5. SDWebImageDownloader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-SDWebImageDownloaderOperation"><span class="nav-number">1.3.6.</span> <span class="nav-text">6. SDWebImageDownloaderOperation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载管理"><span class="nav-number">1.4.</span> <span class="nav-text">下载管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SDWebImageManager"><span class="nav-number">1.4.1.</span> <span class="nav-text">SDWebImageManager</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

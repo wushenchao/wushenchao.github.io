@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="iOS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进程定义:123在进程模型中，计算机上所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程（process）。--摘自《现代操作系统》 1234狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统">
+<meta name="keywords" content="iOS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多线程编程-GCD">
+<meta property="og:url" content="http://yoursite.com/2018/01/28/22-GCD/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="进程定义:123在进程模型中，计算机上所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程（process）。--摘自《现代操作系统》 1234狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/14/14-1.png">
+<meta property="og:updated_time" content="2019-05-05T09:32:19.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多线程编程-GCD">
+<meta name="twitter:description" content="进程定义:123在进程模型中，计算机上所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程（process）。--摘自《现代操作系统》 1234狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统">
+<meta name="twitter:image" content="http://yoursite.com/images/14/14-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/28/22-GCD/">
+
+
+
+
+
+  <title>多线程编程-GCD | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It is never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/22-GCD/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多线程编程-GCD</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-28T00:00:00+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/28/22-GCD/" class="leancloud_visitors" data-flag-title="多线程编程-GCD">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.5k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  16 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h4 id="定义"><a href="#定义" class="headerlink" title="定义:"></a>定义:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在进程模型中，计算机上所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程（process）。</span><br><span class="line"></span><br><span class="line">--摘自《现代操作系统》</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。</span><br><span class="line">广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。</span><br><span class="line"></span><br><span class="line">--摘自《百度百科》</span><br></pre></td></tr></table></figure>
+<p>在iOS系统中，开启一个应用就打开了一个进程。</p>
+<a id="more"></a>
+<h4 id="进程和程序之间的区别"><a href="#进程和程序之间的区别" class="headerlink" title="进程和程序之间的区别:"></a>进程和程序之间的区别:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">进程就是厨师阅读蛋糕食谱，取来各种原料以及烘制蛋糕的一系列动作的总和。</span><br><span class="line">其中的厨师相当于处理器（CPU），蛋糕食谱相当于程序（即用适当形式描述的算法），各种原料相当于输入的数据。</span><br></pre></td></tr></table></figure>
+<h4 id="创建进程的4个主要事件"><a href="#创建进程的4个主要事件" class="headerlink" title="创建进程的4个主要事件:"></a>创建进程的4个主要事件:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 系统初始化</span><br><span class="line">2. 执行了正在运行的进程所调用的进程创建系统调用</span><br><span class="line">3. 用户请求创建一个新进程</span><br><span class="line">4. 一个批处理作业的初始化</span><br></pre></td></tr></table></figure>
+<h4 id="进程的三种状态及转换关系"><a href="#进程的三种状态及转换关系" class="headerlink" title="进程的三种状态及转换关系:"></a>进程的三种状态及转换关系:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1. 在操作系统发现进程不能继续运行下去，发生转换1</span><br><span class="line">2. 2和3的转换是由进程调度程序引起的。系统认为一个运行进程占用时间过长，</span><br><span class="line">   决定让其他进程来使用cpu，会发生转换2。系统重新让刚刚的进程重新运行发生转换3</span><br><span class="line">3. 当进程等待一个外部事件发生时(例如一些输入)，发生转换4</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../images/14/14-1.png" alt></p>
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义:"></a>定义:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">线程（thread）是操作系统能够进行运算调度的最小单位。它被包含在进程之中，</span><br><span class="line">是进程中的实际运作单位。</span><br><span class="line">一条线程指的是进程中一个单一顺序的控制流，一个进程中可以并发多个线程，</span><br><span class="line">每条线程并行执行不同的任务。</span><br><span class="line">在Unix System V及SunOS中也被称为轻量进程，但轻量进程更多指内核线程，</span><br><span class="line">而把用户线程称为线程。</span><br><span class="line"></span><br><span class="line">--摘自《百度百科》</span><br></pre></td></tr></table></figure>
+<p>在iOS系统中，一个进程包含一个主线程，它的主要任务是处理UI事件，显示和刷新UI。</p>
+<h4 id="进程和线程的关系"><a href="#进程和线程的关系" class="headerlink" title="进程和线程的关系:"></a>进程和线程的关系:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 进程是CPU调度和资源分配的基本单位。</span><br><span class="line">2. 同一进程内的线程共享进程的资源。</span><br><span class="line">3. 线程是由相关堆栈寄存器和线程控制表组成。</span><br><span class="line">4. 一个进程可以包含若干线程，每个线程为独立运行和调用的基本单位。</span><br><span class="line">5. 由于线程的调度消耗比进程更小，因此能高效的提高系统内多个程序间的并发执行程度，</span><br><span class="line">   从而提高系统的资源利用率和吞吐量。</span><br></pre></td></tr></table></figure>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别:"></a>区别:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1）地址空间和其它资源（如打开文件）：进程间相互独立，同一进程的各线程间共享。某进程内的线程在其它进程不可见。</span><br><span class="line">2）通信：进程间通信IPC，线程间可以直接读写进程数据段（如全局变量）来进行通信——需要进程同步和互斥手段的辅助，以保证数据的一致性。</span><br><span class="line">3）调度和切换：线程上下文切换比进程上下文切换要快得多。</span><br><span class="line">4）在多线程OS中，线程不是一个可执行的实体。</span><br></pre></td></tr></table></figure>
+<h2 id="同步-amp-amp-异步"><a href="#同步-amp-amp-异步" class="headerlink" title="同步 &amp;&amp; 异步"></a>同步 &amp;&amp; 异步</h2><h4 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h4><p>在当前线程中依次执行任务，不开启新的线程。</p>
+<h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>多个任务情况下，一个任务A正在执行，同时可以执行另一个任务B。任务B不用等待任务A结束才执行。存在多条线程。</p>
+<h2 id="并发-amp-amp-并行"><a href="#并发-amp-amp-并行" class="headerlink" title="并发 &amp;&amp; 并行"></a>并发 &amp;&amp; 并行</h2><h4 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h4><p>并发指当多个线程操作时，如果系统只有一个CPU，则它根本不可能真正同时进行一个以上的线程，它只能把CPU运行时间划分成若干个时间段,再将时间段分配给各个线程执行，在一个时间段的线程代码运行时，其它线程处于挂起状。这种方式我们称之为并发(Concurrent)。</p>
+<h4 id="并行"><a href="#并行" class="headerlink" title="并行"></a>并行</h4><p>并行指当系统有一个以上CPU时，其中一个CPU执行一个线程时，另一个CPU执行另一个线程，两个线程互不抢占CPU资源，可以同时进行，这种方式我们称之为并行(Parallel)。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结:"></a>总结:</h3><p>并行是指两个或者多个事件在同一时刻发生, 而并发是指两个或多个事件在同一时间间隔内发生。在多程序环境下，并发性是指在一段时间内宏观上有多个程序在同时运行，但在单处理机系统中，每一时刻却只能有一道程序执行，因此这些程序只能是分时地交替执行。倘若该计算机系统有多个处理器，则这些可以并发执行的程序便可被分配到多个处理器上，实现并行执行，这样，多个程序便可以同时执行。</p>
+<h2 id="Grand-Central-Dispatch-GCD"><a href="#Grand-Central-Dispatch-GCD" class="headerlink" title="Grand Central Dispatch(GCD)"></a>Grand Central Dispatch(GCD)</h2><h3 id="百度百科的定义"><a href="#百度百科的定义" class="headerlink" title="百度百科的定义:"></a>百度百科的定义:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Grand Central Dispatch(GCD) 是 Apple 开发的一个多核编程的较新的解决方法。</span><br><span class="line">它主要用于优化应用程序以支持多核处理器以及其他对称多处理系统。它是一个在线程池</span><br><span class="line">模式的基础上执行的并发任务。在 Mac OS X 10.6 雪豹中首次推出，也可在 iOS 4 </span><br><span class="line">及以上版本使用。</span><br></pre></td></tr></table></figure>
+<h3 id="GCD线程的简单使用"><a href="#GCD线程的简单使用" class="headerlink" title="GCD线程的简单使用:"></a>GCD线程的简单使用:</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GCD 可用于多核的并行运算</span><br><span class="line">GCD 会自动利用更多的 CPU 内核（比如双核、四核）</span><br><span class="line">GCD 会自动管理线程的生命周期（创建线程、调度任务、销毁线程）</span><br></pre></td></tr></table></figure>
+<h4 id="两种队列的创建-获取方式"><a href="#两种队列的创建-获取方式" class="headerlink" title="两种队列的创建/获取方式"></a>两种队列的创建/获取方式</h4><h5 id="并发队列"><a href="#并发队列" class="headerlink" title="并发队列"></a>并发队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.concurrent.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line"></span><br><span class="line">默认的全局并发队列</span><br><span class="line">dispatch_queue_t global_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br></pre></td></tr></table></figure>
+<h5 id="串行队列"><a href="#串行队列" class="headerlink" title="串行队列"></a>串行队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.serial.queue&quot;, DISPATCH_QUEUE_SERIAL);</span><br><span class="line"></span><br><span class="line">主队列:特殊的串行队列</span><br><span class="line">dispatch_queue_t main_serial_queue = dispatch_get_main_queue();</span><br></pre></td></tr></table></figure>
+<h3 id="队列和线程的6种组合"><a href="#队列和线程的6种组合" class="headerlink" title="队列和线程的6种组合"></a>队列和线程的6种组合</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>并发队列(CONCURRENT)</th>
+<th>串行队列(SERIAL)</th>
+<th>主队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步(sync)</td>
+<td>没有开启新线程,串行执行任务</td>
+<td>没有开启新线程,串行执行任务</td>
+<td>(主线程调用:死锁)其他线程:没有开启新线程,串行执行任务</td>
+</tr>
+<tr>
+<td>异步(async)</td>
+<td>开启新线程,并发执行任务</td>
+<td>开启新线程(1条),串行执行任务</td>
+<td>没有开启新线程,串行执行任务</td>
+</tr>
+</tbody>
+</table>
+<h5 id="1-同步-并发"><a href="#1-同步-并发" class="headerlink" title="1.同步+并发"></a>1.同步+并发</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;syncConcurrent---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.concurrent.sync.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">dispatch_sync(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">dispatch_sync(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;2---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;syncConcurrent---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>打印结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:827307] currentThread---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] syncConcurrent---begin</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] syncConcurrent---end</span><br></pre></td></tr></table></figure>
+<h5 id="2-异步-并发"><a href="#2-异步-并发" class="headerlink" title="2.异步+并发"></a>2.异步+并发</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;asyncConcurrent---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.concurrent.async.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;2---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;asyncConcurrent---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>打印结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:827307] currentThread---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] asyncConcurrent---begin</span><br><span class="line">[18151:827307] asyncConcurrent---end</span><br><span class="line">[18151:828000] 1---&lt;NSThread: 0x600002370c00&gt;&#123;number = 3, name = (null)&#125;</span><br><span class="line">[18151:831272] 2---&lt;NSThread: 0x60000238e000&gt;&#123;number = 4, name = (null)&#125;</span><br><span class="line">[18151:828000] 1---&lt;NSThread: 0x600002370c00&gt;&#123;number = 3, name = (null)&#125;</span><br><span class="line">[18151:831272] 2---&lt;NSThread: 0x60000238e000&gt;&#123;number = 4, name = (null)&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-同步-串行"><a href="#3-同步-串行" class="headerlink" title="3.同步+串行"></a>3.同步+串行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;syncSerial---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.serial.sync.queue&quot;, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">dispatch_sync(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">dispatch_sync(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;2---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;syncSerial---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>打印结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:827307] currentThread---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] syncSerial---begin</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] syncSerial---end</span><br></pre></td></tr></table></figure>
+<h5 id="4-异步-串行"><a href="#4-异步-串行" class="headerlink" title="4.异步+串行"></a>4.异步+串行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;asyncSerial---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.serial.async.queue&quot;, DISPATCH_QUEUE_SERIAL);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;2---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;asyncSerial---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>打印结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:827307] currentThread---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] asyncSerial---begin</span><br><span class="line">[18151:827307] asyncSerial---end</span><br><span class="line">[18151:831273] 1---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18151:831273] 1---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18151:831273] 2---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18151:831273] 2---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-同步-主队列"><a href="#5-同步-主队列" class="headerlink" title="5.同步+主队列"></a>5.同步+主队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;syncMain---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_get_main_queue();</span><br><span class="line">dispatch_sync(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;syncMain---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>如果在主线程中执行该代码打印如下结果后直接卡死</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[18151:831273] currentThread---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18151:831273] syncMain---begin</span><br></pre></td></tr></table></figure>
+<p>我们可创建一个异步线程，在异步线程中重新执行上述代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.concurrent.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">     ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:831273] currentThread---&lt;NSThread: 0x60000238d940&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18151:831273] syncMain---begin</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:831273] syncMain---end</span><br></pre></td></tr></table></figure>
+<h5 id="6-异步-主队列"><a href="#6-异步-主队列" class="headerlink" title="6.异步+主队列"></a>6.异步+主队列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;asyncMain---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_get_main_queue();</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">NSLog(@&quot;asyncMain---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>打印结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[18151:827307] currentThread---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] asyncMain---begin</span><br><span class="line">[18151:827307] asyncMain---end</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 1---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18151:827307] 2---&lt;NSThread: 0x6000023f6900&gt;&#123;number = 1, name = main&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h3><ol>
+<li>栅栏方法: dispatch_barrier_async</li>
+<li>延时执行方法: dispatch_after</li>
+<li>一次性代码: dispatch_once</li>
+<li>快速迭代方法: dispatch_apply</li>
+<li>信号量: dispatch_semaphore</li>
+<li>队列组: dispatch_group_notify、dispatch_group_wait、和<br> dispatch_group_enter、dispatch_group_leave （两者组合等同于 dispatch_group_async）</li>
+</ol>
+<h4 id="1-栅栏方法-dispatch-barrier-async"><a href="#1-栅栏方法-dispatch-barrier-async" class="headerlink" title="1. 栅栏方法: dispatch_barrier_async"></a>1. 栅栏方法: dispatch_barrier_async</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;barrier async---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_queue_create(&quot;com.concurrent.async.queue&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;11---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;22---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">// 栅栏方法</span><br><span class="line">dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;barrier---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">NSLog(@&quot;barrier async---end&quot;);</span><br></pre></td></tr></table></figure>
+<p>执行结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[18339:884102] currentThread---&lt;NSThread: 0x6000039c9380&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18339:884102] barrier async---begin</span><br><span class="line">[18339:884102] barrier async---end</span><br><span class="line">[18339:884207] 22---&lt;NSThread: 0x60000394dfc0&gt;&#123;number = 3, name = (null)&#125;</span><br><span class="line">[18339:884208] 11---&lt;NSThread: 0x6000039b1a40&gt;&#123;number = 4, name = (null)&#125;</span><br><span class="line">[18339:884207] 22---&lt;NSThread: 0x60000394dfc0&gt;&#123;number = 3, name = (null)&#125;</span><br><span class="line">[18339:884208] 11---&lt;NSThread: 0x6000039b1a40&gt;&#123;number = 4, name = (null)&#125;</span><br><span class="line">[18339:884208] barrier---&lt;NSThread: 0x6000039b1a40&gt;&#123;number = 4, name = (null)&#125;</span><br><span class="line">[18339:884208] barrier---&lt;NSThread: 0x6000039b1a40&gt;&#123;number = 4, name = (null)&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-信号量-dispatch-semaphore"><a href="#5-信号量-dispatch-semaphore" class="headerlink" title="5. 信号量: dispatch_semaphore"></a>5. 信号量: dispatch_semaphore</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dispatch_semaphore_create：创建一个Semaphore并初始化信号的总量</span><br><span class="line">dispatch_semaphore_signal：发送一个信号，让信号总量加1</span><br><span class="line">dispatch_semaphore_wait：当信号总量为0时就会一直等待（阻塞所在线程)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;semaphore---begin&quot;);</span><br><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);</span><br><span class="line">__block NSInteger number = 0;</span><br><span class="line">dispatch_async(queue, ^&#123;</span><br><span class="line">    [NSThread sleepForTimeInterval:2];</span><br><span class="line">    NSLog(@&quot;1---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    number = 100;</span><br><span class="line">    dispatch_semaphore_signal(semaphore);</span><br><span class="line">&#125;);</span><br><span class="line">dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);</span><br><span class="line">NSLog(@&quot;semaphore---end,number = %ld&quot;,(long)number);</span><br></pre></td></tr></table></figure>
+<p>执行结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[18361:888102] currentThread---&lt;NSThread: 0x6000021b68c0&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">[18361:888102] semaphore---begin</span><br><span class="line">[18361:888147] 1---&lt;NSThread: 0x6000021323c0&gt;&#123;number = 5, name = (null)&#125;</span><br><span class="line">[18361:888102] semaphore---end,number = 100</span><br></pre></td></tr></table></figure>
+<h4 id="6-队列组-dispatch-group"><a href="#6-队列组-dispatch-group" class="headerlink" title="6. 队列组: dispatch_group"></a>6. 队列组: dispatch_group</h4><h5 id="6-1-dispatch-group-async"><a href="#6-1-dispatch-group-async" class="headerlink" title="6.1 dispatch_group_async"></a>6.1 dispatch_group_async</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">NSLog(@&quot;currentThread---%@&quot;,[NSThread currentThread]);</span><br><span class="line">NSLog(@&quot;group---begin&quot;);</span><br><span class="line">dispatch_group_t group =  dispatch_group_create();</span><br><span class="line">dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;11---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">    </span><br><span class="line">dispatch_group_async(group, queue, ^&#123;</span><br><span class="line">    for (int i = 0; i &lt; 2; ++i) &#123;</span><br><span class="line">        [NSThread sleepForTimeInterval:2];</span><br><span class="line">        NSLog(@&quot;22---%@&quot;,[NSThread currentThread]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">##### 6.2 dispatch\_group\_enter，dispatch\_group\_leave</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">两者成对出现，如果只是用 dispatch_group_enter，会使线程一直阻塞。</span><br><span class="line">如果只使用dispatch_group_leave会出现野指针。</span><br></pre></td></tr></table></figure>
+<p>NSLog(@”currentThread---%@”,[NSThread currentThread]);<br>NSLog(@”group—begin”);<br>dispatch_group_t group =  dispatch_group_create();<br>dispatch_group_enter(group);<br>dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);<br>dispatch_async(group, queue, ^{<br>    for (int i = 0; i &lt; 2; ++i) {<br>        [NSThread sleepForTimeInterval:2];<br>        NSLog(@”11---%@”,[NSThread currentThread]);<br>    }<br>    dispatch_group_leave(group);<br>});</p>
+<p>dispatch_group_enter(group);<br>dispatch_async(group, queue, ^{<br>    for (int i = 0; i &lt; 2; ++i) {<br>        [NSThread sleepForTimeInterval:2];<br>        NSLog(@”22---%@”,[NSThread currentThread]);<br>    }<br>    dispatch_group_leave(group);<br>});</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">以下方法接上面的 6.1 或者 6.2</span><br><span class="line"></span><br><span class="line">##### 方法1. dispatch\_group\_notify,不会阻塞主线程，但是会等任务1、任务2都执行完毕后,回到原线程中执行notify内容</span><br></pre></td></tr></table></figure>
+<p>dispatch_group_notify(group, dispatch_get_main_queue(), ^{<br>    for (int i = 0; i &lt; 2; ++i) {<br>        [NSThread sleepForTimeInterval:2];<br>        NSLog(@”33---%@”,[NSThread currentThread]);<br>    }<br>});<br>NSLog(@”group—end”);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### 方法1结果如下:</span><br></pre></td></tr></table></figure></p>
+<p>[18361:888102] currentThread—&lt;NSThread: 0x6000021b68c0&gt;{number = 1, name = main}<br>[18361:888102] group—begin<br>[18361:888102] group—end<br>[18361:888147] 11—&lt;NSThread: 0x6000021323c0&gt;{number = 5, name = (null)}<br>[18361:889748] 22—&lt;NSThread: 0x600002132200&gt;{number = 6, name = (null)}<br>[18361:889748] 22—&lt;NSThread: 0x600002132200&gt;{number = 6, name = (null)}<br>[18361:888147] 11—&lt;NSThread: 0x6000021323c0&gt;{number = 5, name = (null)}<br>[18361:888102] 33—&lt;NSThread: 0x6000021b68c0&gt;{number = 1, name = main}<br>[18361:888102] 33—&lt;NSThread: 0x6000021b68c0&gt;{number = 1, name = main}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">##### 方法2. dispatch\_group\_wait,会阻塞当前线程,等前面的异步任务1、任务2都执行完毕才会接着执行</span><br></pre></td></tr></table></figure></p>
+<p>dispatch_group_wait(group, DISPATCH_TIME_FOREVER);<br>NSLog(@”group—end”);<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###### 方法2结果如下:</span><br></pre></td></tr></table></figure></p>
+<p>[18361:888102] currentThread—&lt;NSThread: 0x6000021b68c0&gt;{number = 1, name = main}<br>[18361:888102] group—begin<br>[18361:888147] 11—&lt;NSThread: 0x6000021323c0&gt;{number = 5, name = (null)}<br>[18361:889748] 22—&lt;NSThread: 0x600002132200&gt;{number = 6, name = (null)}<br>[18361:889748] 22—&lt;NSThread: 0x600002132200&gt;{number = 6, name = (null)}<br>[18361:888147] 11—&lt;NSThread: 0x6000021323c0&gt;{number = 5, name = (null)}<br>[18361:888102] group—end<br><code>`</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/12/21-rutime/" rel="next" title="Runtime介绍">
+                <i class="fa fa-chevron-left"></i> Runtime介绍
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/20/31-centos7部署flask项目/" rel="prev" title="centos7服务部署flask项目">
+                centos7服务部署flask项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程"><span class="nav-number">1.</span> <span class="nav-text">进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和程序之间的区别"><span class="nav-number">1.0.2.</span> <span class="nav-text">进程和程序之间的区别:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建进程的4个主要事件"><span class="nav-number">1.0.3.</span> <span class="nav-text">创建进程的4个主要事件:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程的三种状态及转换关系"><span class="nav-number">1.0.4.</span> <span class="nav-text">进程的三种状态及转换关系:</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#线程"><span class="nav-number">2.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义-1"><span class="nav-number">2.0.1.</span> <span class="nav-text">定义:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程和线程的关系"><span class="nav-number">2.0.2.</span> <span class="nav-text">进程和线程的关系:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#区别"><span class="nav-number">2.0.3.</span> <span class="nav-text">区别:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-amp-amp-异步"><span class="nav-number">3.</span> <span class="nav-text">同步 &amp;&amp; 异步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#同步"><span class="nav-number">3.0.1.</span> <span class="nav-text">同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异步"><span class="nav-number">3.0.2.</span> <span class="nav-text">异步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#并发-amp-amp-并行"><span class="nav-number">4.</span> <span class="nav-text">并发 &amp;&amp; 并行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发"><span class="nav-number">4.0.1.</span> <span class="nav-text">并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并行"><span class="nav-number">4.0.2.</span> <span class="nav-text">并行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">4.1.</span> <span class="nav-text">总结:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grand-Central-Dispatch-GCD"><span class="nav-number">5.</span> <span class="nav-text">Grand Central Dispatch(GCD)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#百度百科的定义"><span class="nav-number">5.1.</span> <span class="nav-text">百度百科的定义:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GCD线程的简单使用"><span class="nav-number">5.2.</span> <span class="nav-text">GCD线程的简单使用:</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#两种队列的创建-获取方式"><span class="nav-number">5.2.1.</span> <span class="nav-text">两种队列的创建/获取方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#并发队列"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">并发队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#串行队列"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">串行队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#队列和线程的6种组合"><span class="nav-number">5.3.</span> <span class="nav-text">队列和线程的6种组合</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-同步-并发"><span class="nav-number">5.3.0.1.</span> <span class="nav-text">1.同步+并发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-异步-并发"><span class="nav-number">5.3.0.2.</span> <span class="nav-text">2.异步+并发</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-同步-串行"><span class="nav-number">5.3.0.3.</span> <span class="nav-text">3.同步+串行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-异步-串行"><span class="nav-number">5.3.0.4.</span> <span class="nav-text">4.异步+串行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-同步-主队列"><span class="nav-number">5.3.0.5.</span> <span class="nav-text">5.同步+主队列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-异步-主队列"><span class="nav-number">5.3.0.6.</span> <span class="nav-text">6.异步+主队列</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他方法"><span class="nav-number">5.4.</span> <span class="nav-text">其他方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-栅栏方法-dispatch-barrier-async"><span class="nav-number">5.4.1.</span> <span class="nav-text">1. 栅栏方法: dispatch_barrier_async</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-信号量-dispatch-semaphore"><span class="nav-number">5.4.2.</span> <span class="nav-text">5. 信号量: dispatch_semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-队列组-dispatch-group"><span class="nav-number">5.4.3.</span> <span class="nav-text">6. 队列组: dispatch_group</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-dispatch-group-async"><span class="nav-number">5.4.3.1.</span> <span class="nav-text">6.1 dispatch_group_async</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

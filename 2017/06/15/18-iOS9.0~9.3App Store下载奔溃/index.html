@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below 问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码">
+<meta name="description" content="问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。 去友盟错误列表反馈报以下错误提示: Application received signal SIGTRAP 最终定位到了P3资源文件的问题上了,图片资">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于iOS9.0~9.3 App Store下载奔溃问题">
 <meta property="og:url" content="http://yoursite.com/2017/06/15/18-iOS9.0~9.3App Store下载奔溃/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below 问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码">
+<meta property="og:description" content="问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。 去友盟错误列表反馈报以下错误提示: Application received signal SIGTRAP 最终定位到了P3资源文件的问题上了,图片资">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1buhvj212802e756.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg">
-<meta property="og:updated_time" content="2019-03-14T07:45:37.973Z">
+<meta property="og:updated_time" content="2019-05-17T10:14:57.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于iOS9.0~9.3 App Store下载奔溃问题">
-<meta name="twitter:description" content="参考链接：https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below 问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码">
+<meta name="twitter:description" content="问题出现前提:1.使用Xcode8打包 2.运行系统iOS9.0～9.3 3.图片添加在Assets资源下 问题描述版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。 去友盟错误列表反馈报以下错误提示: Application received signal SIGTRAP 最终定位到了P3资源文件的问题上了,图片资">
 <meta name="twitter:image" content="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1k303j20s60lm0yz.jpg">
 
 
@@ -351,7 +351,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  601 words
+                  602 words
                 </span>
               
 
@@ -388,8 +388,7 @@
       
 
       
-        <p>参考链接：<a href="https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below" target="_blank" rel="noopener">https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below</a></p>
-<h2 id="问题出现前提"><a href="#问题出现前提" class="headerlink" title="问题出现前提:"></a>问题出现前提:</h2><p>1.使用Xcode8打包</p>
+        <h2 id="问题出现前提"><a href="#问题出现前提" class="headerlink" title="问题出现前提:"></a>问题出现前提:</h2><p>1.使用Xcode8打包</p>
 <p>2.运行系统iOS9.0～9.3</p>
 <p>3.图片添加在Assets资源下</p>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>版本上线后使用同事的iOS9.1系统的6sp手机运行闪退,而这个手机在使用真机直接运行安装、扫描二维码安装ipa包,都是没有问题的。</p>
@@ -406,6 +405,8 @@
 <p><img src="http://ww1.sinaimg.cn/large/8af26a6dly1fxvzn1a7pzj20fe050gm6.jpg" alt></p>
 <p>至此我们的问题完美解决。</p>
 <h5 id="2改变图片位置"><a href="#2改变图片位置" class="headerlink" title="2改变图片位置"></a>2改变图片位置</h5><p>将问题图片从Assets移除，直接添加到工程中使用</p>
+<p><strong>以上内容参考以下文章:</strong></p>
+<p><a href="https://stackoverflow.com/questions/39404285/xcode-8-build-crash-on-ios-9-2-and-below" target="_blank" rel="noopener">Xcode 8 build crash on iOS 9.2 and below</a></p>
 
       
     </div>
@@ -525,7 +526,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

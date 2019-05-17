@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
+<meta name="description" content="方法一参考文章连接: xcode 4 制作静态库详解 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="静态库制作及注意事项">
 <meta property="og:url" content="http://yoursite.com/2014/05/13/02-静态库制作及注意事项/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
+<meta property="og:description" content="方法一参考文章连接: xcode 4 制作静态库详解 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/02/02-1.jpg">
 <meta property="og:image" content="http://yoursite.com/images/02/02-2.jpg">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="http://yoursite.com/images/02/02-9.jpg">
 <meta property="og:image" content="http://yoursite.com/images/02/02-10.png">
 <meta property="og:image" content="http://yoursite.com/images/02/02-11.png">
-<meta property="og:updated_time" content="2019-03-14T07:43:40.081Z">
+<meta property="og:updated_time" content="2019-05-17T10:11:57.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静态库制作及注意事项">
-<meta name="twitter:description" content="方法一参考文章连接: http://blog.csdn.net/pjk1129/article/details/7255163 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
+<meta name="twitter:description" content="方法一参考文章连接: xcode 4 制作静态库详解 方法二在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary">
 <meta name="twitter:image" content="http://yoursite.com/images/02/02-1.jpg">
 
 
@@ -360,7 +360,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  857 words
+                  859 words
                 </span>
               
 
@@ -397,7 +397,7 @@
       
 
       
-        <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">http://blog.csdn.net/pjk1129/article/details/7255163</a></p>
+        <h2 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h2><p>参考文章连接: <a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">xcode 4 制作静态库详解</a></p>
 <h2 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h2><p>在原有工程上操作，打开已存在的工程，然后添加一个要做成.a静态库的 Target 在此，简单命名为mylibrary</p>
 <a id="more"></a>
 <p><img src="../../../../images/02/02-1.jpg" alt="avatar"></p>
@@ -422,7 +422,10 @@
 <h4 id="4-自动拷贝头文件"><a href="#4-自动拷贝头文件" class="headerlink" title="4.自动拷贝头文件"></a>4.自动拷贝头文件</h4><p>在工程对应的target的“Build Phases”下添加“Copy Headers”的选项。该选项默认是没有的，添加方法是点击下方的“Add Build Phase”按钮后选择后即可添加。该选项下有3个子选项，分别是Public,Private,Project。通过点击下方的加号，可以将工程中的头文件添加到“Project”中，在其中的对应头文件点击右键，选择“Move to Public Group”，当头文件移到“Pulic”后，编译工程以后，在工程编译后.a文件所在的路径下，会同时出现一个”usr/local/include”的文件夹，其中的头文件就是public group中的头文件。这时只需将.a文件和这个路径下的头文件拷贝到所需工程文件即可。</p>
 <p><img src="../../../../images/02/02-10.png" alt="avatar"></p>
 <p><img src="../../../../images/02/02-11.png" alt="avatar"></p>
-<p>本文整理自：<a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况" target="_blank" rel="noopener">http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html，http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0中的情况</a></p>
+<p><strong>以上内容参考以下文章:</strong></p>
+<p><a href="http://blog.csdn.net/pjk1129/article/details/7255163" target="_blank" rel="noopener">xcode 4 制作静态库详解</a></p>
+<p><a href="http://www.cnblogs.com/superhappy/archive/2013/05/27/3102629.html" target="_blank" rel="noopener">IOS 制作静态库的两种方法</a></p>
+<p><a href="http://webfrogs.me/2012/12/18/ios-static-lib/5.7.0的情况" target="_blank" rel="noopener">文章2</a></p>
 
       
     </div>
@@ -542,7 +545,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="转载: SQLAlchemy_定义(一对一/一对多/多对多)关系 下列的 import 语句，应用到所有事列代码中 12345from sqlalchemy import Table, Column, Integer, ForeignKeyfrom sqlalchemy.orm import relationshipfrom sqlalchemy.ext.declarative import de">
+<meta name="description" content="relationship 的 lazy 属性指定 sqlalchemy 数据库什么时候加载数据:    参数 说明     select 默认属性,首次访问属性时，应使用单独的SELECT语句或标识映射获取来简单地加载项目以进行简单的多对一引用。   immediate 应该在加载父项时加载项目，使用单独的SELECT语句或标识映射获取来进行简单的多对一引用。   joined 应该使用JOIN或">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sqlalchemy 表的关联关系">
 <meta property="og:url" content="http://yoursite.com/2018/06/12/26-Sqlalchemy/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="转载: SQLAlchemy_定义(一对一/一对多/多对多)关系 下列的 import 语句，应用到所有事列代码中 12345from sqlalchemy import Table, Column, Integer, ForeignKeyfrom sqlalchemy.orm import relationshipfrom sqlalchemy.ext.declarative import de">
+<meta property="og:description" content="relationship 的 lazy 属性指定 sqlalchemy 数据库什么时候加载数据:    参数 说明     select 默认属性,首次访问属性时，应使用单独的SELECT语句或标识映射获取来简单地加载项目以进行简单的多对一引用。   immediate 应该在加载父项时加载项目，使用单独的SELECT语句或标识映射获取来进行简单的多对一引用。   joined 应该使用JOIN或">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-17T10:18:11.980Z">
+<meta property="og:updated_time" content="2019-06-03T09:26:14.689Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sqlalchemy 表的关联关系">
-<meta name="twitter:description" content="转载: SQLAlchemy_定义(一对一/一对多/多对多)关系 下列的 import 语句，应用到所有事列代码中 12345from sqlalchemy import Table, Column, Integer, ForeignKeyfrom sqlalchemy.orm import relationshipfrom sqlalchemy.ext.declarative import de">
+<meta name="twitter:description" content="relationship 的 lazy 属性指定 sqlalchemy 数据库什么时候加载数据:    参数 说明     select 默认属性,首次访问属性时，应使用单独的SELECT语句或标识映射获取来简单地加载项目以进行简单的多对一引用。   immediate 应该在加载父项时加载项目，使用单独的SELECT语句或标识映射获取来进行简单的多对一引用。   joined 应该使用JOIN或">
 
 
 
@@ -161,7 +161,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">It is never too old to learn.</p>
+        <p class="site-subtitle">It's never too old to learn.</p>
       
   </div>
 
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.3k words
+                  1.8k words
                 </span>
               
 
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  6 minutes
+                  8 minutes
                 </span>
               
             </div>
@@ -384,7 +384,54 @@
       
 
       
-        <p>转载: <a href="https://www.cnblogs.com/kiko0o0/p/8435059.html" target="_blank" rel="noopener">SQLAlchemy_定义(一对一/一对多/多对多)关系</a></p>
+        <p>relationship 的 lazy 属性指定 sqlalchemy 数据库什么时候加载数据:</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>select</td>
+<td>默认属性,首次访问属性时，应使用单独的SELECT语句或标识映射获取来简单地加载项目以进行简单的多对一引用。</td>
+</tr>
+<tr>
+<td>immediate</td>
+<td>应该在加载父项时加载项目，使用单独的SELECT语句或标识映射获取来进行简单的多对一引用。</td>
+</tr>
+<tr>
+<td>joined</td>
+<td>应该使用JOIN或LEFT OUTER JOIN在与父项相同的查询中“热切地”加载项目。 连接是否为“外部”由innerjoin参数确定。</td>
+</tr>
+<tr>
+<td>subquery</td>
+<td>在父项加载时，应“急切地”加载项目，使用一个额外的SQL语句，该语句为请求的每个集合发出JOIN到原始语句的子查询。</td>
+</tr>
+<tr>
+<td>selectin</td>
+<td>使用一个或多个其他SQL语句加载父项时，应“急切地”加载项目，这些语句向直接父对象发出JOIN，使用IN子句指定主键标识符。</td>
+</tr>
+<tr>
+<td>noload</td>
+<td>任何时候都不应该加载。 这是为了支持“只写”属性，或以特定于应用程序的某种方式填充的属性。</td>
+</tr>
+<tr>
+<td>raise</td>
+<td>不允许懒加载，访问该属性需要预先加载，否则会引发InvalidRequestError，当对象在加载后从其附加的会话中分离时，可以使用此策略。</td>
+</tr>
+<tr>
+<td>raise_on_sql</td>
+<td>如果懒加载前需要执行sql，访问该属性需要预先加载，否则会引发InvalidRequestError，如果延迟加载可以从标识映射中提取相关值或确定它应该是None，则加载该值。 当对象与附加的Session保持关联时，可以使用此策略，但应阻止其他SELECT语句。</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>返回所有读取的query对象，在迭代之前可以进行进一步的过滤操作</td>
+</tr>
+</tbody>
+</table>
+<p>以下内容转载: <a href="https://www.cnblogs.com/kiko0o0/p/8435059.html" target="_blank" rel="noopener">SQLAlchemy_定义(一对一/一对多/多对多)关系</a></p>
 <p>下列的 import 语句，应用到所有事列代码中</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sqlalchemy import Table, Column, Integer, ForeignKey</span><br><span class="line">from sqlalchemy.orm import relationship</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line"></span><br><span class="line">Base = declarative_base()</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -447,7 +494,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/28/25-python浏览器设置/" rel="next" title="爬虫selenium">
+              <a href="/2018/05/28/25-selenium设置/" rel="next" title="爬虫selenium">
                 <i class="fa fa-chevron-left"></i> 爬虫selenium
               </a>
             
@@ -536,7 +583,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

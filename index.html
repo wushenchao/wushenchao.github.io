@@ -861,6 +861,478 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/30-Sqlalchemy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/30-Sqlalchemy/" itemprop="url">Sqlalchemy 表的关联关系</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T00:00:00+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/10/30-Sqlalchemy/" class="leancloud_visitors" data-flag-title="Sqlalchemy 表的关联关系">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.5k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="SQLAlchemy列类型"><a href="#SQLAlchemy列类型" class="headerlink" title="SQLAlchemy列类型"></a>SQLAlchemy列类型</h3><table>
+<thead>
+<tr>
+<th>类型名</th>
+<th>Python类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integer</td>
+<td>int</td>
+<td>普通常数，通常是32位</td>
+</tr>
+<tr>
+<td>SmallInteger</td>
+<td>int</td>
+<td>取值范围小的整数，通常是16位</td>
+</tr>
+<tr>
+<td>BigInteger</td>
+<td>int或long</td>
+<td>不限制精度的整数</td>
+</tr>
+<tr>
+<td>Float</td>
+<td>float</td>
+<td>浮点数</td>
+</tr>
+<tr>
+<td>Numeric</td>
+<td>decimal.Decimal</td>
+<td>定点数</td>
+</tr>
+<tr>
+<td>String</td>
+<td>str</td>
+<td>变长字符串</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>str</td>
+<td>变长字符串，对较长或不限长的字符串做了优化</td>
+</tr>
+<tr>
+<td>Unicode</td>
+<td>unicode</td>
+<td>变长unicode字符串</td>
+</tr>
+<tr>
+<td>UnicodeText</td>
+<td>unicode</td>
+<td>变长unicode字符串，对较长或不限长的字符串做了优化</td>
+</tr>
+<tr>
+<td>Boolean</td>
+<td>bool</td>
+<td>布尔类型</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>datetime.date</td>
+<td>日期</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>datetime.time</td>
+<td>时间</td>
+</tr>
+<tr>
+<td>DateTime</td>
+<td>datetime.datetime</td>
+<td>日期和时间</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>datetime.timedelta</td>
+<td>时间间隔</td>
+</tr>
+<tr>
+<td>Enum</td>
+<td>str</td>
+<td>一组字符串</td>
+</tr>
+<tr>
+<td>PickleType</td>
+<td>任何python对象</td>
+<td>自动使用pickle序列化</td>
+</tr>
+<tr>
+<td>LargeBinary</td>
+<td>str</td>
+<td>二进制blob</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/10/30-Sqlalchemy/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/29-Flask-email 发送邮件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/29-Flask-email 发送邮件/" itemprop="url">Flask-email 发送邮件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T00:00:00+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/10/29-Flask-email 发送邮件/" class="leancloud_visitors" data-flag-title="Flask-email 发送邮件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  946 words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>爬虫项目运行在服务端后，我们无法及时了解项目是否正在运行，还是因为异常已经结束运行，考虑到项目的成本，因此我们在项目中增加了邮件功能，在项目运行结束、或者是异常结束的情况下通知开发者。下面简单介绍在项目中使用flask-mail来实现发送邮件的功能。</p>
+<h3 id="flask-mail的安装"><a href="#flask-mail的安装" class="headerlink" title="flask-mail的安装"></a>flask-mail的安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install flask-email</span><br><span class="line">注:本文使用的是python3环境</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/10/29-Flask-email 发送邮件/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/28/28-Charles使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1050,7 +1522,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/27-Flask-email 发送邮件/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/20/27-Flask/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1069,7 +1541,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/20/27-Flask-email 发送邮件/" itemprop="url">Flask-email 发送邮件</a></h1>
+                <a class="post-title-link" href="/2018/07/20/27-Flask/" itemprop="url">Flask</a></h1>
         
 
         <div class="post-meta">
@@ -1121,7 +1593,7 @@
 
           
           
-             <span id="/2018/07/20/27-Flask-email 发送邮件/" class="leancloud_visitors" data-flag-title="Flask-email 发送邮件">
+             <span id="/2018/07/20/27-Flask/" class="leancloud_visitors" data-flag-title="Flask">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1146,7 +1618,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  946 words
+                  1.8k words
                 </span>
               
 
@@ -1162,7 +1634,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  3 minutes
+                  6 minutes
                 </span>
               
             </div>
@@ -1184,11 +1656,13 @@
 
       
         
-          <p>爬虫项目运行在服务端后，我们无法及时了解项目是否正在运行，还是因为异常已经结束运行，考虑到项目的成本，因此我们在项目中增加了邮件功能，在项目运行结束、或者是异常结束的情况下通知开发者。下面简单介绍在项目中使用flask-mail来实现发送邮件的功能。</p>
-<h3 id="flask-mail的安装"><a href="#flask-mail的安装" class="headerlink" title="flask-mail的安装"></a>flask-mail的安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip3 install flask-email</span><br><span class="line">注:本文使用的是python3环境</span><br></pre></td></tr></table></figure>
+          <h2 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h2><p>虚拟环境的使用，可以避免你安装的python版本包与系统预装的发生冲突，为每个项目单独创建虚拟环境，可以保证应用只访问所在虚拟环境中包，从而保持全局解释器的干净整洁。虚拟环境的另一有优点是不需要管理员权限。</p>
+<h3 id="虚拟环境的创建"><a href="#虚拟环境的创建" class="headerlink" title="虚拟环境的创建"></a>虚拟环境的创建</h3><h4 id="python3"><a href="#python3" class="headerlink" title="python3"></a>python3</h4><p>python3的虚拟环境由python标准库中的venv包原生支持,创建虚拟环境的命令格式如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv venv</span><br></pre></td></tr></table></figure>
+<p>-m venv 选项的作用是以独立的脚本运行标准库中的venv包，后面的参数为虚拟环境名称(一般用venv)</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/20/27-Flask-email 发送邮件/#more" rel="contents">
+            <a class="btn" href="/2018/07/20/27-Flask/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1239,7 +1713,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/12/26-Sqlalchemy/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/26-OC修饰词/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -1258,7 +1732,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/06/12/26-Sqlalchemy/" itemprop="url">Sqlalchemy 表的关联关系</a></h1>
+                <a class="post-title-link" href="/2018/06/21/26-OC修饰词/" itemprop="url">iOS 常用修饰词</a></h1>
         
 
         <div class="post-meta">
@@ -1270,8 +1744,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-12T00:00:00+08:00">
-                2018-06-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-21T00:00:00+08:00">
+                2018-06-21
               </time>
             
 
@@ -1281,28 +1755,6 @@
           </span>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -1310,7 +1762,7 @@
 
           
           
-             <span id="/2018/06/12/26-Sqlalchemy/" class="leancloud_visitors" data-flag-title="Sqlalchemy 表的关联关系">
+             <span id="/2018/06/21/26-OC修饰词/" class="leancloud_visitors" data-flag-title="iOS 常用修饰词">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1335,7 +1787,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.8k words
+                  1.5k words
                 </span>
               
 
@@ -1351,7 +1803,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8 minutes
+                  5 minutes
                 </span>
               
             </div>
@@ -1373,59 +1825,15 @@
 
       
         
-          <p>relationship 的 lazy 属性指定 sqlalchemy 数据库什么时候加载数据:</p>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>select</td>
-<td>默认属性,首次访问属性时，应使用单独的SELECT语句或标识映射获取来简单地加载项目以进行简单的多对一引用。</td>
-</tr>
-<tr>
-<td>immediate</td>
-<td>应该在加载父项时加载项目，使用单独的SELECT语句或标识映射获取来进行简单的多对一引用。</td>
-</tr>
-<tr>
-<td>joined</td>
-<td>应该使用JOIN或LEFT OUTER JOIN在与父项相同的查询中“热切地”加载项目。 连接是否为“外部”由innerjoin参数确定。</td>
-</tr>
-<tr>
-<td>subquery</td>
-<td>在父项加载时，应“急切地”加载项目，使用一个额外的SQL语句，该语句为请求的每个集合发出JOIN到原始语句的子查询。</td>
-</tr>
-<tr>
-<td>selectin</td>
-<td>使用一个或多个其他SQL语句加载父项时，应“急切地”加载项目，这些语句向直接父对象发出JOIN，使用IN子句指定主键标识符。</td>
-</tr>
-<tr>
-<td>noload</td>
-<td>任何时候都不应该加载。 这是为了支持“只写”属性，或以特定于应用程序的某种方式填充的属性。</td>
-</tr>
-<tr>
-<td>raise</td>
-<td>不允许懒加载，访问该属性需要预先加载，否则会引发InvalidRequestError，当对象在加载后从其附加的会话中分离时，可以使用此策略。</td>
-</tr>
-<tr>
-<td>raise_on_sql</td>
-<td>如果懒加载前需要执行sql，访问该属性需要预先加载，否则会引发InvalidRequestError，如果延迟加载可以从标识映射中提取相关值或确定它应该是None，则加载该值。 当对象与附加的Session保持关联时，可以使用此策略，但应阻止其他SELECT语句。</td>
-</tr>
-<tr>
-<td>dynamic</td>
-<td>返回所有读取的query对象，在迭代之前可以进行进一步的过滤操作</td>
-</tr>
-</tbody>
-</table>
-<p>以下内容转载: <a href="https://www.cnblogs.com/kiko0o0/p/8435059.html" target="_blank" rel="noopener">SQLAlchemy_定义(一对一/一对多/多对多)关系</a></p>
-<p>下列的 import 语句，应用到所有事列代码中</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sqlalchemy import Table, Column, Integer, ForeignKey</span><br><span class="line">from sqlalchemy.orm import relationship</span><br><span class="line">from sqlalchemy.ext.declarative import declarative_base</span><br><span class="line"></span><br><span class="line">Base = declarative_base()</span><br></pre></td></tr></table></figure>
+          <h2 id="ARC下不指定任何属性关键字时-默认的关键字有哪些"><a href="#ARC下不指定任何属性关键字时-默认的关键字有哪些" class="headerlink" title="ARC下不指定任何属性关键字时,默认的关键字有哪些?"></a>ARC下不指定任何属性关键字时,默认的关键字有哪些?</h2><pre><code>对于基本数据类型默认关键字是: atomic, readwrite, assign
+对于普通的OC对象: atomic, readwrite, strong
+</code></pre><h2 id="property-synthesize-dynamic"><a href="#property-synthesize-dynamic" class="headerlink" title="@property, @synthesize, @dynamic"></a>@property, @synthesize, @dynamic</h2><p>@property = interface + ivar（实例变量/成员变量) + setter/getter</p>
+<p>@property 属性有两个关键词 @synthesize 和 @dynamic。默认是 @synthesize。</p>
+<p>@synthesize 如果你没有手动实现 @setter 和 @getter 方法，编译器会自动为你加上这两个方法。</p>
+<p>@dynamic 告诉编译器属性的 @setter 和 @getter 方法由用户自己实现，不自动生成。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/06/12/26-Sqlalchemy/#more" rel="contents">
+            <a class="btn" href="/2018/06/21/26-OC修饰词/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1845,388 +2253,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/04/23-scrapy/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/04/23-scrapy/" itemprop="url">scrapy 相关使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-04T00:00:00+08:00">
-                2018-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/03/04/23-scrapy/" class="leancloud_visitors" data-flag-title="scrapy 相关使用">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  402 words
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1 minutes
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="向scrapy中的spider传参"><a href="#向scrapy中的spider传参" class="headerlink" title="向scrapy中的spider传参"></a>向scrapy中的spider传参</h2><p>有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。</p>
-<p>ep:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 根据用户提交的url来控制spider爬取的网站。</span><br><span class="line">2. 根据需求增量爬取数据。</span><br></pre></td></tr></table></figure>
-<p>Spider参数通过 crawl 命令的 -a 选项来传递，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl xxx -a parameter=xxxxxx</span><br><span class="line">注：augmenter=不为空</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/03/04/23-scrapy/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/28/22-GCD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content>
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="不知是哪个号">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/28/22-GCD/" itemprop="url">多线程编程-GCD</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-28T00:00:00+08:00">
-                2018-01-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/01/28/22-GCD/" class="leancloud_visitors" data-flag-title="多线程编程-GCD">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  3.5k words
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  16 minutes
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><h4 id="定义"><a href="#定义" class="headerlink" title="定义:"></a>定义:</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在进程模型中，计算机上所有可运行的软件，通常也包括操作系统，被组织成若干顺序进程，简称进程（process）。</span><br><span class="line"></span><br><span class="line">--摘自《现代操作系统》</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">狭义定义：进程是正在运行的程序的实例（an instance of a computer program that is being executed）。</span><br><span class="line">广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。</span><br><span class="line"></span><br><span class="line">--摘自《百度百科》</span><br></pre></td></tr></table></figure>
-<p>在iOS系统中，开启一个应用就打开了一个进程。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/28/22-GCD/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2277,7 +2303,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

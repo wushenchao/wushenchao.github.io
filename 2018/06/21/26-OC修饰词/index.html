@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ARC下不指定任何属性关键字时,默认的关键字有哪些?对于基本数据类型默认关键字是: atomic, readwrite, assign 对于普通的OC对象: atomic, readwrite, strong @property, @synthesize, @dynamic@property = interface + ivar（实例变量/成员变量) + setter/getter @proper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS 常用修饰词">
+<meta property="og:url" content="http://yoursite.com/2018/06/21/26-OC修饰词/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="ARC下不指定任何属性关键字时,默认的关键字有哪些?对于基本数据类型默认关键字是: atomic, readwrite, assign 对于普通的OC对象: atomic, readwrite, strong @property, @synthesize, @dynamic@property = interface + ivar（实例变量/成员变量) + setter/getter @proper">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/26/26-1.png">
+<meta property="og:image" content="http://yoursite.com/images/26/26-2.png">
+<meta property="og:image" content="http://yoursite.com/images/26/26-3.png">
+<meta property="og:image" content="http://yoursite.com/images/26/26-5.png">
+<meta property="og:image" content="http://yoursite.com/images/26/26-6.png">
+<meta property="og:updated_time" content="2019-06-22T09:36:19.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS 常用修饰词">
+<meta name="twitter:description" content="ARC下不指定任何属性关键字时,默认的关键字有哪些?对于基本数据类型默认关键字是: atomic, readwrite, assign 对于普通的OC对象: atomic, readwrite, strong @property, @synthesize, @dynamic@property = interface + ivar（实例变量/成员变量) + setter/getter @proper">
+<meta name="twitter:image" content="http://yoursite.com/images/26/26-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/21/26-OC修饰词/">
+
+
+
+
+
+  <title>iOS 常用修饰词 | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It's never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/21/26-OC修饰词/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">iOS 常用修饰词</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-21T00:00:00+08:00">
+                2018-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/21/26-OC修饰词/" class="leancloud_visitors" data-flag-title="iOS 常用修饰词">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1.5k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  5 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ARC下不指定任何属性关键字时-默认的关键字有哪些"><a href="#ARC下不指定任何属性关键字时-默认的关键字有哪些" class="headerlink" title="ARC下不指定任何属性关键字时,默认的关键字有哪些?"></a>ARC下不指定任何属性关键字时,默认的关键字有哪些?</h2><pre><code>对于基本数据类型默认关键字是: atomic, readwrite, assign
+对于普通的OC对象: atomic, readwrite, strong
+</code></pre><h2 id="property-synthesize-dynamic"><a href="#property-synthesize-dynamic" class="headerlink" title="@property, @synthesize, @dynamic"></a>@property, @synthesize, @dynamic</h2><p>@property = interface + ivar（实例变量/成员变量) + setter/getter</p>
+<p>@property 属性有两个关键词 @synthesize 和 @dynamic。默认是 @synthesize。</p>
+<p>@synthesize 如果你没有手动实现 @setter 和 @getter 方法，编译器会自动为你加上这两个方法。</p>
+<p>@dynamic 告诉编译器属性的 @setter 和 @getter 方法由用户自己实现，不自动生成。</p>
+<a id="more"></a>
+<p>⚠️ 以下几点需要注意 ⚠️</p>
+<ol>
+<li><p>假如一个属性被标记为 @dynamic var，如果没有提供 @setter和 @getter 方法，当程序调用 @setter或 @getter时会崩溃。编译时没问题，运行时才执行相应的方法，这就是所谓的动态绑定。</p>
+<p> <img src="../../../../images/26/26-1.png" alt></p>
+</li>
+<li><p>默认情况编译器自动为 @property 生成 ivar（实例变量/成员变量）、@setter和 @getter 方法。当重写 @property 的 @setter 和 @getter 方法时，系统就不会生成 ivar（实例变量/成员变量）</p>
+<p> <img src="../../../../images/26/26-2.png" alt></p>
+</li>
+<li><p>手动实现 ivar（实例变量/成员变量）的 @setter 和 @getter 方法，KVC的访问会触发 @setter方法，_pId除了无法通过点语法访问外，其他表现与@property无异</p>
+<p> <img src="../../../../images/26/26-3.png" alt></p>
+</li>
+<li><p>以下情况不会 autosynthesis（自动合成）:<br> <a href="https://stackoverflow.com/questions/19784454/when-should-i-use-synthesize-explicitly/19821816#19821816" target="_blank" rel="noopener">参考stackoverflow</a></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1.同时重写了 @setter 和 @getter 方法时</span><br><span class="line">2.重写了只读属性的 @getter 方法时</span><br><span class="line">3.使用了 @dynamic 声明时</span><br><span class="line">4.在 @protocol 中定义的所有属性</span><br><span class="line">5.在 category 中定义的所有属性</span><br><span class="line">6.重载的属性</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="readonly-readwrite"><a href="#readonly-readwrite" class="headerlink" title="readonly, readwrite"></a>readonly, readwrite</h2><p>readonly: 只读，默认只生成getter方法，不生成setter方法。如果调用setter方法会报 Assignment to readonly property 错误。</p>
+<p><strong>注意</strong>   我们可以利用kvo来修改readonly属性</p>
+<p><img src="../../../../images/26/26-5.png" alt></p>
+<p>如果我们在项目中做如下修改会发现程序会崩溃，txt属性无法修改</p>
+<p><img src="../../../../images/26/26-6.png" alt></p>
+<p>参考官方文档<a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueCoding/SearchImplementation.html#//apple_ref/doc/uid/20000955-CJBBBFFA" target="_blank" rel="noopener">Key-Value Coding Programming Guide</a>可知:</p>
+<p>默认该方法返回yes，访问器会寻找名为 _\&lt;key>,  _is\&lt;Key>,  \&lt;key>, is\&lt;Key>的成员变量. 如果返回false, 就会跳转至第6步报[valueForUndefinedKey:]错误。</p>
+<p>readwrite:  property默认修饰词，代表可读可写。</p>
+<h2 id="nonotomic-automic"><a href="#nonotomic-automic" class="headerlink" title="nonotomic, automic"></a>nonotomic, automic</h2><p>automic: 原子性，系统默认的属性修饰词，相对线程安全的，因为系统生成的getter/setter方法会进行加锁操作，这个锁仅仅保证了getter和setter存取方法的线程是安全的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ep: 线程1调用了某一属性的setter方法并进行到了一半, 线程2调用其getter方法,那么会执行完setter操作后,在执行getter操作, 线程2会获取到线程1 setter后的完整的值.</span><br><span class="line"></span><br><span class="line">当几个线程同时调用同一属性的setter、getter方法时,会get到一个完整的值,但get到的值不可控.</span><br></pre></td></tr></table></figure>
+<p>nonotomic: 非原子性，效率较快，线程不安全, 如果有两个线程访问同一个属性, 会出现数据紊乱</p>
+<h2 id="assign-weak-strong"><a href="#assign-weak-strong" class="headerlink" title="assign, weak, strong"></a>assign, weak, strong</h2><p>assign: 在MRC 和 ARC下都可以使用，修饰基本数据类型，不会使对象的引用计数 +1, 如果用assign去修饰对象，这个对象会被立即释放，assign在被释放的时候是不会自动置为nil，保留对象的指针地址，从而形成野指针(EXC_BAD_ACCESS)，如果给该对象发送消息会奔溃.</p>
+<p>weak: 用于修饰对象，不会使对象的引用计数 +1, 当对象被释放时自动置为nil（oc向nil发送消息不会崩溃），比较常用的是delegate属性设置，相当于MRC下的assign，如果用来修饰基本数据类型xcode会报错</p>
+<p><strong>weak底层原理</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">runtime维护了一个weak表，用于存储指向某个对象的所有weak指针。weak表其实是一个hash（哈希）表，key是所指对象的地址，Value是weak指针的地址（这个地址的值是所指对象指针的地址）数组。</span><br><span class="line"></span><br><span class="line">1. 初始化时：runtime会调用objc_initWeak函数，初始化一个新的weak指针指向对象的地址。</span><br><span class="line">2. 添加引用时：objc_initWeak函数会调用 storeWeak() 函数， storeWeak() 的作用是更新指针指向，创建对应的弱引用表。</span><br><span class="line">3. 释放时,调用clearDeallocating函数。clearDeallocating函数首先根据对象地址获取所有weak指针地址的数组，然后遍历这个数组把其中的数据设为nil，最后把这个entry从weak表中删除，最后清理对象的记录。</span><br></pre></td></tr></table></figure>
+<p>strong: 用于修饰对象，引用计数+1，相当于MRC下的reatin</p>
+<h2 id="retain-copy"><a href="#retain-copy" class="headerlink" title="retain, copy"></a>retain, copy</h2><p>copy: 分为深复制和浅复制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">深复制: 内容拷贝，源对象和副本对象指向两个不同的对象，源对象的引用计数不变，副本对象的引用计数为1。</span><br><span class="line"></span><br><span class="line">浅复制: 指针拷贝，源对象和副本对象指的是同一个对象，对象的引用计数+1，相当于retain</span><br></pre></td></tr></table></figure>
+<p>只有不可变对象创建不可变副本(copy)才是浅复制，其它的都是深复制，copy减少对象的上下文依赖。</p>
+<p>⚠️<strong>被定义为copy属性的对象必须要符合NSCopying协议，实现- (id)copyWithZone:(NSZone *)zone方法。</strong></p>
+<p>retain: 常用在MRC下，引用计数+1，只能修饰oc对象（CoreFoundation是C语言框架，没有引用计数，不能用retain修饰），即对象的指针拷贝。</p>
+<h2 id="nonnull-nullable-null-resettable-null-unspecified"><a href="#nonnull-nullable-null-resettable-null-unspecified" class="headerlink" title="nonnull, nullable, null_resettable, null_unspecified"></a>nonnull, nullable, null_resettable, null_unspecified</h2><p>nonnull: 不能为空,用来修饰属性,或者方法的参数,方法的返回值,不适用于assign属性,因为他是专门用来修饰指针的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, copy, nonnull) NSString *name;</span><br><span class="line">@property (nonatomic, copy) NSString *_Nonnull name;</span><br><span class="line">@property (nonatomic, copy) NSString *__nonnull name;</span><br></pre></td></tr></table></figure>
+<p>nullable: 表示可以为空,代码提示会告诉你这个谁能够是可以为空的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property (nonatomic, copy, nullable) NSString *name;</span><br><span class="line">@property (nonatomic, copy) NSString *_Nullable name;</span><br><span class="line">@property (nonatomic, copy) NSString *__nullable name;</span><br></pre></td></tr></table></figure>
+<p>null_resettable: 表示get方法不能返回为空, set方法可以为空, 必须重写该属性的get方法,保证返回值不为空，且只有下面这一种表达方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic, strong, null_resettable) NSNumber * number;</span><br></pre></td></tr></table></figure>
+<p>null_unspecified: 表示不确定是否为空</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic, strong) NSNumber *_Null_unspecified height;</span><br><span class="line">@property(nonatomic, strong) NSNumber *__null_unspecified height;</span><br><span class="line">@property(nonatomic, strong, null_unspecified) NSNumber *height;</span><br></pre></td></tr></table></figure>
+<p><strong>以上内容参考以下文章:</strong></p>
+<p><a href="http://www.aiuxian.com/article/p-2333527.html" target="_blank" rel="noopener">OS中属性的关键修饰词：strong weak assign copy retain等</a></p>
+<p><a href="https://www.jianshu.com/p/9c52b6f9d01c" target="_blank" rel="noopener">weak实现原理</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/25-selenium设置/" rel="next" title="爬虫selenium">
+                <i class="fa fa-chevron-left"></i> 爬虫selenium
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/20/27-Flask/" rel="prev" title="Flask">
+                Flask <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARC下不指定任何属性关键字时-默认的关键字有哪些"><span class="nav-number">1.</span> <span class="nav-text">ARC下不指定任何属性关键字时,默认的关键字有哪些?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#property-synthesize-dynamic"><span class="nav-number">2.</span> <span class="nav-text">@property, @synthesize, @dynamic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#readonly-readwrite"><span class="nav-number">3.</span> <span class="nav-text">readonly, readwrite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nonotomic-automic"><span class="nav-number">4.</span> <span class="nav-text">nonotomic, automic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#assign-weak-strong"><span class="nav-number">5.</span> <span class="nav-text">assign, weak, strong</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retain-copy"><span class="nav-number">6.</span> <span class="nav-text">retain, copy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nonnull-nullable-null-resettable-null-unspecified"><span class="nav-number">7.</span> <span class="nav-text">nonnull, nullable, null_resettable, null_unspecified</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

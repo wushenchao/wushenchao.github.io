@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/images/26/26-3.png">
 <meta property="og:image" content="http://yoursite.com/images/26/26-5.png">
 <meta property="og:image" content="http://yoursite.com/images/26/26-6.png">
-<meta property="og:updated_time" content="2019-06-22T09:36:19.644Z">
+<meta property="og:updated_time" content="2019-07-26T09:59:58.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS 常用修饰词">
 <meta name="twitter:description" content="ARC下不指定任何属性关键字时,默认的关键字有哪些?对于基本数据类型默认关键字是: atomic, readwrite, assign 对于普通的OC对象: atomic, readwrite, strong @property, @synthesize, @dynamic@property = interface + ivar（实例变量/成员变量) + setter/getter @proper">
@@ -390,7 +390,7 @@
 </li>
 </ol>
 <h2 id="readonly-readwrite"><a href="#readonly-readwrite" class="headerlink" title="readonly, readwrite"></a>readonly, readwrite</h2><p>readonly: 只读，默认只生成getter方法，不生成setter方法。如果调用setter方法会报 Assignment to readonly property 错误。</p>
-<p><strong>注意</strong>   我们可以利用kvo来修改readonly属性</p>
+<p><strong>注意</strong>   我们可以利用kvc来修改readonly属性</p>
 <p><img src="../../../../images/26/26-5.png" alt></p>
 <p>如果我们在项目中做如下修改会发现程序会崩溃，txt属性无法修改</p>
 <p><img src="../../../../images/26/26-6.png" alt></p>
@@ -419,7 +419,7 @@
 <p>null_unspecified: 表示不确定是否为空</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@property(nonatomic, strong) NSNumber *_Null_unspecified height;</span><br><span class="line">@property(nonatomic, strong) NSNumber *__null_unspecified height;</span><br><span class="line">@property(nonatomic, strong, null_unspecified) NSNumber *height;</span><br></pre></td></tr></table></figure>
 <p><strong>以上内容参考以下文章:</strong></p>
-<p><a href="http://www.aiuxian.com/article/p-2333527.html" target="_blank" rel="noopener">OS中属性的关键修饰词：strong weak assign copy retain等</a></p>
+<p><a href="http://www.aiuxian.com/article/p-2333527.html" target="_blank" rel="noopener">iOS中属性的关键修饰词：strong weak assign copy retain等</a></p>
 <p><a href="https://www.jianshu.com/p/9c52b6f9d01c" target="_blank" rel="noopener">weak实现原理</a></p>
 
       
@@ -534,7 +534,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-count">35</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

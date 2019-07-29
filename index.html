@@ -323,7 +323,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1.9k words
+                  1.6k words
                 </span>
               
 
@@ -339,7 +339,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8 minutes
+                  7 minutes
                 </span>
               
             </div>
@@ -361,20 +361,9 @@
 
       
         
-          <h2 id="AutoreleasePool-创建和释放"><a href="#AutoreleasePool-创建和释放" class="headerlink" title="AutoreleasePool 创建和释放"></a>AutoreleasePool 创建和释放</h2><ul>
-<li><p>App启动后，苹果在主线程 RunLoop 里注册了两个 Observer，其回调都是 _wrapRunLoopWithAutoreleasePoolHandler()。</p>
-</li>
-<li><p>第一个 Observer 监视的事件是 Entry(即将进入Loop)，其回调内会调用 _objc_autoreleasePoolPush() 创建自动释放池。其 order 是-2147483647，优先级最高，保证创建释放池发生在其他所有回调之前。</p>
-</li>
-<li><p>第二个 Observer 监视了两个事件： BeforeWaiting(准备进入休眠) 时调用_objc_autoreleasePoolPop() 和 _objc_autoreleasePoolPush() 释放旧的池并创建新池；</p>
-<p>Exit(即将退出Loop) 时调用 _objc_autoreleasePoolPop() 来释放自动释放池。这个 Observer 的 order 是 2147483647，优先级最低，保证其释放池子发生在其他所有回调之后。</p>
-</li>
-<li><p>在主线程执行的代码，通常是写在诸如事件回调、Timer回调内的。这些回调会被 RunLoop 创建好的 AutoreleasePool 环绕着，所以不会出现内存泄漏，开发者也不必显示创建了。</p>
-</li>
-</ul>
-<p>也就是说AutoreleasePool创建是在一个RunLoop事件开始之前(push)，AutoreleasePool释放是在一个RunLoop事件即将结束之前(pop)。</p>
-<p>AutoreleasePool里的Autorelease对象的加入是在RunLoop事件中，AutoreleasePool里的Autorelease对象的释放是在AutoreleasePool释放时。</p>
-<p>下面我们将一步步的深入探讨。 </p>
+          <h2 id="AutoreleasePool实现原理"><a href="#AutoreleasePool实现原理" class="headerlink" title="AutoreleasePool实现原理"></a>AutoreleasePool实现原理</h2><p>首先我们在 main.m 的文件中定义如下代码段:</p>
+<p><img src="../../../../images/34/34-1.png" alt></p>
+<p>我们可以通过如下两种方式转换这段代码</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/06/28/34.AutoreleasePool/#more" rel="contents">

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="iOS,">
 
 
 
@@ -80,9 +80,10 @@
 
 
 <meta name="description" content="AutoreleasePool实现原理首先我们在 main.m 的文件中定义如下代码段:  我们可以通过如下两种方式转换这段代码">
+<meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AutoreleasePool">
-<meta property="og:url" content="http://yoursite.com/2019/06/28/34.AutoreleasePool/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/06/28/34-AutoreleasePool/index.html">
 <meta property="og:site_name" content="不知是哪个号">
 <meta property="og:description" content="AutoreleasePool实现原理首先我们在 main.m 的文件中定义如下代码段:  我们可以通过如下两种方式转换这段代码">
 <meta property="og:locale" content="default">
@@ -93,7 +94,7 @@
 <meta property="og:image" content="http://yoursite.com/images/34/34-5.png">
 <meta property="og:image" content="http://yoursite.com/images/34/34-6.png">
 <meta property="og:image" content="http://yoursite.com/images/34/34-7.png">
-<meta property="og:updated_time" content="2019-07-29T09:32:56.749Z">
+<meta property="og:updated_time" content="2019-07-30T09:48:42.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AutoreleasePool">
 <meta name="twitter:description" content="AutoreleasePool实现原理首先我们在 main.m 的文件中定义如下代码段:  我们可以通过如下两种方式转换这段代码">
@@ -127,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/28/34.AutoreleasePool/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/28/34-AutoreleasePool/">
 
 
 
@@ -260,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/34.AutoreleasePool/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/28/34-AutoreleasePool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content>
@@ -300,6 +301,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -307,7 +330,7 @@
 
           
           
-             <span id="/2019/06/28/34.AutoreleasePool/" class="leancloud_visitors" data-flag-title="AutoreleasePool">
+             <span id="/2019/06/28/34-AutoreleasePool/" class="leancloud_visitors" data-flag-title="AutoreleasePool">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -403,7 +426,7 @@
 <h4 id="pop-ctxt"><a href="#pop-ctxt" class="headerlink" title="pop(ctxt)"></a>pop(ctxt)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">static inline void pop(void *token) </span><br><span class="line">&#123;</span><br><span class="line">    AutoreleasePoolPage *page;</span><br><span class="line">    id *stop;</span><br><span class="line"></span><br><span class="line">    if (token == (void*)EMPTY_POOL_PLACEHOLDER) &#123;</span><br><span class="line">        // Popping the top-level placeholder pool.</span><br><span class="line">        if (hotPage()) &#123;</span><br><span class="line">            // Pool was used. Pop its contents normally.</span><br><span class="line">            // Pool pages remain allocated for re-use as usual.</span><br><span class="line">            pop(coldPage()-&gt;begin());</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // Pool was never used. Clear the placeholder.</span><br><span class="line">            setHotPage(nil);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	// 1. 找到token所在的页面</span><br><span class="line">    page = pageForPointer(token);</span><br><span class="line">    stop = (id *)token;</span><br><span class="line">    if (*stop != POOL_BOUNDARY) &#123;</span><br><span class="line">        if (stop == page-&gt;begin()  &amp;&amp;  !page-&gt;parent) &#123;</span><br><span class="line">            // Start of coldest page may correctly not be POOL_BOUNDARY:</span><br><span class="line">            // 1. top-level pool is popped, leaving the cold page in place</span><br><span class="line">            // 2. an object is autoreleased with no pool</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            // Error. For bincompat purposes this is not </span><br><span class="line">            // fatal in executables built with old SDKs.</span><br><span class="line">            return badPop(token);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (PrintPoolHiwat) printHiwat();</span><br><span class="line">	</span><br><span class="line">	// 2. 对token之后所有的对象发送release消息</span><br><span class="line">    page-&gt;releaseUntil(stop);</span><br><span class="line">	</span><br><span class="line">	// 3. 杀掉多余的page（分debug模式和非debug模式）</span><br><span class="line">    // memory: delete empty children</span><br><span class="line">    if (DebugPoolAllocation  &amp;&amp;  page-&gt;empty()) &#123;</span><br><span class="line">        // special case: delete everything during page-per-pool debugging</span><br><span class="line">        AutoreleasePoolPage *parent = page-&gt;parent;</span><br><span class="line">        page-&gt;kill();</span><br><span class="line">        setHotPage(parent);</span><br><span class="line">    &#125; else if (DebugMissingPools  &amp;&amp;  page-&gt;empty()  &amp;&amp;  !page-&gt;parent) &#123;</span><br><span class="line">        // special case: delete everything for pop(top) </span><br><span class="line">        // when debugging missing autorelease pools</span><br><span class="line">        page-&gt;kill();</span><br><span class="line">        setHotPage(nil);</span><br><span class="line">    &#125; </span><br><span class="line">    else if (page-&gt;child) &#123;</span><br><span class="line">        // 非debug模式</span><br><span class="line">        // 3.1 当page使用量小于一半时，杀掉page的child之后的所有page</span><br><span class="line">        if (page-&gt;lessThanHalfFull()) &#123;</span><br><span class="line">            page-&gt;child-&gt;kill();</span><br><span class="line">        &#125;</span><br><span class="line">        else if (page-&gt;child-&gt;child) &#123;</span><br><span class="line">        // 3.2 当page使用量大约一半且存在孙子时，杀掉孙子之后的所有page</span><br><span class="line">            page-&gt;child-&gt;child-&gt;kill();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>出栈操作，注意debug模式和非debug模式的不同。</p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>线程与runloop是一一对应的关系，因此不能是完成一次循环还是线程被关闭，autoreleasepool都会被释放。而 autorelease 是由若干 AutoreleasePoolPage 以双向链表的方式组成的, 每个page的大小是4096字节， 当程序运行到 <em>@autoreleasepool{</em> 时, objc_autoreleasePoolPush()被调用, runtime会向当前的AutoreleasePoolPage中添加一个 POOL_BOUNDARY 对象作为哨兵, 在 <em>{}</em> 中创建的对象会被依次记录到AutoreleasePoolPage的栈顶指针, 当运行完 <em>@autoreleasepool{}</em> 时, objc_autoreleasePoolPop(哨兵)将被调用, runtime就会向AutoreleasePoolPage中记录的对象发送release消息直到哨兵的位置, 即完成了一次完整的运作.</p>
-<p><strong>参考资料</strong></p>
+<p><strong>以上内容参考以下文章</strong></p>
 <p><a href="https://juejin.im/entry/5a4302535188257d7242b387#autoreleaseFast" target="_blank" rel="noopener">自动释放池的前世今生 —- 深入解析 autoreleasepool</a></p>
 <p><a href="https://blog.csdn.net/weixin_34122548/article/details/86827609" target="_blank" rel="noopener">AutoReleasePoolPage</a></p>
 <p><a href="https://juejin.im/post/59eabe2451882578ca2dc145" target="_blank" rel="noopener">在ARC环境中autoreleasepool(runloop)的研究</a></p>
@@ -421,6 +444,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag"># iOS</a>
+          
+        </div>
       
 
       
@@ -440,6 +469,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/20/35-synchronized/" rel="prev" title="synchronized">
+                synchronized <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -516,7 +549,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

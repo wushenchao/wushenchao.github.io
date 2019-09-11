@@ -89,7 +89,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/24/24-1.png">
 <meta property="og:image" content="http://yoursite.com/images/24/24-2.png">
-<meta property="og:updated_time" content="2019-05-17T10:11:25.268Z">
+<meta property="og:updated_time" content="2019-09-04T01:37:37.048Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RunLoop">
 <meta name="twitter:description" content="RunLoop概念事件轮询简单来说就是do-while循环，如下逻辑代码： 12345678int main(int argc, char * argv[]) &amp;#123;            BOOL running = YES;    do &amp;#123;        // 执行各种任务，处理各种事件        // ......    &amp;#125; while (running);">
@@ -463,7 +463,7 @@
 <p>上面的 Source/Timer/Observer 被统称为 mode item，一个 item 可以被同时加入多个 mode。但一个 item 被重复加入同一个 mode 时是不会有效果的。如果一个 mode 中一个 item 都没有，则 RunLoop 会直接退出，不进入循环。</p>
 <h2 id="RunLoop-的运行逻辑"><a href="#RunLoop-的运行逻辑" class="headerlink" title="RunLoop 的运行逻辑"></a>RunLoop 的运行逻辑</h2><p>有苹果官方<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Multithreading/RunLoopManagement/RunLoopManagement.html#//apple_ref/doc/uid/10000057i-CH16-SW23" target="_blank" rel="noopener">文档</a>可知:在每次运行开启RunLoop的时候，所在线程的RunLoop会自动处理之前未处理的事件，并且通知相关的观察者，具体顺序如下所示:</p>
 <p><img src="../../../../images/24/24-2.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">1. 通知观察者runloop即将启动。</span><br><span class="line">2. 通知观察者定时器即将启动。</span><br><span class="line">3. 通知观察者即将处理source0。</span><br><span class="line">4. 处理source0。</span><br><span class="line">5. 如果当前是主线程的runloop，且source1准备就绪，转到第9步。</span><br><span class="line">6. 通知观察者线程即将睡眠。</span><br><span class="line">7. 将线程置于睡眠状态，直到发生以下事件之一：</span><br><span class="line">	a. source1准备就绪。</span><br><span class="line">	b. 定时器启动。</span><br><span class="line">	c. RunLoop设置的时间已经超时。</span><br><span class="line">	d. RunLoop被唤醒。</span><br><span class="line">8. 通知观察者线程刚被唤醒。</span><br><span class="line">9. 处理待处理的事件。</span><br><span class="line">	 </span><br><span class="line">10. 通知观察者即将退出RunLoop。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">1. 通知观察者runloop即将启动。</span><br><span class="line">2. 通知观察者定时器即将启动。</span><br><span class="line">3. 通知观察者即将处理source0。</span><br><span class="line">4. 处理source0。</span><br><span class="line">5. 如果当前是主线程的runloop，且source1准备就绪，转到第9步。</span><br><span class="line">6. 通知观察者线程即将睡眠。</span><br><span class="line">7. 将线程置于睡眠状态，直到发生以下事件之一：</span><br><span class="line">	a. source1准备就绪。</span><br><span class="line">	b. 定时器启动。</span><br><span class="line">	c. RunLoop设置的时间已经超时。</span><br><span class="line">	d. RunLoop被唤醒。</span><br><span class="line">8. 通知观察者线程刚被唤醒。</span><br><span class="line">9. 处理待处理的事件。 </span><br><span class="line">10. 通知观察者即将退出RunLoop。</span><br></pre></td></tr></table></figure>
 <p>关于 <strong>5. 如果当前是主线程的runloop，且source1准备就绪，转到第9步</strong> 的论证可参考该文章<a href="https://www.jianshu.com/p/ae0118f968bf" target="_blank" rel="noopener">关于runloop，好多人都理解错了!</a></p>
 <h2 id="配置、启动、退出RunLoop"><a href="#配置、启动、退出RunLoop" class="headerlink" title="配置、启动、退出RunLoop"></a>配置、启动、退出RunLoop</h2><h3 id="配置RunLoop"><a href="#配置RunLoop" class="headerlink" title="配置RunLoop"></a>配置RunLoop</h3><p>在我们为线程手动添加runloop时，必须为runloop添加至少一个输入源或者定时器，如果没有添加，当我们运行runloop时会立即退出.</p>
 <p>下面是创建runloop的代码:</p>
@@ -607,7 +607,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

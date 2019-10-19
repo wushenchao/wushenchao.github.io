@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="向scrapy中的spider传参有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。 ep: 121. 根据用户提交的url来控制spider爬取的网站。2. 根据需求增量爬取数据。 Spider参数通过 crawl 命令的 -a 选项来传递，比如： 12scrapy crawl xxx -a parameter=xxxxxx注：augmenter=不为空">
+<meta name="description" content="scrapy 简介scrapy 是一款 python 开发的 web 抓取框架，用于抓取 web 站点并从页面中提取结构化数据。scrapy 还可以用于数据挖掘、检测和自动化测试等。 scrapy 构成scrapy 主要由以下组件组成，它们分别是调度器(Scheduler)、调度中间件(Scheduler Middewares)、下载器(Downloader)、下载器中间件(Downloader">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="scrapy 相关使用">
+<meta property="og:title" content="scrapy">
 <meta property="og:url" content="http://yoursite.com/2017/09/20/20-scrapy/index.html">
 <meta property="og:site_name" content="不知是哪个号">
-<meta property="og:description" content="向scrapy中的spider传参有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。 ep: 121. 根据用户提交的url来控制spider爬取的网站。2. 根据需求增量爬取数据。 Spider参数通过 crawl 命令的 -a 选项来传递，比如： 12scrapy crawl xxx -a parameter=xxxxxx注：augmenter=不为空">
+<meta property="og:description" content="scrapy 简介scrapy 是一款 python 开发的 web 抓取框架，用于抓取 web 站点并从页面中提取结构化数据。scrapy 还可以用于数据挖掘、检测和自动化测试等。 scrapy 构成scrapy 主要由以下组件组成，它们分别是调度器(Scheduler)、调度中间件(Scheduler Middewares)、下载器(Downloader)、下载器中间件(Downloader">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-22T09:27:41.931Z">
+<meta property="og:updated_time" content="2019-09-25T03:20:42.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="scrapy 相关使用">
-<meta name="twitter:description" content="向scrapy中的spider传参有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。 ep: 121. 根据用户提交的url来控制spider爬取的网站。2. 根据需求增量爬取数据。 Spider参数通过 crawl 命令的 -a 选项来传递，比如： 12scrapy crawl xxx -a parameter=xxxxxx注：augmenter=不为空">
+<meta name="twitter:title" content="scrapy">
+<meta name="twitter:description" content="scrapy 简介scrapy 是一款 python 开发的 web 抓取框架，用于抓取 web 站点并从页面中提取结构化数据。scrapy 还可以用于数据挖掘、检测和自动化测试等。 scrapy 构成scrapy 主要由以下组件组成，它们分别是调度器(Scheduler)、调度中间件(Scheduler Middewares)、下载器(Downloader)、下载器中间件(Downloader">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>scrapy 相关使用 | 不知是哪个号</title>
+  <title>scrapy | 不知是哪个号</title>
   
 
 
@@ -270,7 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">scrapy 相关使用</h1>
+          <h1 class="post-title" itemprop="name headline">scrapy</h1>
         
 
         <div class="post-meta">
@@ -322,7 +322,7 @@
 
           
           
-             <span id="/2017/09/20/20-scrapy/" class="leancloud_visitors" data-flag-title="scrapy 相关使用">
+             <span id="/2017/09/20/20-scrapy/" class="leancloud_visitors" data-flag-title="scrapy">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -347,7 +347,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  402 words
+                  956 words
                 </span>
               
 
@@ -363,7 +363,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1 minutes
+                  3 minutes
                 </span>
               
             </div>
@@ -384,7 +384,18 @@
       
 
       
-        <h2 id="向scrapy中的spider传参"><a href="#向scrapy中的spider传参" class="headerlink" title="向scrapy中的spider传参"></a>向scrapy中的spider传参</h2><p>有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。</p>
+        <h2 id="scrapy-简介"><a href="#scrapy-简介" class="headerlink" title="scrapy 简介"></a>scrapy 简介</h2><p>scrapy 是一款 python 开发的 web 抓取框架，用于抓取 web 站点并从页面中提取结构化数据。scrapy 还可以用于数据挖掘、检测和自动化测试等。</p>
+<h2 id="scrapy-构成"><a href="#scrapy-构成" class="headerlink" title="scrapy 构成"></a>scrapy 构成</h2><p>scrapy 主要由以下组件组成，它们分别是调度器(Scheduler)、调度中间件(Scheduler Middewares)、下载器(Downloader)、下载器中间件(Downloader Middlewares)、爬虫（Spider）、爬虫中间件(Spider Middlewares)、管道(Item Pipeline) 和 Scrapy引擎(Scrapy Engine)。</p>
+<h3 id="Scrapy引擎-Scrapy-Engine"><a href="#Scrapy引擎-Scrapy-Engine" class="headerlink" title="Scrapy引擎(Scrapy Engine)"></a>Scrapy引擎(Scrapy Engine)</h3><p>框架的核心部分，它控制着调度器、下载器、爬虫和管道，相当于计算机的 CPU，控制整个流程。</p>
+<h3 id="管道-Item-Pipeline"><a href="#管道-Item-Pipeline" class="headerlink" title="管道(Item Pipeline)"></a>管道(Item Pipeline)</h3><p>用于处理爬虫提取的实体，主要功能是验证和清除不需要的信息，并持久化信息。</p>
+<h3 id="爬虫（Spider）"><a href="#爬虫（Spider）" class="headerlink" title="爬虫（Spider）"></a>爬虫（Spider）</h3><p>用户自己定制的部分，用于从特定的网站中提取自己需要的信息。</p>
+<h3 id="爬虫中间件-Spider-Middlewares"><a href="#爬虫中间件-Spider-Middlewares" class="headerlink" title="爬虫中间件(Spider Middlewares)"></a>爬虫中间件(Spider Middlewares)</h3><p>介于scrapy引擎和爬虫之间的中间件，主要处理爬虫响应输入和请求输出。包含url重定向、url长度、请求深度、请求错误等处理。</p>
+<h3 id="下载器-Downloader"><a href="#下载器-Downloader" class="headerlink" title="下载器(Downloader)"></a>下载器(Downloader)</h3><p>用于高速的从网络上获取资源，是建立在 twisted 这个高效的异步模型上。</p>
+<h3 id="下载器中间件-Downloader-Middlewares"><a href="#下载器中间件-Downloader-Middlewares" class="headerlink" title="下载器中间件(Downloader Middlewares)"></a>下载器中间件(Downloader Middlewares)</h3><p>介于引擎和下载器之间的框架，主要是处理引擎和下载器之间的请求和响应，可以在此处配置ip代理迟、user_agent，cookie 等反爬策略。</p>
+<h3 id="调度器-Scheduler"><a href="#调度器-Scheduler" class="headerlink" title="调度器(Scheduler)"></a>调度器(Scheduler)</h3><p>用于接收请求并压入队列中，在引擎再次请求时返回，由它决定下一个要抓取的网址是什么，同时负责去重网址。</p>
+<h2 id="scrapy-执行流程"><a href="#scrapy-执行流程" class="headerlink" title="scrapy 执行流程"></a>scrapy 执行流程</h2><p>scrapy发出请求后的整个流程如下：</p>
+<p>1.首先发送出的 request 经Scrapy引擎交给调度器（Scheduler）<br>2.调度器排序处理后，由Scrapy引擎经下载器中间件到下载器（Downloader）<br>3.下载器向互联网发送请求，并接收响应，再由Scrapy引擎经过爬虫中间件交给 Spiders<br>4.spiers处理response，提取数据后，再由Scrapy引擎交给管道(Item Pipeline)<br>5.提取新的request 经Scrapy引擎交给调度器（Scheduler）并重复上述流程</p>
+<h2 id="向scrapy中的spider传参"><a href="#向scrapy中的spider传参" class="headerlink" title="向scrapy中的spider传参"></a>向scrapy中的spider传参</h2><p>有时候需要根据项目的实际需求向spider传递参数来控制spider的运行方式。</p>
 <p>ep:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 根据用户提交的url来控制spider爬取的网站。</span><br><span class="line">2. 根据需求增量爬取数据。</span><br></pre></td></tr></table></figure>
 <p>Spider参数通过 crawl 命令的 -a 选项来传递，比如：</p>
@@ -527,7 +538,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -582,7 +593,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#向scrapy中的spider传参"><span class="nav-number">1.</span> <span class="nav-text">向scrapy中的spider传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#callback-传递参数"><span class="nav-number">2.</span> <span class="nav-text">callback 传递参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log-配置方式"><span class="nav-number">3.</span> <span class="nav-text">log 配置方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-简介"><span class="nav-number">1.</span> <span class="nav-text">scrapy 简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-构成"><span class="nav-number">2.</span> <span class="nav-text">scrapy 构成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Scrapy引擎-Scrapy-Engine"><span class="nav-number">2.1.</span> <span class="nav-text">Scrapy引擎(Scrapy Engine)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管道-Item-Pipeline"><span class="nav-number">2.2.</span> <span class="nav-text">管道(Item Pipeline)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫（Spider）"><span class="nav-number">2.3.</span> <span class="nav-text">爬虫（Spider）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#爬虫中间件-Spider-Middlewares"><span class="nav-number">2.4.</span> <span class="nav-text">爬虫中间件(Spider Middlewares)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载器-Downloader"><span class="nav-number">2.5.</span> <span class="nav-text">下载器(Downloader)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载器中间件-Downloader-Middlewares"><span class="nav-number">2.6.</span> <span class="nav-text">下载器中间件(Downloader Middlewares)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调度器-Scheduler"><span class="nav-number">2.7.</span> <span class="nav-text">调度器(Scheduler)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scrapy-执行流程"><span class="nav-number">3.</span> <span class="nav-text">scrapy 执行流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向scrapy中的spider传参"><span class="nav-number">4.</span> <span class="nav-text">向scrapy中的spider传参</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#callback-传递参数"><span class="nav-number">5.</span> <span class="nav-text">callback 传递参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#log-配置方式"><span class="nav-number">6.</span> <span class="nav-text">log 配置方式</span></a></li></ol></div>
             
 
           </div>

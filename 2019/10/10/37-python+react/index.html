@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景研究了开源项目 superset 已经有一段时间了，突然想自己搭建一个类似的 Python + React 类型的项目，搭建的过程中产生了各种问题，这篇文章记录了搭建的整个过程以及遇到的问题和相关解决方法。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python + React">
+<meta property="og:url" content="http://yoursite.com/2019/10/10/37-python+react/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="背景研究了开源项目 superset 已经有一段时间了，突然想自己搭建一个类似的 Python + React 类型的项目，搭建的过程中产生了各种问题，这篇文章记录了搭建的整个过程以及遇到的问题和相关解决方法。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/36/36-1.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-2.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-4.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-5.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-8.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-9.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-10.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-11.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-12.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-13.png">
+<meta property="og:image" content="http://yoursite.com/images/36/36-14.png">
+<meta property="og:updated_time" content="2019-10-19T06:45:17.977Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python + React">
+<meta name="twitter:description" content="背景研究了开源项目 superset 已经有一段时间了，突然想自己搭建一个类似的 Python + React 类型的项目，搭建的过程中产生了各种问题，这篇文章记录了搭建的整个过程以及遇到的问题和相关解决方法。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta name="twitter:image" content="http://yoursite.com/images/36/36-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/10/37-python+react/">
+
+
+
+
+
+  <title>Python + React | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It's never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/37-python+react/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python + React</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-10T00:00:00+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/10/10/37-python+react/" class="leancloud_visitors" data-flag-title="Python + React">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.1k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  20 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>研究了开源项目 superset 已经有一段时间了，突然想自己搭建一个类似的 Python + React 类型的项目，搭建的过程中产生了各种问题，这篇文章记录了搭建的整个过程以及遇到的问题和相关解决方法。</p>
+<h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><p>系统环境: macOS系统</p>
+<p>使用python等版本如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v: v11.1.0</span><br><span class="line">npm -v: 6.5.0</span><br><span class="line">python3 --version: 3.6.5</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="虚拟环境和相关安装包配置"><a href="#虚拟环境和相关安装包配置" class="headerlink" title="虚拟环境和相关安装包配置"></a>虚拟环境和相关安装包配置</h2><p>进入项目目录创建 requirements.txt 文件，配置相关依赖包（见文末）</p>
+<p>创建虚拟环境(python3直接创建)并激活环境:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 -m venv venv</span><br><span class="line">source venv/bin/activate</span><br></pre></td></tr></table></figure>
+<p>使用如下命令安装相关依赖包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p>本项目以 <strong>Flask-AppBuilder</strong> 为基础搭建，相关文档和地址:<br><a href>GitHub 地址</a> <a href="https://flask-appbuilder.readthedocs.io/en/latest" target="_blank" rel="noopener">文档地址</a> </p>
+<p>按照文档使用如下命令创建项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask fab create-app</span><br></pre></td></tr></table></figure>
+<p><img src="../../../../images/36/36-1.png" alt></p>
+<p>我们看到安装出现了错误，我从 Flask-AppBuilder 2.1.10 升级到 2.1.13 还是有这个错，搜了下issues 发现已经有这个问题，并且这个问题已经被修复，最新版本应该是还没有发布。我们直接复制地址到浏览器下载: <strong><a href="https://github.com/dpgaspar/Flask-AppBuilder-Skeleton/archive/master.zip" target="_blank" rel="noopener">https://github.com/dpgaspar/Flask-AppBuilder-Skeleton/archive/master.zip</a></strong> 把下载压缩包解压，移动文件中的内容到项目文件目录下。如下所示</p>
+<p><img src="../../../../images/36/36-2.png" alt></p>
+<h3 id="相关目录创建和文件配置"><a href="#相关目录创建和文件配置" class="headerlink" title="相关目录创建和文件配置"></a>相关目录创建和文件配置</h3><ul>
+<li>删除 views.py 和 models.py </li>
+<li><p>新增目录 staic、assets、views、models</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1. 软连接 assets 到 static 目录下(使用绝对路径)</span><br><span class="line">ln -s /Users/xx/app/assets /Users/xx/app/static/assets</span><br><span class="line"></span><br><span class="line">2. models 文件目录是相关模型</span><br><span class="line">3. views 文件目录是相关视图</span><br><span class="line">4. templates 文件目录是相关模版文件(见React部分)</span><br><span class="line">5. assets 文件目录是react相关配置(见React部分)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>调整后的目录结构如下所示:
+
+![](../../../../images/36/36-3.png)
+</code></pre><ul>
+<li><p>配置 config.py 文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">数据库地址配置: SQLALCHEMY_DATABASE_URI</span><br><span class="line">并新增 SQLALCHEMY_TRACK_MODIFICATIONS = False 配置项</span><br><span class="line">应用名称配置: APP_NAME</span><br><span class="line">应用icon配置: APP_ICON</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>models 模块配置</p>
+<p>  为了方便 model 统一管理我们创建了 models，该文件下主要存放各种模型文件和模型辅助文件，结构目录如下所示:</p>
+<p>  <img src="../../../../images/36/36-4.png" alt></p>
+<ol>
+<li><p>__init__.py 文件内容为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from . import core</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>2. core.py 我们定义的一个log模型
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">from datetime import datetime</span><br><span class="line">import functools</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line">from flask import request, g</span><br><span class="line">from sqlalchemy import (</span><br><span class="line">    Boolean, Column, DateTime, ForeignKey, Integer, String, Text,</span><br><span class="line">)</span><br><span class="line">from flask_appbuilder import Model</span><br><span class="line"></span><br><span class="line">class Log(Model):</span><br><span class="line"></span><br><span class="line">    &quot;&quot;&quot;ORM object used to log Superset actions to the database&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    __tablename__ = &apos;logs&apos;</span><br><span class="line"></span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    action = Column(String(512))</span><br><span class="line">    blog_id = Column(Integer)</span><br><span class="line">    json = Column(Text)</span><br><span class="line">    timestamp = Column(DateTime, default=datetime.utcnow)</span><br><span class="line">    duration_ms = Column(Integer)</span><br><span class="line">    referrer = Column(String(1024))</span><br><span class="line">    user_id = Column(Integer, ForeignKey(&apos;ab_user.id&apos;))</span><br><span class="line"></span><br><span class="line">    def __repr__(self):</span><br><span class="line">        return self.user_id if self.user_id else self.action</span><br><span class="line"></span><br><span class="line">    @classmethod</span><br><span class="line">    def log_this(cls, f):</span><br><span class="line">        &quot;&quot;&quot;Decorator to log user actions&quot;&quot;&quot;</span><br><span class="line">        @functools.wraps(f)</span><br><span class="line">        def wrapper(*args, **kwargs):</span><br><span class="line">            &quot;&quot;&quot;自定义记录内容&quot;&quot;&quot;</span><br><span class="line">        return wrapper</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>views 模块配置</p>
+<p>  同理为了方便视图的统一管理我们创建了 views，结构目录如下所示:</p>
+<p>  <img src="../../../../images/36/36-5.png" alt></p>
+<ol>
+<li>__init__.py 文件内容同model模块</li>
+<li><p>base.py 定义继承于 BaseView 的公共基类和获取用户的基本信息</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">from flask import Response, get_flashed_messages, g</span><br><span class="line">from flask_appbuilder import BaseView</span><br><span class="line">import simplejson as json</span><br><span class="line">from flask_appbuilder.security.sqla import models as ab_models</span><br><span class="line">from app import db</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def bootstrap_user_data(username=None, include_perms=False):</span><br><span class="line">    &quot;&quot;&quot;获取用户信息&quot;&quot;&quot;</span><br><span class="line">    if username:</span><br><span class="line">        username = username</span><br><span class="line">    else:</span><br><span class="line">        username = g.user.username</span><br><span class="line">    user = db.session.query(ab_models.User).filter_by(username=username).one()</span><br><span class="line">    payload = &#123;</span><br><span class="line">        &apos;username&apos;: user.username,</span><br><span class="line">        &apos;firstName&apos;: user.first_name,</span><br><span class="line">        &apos;lastName&apos;: user.last_name,</span><br><span class="line">        &apos;userId&apos;: user.id,</span><br><span class="line">        &apos;isActive&apos;: user.is_active,</span><br><span class="line">        &apos;email&apos;: user.email,</span><br><span class="line">        &apos;createdOn&apos;: user.created_on.isoformat()</span><br><span class="line">    &#125;</span><br><span class="line">    if include_perms:</span><br><span class="line">        &quot;&quot;&quot;&quot;&quot;&quot;</span><br><span class="line">    return payload</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class BaseDDBlogView(BaseView):</span><br><span class="line"></span><br><span class="line">    def json_response(self, obj, status=200):</span><br><span class="line">        return Response(</span><br><span class="line">            json.dumps(obj, ignore_nan=True),</span><br><span class="line">            status=status,</span><br><span class="line">            mimetype=&apos;application/json&apos;</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    def common_bootstrap_payload(self):</span><br><span class="line">        &quot;&quot;&quot;common bootstrap&quot;&quot;&quot;</span><br><span class="line">        messages = get_flashed_messages(with_categories=True)</span><br><span class="line">        return &#123;</span><br><span class="line">            &apos;flash_messages&apos;: messages</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>core.py</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">from flask import (</span><br><span class="line">    Response, request, url_for, redirect, render_template, flash, g</span><br><span class="line">)</span><br><span class="line">from flask_appbuilder import expose</span><br><span class="line">import simplejson as json</span><br><span class="line">from .base import (</span><br><span class="line">    BaseDDBlogView, bootstrap_user_data</span><br><span class="line">)</span><br><span class="line">from app import (app, appbuilder, db)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class DDBlog(BaseDDBlogView):</span><br><span class="line">    &quot;&quot;&quot;&quot;&quot;&quot;</span><br><span class="line">    @expose(&apos;/welcome&apos;)</span><br><span class="line">    def welcome(self):</span><br><span class="line">        if not g.user or not g.user.get_id():</span><br><span class="line">            return redirect(appbuilder.get_url_for_login)</span><br><span class="line">        payload = &#123;</span><br><span class="line">            &apos;common&apos;: self.common_bootstrap_payload(),</span><br><span class="line">            &apos;user&apos;: bootstrap_user_data()</span><br><span class="line">        &#125;</span><br><span class="line">        return self.render_template(</span><br><span class="line">            &apos;blog/basic.html&apos;,</span><br><span class="line">            entry=&apos;welcome&apos;,</span><br><span class="line">            bootstrap_data=json.dumps(payload)</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">appbuilder.add_view_no_menu(DDBlog)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p>修改 run.py 文件</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">from app import db, app</span><br><span class="line">from app.models.core import Log</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">@app.shell_context_processor</span><br><span class="line">def make_shell_context():</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    此处引入model中已经创建好的Log模型，用于migrate创建是自动加载</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return dict(app=app, db=db, Log=Log)</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    app.run(host=&quot;0.0.0.0&quot;, port=8080, debug=True)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置 app/__init__.py 文件</p>
+<p>  1、新增 migrate 配置</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">APP_DIR = os.path.dirname(__file__)</span><br><span class="line">migrate = Migrate(app, db, directory=APP_DIR + &quot;/migrations&quot;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<pre><code>2、继承并重定向 IndexView
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class MyIndexView(IndexView):</span><br><span class="line">    @expose(&quot;/&quot;)</span><br><span class="line">    def index(self):</span><br><span class="line">        return redirect(&quot;/ddblog/welcome&quot;)</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">with app.app_context():</span><br><span class="line">    appbuilder = AppBuilder(</span><br><span class="line">        app,</span><br><span class="line">        db.session,</span><br><span class="line">        base_template=&quot;blog/base.html&quot;,</span><br><span class="line">        indexview=MyIndexView,</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+
+3、配置启动处理 assets 模块 manifest
+
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&quot;&quot;&quot;Handling manifest file logic at app start&quot;&quot;&quot;</span><br><span class="line">MANIFEST_FILE = APP_DIR + &quot;/static/assets/dist/manifest.json&quot;</span><br><span class="line">manifest = &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">def parse_manifest_json():</span><br><span class="line">    global manifest</span><br><span class="line">    try:</span><br><span class="line">        with open(MANIFEST_FILE, &quot;r&quot;) as f:</span><br><span class="line">            full_manifest = json.load(f)</span><br><span class="line">            manifest = full_manifest.get(&quot;entrypoints&quot;, &#123;&#125;)</span><br><span class="line">    except Exception as e:</span><br><span class="line">        print(str(e))</span><br><span class="line">        pass</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">def get_js_manifest_files(filename):</span><br><span class="line">    if app.debug:</span><br><span class="line">        parse_manifest_json()</span><br><span class="line">    entry_files = manifest.get(filename, &#123;&#125;)</span><br><span class="line">    return entry_files.get(&quot;js&quot;, [])</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">def get_css_manifest_files(filename):</span><br><span class="line">    if app.debug:</span><br><span class="line">        parse_manifest_json()</span><br><span class="line">    entry_files = manifest.get(filename, &#123;&#125;)</span><br><span class="line">    return entry_files.get(&quot;css&quot;, [])</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">def get_unloaded_chunks(files, loaded_chunks):</span><br><span class="line">    filtered_files = [f for f in files if f not in loaded_chunks]</span><br><span class="line">    for f in filtered_files:</span><br><span class="line">        loaded_chunks.add(f)</span><br><span class="line">    return filtered_files</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">parse_manifest_json()</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">@app.context_processor</span><br><span class="line">def get_manifest():</span><br><span class="line">    return dict(</span><br><span class="line">        loaded_chunks=set(),</span><br><span class="line">        get_unloaded_chunks=get_unloaded_chunks,</span><br><span class="line">        js_manifest=get_js_manifest_files,</span><br><span class="line">        css_manifest=get_css_manifest_files,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>以上配置完成后创建并初始化数据库</p>
+<ol>
+<li><p>进入到到当前项目，启动虚拟环境，执行如下命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export FLASK_APP=run.py</span><br><span class="line">flask db init</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<pre><code>如下图所示:
+
+![](../../../../images/36/36-6.png)
+</code></pre><ol start="2">
+<li><p>执行下面命令生成数据库版本并更新</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">flask db migrate</span><br><span class="line">flask db upgrade</span><br></pre></td></tr></table></figure>
+<p> 到这里数据库已经完成创建</p>
+</li>
+</ol>
+<ul>
+<li>创建管理员账号 flask fab create-admin 如下图</li>
+</ul>
+<pre><code>![](../../../../images/36/36-7.png)
+</code></pre><p>如果以上都能执行完成，Python 模块基本配置完成，这里总结上面出现的几种常见错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. 项目的目录结构层级错误</span><br><span class="line">2. 目录 app 名称被修改，执行命令会出现找不到 app 等错误</span><br><span class="line">3. run.py 文件中需要配置一个自己定义的模型如 Log，模型才能被初始化合并到项目中</span><br></pre></td></tr></table></figure>
+<h3 id="React-配置"><a href="#React-配置" class="headerlink" title="React 配置"></a>React 配置</h3><p>此模块主要记录了项目中 webpack 配置过程中所产生的各种问题和相关解决方法。 该模块主要包含  templates 和 assets 两部分配置，assets 部分配置是重点。</p>
+<h3 id="templates-模块配置"><a href="#templates-模块配置" class="headerlink" title="templates 模块配置"></a>templates 模块配置</h3><p>该模块主要参考 superset 内容，里面有两个文件，一个 appbuilder， 一个是自定义的模块bog，该文件名称和文章前面 __init__.py 中 apppbuilder 中 base_template 配置相同。</p>
+<h3 id="assets-模块配置（容易出错的地方）"><a href="#assets-模块配置（容易出错的地方）" class="headerlink" title="assets 模块配置（容易出错的地方）"></a>assets 模块配置（容易出错的地方）</h3><p><strong>以下操作在文件目录 assets 下执行</strong></p>
+<h4 id="生成-package-json-文件"><a href="#生成-package-json-文件" class="headerlink" title="生成 package.json 文件"></a>生成 package.json 文件</h4><p>第一次进入assets目录下改文件夹内容是空的我们按照下面过程操作</p>
+<ol>
+<li><p>执行 npm init 命令 一直回车生成 package.json 文件</p>
+</li>
+<li><p>编辑 package.json 文件内容，这时文件目录如下所示</p>
+</li>
+<li><p>执行 npm install 安装 node_modules 模块</p>
+</li>
+</ol>
+<p>以上执行完成后该文件夹内容如下所示</p>
+<p><img src="../../../../images/36/36-8.png" alt></p>
+<h4 id="assets目录下新增-src、images-和-stylesheets目录"><a href="#assets目录下新增-src、images-和-stylesheets目录" class="headerlink" title="assets目录下新增 src、images 和 stylesheets目录"></a>assets目录下新增 src、images 和 stylesheets目录</h4><ul>
+<li>src 目录中主要存放 react 编写的 js 文件，这里我把superset中 welcome 模块修改了部分内容后直接使用</li>
+<li>stylesheets 存放的是项目中需要使用的 css less样式，这里我也套用 superset 模块内容</li>
+<li>images 存放是项目中使用的图片</li>
+</ul>
+<h4 id="创建并配置-webpack-config-js"><a href="#创建并配置-webpack-config-js" class="headerlink" title="创建并配置 webpack.config.js"></a>创建并配置 webpack.config.js</h4><p>webpack 各个参数配置和说明可以参考<a href="https://www.webpackjs.com/concepts/" target="_blank" rel="noopener">中文文档</a></p>
+<p>在我们创建并配置好 webpack.config.js 后，当前文件目录如下所示</p>
+<p><img src="../../../../images/36/36-9.png" alt></p>
+<ol>
+<li><p>以上配置完成后我尝试的运行了下打包命令 npm run dev，第一个错误出现</p>
+<p> <img src="../../../../images/36/36-10.png" alt></p>
+<p> 该错误提示比较明显，提示我们缺少一个 tsconfig 文件，因此我们新增加了一个 tsconfig.config 文件内容参考 superset 配置，修改后的文件目录如下所示</p>
+<p> <img src="../../../../images/36/36-11.png" alt> </p>
+</li>
+<li><p>我又尝试的运行了下打包命令 npm run dev ，第二个错误出现</p>
+<p> <img src="../../../../images/36/36-12.png" alt> </p>
+<p> 从错误里面看到好像和 babel-core 有关，于是我找到下面这篇<a href="https://www.cnblogs.com/soyxiaobi/p/9554565.html" target="_blank" rel="noopener">文章</a>, 从该文章我知道 babel、babel-loader 版本需要和 webpack 对应，于是我将这三个模块都回退到了7执行以下命令</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -D babel-loader@7 babel-core babel-preset-env webpack</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我又尝试的运行了下打包命令 npm run dev ，第三个错误出现</p>
+<p> <img src="../../../../images/36/36-13.png" alt></p>
+<p> 这次错误倒是少了提示 babel-loader 失败，从字面理解应该是 babel 模块加载失败，但是从这里很难找到问题，于是我又查找了一通，终于从发下了下面这篇文章 <a href="https://segmentfault.com/a/1190000016458913" target="_blank" rel="noopener">webpack配置 babel</a>，从这篇文章我突然发现我少了一个 .babelrc 文件，于是我又查看了 superset 果然有这个文件，于是我又参考了它配置了一个如下</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;react&quot;, &quot;env&quot;, &quot;airbnb&quot;],</span><br><span class="line">  &quot;plugins&quot;: [&quot;lodash&quot;, &quot;syntax-dynamic-import&quot;, &quot;react-hot-loader/babel&quot;],</span><br><span class="line">  &quot;env&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &#123;</span><br><span class="line">      &quot;plugins&quot;: [</span><br><span class="line">        &quot;babel-plugin-dynamic-import-node&quot;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>我又尝试的运行了下打包命令 npm run dev ，第四个错误出现</p>
+<p> <img src="../../../../images/36/36-14.png" alt></p>
+<p> 这个错误还是比较明显的提示我们 aribnb 没有找到，回到package.json 中发现我配置的是 babel-preset-airbnb，修改presets内容后再次运行</p>
+</li>
+</ol>
+<pre><code>![](../../../../images/36/36-15.png)
+
+
+终于在经过上面n多次修改后，我的项目终于编译成功！附上该模块最终目录截图
+
+![](../../../../images/36/36-16.png)
+</code></pre><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>事后我又直接找到 <a href="https://www.babeljs.cn/docs/" target="_blank" rel="noopener">babel 中文网</a>，发现原来Babel 是一个工具链主要用于语法转换的，它的核心库包含 babel-core、babel-cli、babel-preset-env和babel-polyfill等，关于他的一些配置事项该网站中都有介绍，如果我早查看该文章可能会少走些弯路。总的来说过程是痛苦的但是结果是好的</p>
+<p><strong>以上内容参考以下文章</strong></p>
+<p><a href="https://segmentfault.com/a/1190000016458913" target="_blank" rel="noopener">webpack配置 babel</a><br><a href="https://www.cnblogs.com/soyxiaobi/p/9554565.html" target="_blank" rel="noopener">webpack.config.js配置遇到Error: Cannot find module ‘@babel/core’&amp;&amp;Cannot find module ‘@babel/plugin-transform-react-jsx’ 问题</a></p>
+<p>webpack.config.js 文件内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br></pre></td><td class="code"><pre><span class="line">const path = require(&apos;path&apos;);</span><br><span class="line">const webpack = require(&apos;webpack&apos;);</span><br><span class="line">const BundleAnalyzerPlugin = require(&apos;webpack-bundle-analyzer&apos;).BundleAnalyzerPlugin;</span><br><span class="line">const CleanWebpackPlugin = require(&apos;clean-webpack-plugin&apos;);</span><br><span class="line">const MiniCssExtractPlugin = require(&apos;mini-css-extract-plugin&apos;);</span><br><span class="line">const OptimizeCSSAssetsPlugin = require(&apos;optimize-css-assets-webpack-plugin&apos;);</span><br><span class="line">const SpeedMeasurePlugin = require(&apos;speed-measure-webpack-plugin&apos;);</span><br><span class="line">const TerserPlugin = require(&apos;terser-webpack-plugin&apos;);</span><br><span class="line">const WebpackAssetsManifest = require(&apos;webpack-assets-manifest&apos;);</span><br><span class="line">const ForkTsCheckerWebpackPlugin = require(&apos;fork-ts-checker-webpack-plugin&apos;);</span><br><span class="line"></span><br><span class="line">// Parse command-line arguments</span><br><span class="line">const parsedArgs = require(&apos;minimist&apos;)(process.argv.slice(2));</span><br><span class="line"></span><br><span class="line">// input dir</span><br><span class="line">const APP_DIR = path.resolve(__dirname, &apos;./&apos;);</span><br><span class="line"></span><br><span class="line">// output dir</span><br><span class="line">const BUILD_DIR = path.resolve(__dirname, &apos;./dist&apos;);</span><br><span class="line"></span><br><span class="line">const &#123;</span><br><span class="line">  mode = &apos;development&apos;,</span><br><span class="line">  devPort = 9000,</span><br><span class="line">  proPort = 8088,</span><br><span class="line">  measure = false,</span><br><span class="line">  analyzeBundle = false,</span><br><span class="line">&#125; = parsedArgs;</span><br><span class="line"></span><br><span class="line">const isDevMode = mode !== &apos;production&apos;;</span><br><span class="line"></span><br><span class="line">const plugins = [</span><br><span class="line">  // creates a manifest.json mapping of name to hashed output used in template files</span><br><span class="line">  new WebpackAssetsManifest(&#123;</span><br><span class="line">    publicPath: true,</span><br><span class="line">    entrypoints: true,</span><br><span class="line">    writeToDisk: isDevMode,</span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  // create fresh dist/ upon build</span><br><span class="line">  new CleanWebpackPlugin([&apos;dist&apos;]),</span><br><span class="line"></span><br><span class="line">  // expose mode variable to other modules</span><br><span class="line">  new webpack.DefinePlugin(&#123;</span><br><span class="line">    &apos;process.env.WEBPACK_MODE&apos;: JSON.stringify(mode),</span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  // runs type checking on a separate process to speed up the build</span><br><span class="line">  new ForkTsCheckerWebpackPlugin(&#123;</span><br><span class="line">    checkSyntacticErrors: true,</span><br><span class="line">  &#125;),</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">if (isDevMode) &#123;</span><br><span class="line">  // Enable hot module replacement</span><br><span class="line">  plugins.push(new webpack.HotModuleReplacementPlugin());</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  // text loading (webpack 4+)</span><br><span class="line">  plugins.push(new MiniCssExtractPlugin(&#123;</span><br><span class="line">    filename: &apos;[name].[chunkhash].entry.css&apos;,</span><br><span class="line">    chunkFilename: &apos;[name].[chunkhash].chunk.css&apos;,</span><br><span class="line">  &#125;));</span><br><span class="line">  plugins.push(new OptimizeCSSAssetsPlugin());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const output = &#123;</span><br><span class="line">  path: BUILD_DIR,</span><br><span class="line">  publicPath: &apos;/static/assets/dist/&apos;, // necessary for lazy-loaded chunks</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">if (isDevMode) &#123;</span><br><span class="line">  output.filename = &apos;[name].[hash:8].entry.js&apos;;</span><br><span class="line">  output.chunkFilename = &apos;[name].[hash:8].chunk.js&apos;;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">  output.filename = &apos;[name].[chunkhash].entry.js&apos;;</span><br><span class="line">  output.chunkFilename = &apos;[name].[chunkhash].chunk.js&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const PREAMBLE = [</span><br><span class="line">  &apos;babel-polyfill&apos;,</span><br><span class="line">  path.join(APP_DIR, &apos;/src/preamble.js&apos;),</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">function addPreamble(entry) &#123;</span><br><span class="line">  return PREAMBLE.concat([path.join(APP_DIR, entry)]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">const config = &#123;</span><br><span class="line">  node: &#123;</span><br><span class="line">    fs: &apos;empty&apos;,</span><br><span class="line">  &#125;,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    theme: path.join(APP_DIR, &apos;/src/theme.js&apos;),</span><br><span class="line">    preamble: PREAMBLE,</span><br><span class="line">    welcome: addPreamble(&apos;/src/welcome/index.jsx&apos;),</span><br><span class="line">  &#125;,</span><br><span class="line">  output,</span><br><span class="line">  optimization: &#123;</span><br><span class="line">    splitChunks: &#123;</span><br><span class="line">      chunks: &apos;all&apos;,</span><br><span class="line">      automaticNameDelimiter: &apos;-&apos;,</span><br><span class="line">      minChunks: 2,</span><br><span class="line">      cacheGroups: &#123;</span><br><span class="line">        default: false,</span><br><span class="line">        major: &#123;</span><br><span class="line">          name: &apos;vendors-major&apos;,</span><br><span class="line">          test: /[\\/]node_modules\/(brace|react[-]dom|core[-]js)[\\/]/,</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  resolve: &#123;</span><br><span class="line">    alias: &#123;</span><br><span class="line">      src: path.resolve(APP_DIR, &apos;./src&apos;),</span><br><span class="line">    &#125;,</span><br><span class="line">    extensions: [&apos;.ts&apos;, &apos;.tsx&apos;, &apos;.js&apos;, &apos;.jsx&apos;],</span><br><span class="line">  &#125;,</span><br><span class="line">  context: APP_DIR, // to automatically find tsconfig.json</span><br><span class="line">  module: &#123;</span><br><span class="line">    rules: [</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.jsx?$/,</span><br><span class="line">        exclude: /node_modules/,</span><br><span class="line">        include: APP_DIR,</span><br><span class="line">        loader: &apos;babel-loader&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.css$/,</span><br><span class="line">        include: APP_DIR,</span><br><span class="line">        use: [</span><br><span class="line">          isDevMode ? &apos;style-loader&apos; : MiniCssExtractPlugin.loader,</span><br><span class="line">          &apos;css-loader&apos;,</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.less$/,</span><br><span class="line">        include: APP_DIR,</span><br><span class="line">        use: [</span><br><span class="line">          isDevMode ? &apos;style-loader&apos; : MiniCssExtractPlugin.loader,</span><br><span class="line">          &apos;css-loader&apos;,</span><br><span class="line">          &apos;less-loader&apos;,</span><br><span class="line">        ],</span><br><span class="line">      &#125;,</span><br><span class="line">      /* for css linking images */</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.png$/,</span><br><span class="line">        loader: &apos;url-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          limit: 10000,</span><br><span class="line">          name: &apos;[name].[hash:8].[ext]&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.(jpg|gif)$/,</span><br><span class="line">        loader: &apos;file-loader&apos;,</span><br><span class="line">        options: &#123;</span><br><span class="line">          name: &apos;[name].[hash:8].[ext]&apos;,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">      /* for font-awesome */</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,</span><br><span class="line">        loader: &apos;url-loader?limit=10000&amp;mimetype=application/font-woff&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,</span><br><span class="line">        loader: &apos;file-loader&apos;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">  externals: &#123;</span><br><span class="line">    cheerio: &apos;window&apos;,</span><br><span class="line">    &apos;react/lib/ExecutionEnvironment&apos;: true,</span><br><span class="line">    &apos;react/lib/ReactContext&apos;: true,</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins,</span><br><span class="line">  devtool: isDevMode ? &apos;cheap-module-eval-source-map&apos; : false,</span><br><span class="line">  devServer: &#123;</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">    hot: true,</span><br><span class="line">    index: &apos;&apos;, // This line is needed to enable root proxying</span><br><span class="line">    inline: true,</span><br><span class="line">    stats: &#123; colors: true &#125;,</span><br><span class="line">    overlay: true,</span><br><span class="line">    port: devPort,</span><br><span class="line">    // Only serves bundled files from webpack-dev-server</span><br><span class="line">    // and proxy everything else to backend</span><br><span class="line">    proxy: &#123;</span><br><span class="line">      context: () =&gt; true,</span><br><span class="line">      &apos;/&apos;: `http://localhost:$&#123;proPort&#125;`,</span><br><span class="line">      target: `http://localhost:$&#123;proPort&#125;`,</span><br><span class="line">    &#125;,</span><br><span class="line">    contentBase: path.join(process.cwd(), &apos;../static/assets/dist&apos;),</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">if (!isDevMode) &#123;</span><br><span class="line">  config.optimization.minimizer = [</span><br><span class="line">    new TerserPlugin(&#123;</span><br><span class="line">      cache: &apos;.terser-plugin-cache/&apos;,</span><br><span class="line">      parallel: true,</span><br><span class="line">      extractComments: true,</span><br><span class="line">    &#125;),</span><br><span class="line">  ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Bundle analyzer is disabled by default</span><br><span class="line">// Pass flag --analyzeBundle=true to enable</span><br><span class="line">// e.g. npm run build -- --analyzeBundle=true</span><br><span class="line">if (analyzeBundle) &#123;</span><br><span class="line">  config.plugins.push(new BundleAnalyzerPlugin());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Speed measurement is disabled by default</span><br><span class="line">// Pass flag --measure=true to enable</span><br><span class="line">// e.g. npm run build -- --measure=true</span><br><span class="line">const smp = new SpeedMeasurePlugin(&#123;</span><br><span class="line">  disable: !measure,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">module.exports = smp.wrap(config);</span><br></pre></td></tr></table></figure>
+<p>package.json 文件内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;ddblog&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;webpack --mode=development --colors --progress --debug --watch&quot;,</span><br><span class="line">    &quot;dev-server&quot;: &quot;webpack-dev-server --mode=development --progress&quot;,</span><br><span class="line">    &quot;build&quot;: &quot;NODE_ENV=production webpack --mode=production --colors --progress&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;keywords&quot;: [</span><br><span class="line">    &quot;blog&quot;,</span><br><span class="line">    &quot;python&quot;,</span><br><span class="line">    &quot;react&quot;</span><br><span class="line">  ],</span><br><span class="line">  &quot;author&quot;: &quot;wushenchao&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;MIT&quot;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;abortcontroller-polyfill&quot;: &quot;^1.1.9&quot;,</span><br><span class="line">    &quot;bootstrap&quot;: &quot;^3.3.6&quot;,</span><br><span class="line">    &quot;bootstrap-slider&quot;: &quot;^10.0.0&quot;,</span><br><span class="line">    &quot;jquery&quot;: &quot;3.4.1&quot;,</span><br><span class="line">    &quot;lodash&quot;: &quot;^4.17.11&quot;,</span><br><span class="line">    &quot;moment&quot;: &quot;^2.20.1&quot;,</span><br><span class="line">    &quot;prop-types&quot;: &quot;^15.6.0&quot;,</span><br><span class="line">    &quot;postcss&quot;: &quot;6.0.20&quot;,</span><br><span class="line">    &quot;react&quot;: &quot;^16.4.1&quot;,</span><br><span class="line">    &quot;react-ace&quot;: &quot;^5.10.0&quot;,</span><br><span class="line">    &quot;react-addons-shallow-compare&quot;: &quot;^15.4.2&quot;,</span><br><span class="line">    &quot;react-bootstrap&quot;: &quot;^0.31.5&quot;,</span><br><span class="line">    &quot;react-bootstrap-slider&quot;: &quot;2.1.5&quot;,</span><br><span class="line">    &quot;react-bootstrap-table&quot;: &quot;^4.3.1&quot;,</span><br><span class="line">    &quot;react-hot-loader&quot;: &quot;^4.3.6&quot;,</span><br><span class="line">    &quot;react-dom&quot;: &quot;^16.4.1&quot;,</span><br><span class="line">    &quot;react-redux&quot;: &quot;^5.0.2&quot;,</span><br><span class="line">    &quot;reactable&quot;: &quot;1.0.2&quot;,</span><br><span class="line">    &quot;redux&quot;: &quot;^3.5.2&quot;,</span><br><span class="line">    &quot;redux-localstorage&quot;: &quot;^0.4.1&quot;,</span><br><span class="line">    &quot;redux-thunk&quot;: &quot;^2.1.0&quot;,</span><br><span class="line">    &quot;redux-undo&quot;: &quot;^1.0.0-beta9-9-7&quot;,</span><br><span class="line">    &quot;shortid&quot;: &quot;^2.2.6&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;devDependencies&quot;: &#123;</span><br><span class="line">    &quot;babel-cli&quot;: &quot;^6.26.0&quot;,</span><br><span class="line">    &quot;babel-core&quot;: &quot;^6.10.4&quot;,</span><br><span class="line">    &quot;babel-eslint&quot;: &quot;^8.2.2&quot;,</span><br><span class="line">    &quot;babel-jest&quot;: &quot;^25.0.0&quot;,</span><br><span class="line">    &quot;babel-loader&quot;: &quot;^7.1.4&quot;,</span><br><span class="line">    &quot;babel-plugin-css-modules-transform&quot;: &quot;^1.1.0&quot;,</span><br><span class="line">    &quot;babel-plugin-dynamic-import-node&quot;: &quot;^1.2.0&quot;,</span><br><span class="line">    &quot;babel-plugin-lodash&quot;: &quot;^3.3.4&quot;,</span><br><span class="line">    &quot;babel-plugin-syntax-dynamic-import&quot;: &quot;^6.18.0&quot;,</span><br><span class="line">    &quot;babel-polyfill&quot;: &quot;^6.23.0&quot;,</span><br><span class="line">    &quot;babel-preset-airbnb&quot;: &quot;^2.1.1&quot;,</span><br><span class="line">    &quot;babel-preset-env&quot;: &quot;^1.7.0&quot;,</span><br><span class="line">    &quot;cache-loader&quot;: &quot;^1.2.2&quot;,</span><br><span class="line">    &quot;clean-webpack-plugin&quot;: &quot;^0.1.19&quot;,</span><br><span class="line">    &quot;css-loader&quot;: &quot;^1.0.0&quot;,</span><br><span class="line">    &quot;enzyme&quot;: &quot;^3.3.0&quot;,</span><br><span class="line">    &quot;enzyme-adapter-react-16&quot;: &quot;^1.1.1&quot;,</span><br><span class="line">    &quot;exports-loader&quot;: &quot;^0.7.0&quot;,</span><br><span class="line">    &quot;fetch-mock&quot;: &quot;^7.0.0-alpha.6&quot;,</span><br><span class="line">    &quot;file-loader&quot;: &quot;^1.1.11&quot;,</span><br><span class="line">    &quot;fork-ts-checker-webpack-plugin&quot;: &quot;^1.5.0&quot;,</span><br><span class="line">    &quot;ignore-styles&quot;: &quot;^5.0.1&quot;,</span><br><span class="line">    &quot;imports-loader&quot;: &quot;^0.7.1&quot;,</span><br><span class="line">    &quot;less&quot;: &quot;^3.10.0&quot;,</span><br><span class="line">    &quot;less-loader&quot;: &quot;^4.1.0&quot;,</span><br><span class="line">    &quot;mini-css-extract-plugin&quot;: &quot;^0.4.0&quot;,</span><br><span class="line">    &quot;minimist&quot;: &quot;^1.2.0&quot;,</span><br><span class="line">    &quot;optimize-css-assets-webpack-plugin&quot;: &quot;^5.0.1&quot;,</span><br><span class="line">    &quot;speed-measure-webpack-plugin&quot;: &quot;^1.2.3&quot;,</span><br><span class="line">    &quot;style-loader&quot;: &quot;^0.21.0&quot;,</span><br><span class="line">    &quot;transform-loader&quot;: &quot;^0.2.3&quot;,</span><br><span class="line">    &quot;ts-loader&quot;: &quot;^5.2.0&quot;,</span><br><span class="line">    &quot;typescript&quot;: &quot;^3.1.3&quot;,</span><br><span class="line">    &quot;url-loader&quot;: &quot;^1.0.1&quot;,</span><br><span class="line">    &quot;webpack&quot;: &quot;^4.19.0&quot;,</span><br><span class="line">    &quot;webpack-assets-manifest&quot;: &quot;^3.0.1&quot;,</span><br><span class="line">    &quot;webpack-bundle-analyzer&quot;: &quot;^3.0.2&quot;,</span><br><span class="line">    &quot;webpack-cli&quot;: &quot;^3.1.1&quot;,</span><br><span class="line">    &quot;webpack-dev-server&quot;: &quot;^3.1.7&quot;,</span><br><span class="line">    &quot;webpack-sources&quot;: &quot;^1.1.0&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>requirements.txt 文件内容:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Babel==2.6.0</span><br><span class="line">bleach==3.0.2</span><br><span class="line">celery==4.2.0</span><br><span class="line">fake-useragent==0.1.11</span><br><span class="line">Flask==1.1.0</span><br><span class="line">Flask-AppBuilder==2.1.13</span><br><span class="line">Flask-Babel==0.11.1</span><br><span class="line">Flask-Caching==1.4.0</span><br><span class="line">Flask-Compress==1.4.0</span><br><span class="line">Flask-Login==0.4.1</span><br><span class="line">Flask-Migrate==2.5.0</span><br><span class="line">Flask-Moment==0.9.0</span><br><span class="line">Flask-OpenID==1.2.5</span><br><span class="line">Flask-Script==2.0.6</span><br><span class="line">Flask-SQLAlchemy==2.4.0</span><br><span class="line">Flask-WTF==0.14.2</span><br><span class="line">flower==0.9.2</span><br><span class="line">future==0.16.0</span><br><span class="line">numpy==1.15.2</span><br><span class="line">pandas==0.23.4</span><br><span class="line">requests==2.21.0</span><br><span class="line">selenium==3.141.0</span><br><span class="line">simplejson==3.15.0</span><br><span class="line">six==1.11.0</span><br><span class="line">SQLAlchemy==1.2.2</span><br><span class="line">SQLAlchemy-Utils==0.32.21</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/25/36-Carthage/" rel="next" title="Carthage">
+                <i class="fa fa-chevron-left"></i> Carthage
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">2.</span> <span class="nav-text">基本环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟环境和相关安装包配置"><span class="nav-number">3.</span> <span class="nav-text">虚拟环境和相关安装包配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建项目"><span class="nav-number">3.1.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关目录创建和文件配置"><span class="nav-number">3.2.</span> <span class="nav-text">相关目录创建和文件配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-配置"><span class="nav-number">3.3.</span> <span class="nav-text">React 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#templates-模块配置"><span class="nav-number">3.4.</span> <span class="nav-text">templates 模块配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#assets-模块配置（容易出错的地方）"><span class="nav-number">3.5.</span> <span class="nav-text">assets 模块配置（容易出错的地方）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#生成-package-json-文件"><span class="nav-number">3.5.1.</span> <span class="nav-text">生成 package.json 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#assets目录下新增-src、images-和-stylesheets目录"><span class="nav-number">3.5.2.</span> <span class="nav-text">assets目录下新增 src、images 和 stylesheets目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建并配置-webpack-config-js"><span class="nav-number">3.5.3.</span> <span class="nav-text">创建并配置 webpack.config.js</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">3.6.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

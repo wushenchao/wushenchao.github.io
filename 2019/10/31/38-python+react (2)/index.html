@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="背景上篇文章我们已经把 python + react 基本环境搭建出来了，基本环境已有，下面我将仿照某个博客网站来开发一个同样的网站。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python + React （2）">
+<meta property="og:url" content="http://yoursite.com/2019/10/31/38-python+react (2)/index.html">
+<meta property="og:site_name" content="不知是哪个号">
+<meta property="og:description" content="背景上篇文章我们已经把 python + react 基本环境搭建出来了，基本环境已有，下面我将仿照某个博客网站来开发一个同样的网站。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/38/38-1.png">
+<meta property="og:image" content="http://yoursite.com/images/38/38-2.png">
+<meta property="og:image" content="http://yoursite.com/images/38/38-3.png">
+<meta property="og:image" content="http://yoursite.com/images/38/38-4.png">
+<meta property="og:image" content="http://yoursite.com/images/38/38-5.png">
+<meta property="og:image" content="http://yoursite.com/images/38/38-6.png">
+<meta property="og:updated_time" content="2019-10-31T11:21:36.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python + React （2）">
+<meta name="twitter:description" content="背景上篇文章我们已经把 python + react 基本环境搭建出来了，基本环境已有，下面我将仿照某个博客网站来开发一个同样的网站。 基本环境系统环境: macOS系统 使用python等版本如下 123node -v: v11.1.0npm -v: 6.5.0python3 --version: 3.6.5">
+<meta name="twitter:image" content="http://yoursite.com/images/38/38-1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/10/31/38-python+react (2)/">
+
+
+
+
+
+  <title>Python + React （2） | 不知是哪个号</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">不知是哪个号</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">It's never too old to learn.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/31/38-python+react (2)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content>
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="不知是哪个号">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python + React （2）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-31T00:00:00+08:00">
+                2019-10-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/10/31/38-python+react (2)/" class="leancloud_visitors" data-flag-title="Python + React （2）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.7k words
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  12 minutes
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>上篇文章我们已经把 python + react 基本环境搭建出来了，基本环境已有，下面我将仿照某个博客网站来开发一个同样的网站。</p>
+<h2 id="基本环境"><a href="#基本环境" class="headerlink" title="基本环境"></a>基本环境</h2><p>系统环境: macOS系统</p>
+<p>使用python等版本如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v: v11.1.0</span><br><span class="line">npm -v: 6.5.0</span><br><span class="line">python3 --version: 3.6.5</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="数据库模型配置和升级"><a href="#数据库模型配置和升级" class="headerlink" title="数据库模型配置和升级"></a>数据库模型配置和升级</h2><h3 id="模型配置"><a href="#模型配置" class="headerlink" title="模型配置"></a>模型配置</h3><p>博客类型网站肯定和用户、文章、评论等相关，<strong>flask_appbuilder</strong> 已经自带用户模型，因此我们在这基础上添加两个模型 Blog 和 Comment（初版本只为实现基本功能）。其中 Blog 和 Comment 分别关联上用户（ab_user）信息, 除了分别关联上用户信息，Blog 和 Comment 之间实现了一对多关心。如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Blog(Model, AuditMixinNullable):</span><br><span class="line">    &quot;&quot;&quot;发布文章&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    __tablename__ = &apos;blog&apos;</span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    title = Column(String(500))</span><br><span class="line">    body = Column(Text)</span><br><span class="line">    body_html = Column(Text)</span><br><span class="line">    user_id = Column(Integer, ForeignKey(&apos;ab_user.id&apos;))</span><br><span class="line">    owner = relationship(security_manager.user_model, backref=&apos;blog&apos;, foreign_keys=[user_id])</span><br><span class="line">    comments = relationship(&apos;Comment&apos;, back_populates=&quot;blog&quot;)</span><br><span class="line"></span><br><span class="line">    def __repr__(self):</span><br><span class="line">        return self.title if self.title else self.id</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def simple_json(self):</span><br><span class="line">        return &#123;</span><br><span class="line">            &apos;id&apos;: self.id,</span><br><span class="line">            &apos;title&apos;: self.title,</span><br><span class="line">            &apos;body&apos;: self.body,</span><br><span class="line">            &apos;body_html&apos;: self.body_html,</span><br><span class="line">            &apos;timestamp&apos;: self.changed_on.isoformat(),</span><br><span class="line">            &apos;owner&apos;: self.owner.to_json(),</span><br><span class="line">            &apos;comments&apos;: [comment.simple_json for comment in self.comments]</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Comment(Model, AuditMixinNullable):</span><br><span class="line">    &quot;&quot;&quot;发布文章评论&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    __tablename__ = &apos;comments&apos;</span><br><span class="line">    id = Column(Integer, primary_key=True)</span><br><span class="line">    body = Column(Text)</span><br><span class="line">    body_html = Column(Text)</span><br><span class="line">    user_id = Column(Integer, ForeignKey(&apos;ab_user.id&apos;))</span><br><span class="line">    owner = relationship(security_manager.user_model, backref=&apos;comments&apos;, foreign_keys=[user_id])</span><br><span class="line">    blog_id = Column(Integer, ForeignKey(&apos;blog.id&apos;))</span><br><span class="line">    blog = relationship(Blog, back_populates=&quot;comments&quot;)</span><br><span class="line">    disabled = Column(Boolean, default=False)</span><br><span class="line"></span><br><span class="line">    def __repr__(self):</span><br><span class="line">        return self.body if self.body else self.body_html</span><br><span class="line">    </span><br><span class="line">    @property</span><br><span class="line">    def simple_json(self):</span><br><span class="line">        return &#123;</span><br><span class="line">            &apos;id&apos;: self.id,</span><br><span class="line">            &apos;body&apos;: self.body,</span><br><span class="line">            &apos;timestamp&apos;: self.changed_on.isoformat(),</span><br><span class="line">            &apos;owner&apos;: self.owner.to_json()</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>这两个模型我们都引入了一个 AuditMixinNullable，该模块继承于 <strong>flask_appbuilder</strong> 中的 AuditMixin，我们调整了 nullable 字段，使其允许使用空字段 (参考 superset), 这样我们在生成 Blog 和 Comment 模型时会生成 created_on、changed_on、created_by_fk 和changed_by_fk 四个字段。我们在 models 下新建一个helpers.py，将 AuditMixinNullable 放入该文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">from datetime import datetime</span><br><span class="line"></span><br><span class="line">from flask_appbuilder.models.mixins import AuditMixin</span><br><span class="line">import sqlalchemy as sa</span><br><span class="line">from sqlalchemy.ext.declarative import declared_attr</span><br><span class="line"></span><br><span class="line">class AuditMixinNullable(AuditMixin):</span><br><span class="line"></span><br><span class="line">    created_on = sa.Column(sa.DateTime, default=datetime.now, nullable=True)</span><br><span class="line">    changed_on = sa.Column(sa.DateTime, default=datetime.now, onupdate=datetime.now, nullable=True)</span><br><span class="line"></span><br><span class="line">    @declared_attr</span><br><span class="line">    def created_by_fk(self):</span><br><span class="line">        return sa.Column(</span><br><span class="line">            sa.Integer,sa.ForeignKey(&quot;ab_user.id&quot;),default=self.get_user_id,nullable=True,</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">    @declared_attr</span><br><span class="line">    def changed_by_fk(self):</span><br><span class="line">        return sa.Column(</span><br><span class="line">            sa.Integer,sa.ForeignKey(&quot;ab_user.id&quot;),default=self.get_user_id,onupdate=self.get_user_id,nullable=True,</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<p>调整后的目录结构如下所示:</p>
+<p><img src="../../../../images/38/38-1.png" alt></p>
+<h3 id="模型升级"><a href="#模型升级" class="headerlink" title="模型升级"></a>模型升级</h3><p>以上配置都完成后我们开始升级数据库，我们进入到项目对应目录下，启动虚拟环境并设置环境变量，然后执行 flask db migrate 命令，如下图所示:</p>
+<p><img src="../../../../images/38/38-2.png" alt></p>
+<p>执行完成后我们会在 migration/versions/ 目录下发现新生成的一个文件，检查该文件内容，确定是否需要作出调整（一般是不需要更改）然后我们执行下面命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask db upgrade</span><br></pre></td></tr></table></figure>
+<p>以上命令都执行完成后，数据库就生成了对应的 blog 和 comment 两张表。</p>
+<h2 id="网站建立"><a href="#网站建立" class="headerlink" title="网站建立"></a>网站建立</h2><h3 id="样式抓取"><a href="#样式抓取" class="headerlink" title="样式抓取"></a>样式抓取</h3><p>用 Google 浏览器打开需要抓取网站的地址，使用 Command + S 快捷键保存该页面内容到本地文件下（其他浏览器保存方式自行查找）。我们发现文件下会出现一个 <strong>.htm</strong> 结尾的文件和一个 <strong>_files</strong> 结尾的文件夹。打开文件夹，我们发现里面大多是是图片，删除里面除 .css 和 .js 结尾的其他文件。如下所示:</p>
+<p><img src="../../../../images/38/38-3.png" alt></p>
+<p>抓取下来的 .htm 和 .css 文件内容都是错位的，为了方便查看我们使用工具将这两个文件分别格式化。这样就完成了该页面样式的抓取。</p>
+<h3 id="页面分析"><a href="#页面分析" class="headerlink" title="页面分析"></a>页面分析</h3><p>用浏览器打开 .htm 文件，如下图所示:</p>
+<p><img src="../../../../images/38/38-4.png" alt></p>
+<p>分析该网站发现该页面除了导航栏主要分左右两个模块，左侧由头部轮播和文章列表两部分组成，右侧主要由banner和推荐作者两个模块组成。第一个版本我们只做文章列表和推荐作者这两个模块。</p>
+<h3 id="页面搭建"><a href="#页面搭建" class="headerlink" title="页面搭建"></a>页面搭建</h3><p>首页对应我们的 assets/src/welcome 模块，从上面分析知该模块我们需要的文章列表和推荐用户列表两大数据。</p>
+<h4 id="App-js"><a href="#App-js" class="headerlink" title="App.js"></a>App.js</h4><p>新增 blogList 和 recommendUsers 两大数据源，并将数据传入到 welcome.jsx 模块 具体代码如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const container = document.getElementById(&apos;app&apos;);</span><br><span class="line">const bootstrap = JSON.parse(container.getAttribute(&apos;data-bootstrap&apos;));</span><br><span class="line">/** 当前用户信息 **/</span><br><span class="line">const user = &#123; ...bootstrap.user &#125;;</span><br><span class="line">/** 博客列表 **/</span><br><span class="line">const blogList = &#123; ...bootstrap.blogList &#125;;</span><br><span class="line">/** 推荐用户列表 **/</span><br><span class="line">const recommendUsers = &#123; ...bootstrap.recommendUsers &#125;;</span><br><span class="line"></span><br><span class="line">const store = createStore(</span><br><span class="line">  combineReducers(&#123;</span><br><span class="line">    messageToasts: messageToastReducer,</span><br><span class="line">  &#125;),</span><br><span class="line">  &#123;&#125;,</span><br><span class="line">  compose(</span><br><span class="line">    applyMiddleware(thunk),</span><br><span class="line">    initEnhancer(false),</span><br><span class="line">  ),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">const App = () =&gt; (</span><br><span class="line">  &lt;Provider store=&#123;store&#125;&gt;</span><br><span class="line">    &lt;Welcome user=&#123;user&#125; blogList=&#123;blogList&#125; recommendUsers=&#123;recommendUsers&#125;/&gt;</span><br><span class="line">  &lt;/Provider&gt;</span><br><span class="line">);</span><br><span class="line">export default hot(module)(App);</span><br></pre></td></tr></table></figure>
+<h4 id="Welcome-jsx"><a href="#Welcome-jsx" class="headerlink" title="Welcome.jsx"></a>Welcome.jsx</h4><p>我们从 App.jsx 获取到数据后，我们进入主页面搭建过程，分析 .htm 文件我们知道我们需要两个模块的数据在 <strong>container index</strong> 中, 而博客列表数据在画红线的 <strong>col-xs-16 main</strong> 中，推荐用户列表在画蓝线的 <strong>col-xs-7 col-xs-offset-1 aside</strong> 中 如下图所示:</p>
+<p><img src="../../../../images/38/38-5.png" alt></p>
+<p>我们将博客列表拆分到 BlogList 中并将博客数据传入该模块，同理推荐用户拆分到 RecommendList 中并把推荐用户数据传入该模块，Welcome.jsx 中代码如下所示:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  const blogList = this.props.blogList;</span><br><span class="line">  const recommendUsers = this.props.recommendUsers;</span><br><span class="line">  const user = this.props.user;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&quot;container index&quot;&gt;</span><br><span class="line">      &lt;div className=&quot;row&quot;&gt;</span><br><span class="line">        &lt;BlogList blogList=&#123;blogList&#125; user=&#123;user&#125; /&gt;</span><br><span class="line">        &lt;RecommendList recommendUsers=&#123;recommendUsers&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="BlogList-jsx、BlogListRow-jsx、BlogListRowContent-jsx"><a href="#BlogList-jsx、BlogListRow-jsx、BlogListRowContent-jsx" class="headerlink" title="BlogList.jsx、BlogListRow.jsx、BlogListRowContent.jsx"></a>BlogList.jsx、BlogListRow.jsx、BlogListRowContent.jsx</h4><p>现在我们分析 .htm 中 <strong>col-xs-16 main</strong> 模块，该模块主要是博客内容列表，这个版本我们不考虑头部的轮播图，因此我们直接找到 <strong>list-container</strong> 下的 <strong>note-list</strong>, 该模块由多个 <strong>li</strong> 组成，观察 <strong>li</strong> 的内容我们发现，该模块主要有两种类型，一种是带图片的，一种是无图的，核心样式都是一样的，因此我们可以拆分一个 <strong>BlogListRow.jsx</strong> ,在这个类中去区分有无图片这个问题。将核心的列表样式都放到 <strong>BlogListRowContent.jsx</strong>，这样blog这个模块的代码基本就可以确定下来了如下所示:</p>
+<p>BlogList.jsx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  const blogList = this.props.blogList;</span><br><span class="line">  let data = Object.keys(blogList).map( key =&gt; blogList[key]);</span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&quot;col-xs-16 main&quot;&gt;</span><br><span class="line">      &lt;div className=&quot;split-line&quot;&gt; &lt;/div&gt;</span><br><span class="line">      &lt;div id=&quot;list-container&quot;&gt;</span><br><span class="line">        &lt;ul className=&quot;note-list&quot;&gt;</span><br><span class="line">         &#123;data.map( (blog) =&gt; (</span><br><span class="line">           &lt;BlogListRow key=&#123;blog.id&#125; blog=&#123;blog&#125; user=&#123;this.props.user&#125; /&gt;)</span><br><span class="line">         )&#125;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BlogListRow.jsx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  const blog = this.props.blog;</span><br><span class="line">  /** list has image **/</span><br><span class="line">  const hasImg = false;</span><br><span class="line">  if (hasImg) &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;li className=&quot;hav-img&quot;&gt;</span><br><span class="line">        &lt;a className=&quot;wrap-img&quot; href=&quot;#&quot;&gt;</span><br><span class="line">          &lt;img src=&quot;&quot; className=&quot;img-blur&quot; alt=&quot;120&quot;/&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;BlogListRowContent blog=&#123;blog&#125; user=&#123;this.props.user&#125; /&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;BlogListRowContent blog=&#123;blog&#125; user=&#123;this.props.user&#125; /&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BlogListRowContent.jsx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  const blog = this.props.blog;</span><br><span class="line">  const owner = blog.owner;</span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&quot;content&quot;&gt;</span><br><span class="line">      &lt;a className=&quot;title&quot; href=&quot;&quot;&gt;</span><br><span class="line">        &#123;blog.title&#125;</span><br><span class="line">      &lt;/a&gt;</span><br><span class="line">      &lt;p className=&quot;abstract&quot;&gt;</span><br><span class="line">        &#123;blog.body&#125;</span><br><span class="line">      &lt;/p&gt;</span><br><span class="line">      &lt;div className=&quot;meta&quot;&gt;</span><br><span class="line">        &lt;a className=&quot;nickname&quot; href=&quot;&quot;&gt;</span><br><span class="line">          &#123;owner.username&#125;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;a href=&quot;&quot;&gt;</span><br><span class="line">          &lt;i className=&quot;iconfont ic-list-comments&quot;&gt; &lt;/i&gt; 7</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;span&gt;</span><br><span class="line">          &lt;i className=&quot;iconfont ic-list-like&quot;&gt; &lt;/i&gt; 10</span><br><span class="line">        &lt;/span&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们只是把 <strong>.htm</strong> 的样式代码部分复制过来了，但是核心的 css 样式还没有引入到项目中，我们可以在 <strong>assets/stylesheets/</strong> 目录下我们新建一个 <strong>welcome.css</strong> 文件来管理我们的 css 样式，打开我们刚刚保存的网站样式我们看到里面有两个 css 结尾的文件，我们打开以 <strong>entry</strong> 开头的 css 文件，发现里面有 <strong>.note-list</strong> 和 <strong>.recommended-authors</strong> 等一些样式，这些刚好和我们刚刚 <strong>blog</strong> 里面的代码样式能对应上，因此我们将该内容粘贴到 <strong>welcome.css</strong> 样式中，在打开 <strong>web</strong> 开头到文件，里面有 1w+ 行代码，粗略看了下，这里面的样式和页面的基本样式有关，因此我们将该文件内容放入基本样式文件 <strong>ddblog.less</strong> 中，并在 <strong>theme.js</strong>文件中引入该文件（后期在做调整）。这样首页的样式就配置成功了，最后我们在 <strong>welcome.jsx</strong> 文件中引入刚刚配置的 <strong>welcome.css</strong> 文件。</p>
+<h4 id="RecommendList-jsx-RecommendRowContent-jsx"><a href="#RecommendList-jsx-RecommendRowContent-jsx" class="headerlink" title="RecommendList.jsx RecommendRowContent.jsx"></a>RecommendList.jsx RecommendRowContent.jsx</h4><p>推荐用户部分的可以参考上面部分完成具体内容如下:</p>
+<p>RecommendList.jsx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">render() &#123;</span><br><span class="line">  const recommendUsers = this.props.recommendUsers;</span><br><span class="line">  if (recommendUsers == null || recommendUsers.length == 0) &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt; &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  let data = Object.keys(recommendUsers).map( key =&gt; recommendUsers[key]);</span><br><span class="line">  return (</span><br><span class="line">    &lt;div className=&quot;col-xs-7 col-xs-offset-1 aside&quot;&gt;</span><br><span class="line">      &lt;div className=&quot;recommended-author-wrap&quot;&gt;</span><br><span class="line">        &lt;div className=&quot;recommended-authors&quot;&gt;</span><br><span class="line">          &lt;div className=&quot;title&quot;&gt;</span><br><span class="line">            &lt;span&gt;&#123;&quot;推荐作者&quot;&#125;&lt;/span&gt;</span><br><span class="line">            &lt;a className=&quot;page-change&quot;&gt;</span><br><span class="line">              &lt;i className=&quot;iconfont ic-search-change&quot;&gt; &#123;&quot;换一批&quot;&#125; &lt;/i&gt;</span><br><span class="line">            &lt;/a&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">          &lt;ul className=&quot;list&quot;&gt;</span><br><span class="line">            &#123;data.map( (user) =&gt; (</span><br><span class="line">            &lt;RecommendRowContent key=&#123;user.id&#125; user=&#123;user&#125; /&gt;)</span><br><span class="line">            )&#125;</span><br><span class="line">          &lt;/ul&gt;</span><br><span class="line">          &lt;a href=&quot;&quot; className=&quot;find-more&quot;&gt;</span><br><span class="line">            &#123;&quot;查看全部&quot;&#125;</span><br><span class="line">          &lt;/a&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">  );</span><br></pre></td></tr></table></figure>
+<p>RecommendRowContent.jsx</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  render() &#123;</span><br><span class="line">    const user = this.props.user;</span><br><span class="line">    return (</span><br><span class="line">      &lt;li&gt;</span><br><span class="line">        &lt;a href=&quot;&quot; className=&quot;avatar&quot;&gt;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;a className=&quot;follow&quot;&gt;</span><br><span class="line">          &lt;i className=&quot;iconfont ic-follow&quot;&gt; &lt;/i&gt; &#123;&quot;关注&quot;&#125;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;a href=&quot;&quot; className=&quot;name&quot;&gt;</span><br><span class="line">          &#123;user.username&#125;</span><br><span class="line">        &lt;/a&gt;</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">          &#123;&quot;2.1k喜欢&quot;&#125;</span><br><span class="line">        &lt;/p&gt;</span><br><span class="line">      &lt;/li&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### npm 打包</span><br><span class="line"></span><br><span class="line">以上操作都完成后，我们运行以下命令:</span><br></pre></td></tr></table></figure>
+<p>npm run dev<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">如果没有出现任何红色警告或者提示，那么恭喜你可以进入下一步。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 数据提供</span><br><span class="line"></span><br><span class="line">上面我们已经把首页的样式完成，现在我们需要为首页提供数据。首页的入口我们上次配置在 **views/core.py** 文件中，打开该文件找到 **welcome** 接口, 新增查找博客和用户列表数据库操作，具体代码如下所示:</span><br></pre></td></tr></table></figure></p>
+<pre><code>@expose(&apos;/welcome&apos;)
+def welcome(self):
+
+    blog_list = (
+        db.session.query(models.Blog).all()
+    )
+    if blog_list:
+        blog_list = [blog.simple_json for blog in blog_list]
+    recommend_list = (
+        db.session.query(security_manager.user_model).all()
+    )
+    if recommend_list:
+        recommend_list = [recommend.to_json() for recommend in recommend_list]
+    payload = {
+        &apos;common&apos;: self.common_bootstrap_payload(),
+        &apos;user&apos;: bootstrap_user_data(),
+        &apos;blogList&apos;: blog_list or [],
+        &apos;recommendUsers&apos;: recommend_list or []
+    }
+    return self.render_template(
+        &apos;blog/basic.html&apos;,
+        entry=&apos;welcome&apos;,
+        bootstrap_data=json.dumps(payload)
+    )
+</code></pre><p><code>`</code></p>
+<p><strong>注意</strong> payload 中的 key（blogList，recommendUsers，user） 需要和 <strong>welcome.jsx</strong> 中的相对应。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>以上都配置都没出现错误，我们就可以成功启动项目了。附上一张成功启动的图</p>
+<p><img src="../../../../images/38/38-6.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/10/37-python+react/" rel="next" title="Python + React">
+                <i class="fa fa-chevron-left"></i> Python + React
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本环境"><span class="nav-number">2.</span> <span class="nav-text">基本环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库模型配置和升级"><span class="nav-number">3.</span> <span class="nav-text">数据库模型配置和升级</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#模型配置"><span class="nav-number">3.1.</span> <span class="nav-text">模型配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型升级"><span class="nav-number">3.2.</span> <span class="nav-text">模型升级</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网站建立"><span class="nav-number">4.</span> <span class="nav-text">网站建立</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#样式抓取"><span class="nav-number">4.1.</span> <span class="nav-text">样式抓取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面分析"><span class="nav-number">4.2.</span> <span class="nav-text">页面分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面搭建"><span class="nav-number">4.3.</span> <span class="nav-text">页面搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#App-js"><span class="nav-number">4.3.1.</span> <span class="nav-text">App.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Welcome-jsx"><span class="nav-number">4.3.2.</span> <span class="nav-text">Welcome.jsx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BlogList-jsx、BlogListRow-jsx、BlogListRowContent-jsx"><span class="nav-number">4.3.3.</span> <span class="nav-text">BlogList.jsx、BlogListRow.jsx、BlogListRowContent.jsx</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RecommendList-jsx-RecommendRowContent-jsx"><span class="nav-number">4.3.4.</span> <span class="nav-text">RecommendList.jsx RecommendRowContent.jsx</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">5.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("ooQOr7TTg57HoBj7HT3rMBQi-gzGzoHsz", "gVvc3Lp5txd9lBVhetFaDBFs");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
